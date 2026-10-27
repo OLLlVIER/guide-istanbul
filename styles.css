@@ -101,3 +101,21 @@ body.has-sheet .source-note { opacity: 0; pointer-events: none; }
   .source-note { left: auto; right: 24px; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+.tips { margin: 0 15px 20px; padding: 15px 16px; border-radius: 17px; background: #f4ecdb; border: 1px solid rgba(155,113,41,.25); }
+.tips h3, .food h3 { margin: 0 0 10px; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: #8a672b; }
+.tips ul { margin: 0; padding-left: 18px; display: grid; gap: 7px; }
+.tips li { color: #4e4a3c; font-size: 12.5px; line-height: 1.5; }
+.food { padding: 4px 15px 26px; }
+.food h3 { color: var(--ink); }
+.food-item { display: flex; justify-content: space-between; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line); }
+.food-item:last-child { border-bottom: 1px solid var(--line); }
+.food-item div { min-width: 0; }
+.food-item b { display: block; margin-bottom: 3px; font: 600 16px/1.25 Georgia, serif; }
+.food-item span { color: #4e6259; font-size: 12.5px; line-height: 1.45; }
+.food-item em { flex: 0 0 auto; font-style: normal; font-size: 11px; font-weight: 800; color: #3f5a4d; background: #edf2ed; padding: 5px 8px; border-radius: 999px; align-self: flex-start; font-variant-numeric: tabular-nums; }
+.info-sheet table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 6px 0 4px; }
+.info-sheet th, .info-sheet td { text-align: left; padding: 7px 6px; border-bottom: 1px solid var(--line); color: #4e6259; vertical-align: top; }
+.info-sheet th { color: var(--ink); font-weight: 750; }
+.info-sheet dl { margin: 0; display: grid; gap: 9px; }
+.info-sheet dt { font: 600 15px Georgia, serif; color: var(--ink); }
+.info-sheet dd { margin: 2px 0 0; color: #4e6259; font-size: 12.5px; line-height: 1.5; }

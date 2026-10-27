@@ -1,6 +1,6 @@
 # Guide interactif d’Istanbul
 
-Carte mobile des dix principaux quartiers touristiques depuis le Mövenpick Istanbul Old Town.
+Carte mobile des quatorze principaux quartiers touristiques depuis le Mövenpick Istanbul Old Town.
 
 ## Lancer localement
 
