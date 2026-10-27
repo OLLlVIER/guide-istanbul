@@ -277,7 +277,7 @@ const LEISURE = {
 
 // Version courte et visuelle de chaque quartier (photos libres de Wikimedia Commons).
 const FLASH = {
-  sultanahmet: { photo: "Hagia_Sophia_(Aya_Sofya)_front_facade,_Istanbul,_Turkey_(9606808746).jpg", line: "Le cœur de Byzance : mille ans d’empire en quelques centaines de mètres.", top: ["Sainte-Sophie", "Citerne-Basilique", "Mosquée Bleue"], tip: "Viens dès l’ouverture, avant les groupes." },
+  sultanahmet: { photo: "Hagia_Sophia_Mars_2013.jpg", line: "Le cœur de Byzance : mille ans d’empire en quelques centaines de mètres.", top: ["Sainte-Sophie", "Citerne-Basilique", "Mosquée Bleue"], tip: "Viens dès l’ouverture, avant les groupes." },
   topkapi: { photo: "Topkapi_Palace_(Topkapı_Sarayı),_Istanbul,_Turkey_(9603571659).jpg", line: "Le palais des sultans, leurs trésors et leur harem.", top: ["Le Harem", "Le Trésor", "La terrasse sur le Bosphore"], tip: "Fermé le mardi. Commence par le Harem." },
   eminonu: { photo: "Istanbul_spice_bazaar_02.jpg", line: "Le port, les épices et le sandwich au poisson face à la Corne d’Or.", top: ["Bazar aux épices", "Mosquée Rüstem Paşa", "Balık ekmek sur les quais"], tip: "Le bazar est bondé après 11 h." },
   beyazit: { photo: "Istanbul_asv2021-11_img41_Grand_Bazaar.jpg", line: "Des milliers de boutiques sous des voûtes : ici, on négocie.", top: ["Grand Bazar", "Thé dans la cour Çorlulu Ali Paşa", "Marché des bouquinistes"], tip: "Fermé le dimanche. Commence à 50–60 % du prix." },
