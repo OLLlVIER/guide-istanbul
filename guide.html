@@ -120,6 +120,11 @@
     .xday b { font: 400 21px/1.15 "DM Serif Display", serif; color: white; } .xday p { margin: 0; font-size: 14px; line-height: 1.5; } .xday small { margin-top: auto; color: #9fb3a8; font-weight: 700; }
     @media (max-width: 1000px) { .xplan { grid-template-columns: 1fr 1fr; } .top10 { grid-template-columns: 1fr; } }
     @media (max-width: 600px) { .xplan { grid-template-columns: 1fr; } }
+    .hcard.green2 { border-top-color: var(--z4); } .hcard.green2 .htag { color: var(--z4); }
+    .igrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 12px 0 24px; }
+    .icard, .pcard { border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+    .icard { background: linear-gradient(135deg, #f7e3ef, #fbeee0); } .pcard { background: #e5f1e6; }
+    .icard b, .pcard b { font-size: 16px; } .icard small, .pcard small { font-weight: 700; color: #6b7d74; } .icard p, .pcard p { margin: 0; font-size: 14px; line-height: 1.5; }
     .flash { background: var(--ink); color: white; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
     .flash .label { grid-row: span 2; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 800; color: var(--gold); padding-top: 4px; }
     .flash ol { margin: 0; padding-left: 22px; font-weight: 700; display: grid; gap: 4px; }
@@ -207,6 +212,7 @@
       <a href="#quartiers">Les quartiers</a>
       <a href="#manger">Manger</a>
       <a href="#essentiel">Top 10</a>
+      <a href="#healthy">Healthy & photos</a>
       <a href="#hammams">Hammams</a>
       <a href="#regles">Règles d’or</a>
       <a href="#turquie">La Turquie</a>
