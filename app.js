@@ -191,7 +191,7 @@ const extras = {
   },
   beyazit: {
     tips: ["Le Grand Bazar est fermé le dimanche et les jours fériés religieux.", "Le marchandage est attendu : commencez à 50–60 % du prix annoncé, restez courtois.", "Refusez poliment les invitations insistantes à « juste regarder » une boutique de tapis."],
-    food: [["Havuzlu", "Lokanta dans le bazar : plats mijotés du jour", "12–25 €"], ["Şark Kahvesi", "Café turc traditionnel sous les voûtes", "3–6 €"]]
+    food: [["Havuzlu", "Lokanta dans le bazar : plats mijotés du jour", "12–25 €"], ["Şeyhmuz Kebap Salonu", "Kebab à la viande hachée au couteau, depuis 1975, dans un passage près du bazar", "10–20 €"], ["Şark Kahvesi", "Café turc traditionnel sous les voûtes", "3–6 €"]]
   },
   suleymaniye: {
     tips: ["À deux pas de l’hôtel : idéal en début de matinée ou au coucher du soleil depuis la terrasse de la mosquée.", "Le tombeau de Soliman et celui de Sinan se visitent librement dans l’enclos."],
@@ -199,7 +199,7 @@ const extras = {
   },
   "fener-balat": {
     tips: ["Chora (Kariye) : 20 €, fermée aux visiteurs le vendredi, visite hors heures de prière.", "Rues très pentues et pavées : chaussures confortables.", "Le Patriarcat est un lieu de culte actif : tenue sobre et silence."],
-    food: [["Asitane", "Recettes reconstituées des banquets ottomans, à côté de Chora", "30–55 €"], ["Cafés de Balat", "Petit-déjeuner turc (kahvaltı) dans les maisons colorées", "8–15 €"]]
+    food: [["Asitane", "Recettes reconstituées des banquets ottomans, à côté de Chora", "30–55 €"], ["Balat Sahil", "Mezzés et poissons frais au bord de la Corne d’Or", "25–45 €"], ["Cumbalı Kahve", "Café turc dans une maison colorée de Balat", "3–8 €"]]
   },
   galata: {
     tips: ["Tour de Galata ouverte tous les jours 8h30–23h ; file d’ascenseur longue au coucher du soleil.", "Le Mevlevihanesi propose des cérémonies de derviches certains soirs : vérifiez sur place."],
@@ -235,27 +235,39 @@ const extras = {
   }
 };
 
+// Les bonnes adresses à pied du Mövenpick Old Town.
+const NEAR_HOTEL = [
+  ["Siirt Şeref Büryan 1892", "Agneau büryan rôti 6 à 8 h dans un four creusé, et perde pilavı (riz en croûte). Le meilleur repas typique du quartier, à midi.", "12–22 €", "8 min à pied · Kadınlar Pazarı"],
+  ["Baran Et Mangal", "Grillades et kebabs commandés au kilo, très bonne viande", "15–30 €", "8 min à pied · Kadınlar Pazarı"],
+  ["Erzincanlı Ali Baba", "Kuru fasulye (haricots mijotés) et pilaf face à Süleymaniye, depuis 1924", "6–12 €", "12 min à pied · Süleymaniye"],
+  ["Karadeniz Pide Kebab Salonu", "Pide et güveç de la mer Noire, adresse de quartier", "8–15 €", "7 min à pied · Vefa"],
+  ["Vefa Bozacısı", "Boza (millet fermenté) dans une boutique de 1876, saison froide", "2–4 €", "8 min à pied · Vefa"],
+  ["Zeyrekhane", "Cuisine ottomane en terrasse sous le Pantocrator, vue sur la Corne d’Or. Fermé le lundi, réservation conseillée", "20–40 €", "6 min à pied · Zeyrek"],
+  ["Akdeniz Hatay Sofrası", "Cuisine d’Antakya : agneau et poulet en croûte de sel, mezzés épicés. Pour un dîner généreux", "20–35 €", "15 min à pied ou 5 min en taxi · Fatih"],
+  ["Cibalikapı Balıkçısı", "Meyhane de poisson réputée sur la Corne d’Or : mezzés, poisson du jour, rakı", "35–60 €", "18 min à pied ou 5 min en taxi · Cibali"]
+];
+
 const map = L.map("map", { zoomControl: true, attributionControl: true }).setView([41.024, 28.982], 13);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: "© OpenStreetMap contributors"
 }).addTo(map);
 
-function pinIcon(type, label) {
+function pinIcon(type, label, name) {
   return L.divIcon({
     className: "custom-marker",
-    html: `<div class="map-pin ${type}"><span>${label}</span></div>`,
+    html: `<div class="map-pin ${type}"><span>${label}</span></div><div class="pin-label ${type}">${name}</div>`,
     iconSize: [40, 40], iconAnchor: [20, 39]
   });
 }
 
-L.marker(HOTEL.coords, { icon: pinIcon("hotel", "H") })
+L.marker(HOTEL.coords, { icon: pinIcon("hotel", "H", "Mövenpick Old Town"), zIndexOffset: 1000 })
   .addTo(map)
   .bindTooltip(`<strong>${HOTEL.name}</strong><br>${HOTEL.address}`, { direction: "top", offset: [0, -34] });
 
 const markers = new Map();
 districts.forEach((district, index) => {
-  const marker = L.marker(district.coords, { icon: pinIcon("district", index + 1) }).addTo(map);
+  const marker = L.marker(district.coords, { icon: pinIcon("district", index + 1, district.name) }).addTo(map);
   marker.bindTooltip(district.name, { direction: "top", offset: [0, -32] });
   marker.on("click", () => openDistrict(district.id));
   markers.set(district.id, marker);
@@ -306,7 +318,7 @@ function openDistrict(id) {
       ${district.monuments.map(m => `<article class="monument"><span class="rank ${rankClass(m[0])}">${m[0]}</span><h4>${m[1]}</h4><p>${m[2]}</p><div class="facts"><span>${m[3]}</span><span>${m[4]}</span></div>${m[5] ? `<p class="walk-next">À pied : ${m[5]}</p>` : ""}</article>`).join("")}
     </section>
     ${(() => { const ch = district.monuments.filter(m => CHURCH_WORDS.test(m[1])); return ch.length ? `<section class="churches"><h3>Églises qui valent le déplacement</h3>${ch.map(m => `<div class="church-row"><span class="rank-pill ${rankClass(m[0])}">${m[0]}</span><span>${m[1]}</span></div>`).join("")}</section>` : ""; })()}
-    ${extras[district.id] ? `<section class="food"><h3>Où manger</h3>${extras[district.id].food.map(f => `<div class="food-item"><div><b>${f[0]}</b><span>${f[1]}</span></div><em class="price ${priceBand(f[2]).cls}">${f[2]}</em></div>`).join("")}</section>` : ""}
+    ${extras[district.id] ? `<section class="food"><h3>Où manger</h3>${extras[district.id].food.map(f => `<div class="food-item"><div><b>${f[0]}</b><span>${f[1]}</span><a class="maps-link" href="${mapsLink(f[0])}" target="_blank" rel="noreferrer">Itinéraire ↗</a></div><em class="price ${priceBand(f[2]).cls}">${f[2]}</em></div>`).join("")}</section>` : ""}
     <section class="photos"><h3>Mes photos</h3>
       <p class="photos-note">Elles restent sur cet appareil, dans ce navigateur.</p>
       <label class="add-photo" for="photoInput">+ Ajouter des photos</label>
@@ -422,20 +434,29 @@ document.querySelector("#churchButton").addEventListener("click", () => { render
 /* ---- Liste des restaurants ---- */
 const restoSheet = document.querySelector("#restoSheet");
 let restoFilter = "all";
+const mapsLink = name => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + " Istanbul")}`;
+function restoRow(name, desc, price, extra) {
+  const band = priceBand(price);
+  return `<div class="food-item"><div><b>${name}</b><span>${desc}</span>${extra || ""}<a class="maps-link" href="${mapsLink(name)}" target="_blank" rel="noreferrer">Itinéraire ↗</a></div><em class="price ${band.cls}">${band.label} · ${price}</em></div>`;
+}
+const keep = price => restoFilter === "all" || priceBand(price).cls === restoFilter;
 function renderRestos() {
-  const all = districts.flatMap(d => (extras[d.id]?.food || []).map(f => ({ d, name: f[0], desc: f[1], price: f[2], band: priceBand(f[2]) })));
-  all.sort((a, b) => BANDS.indexOf(a.band) - BANDS.indexOf(b.band));
-  const shown = restoFilter === "all" ? all : all.filter(r => r.band.cls === restoFilter);
   document.querySelector("#restoFilters").innerHTML = [`<button class="chip ${restoFilter === "all" ? "on" : ""}" data-band="all">Tous</button>`]
     .concat(BANDS.map(b => `<button class="chip ${b.cls} ${restoFilter === b.cls ? "on" : ""}" data-band="${b.cls}">${b.label} <small>${b.desc}</small></button>`)).join("");
-  document.querySelector("#restoList").innerHTML = shown.map(r => `<div class="food-item"><div><b>${r.name}</b><span>${r.desc}</span><button class="resto-district" data-id="${r.d.id}">${r.d.name}</button></div><em class="price ${r.band.cls}">${r.band.label} · ${r.price}</em></div>`).join("");
+  const near = NEAR_HOTEL.filter(r => keep(r[2]));
+  let html = near.length ? `<section class="resto-group near"><h3>Près de l’hôtel</h3>${near.map(r => restoRow(r[0], r[1], r[2], `<small class="walk">${r[3]}</small>`)).join("")}</section>` : "";
+  districts.forEach(d => {
+    const list = (extras[d.id]?.food || []).filter(f => keep(f[2]));
+    if (list.length) html += `<section class="resto-group"><h3><button class="resto-district" data-id="${d.id}">${d.name}</button></h3>${list.map(f => restoRow(f[0], f[1], f[2])).join("")}</section>`;
+  });
+  document.querySelector("#restoList").innerHTML = html || `<p class="photos-note">Aucune adresse dans cette gamme de prix.</p>`;
 }
 document.querySelector("#restoFilters").addEventListener("click", e => {
   const b = e.target.closest("[data-band]"); if (!b) return;
   restoFilter = b.dataset.band; renderRestos();
 });
 document.querySelector("#restoList").addEventListener("click", e => {
-  const b = e.target.closest("[data-id]"); if (b) openDistrict(b.dataset.id);
+  const b = e.target.closest("button[data-id]"); if (b) openDistrict(b.dataset.id);
 });
 document.querySelector("#restoButton").addEventListener("click", () => { renderRestos(); sheetState(restoSheet); });
 
