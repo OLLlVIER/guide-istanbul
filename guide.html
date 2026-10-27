@@ -93,6 +93,21 @@
     .zgroup a b { flex: 0 0 auto; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: white; font-size: 12.5px; }
     @media (max-width: 900px) { .zmap-wrap { grid-template-columns: 1fr; } .zindex { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 700px) { .zmap { height: 420px; } }
+    .hgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 12px 0 24px; }
+    .hcard { background: white; border-radius: 16px; padding: 16px 18px; border-top: 5px solid var(--z2); box-shadow: 0 6px 18px rgba(20,40,30,.08); display: flex; flex-direction: column; gap: 6px; }
+    .hcard.local { border-top-color: var(--z5); }
+    .hhead { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+    .hhead b { font-size: 17px; }
+    .htag { flex: 0 0 auto; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--z2); }
+    .hcard.local .htag { color: var(--z5); }
+    .hmeta { margin: 0; font-size: 13px; font-weight: 700; color: #6b7d74; }
+    .hcard p { margin: 0; font-size: 14.5px; line-height: 1.5; }
+    .hcard em { margin-top: auto; padding-top: 6px; font-style: normal; font-weight: 800; color: #152820; }
+    .hotelbox, .hhow { border-radius: 16px; padding: 16px 18px; margin: 16px 0; line-height: 1.55; }
+    .hotelbox { background: #152820; color: #e9efe9; } .hotelbox b { color: #d4a24c; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; } .hotelbox p { margin: 0; }
+    .hhow { background: #e6eef5; } .hhow.sport { background: #e5f1e6; } .hhow b { margin-right: 8px; }
+    .sub2 { font-size: 22px; margin: 26px 0 4px; }
+    .lead.small { font-size: 15px; margin: 0; }
     .flash { background: var(--ink); color: white; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
     .flash .label { grid-row: span 2; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 800; color: var(--gold); padding-top: 4px; }
     .flash ol { margin: 0; padding-left: 22px; font-weight: 700; display: grid; gap: 4px; }
@@ -179,6 +194,7 @@
       <a href="#sejour">Le séjour</a>
       <a href="#quartiers">Les quartiers</a>
       <a href="#manger">Manger</a>
+      <a href="#hammams">Hammams</a>
       <a href="#regles">Règles d’or</a>
       <a href="#turquie">La Turquie</a>
       <a class="map-link" href="./">Carte et carnet</a>
