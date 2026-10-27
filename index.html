@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#152820">
+  <meta name="description" content="Guide interactif d’Istanbul depuis le Mövenpick Istanbul Old Town : 10 quartiers, monuments, trajets et conseils pratiques.">
+  <title>Istanbul · 10 quartiers depuis le Mövenpick Old Town</title>
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Votre guide depuis le Mövenpick Old Town</p>
+      <h1>Istanbul, quartier par quartier</h1>
+    </div>
+    <button id="listButton" class="round-button" aria-label="Afficher les dix quartiers" aria-expanded="false">10</button>
+  </header>
+
+  <main>
+    <div id="map" aria-label="Carte interactive d’Istanbul"></div>
+    <aside class="legend" aria-label="Légende">
+      <span><i class="hotel-dot"></i> Hôtel</span>
+      <span><i class="district-dot"></i> Quartier</span>
+    </aside>
+
+    <section id="districtList" class="district-list" aria-hidden="true">
+      <div class="sheet-handle"></div>
+      <div class="list-head">
+        <div><p class="eyebrow">Les dix quartiers</p><h2>Choisir une visite</h2></div>
+        <button class="close-button" data-close="list" aria-label="Fermer la liste">×</button>
+      </div>
+      <div id="districtButtons" class="district-buttons"></div>
+    </section>
+
+    <article id="detailSheet" class="detail-sheet" aria-hidden="true">
+      <div class="sheet-handle"></div>
+      <button class="close-button detail-close" data-close="detail" aria-label="Fermer la fiche">×</button>
+      <div id="detailContent"></div>
+    </article>
+  </main>
+
+  <footer class="source-note">
+    <button id="infoButton">Informations pratiques et sources</button>
+  </footer>
+
+  <section id="infoSheet" class="info-sheet" aria-hidden="true">
+    <div class="sheet-handle"></div>
+    <button class="close-button detail-close" data-close="info" aria-label="Fermer">×</button>
+    <p class="eyebrow">À savoir</p>
+    <h2>Tarifs et temps de trajet</h2>
+    <p>Prix vérifiés le 27 octobre 2026 et convertis au taux indicatif de 1 € = 55,6746 TRY. Les tarifs sur place peuvent changer. Les coûts Uber sont des fourchettes estimatives : l’application affiche le prix réel au moment de la demande.</p>
+    <p>Les durées varient selon l’heure, la circulation, l’attente et votre rythme. Pour les mosquées, prévoyez une tenue adaptée et évitez les heures de prière.</p>
+    <h3>Sources principales</h3>
+    <ul>
+      <li><a href="https://all.accor.com/hotel/C527/index.en.shtml" target="_blank" rel="noreferrer">Mövenpick Istanbul Old Town — adresse officielle</a></li>
+      <li><a href="https://visit.istanbul/" target="_blank" rel="noreferrer">Visit Istanbul — patrimoine et quartiers</a></li>
+      <li><a href="https://www.millisaraylar.gov.tr/" target="_blank" rel="noreferrer">Direction des Palais nationaux — palais et tarifs</a></li>
+      <li><a href="https://muze.gov.tr/" target="_blank" rel="noreferrer">Ministère turc de la Culture — musées et billets</a></li>
+      <li><a href="https://www.metro.istanbul/en/SeferDurumlari/BiletUcretleri" target="_blank" rel="noreferrer">Metro Istanbul — tarifs</a></li>
+      <li><a href="https://sehirhatlari.istanbul/en" target="_blank" rel="noreferrer">Şehir Hatları — ferries</a></li>
+      <li><a href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html" target="_blank" rel="noreferrer">Banque centrale européenne — taux de change</a></li>
+    </ul>
+  </section>
+
+  <script src="leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
