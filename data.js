@@ -476,6 +476,16 @@ const HOTSPOTS = {
 
 // Nom local (turc) de chaque lieu : c’est ce nom qu’Uber, Waze et Google Maps reconnaissent.
 const LOCAL_NAMES = {
+ "Le Tünel": "Tünel Karaköy",
+ "Les îles des Princes": "Kabataş İskelesi",
+ "Les remparts de Théodose": "Edirnekapı Surları",
+ "La Citerne-Basilique la nuit": "Yerebatan Sarnıcı",
+ "La citerne de Şerefiye": "Şerefiye Sarnıcı",
+ "Le musée de l’Innocence": "Masumiyet Müzesi",
+ "La cérémonie des derviches tourneurs": "Galata Mevlevihanesi Müzesi",
+ "Se faire lire l’avenir dans le café": "Kahve falı Kadıköy",
+ "Les chats d’Istanbul": "Cihangir",
+ "Le musée Rahmi M. Koç": "Rahmi M. Koç Müzesi",
  "Sainte-Sophie": "Ayasofya",
  "Citerne-Basilique": "Yerebatan Sarnıcı",
  "Mosquée Bleue": "Sultanahmet Camii",
