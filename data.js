@@ -613,32 +613,56 @@ const WIKI = {
 let wikiImages = null;
 function loadWikiImages() {
   if (wikiImages) return wikiImages;
-  try { const c = JSON.parse(sessionStorage.getItem("wiki-img-v1")); if (c) return (wikiImages = Promise.resolve(c)); } catch (e) {}
+  try { const c = JSON.parse(sessionStorage.getItem("wiki-img-v2")); if (c) return (wikiImages = Promise.resolve(c)); } catch (e) {}
   const titles = [...new Set(Object.values(WIKI))];
   const batches = []; for (let i = 0; i < titles.length; i += 45) batches.push(titles.slice(i, i + 45));
-  wikiImages = Promise.all(batches.map(b => fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=1280&titles=" + encodeURIComponent(b.join("|")))
+  wikiImages = Promise.all(batches.map(b => fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail%7Cname&pithumbsize=1280&titles=" + encodeURIComponent(b.join("|")))
     .then(r => r.json()).catch(() => null)))
     .then(rs => {
       const out = {};
       rs.forEach(r => {
         if (!r || !r.query) return;
         const back = {}; (r.query.normalized || []).concat(r.query.redirects || []).forEach(x => { back[x.to] = back[x.from] || x.from; });
-        Object.values(r.query.pages || {}).forEach(p => { if (p.thumbnail) { const t = back[p.title] || p.title; out[t] = { src: p.thumbnail.source, page: "https://en.wikipedia.org/wiki/" + encodeURIComponent(p.title.replace(/ /g, "_")) }; } });
+        Object.values(r.query.pages || {}).forEach(p => { if (p.thumbnail) { const t = back[p.title] || p.title; out[t] = { src: p.thumbnail.source, file: p.pageimage || "", page: "https://en.wikipedia.org/wiki/" + encodeURIComponent(p.title.replace(/ /g, "_")) }; } });
       });
-      try { sessionStorage.setItem("wiki-img-v1", JSON.stringify(out)); } catch (e) {}
+      try { sessionStorage.setItem("wiki-img-v2", JSON.stringify(out)); } catch (e) {}
       return out;
     });
   return wikiImages;
 }
-// Diapositives d'un quartier : la photo actuelle d'abord, puis un lieu par photo.
-async function districtSlides(d) {
-  const slides = [];
-  if (FLASH[d.id]) slides.push({ src: photoUrl(FLASH[d.id].photo, 1280), caption: d.name, page: photoPage(FLASH[d.id].photo) });
-  const imgs = await loadWikiImages();
-  const seen = new Set(slides.map(s => s.src));
-  d.monuments.forEach(m => { const w = imgs[WIKI[m[1]]]; if (w && !seen.has(w.src)) { seen.add(w.src); slides.push({ src: w.src, caption: m[1], page: w.page }); } });
-  return slides;
+// Ce que montre la photo d'ouverture de chaque quartier (pour ne pas remontrer le même lieu ensuite).
+const FLASH_SUBJECT = {
+  sultanahmet: "Mosquée Bleue", topkapi: "Palais de Topkapı", eminonu: "Bazar aux épices", beyazit: "Grand Bazar",
+  suleymaniye: "Mosquée Süleymaniye", "fener-balat": "Rues de Balat", eyup: "Colline Pierre Loti", galata: "Tour de Galata",
+  beyoglu: "Avenue İstiklal & passages", besiktas: "Palais de Dolmabahçe", ortakoy: "Mosquée d’Ortaköy",
+  bebek: "Village et parc de Bebek", kadikoy: "Traversée en ferry", uskudar: "Promenade de Salacak & tour de Léandre"
+};
+const fileKey = f => { try { f = decodeURIComponent(f); } catch (e) {} return f.replace(/ /g, "_").toLowerCase(); };
+let allSlides = null;
+// Diapositives de tous les quartiers, calculées en une fois : aucune photo ni aucun lieu deux fois.
+function computeSlides() {
+  if (allSlides) return allSlides;
+  allSlides = loadWikiImages().then(imgs => {
+    const seenFiles = new Set(), seenPages = new Set(), out = {};
+    districts.forEach(d => { if (FLASH[d.id]) seenFiles.add(fileKey(FLASH[d.id].photo)); });
+    districts.forEach(d => {
+      const slides = [];
+      if (FLASH[d.id]) slides.push({ src: photoUrl(FLASH[d.id].photo, 1280), caption: FLASH_SUBJECT[d.id] || d.name, page: photoPage(FLASH[d.id].photo) });
+      d.monuments.forEach(m => {
+        if (m[1] === FLASH_SUBJECT[d.id]) return;
+        const w = imgs[WIKI[m[1]]]; if (!w) return;
+        const k = fileKey(w.file || w.src);
+        if (seenFiles.has(k) || seenPages.has(w.page)) return;
+        seenFiles.add(k); seenPages.add(w.page);
+        slides.push({ src: w.src, caption: m[1], page: w.page });
+      });
+      out[d.id] = slides;
+    });
+    return out;
+  });
+  return allSlides;
 }
+async function districtSlides(d) { return (await computeSlides())[d.id] || []; }
 // Carrousel : on glisse du doigt, ou flèches et points.
 function buildCarousel(host, slides) {
   if (!host || slides.length < 2) return;
