@@ -44,9 +44,25 @@
   </main>
 
   <footer class="source-note">
+    <button id="journalButton">Mon carnet</button>
     <button id="restoButton">Restaurants</button>
-    <button id="infoButton">Culture et infos pratiques</button>
+    <button id="infoButton">Infos pratiques</button>
   </footer>
+
+  <section id="journalSheet" class="info-sheet journal-sheet" aria-hidden="true">
+    <div class="sheet-handle"></div>
+    <button class="close-button detail-close" data-close="journal" aria-label="Fermer">×</button>
+    <p class="eyebrow">Carnet de voyage</p>
+    <h2>Mes journées à Istanbul</h2>
+    <div class="how">
+      <p><b>Tracer vos balades, téléphone en poche :</b> lancez le matin une app d’enregistrement GPS qui fonctionne écran verrouillé (par exemple Open GPX Tracker, gratuite, ou Strava). Le soir, exportez le tracé en fichier .gpx et importez-le ici.</p>
+      <label class="add-photo" for="gpxInput">+ Importer un tracé (.gpx)</label>
+      <input id="gpxInput" type="file" accept=".gpx,application/gpx+xml,application/xml,text/xml" multiple hidden>
+      <p id="gpxStatus" class="photos-note" aria-live="polite"></p>
+      <p class="photos-note">Les photos ajoutées dans les fiches se placent sur la carte : à leur position GPS si l’iPhone l’a conservée, sinon sur le tracé à l’heure de la prise de vue. Tout reste sur cet appareil.</p>
+    </div>
+    <div id="journalDays"></div>
+  </section>
 
   <section id="restoSheet" class="info-sheet resto-sheet" aria-hidden="true">
     <div class="sheet-handle"></div>

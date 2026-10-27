@@ -256,7 +256,7 @@ const districtButtons = document.querySelector("#districtButtons");
 districtButtons.innerHTML = districts.map((d, i) => `<button class="district-button" data-id="${d.id}"><strong>${i + 1}. ${d.name}</strong><span>${d.subtitle}</span></button>`).join("");
 
 function sheetState(openSheet) {
-  [detailSheet, districtList, infoSheet, restoSheet].forEach(sheet => {
+  [detailSheet, districtList, infoSheet, restoSheet, journalSheet].forEach(sheet => {
     const open = sheet === openSheet;
     sheet.classList.toggle("is-open", open);
     sheet.setAttribute("aria-hidden", String(!open));
@@ -325,17 +325,24 @@ let currentDistrict = null;
 const DB_NAME = "guide-istanbul-photos";
 function openDB() {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, 1);
-    req.onupgradeneeded = () => req.result.createObjectStore("photos", { keyPath: "id", autoIncrement: true }).createIndex("district", "district");
+    const req = indexedDB.open(DB_NAME, 2);
+    req.onupgradeneeded = e => {
+      const db = req.result;
+      if (e.oldVersion < 1) db.createObjectStore("photos", { keyPath: "id", autoIncrement: true }).createIndex("district", "district");
+      if (e.oldVersion < 2) {
+        db.createObjectStore("tracks", { keyPath: "id", autoIncrement: true });
+        db.createObjectStore("notes", { keyPath: "day" });
+      }
+    };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
   });
 }
-async function dbRun(mode, fn) {
+async function dbRun(mode, fn, store = "photos") {
   const db = await openDB();
   return new Promise((resolve, reject) => {
-    const tx = db.transaction("photos", mode);
-    const out = fn(tx.objectStore("photos"));
+    const tx = db.transaction(store, mode);
+    const out = fn(tx.objectStore(store));
     tx.oncomplete = () => resolve(out && out.result);
     tx.onerror = () => reject(tx.error);
   });
@@ -358,9 +365,11 @@ function shrink(file) {
 async function addPhotos(district, files) {
   try {
     for (const f of files) {
+      const meta = await readExif(f);
       const blob = await shrink(f);
-      await dbRun("readwrite", st => st.add({ district, blob, date: Date.now() }));
+      await dbRun("readwrite", st => st.add({ district, blob, date: Date.now(), taken: meta.taken || f.lastModified || Date.now(), lat: meta.lat, lon: meta.lon }));
     }
+    drawJournal();
   } catch (e) { alertPhotos("Impossible d’enregistrer : espace de stockage indisponible dans ce navigateur."); }
   renderPhotos(district);
 }
@@ -380,7 +389,7 @@ document.addEventListener("click", async e => {
   if (!btn) return;
   if (btn.dataset.armed !== "1") { btn.dataset.armed = "1"; btn.textContent = "Suppr. ?"; btn.classList.add("armed"); return; }
   await dbRun("readwrite", st => st.delete(Number(btn.dataset.photo)));
-  renderPhotos(currentDistrict);
+  renderPhotos(currentDistrict); drawJournal();
 });
 
 /* ---- Liste des restaurants ---- */
@@ -402,6 +411,160 @@ document.querySelector("#restoList").addEventListener("click", e => {
   const b = e.target.closest("[data-id]"); if (b) openDistrict(b.dataset.id);
 });
 document.querySelector("#restoButton").addEventListener("click", () => { renderRestos(); sheetState(restoSheet); });
+
+/* ---- Carnet de voyage : tracés GPX, photos sur la carte, notes du jour ---- */
+const DAY_COLORS = ["#b2452c", "#2f6f9f", "#7b4fa0", "#c07a12", "#2f7a52", "#a33a6b", "#4d5c9e"];
+const journalLayer = L.layerGroup().addTo(map);
+const journalSheet = document.querySelector("#journalSheet");
+const dayKey = t => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+const dayLabel = k => new Date(k + "T12:00").toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+const fmtTime = t => new Date(t).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+
+function haversine(a, b) {
+  const R = 6371000, r = x => x * Math.PI / 180;
+  const dLat = r(b[0] - a[0]), dLon = r(b[1] - a[1]);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(r(a[0])) * Math.cos(r(b[0])) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+function parseGPX(text) {
+  const doc = new DOMParser().parseFromString(text, "application/xml");
+  const pts = [...doc.querySelectorAll("trkpt, rtept")].map(p => [
+    parseFloat(p.getAttribute("lat")), parseFloat(p.getAttribute("lon")),
+    Date.parse(p.querySelector("time")?.textContent || "") || null
+  ]).filter(p => isFinite(p[0]) && isFinite(p[1]));
+  return pts;
+}
+
+async function importTracks(files) {
+  const status = document.querySelector("#gpxStatus");
+  let ok = 0;
+  for (const f of files) {
+    try {
+      const pts = parseGPX(await f.text());
+      if (pts.length < 2) continue;
+      const start = pts.find(p => p[2])?.[2] || f.lastModified || Date.now();
+      await dbRun("readwrite", st => st.add({ name: f.name, day: dayKey(start), start, points: pts }), "tracks");
+      ok++;
+    } catch (e) { /* fichier illisible : ignoré */ }
+  }
+  status.textContent = ok ? `${ok} tracé(s) importé(s).` : "Aucun tracé lisible : choisissez un fichier .gpx.";
+  await drawJournal(); renderJournal();
+}
+
+// Lecture minimale des métadonnées EXIF (position GPS et date de prise de vue) d'un JPEG.
+async function readExif(file) {
+  try {
+    const buf = await file.slice(0, 256 * 1024).arrayBuffer();
+    const v = new DataView(buf);
+    if (v.getUint16(0) !== 0xFFD8) return {};
+    let off = 2;
+    while (off < v.byteLength - 4) {
+      const marker = v.getUint16(off), size = v.getUint16(off + 2);
+      if (marker === 0xFFE1 && v.getUint32(off + 4) === 0x45786966) return parseTiff(v, off + 10);
+      off += 2 + size;
+    }
+  } catch (e) {}
+  return {};
+}
+function parseTiff(v, t) {
+  const le = v.getUint16(t) === 0x4949;
+  const u16 = o => v.getUint16(t + o, le), u32 = o => v.getUint32(t + o, le);
+  const rat = o => u32(o) / (u32(o + 4) || 1);
+  const ifd = o => { const n = u16(o), tags = {}; for (let i = 0; i < n; i++) { const e = o + 2 + i * 12; tags[u16(e)] = { type: u16(e + 2), count: u32(e + 4), val: e + 8 }; } return tags; };
+  const ptr = tag => u32(tag.val);
+  const str = tag => { let s = "", o = tag.count > 4 ? ptr(tag) : tag.val; for (let i = 0; i < tag.count - 1; i++) s += String.fromCharCode(v.getUint8(t + o + i)); return s; };
+  const out = {};
+  const root = ifd(u32(4));
+  if (root[0x8769]) {
+    const ex = ifd(ptr(root[0x8769]));
+    const dt = ex[0x9003] && str(ex[0x9003]);
+    if (dt) { const m = dt.match(/(\d+):(\d+):(\d+) (\d+):(\d+):(\d+)/); if (m) out.taken = new Date(+m[1], m[2] - 1, +m[3], +m[4], +m[5], +m[6]).getTime(); }
+  }
+  if (root[0x8825]) {
+    const g = ifd(ptr(root[0x8825]));
+    const dms = tag => { const o = ptr(tag); return rat(o) + rat(o + 8) / 60 + rat(o + 16) / 3600; };
+    if (g[2] && g[4]) {
+      const ns = g[1] ? String.fromCharCode(v.getUint8(t + g[1].val)) : "N", ew = g[3] ? String.fromCharCode(v.getUint8(t + g[3].val)) : "E";
+      out.lat = dms(g[2]) * (ns === "S" ? -1 : 1); out.lon = dms(g[4]) * (ew === "W" ? -1 : 1);
+    }
+  }
+  return out;
+}
+
+async function loadJournal() {
+  let tracks = [], photos = [], notes = [];
+  try {
+    tracks = await dbRun("readonly", st => st.getAll(), "tracks") || [];
+    photos = await dbRun("readonly", st => st.getAll()) || [];
+    notes = await dbRun("readonly", st => st.getAll(), "notes") || [];
+  } catch (e) {}
+  // Position d'une photo : GPS de la photo, sinon point du tracé le plus proche dans le temps, sinon centre du quartier.
+  photos.forEach(ph => {
+    if (isFinite(ph.lat) && isFinite(ph.lon)) { ph.pos = [ph.lat, ph.lon]; return; }
+    let best = null, gap = 20 * 60 * 1000;
+    tracks.forEach(tr => tr.points.forEach(p => { if (p[2] && Math.abs(p[2] - ph.taken) < gap) { gap = Math.abs(p[2] - ph.taken); best = [p[0], p[1]]; } }));
+    ph.pos = best || districts.find(d => d.id === ph.district)?.coords;
+  });
+  const days = [...new Set([...tracks.map(t => t.day), ...photos.map(p => dayKey(p.taken || p.date))])].sort();
+  return { tracks, photos, notes: Object.fromEntries(notes.map(n => [n.day, n.text])), days };
+}
+
+async function drawJournal() {
+  const { tracks, photos, days } = await loadJournal();
+  journalLayer.clearLayers();
+  tracks.forEach(tr => {
+    const color = DAY_COLORS[days.indexOf(tr.day) % DAY_COLORS.length];
+    L.polyline(tr.points.map(p => [p[0], p[1]]), { color, weight: 4, opacity: .85 }).addTo(journalLayer)
+      .bindTooltip(`${dayLabel(tr.day)}`, { sticky: true });
+  });
+  photos.filter(p => p.pos).forEach(ph => {
+    const url = URL.createObjectURL(ph.blob);
+    L.marker(ph.pos, { icon: L.divIcon({ className: "photo-marker", html: `<img src="${url}" alt="">`, iconSize: [34, 34], iconAnchor: [17, 17] }) })
+      .addTo(journalLayer).bindPopup(`<img class="photo-pop" src="${url}" alt="Photo personnelle"><br>${dayLabel(dayKey(ph.taken || ph.date))} · ${fmtTime(ph.taken || ph.date)}`);
+  });
+}
+
+async function renderJournal() {
+  const { tracks, photos, notes, days } = await loadJournal();
+  const box = document.querySelector("#journalDays");
+  if (!days.length) { box.innerHTML = `<p class="photos-note">Votre carnet est vide. Importez le tracé de votre première journée ou ajoutez des photos depuis la fiche d’un quartier.</p>`; return; }
+  box.innerHTML = days.map((day, i) => {
+    const color = DAY_COLORS[i % DAY_COLORS.length];
+    const dayTracks = tracks.filter(t => t.day === day);
+    const pts = dayTracks.flatMap(t => t.points);
+    let km = 0; dayTracks.forEach(t => t.points.forEach((p, j) => { if (j) km += haversine(t.points[j - 1], p); }));
+    const times = pts.map(p => p[2]).filter(Boolean);
+    const crossed = districts.filter(d => pts.some(p => haversine(p, d.coords) < 700));
+    const dayPhotos = photos.filter(p => dayKey(p.taken || p.date) === day).sort((a, b) => (a.taken || a.date) - (b.taken || b.date));
+    return `<article class="journal-day" style="--day:${color}">
+      <header><span class="day-dot"></span><h3>Jour ${i + 1} · ${dayLabel(day)}</h3></header>
+      <div class="facts">${pts.length ? `<span>${(km / 1000).toFixed(1).replace(".", ",")} km</span>` : ""}${times.length ? `<span>${fmtTime(Math.min(...times))} – ${fmtTime(Math.max(...times))}</span>` : ""}<span>${dayPhotos.length} photo(s)</span></div>
+      ${crossed.length ? `<p class="crossed">Quartiers parcourus : ${crossed.map(d => `<button class="resto-district" data-id="${d.id}">${d.name}</button>`).join(" ")}</p>` : ""}
+      ${dayPhotos.length ? `<div class="photo-grid">${dayPhotos.map(p => `<figure><img src="${URL.createObjectURL(p.blob)}" alt="Photo personnelle"></figure>`).join("")}</div>` : ""}
+      <label class="note-label" for="note-${day}">Note du jour</label>
+      <textarea id="note-${day}" class="day-note" data-day="${day}" rows="3" placeholder="Restaurants testés, coups de cœur, rencontres…">${(notes[day] || "").replace(/</g, "&lt;")}</textarea>
+      ${dayTracks.length ? `<button class="text-button" data-showday="${day}">Voir ce jour sur la carte</button>` : ""}
+    </article>`;
+  }).join("");
+}
+
+document.querySelector("#journalButton").addEventListener("click", () => { renderJournal(); sheetState(journalSheet); });
+document.querySelector("#gpxInput").addEventListener("change", e => importTracks(e.target.files));
+document.querySelector("#journalDays").addEventListener("input", e => {
+  const ta = e.target.closest(".day-note"); if (!ta) return;
+  clearTimeout(ta._t);
+  ta._t = setTimeout(() => dbRun("readwrite", st => st.put({ day: ta.dataset.day, text: ta.value }), "notes").catch(() => {}), 400);
+});
+document.querySelector("#journalDays").addEventListener("click", async e => {
+  const d = e.target.closest("[data-id]"); if (d) return openDistrict(d.dataset.id);
+  const b = e.target.closest("[data-showday]"); if (!b) return;
+  const { tracks } = await loadJournal();
+  const pts = tracks.filter(t => t.day === b.dataset.showday).flatMap(t => t.points.map(p => [p[0], p[1]]));
+  sheetState(null);
+  if (pts.length) map.fitBounds(L.latLngBounds(pts), { padding: [40, 40] });
+});
+drawJournal();
 
 listButton.addEventListener("click", () => sheetState(districtList));
 document.querySelector("#infoButton").addEventListener("click", () => sheetState(infoSheet));
