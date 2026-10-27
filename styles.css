@@ -196,3 +196,8 @@ body.has-sheet .source-note { opacity: 0; pointer-events: none; }
 .district-desc { margin: 0 22px 22px; }
 .district-desc h3 { margin: 0 0 8px; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--sage-dark); }
 .district-desc p { margin: 0; color: #33463d; font: 15px/1.65 Georgia, serif; max-width: 65ch; }
+.leisure { margin: 0 15px 20px; padding: 15px 16px; border-radius: 17px; background: #e8f0ea; border: 1px solid rgba(71,102,88,.2); }
+.leisure h3 { margin: 0 0 8px; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--sage-dark); }
+.leisure h3 + ul + h3 { margin-top: 14px; }
+.leisure ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.leisure li { color: #33463d; font-size: 12.5px; line-height: 1.5; }
