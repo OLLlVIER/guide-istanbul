@@ -1,3 +1,5 @@
+const CHURCH_WORDS = /église|cathédrale|patriarcat|chora|sainte-sophie|sainte-irène|sainte-marie|pammakaristos|zeyrek|kalenderhane|christ church|surp/i;
+
 const HOTEL = {
   name: "Mövenpick Istanbul Old Town",
   address: "Zeyrek Mahallesi, Atatürk Bulvarı No 9, Unkapanı, Fatih",
@@ -16,7 +18,8 @@ const districts = [
       ["+++", "Sainte-Sophie", "Édifiée par Justinien entre 532 et 537, elle fut basilique impériale, mosquée, musée puis mosquée. Sa coupole et ses mosaïques racontent quinze siècles d’histoire.", "25 € · galerie touristique (Museum Pass non valable)", "1 h 15–1 h 45", "4 min vers la Citerne-Basilique"],
       ["+++", "Citerne-Basilique", "Réservoir monumental du VIe siècle, porté par 336 colonnes et célèbre pour ses deux têtes de Méduse. La scénographie contemporaine met en valeur l’architecture souterraine.", "1 950 TL · env. 35 € (séance nocturne 3 000 TL)", "45–60 min", "5 min vers la Mosquée Bleue"],
       ["+++", "Mosquée Bleue", "Construite pour Ahmed Ier entre 1609 et 1617, elle associe l’héritage de Sainte-Sophie au classicisme ottoman et conserve plus de 20 000 carreaux d’Iznik.", "gratuit", "30–45 min", "2 min vers l’Hippodrome"],
-      ["++", "Hippodrome & obélisques", "Ancien centre des courses et des cérémonies de Constantinople. L’obélisque de Théodose, la colonne Serpentine et la colonne Murée en dessinent encore l’axe.", "gratuit", "25–40 min", null]
+      ["++", "Hippodrome & obélisques", "Ancien centre des courses et des cérémonies de Constantinople. L’obélisque de Théodose, la colonne Serpentine et la colonne Murée en dessinent encore l’axe.", "gratuit", "25–40 min", null],
+      ["++", "Petite Sainte-Sophie (Saints-Serge-et-Bacchus)", "Église de Justinien bâtie vers 527, juste avant Sainte-Sophie, dont elle annonce la coupole. Devenue mosquée, elle garde sa frise grecque d’origine.", "gratuit", "20–30 min", null]
     ]
   },
   {
@@ -26,7 +29,8 @@ const districts = [
     monuments: [
       ["+++", "Palais de Topkapı", "Résidence et centre de gouvernement des sultans ottomans du XVe au XIXe siècle. Les cours, le Trésor, le Harem et les vues sur le Bosphore justifient une longue visite.", "2 750 TL · env. 49 € (palais + Harem + Sainte-Irène)", "3–4 h", "4 min vers les Musées archéologiques"],
       ["+++", "Musées archéologiques", "Trois musées réunissant des œuvres de l’Anatolie, de la Mésopotamie, de l’Égypte et du monde gréco-romain, dont le célèbre sarcophage d’Alexandre.", "env. 15 €", "1 h 30–2 h", "5 min vers Gülhane"],
-      ["++", "Parc de Gülhane", "Ancien jardin extérieur du palais, ouvert au public en 1912. Ses allées offrent une pause ombragée entre la vieille ville et la Corne d’Or.", "gratuit", "30–50 min", null]
+      ["++", "Parc de Gülhane", "Ancien jardin extérieur du palais, ouvert au public en 1912. Ses allées offrent une pause ombragée entre la vieille ville et la Corne d’Or.", "gratuit", "30–50 min", null],
+      ["++", "Sainte-Irène", "Église byzantine du VIe siècle, jamais transformée en mosquée. Sa grande croix iconoclaste en mosaïque domine l’abside nue, à l’acoustique remarquable.", "incluse dans le billet Topkapı", "20–30 min", null]
     ]
   },
   {
@@ -70,7 +74,9 @@ const districts = [
       ["++", "Église Saint-Étienne-des-Bulgares", "Cette église de la fin du XIXe siècle est célèbre pour sa structure préfabriquée en fonte, assemblée sur la rive de la Corne d’Or.", "gratuit", "30–45 min", "8 min vers le Patriarcat"],
       ["++", "Patriarcat œcuménique & Saint-Georges", "Siège spirituel majeur de l’orthodoxie grecque. L’église patriarcale conserve un riche décor et des reliques dans un ensemble discret.", "gratuit", "30–45 min", "12 min vers Balat"],
       ["+", "Rues de Balat", "Maisons colorées, escaliers, petits commerces et édifices religieux témoignent du passé cosmopolite du quartier, longtemps habité par des communautés grecques, juives et arméniennes.", "gratuit", "1–1 h 30", "18 min vers Kariye"],
-      ["+++", "Mosquée Kariye / ancienne Chora", "Célèbre pour ses mosaïques et fresques paléologues du XIVe siècle, l’ancienne église de la Chora offre l’un des ensembles byzantins les plus raffinés d’Istanbul.", "20 € · fermée aux visiteurs le vendredi", "60–90 min", null]
+      ["+++", "Mosquée Kariye / ancienne Chora", "Célèbre pour ses mosaïques et fresques paléologues du XIVe siècle, l’ancienne église de la Chora offre l’un des ensembles byzantins les plus raffinés d’Istanbul.", "20 € · fermée aux visiteurs le vendredi", "60–90 min", null],
+      ["+++", "Sainte-Marie-des-Mongols", "Seule église byzantine de la ville jamais convertie en mosquée, toujours orthodoxe depuis le XIIIe siècle. Souvent fermée : sonnez au portail, de préférence le matin.", "gratuit · offrande bienvenue", "20–30 min", null],
+      ["++", "Pammakaristos (musée Fethiye)", "Chapelle funéraire byzantine du XIVe siècle aux mosaïques d’or, voisine du Patriarcat, aujourd’hui petit musée.", "tarif à vérifier sur place", "30–40 min", null]
     ]
   },
   {
@@ -81,7 +87,8 @@ const districts = [
       ["+++", "Tour de Galata", "Élevée par les Génois en 1348, la tour fut tour de guet, prison et observatoire. Son belvédère offre un panorama circulaire sur la vieille ville et le Bosphore.", "30 € · e-billet galatakulesi.gov.tr", "45–75 min", "6 min vers le Mevlevihanesi"],
       ["++", "Galata Mevlevihanesi", "Premier couvent mevlevi d’Istanbul, fondé en 1491. Le musée présente l’histoire des derviches tourneurs, leur musique et leurs objets rituels.", "env. 7 €", "45–60 min", "10 min vers SALT Galata"],
       ["++", "SALT Galata", "Installé dans l’ancienne Banque ottomane, ce centre culturel associe architecture fin XIXe, archives, expositions, bibliothèque et vues sur la ville.", "gratuit", "45–75 min", "7 min vers Kılıç Ali Paşa"],
-      ["++", "Mosquée Kılıç Ali Paşa", "Mimar Sinan construisit ce complexe au XVIe siècle pour l’amiral Kılıç Ali Paşa. Son plan fait clairement écho à Sainte-Sophie.", "gratuit", "25–40 min", null]
+      ["++", "Mosquée Kılıç Ali Paşa", "Mimar Sinan construisit ce complexe au XVIe siècle pour l’amiral Kılıç Ali Paşa. Son plan fait clairement écho à Sainte-Sophie.", "gratuit", "25–40 min", null],
+      ["++", "Église Saint-Pierre-et-Saint-Paul", "Église dominicaine reconstruite par les frères Fossati en 1843, cachée derrière une cour au pied de la tour de Galata.", "gratuit · ouverte surtout le matin", "15–25 min", null]
     ]
   },
   {
@@ -92,7 +99,11 @@ const districts = [
       ["+++", "Avenue İstiklal & passages", "Grande artère cosmopolite de Pera, bordée d’immeubles des XIXe et XXe siècles, de consulats, de passages, de lieux de culte et du tramway historique.", "gratuit", "1 h 30–3 h", "4 min vers Saint-Antoine"],
       ["++", "Église Saint-Antoine-de-Padoue", "La plus grande église catholique d’Istanbul, reconstruite en style néogothique vénitien au début du XXe siècle.", "gratuit", "20–30 min", "6 min vers le musée de Pera"],
       ["++", "Musée de Pera", "Musée privé installé dans l’ancien Hôtel Bristol, connu pour ses peintures orientalistes, ses collections anatoliennes et ses expositions temporaires.", "450 TL · env. 8 € (gratuit ven. 18h–22h)", "1–1 h 30", "16 min vers Taksim"],
-      ["+", "Place Taksim & monument de la République", "Centre symbolique de l’Istanbul moderne, aménagé autour du monument de 1928 commémorant la fondation de la République.", "gratuit", "20–30 min", null]
+      ["+", "Place Taksim & monument de la République", "Centre symbolique de l’Istanbul moderne, aménagé autour du monument de 1928 commémorant la fondation de la République.", "gratuit", "20–30 min", null],
+      ["+++", "Cathédrale du Saint-Esprit", "Cathédrale catholique d’Istanbul, bâtie en 1846 par Giuseppe Fossati. Dans la cour, la statue du pape Benoît XV érigée par les Turcs en 1921.", "gratuit · messes le dimanche", "20–30 min", null],
+      ["++", "Église Sainte-Trinité (Aya Triada)", "Grande église grecque orthodoxe néo-baroque de 1880, à deux pas de la place Taksim.", "gratuit", "15–25 min", null],
+      ["++", "Église arménienne Üç Horan", "Église arménienne apostolique au cœur du marché de Balık Pazarı, avec un intérieur doré inattendu.", "gratuit", "15–20 min", null],
+      ["++", "Christ Church (église anglicane de Crimée)", "Église néogothique de 1868 élevée en mémoire des soldats de la guerre de Crimée, l’une des rares de ce style en Orient.", "gratuit · ouverte aux offices", "15–20 min", null]
     ]
   },
   {
@@ -113,7 +124,8 @@ const districts = [
       ["+++", "Mosquée d’Ortaköy", "La Büyük Mecidiye Camii fut achevée en 1854 par la famille Balyan. Son décor néobaroque et sa situation au bord de l’eau en font une icône du Bosphore.", "gratuit", "25–40 min", "10 min vers Çırağan"],
       ["+", "Place et marché d’Ortaköy", "Petite place vivante tournée vers le Bosphore, entourée de cafés, d’étals d’artisans et de vendeurs de kumpir.", "gratuit", "45–75 min", "10 min vers Çırağan"],
       ["++", "Palais de Çırağan — extérieur", "Ancien palais ottoman du XIXe siècle construit pour Abdülaziz, aujourd’hui hôtel. Sa façade sur le Bosphore se découvre depuis la promenade.", "extérieur gratuit", "15–25 min", "12 min vers le parc Yıldız"],
-      ["++", "Parc Yıldız", "Ancien domaine impérial transformé en vaste parc paysager, avec bosquets, pavillons et points de vue au-dessus du Bosphore.", "gratuit", "1–1 h 30", null]
+      ["++", "Parc Yıldız", "Ancien domaine impérial transformé en vaste parc paysager, avec bosquets, pavillons et points de vue au-dessus du Bosphore.", "gratuit", "1–1 h 30", null],
+      ["+", "Église Hagios Phokas", "Petite église grecque orthodoxe de 1856 dans les ruelles d’Ortaköy, témoin de l’ancien village grec du Bosphore.", "gratuit · ouverture irrégulière", "10–15 min", null]
     ]
   },
   {
@@ -124,6 +136,7 @@ const districts = [
       ["+++", "Traversée en ferry", "Vingt minutes sur la mer de Marmara, avec la vieille ville, la tour de Léandre et la gare de Haydarpaşa en toile de fond. Prenez un çay et un simit à bord.", "env. 0,85 € avec l’Istanbulkart", "20–25 min", "8 min vers le marché"],
       ["++", "Marché de Kadıköy", "Ruelles de poissonniers, primeurs, fromagers, épiciers et traiteurs de mezzés autour de Güneşlibahçe Sokak.", "gratuit", "45–75 min", "5 min vers Surp Takavor"],
       ["+", "Église arménienne Surp Takavor", "Église arménienne du XIXe siècle, discrète au milieu du quartier commerçant.", "gratuit", "15 min", "15 min vers Moda"],
+      ["+", "Église Sainte-Euphémie (Aya Efimia)", "Église grecque orthodoxe du marché de Kadıköy, sur le site du concile de Chalcédoine de 451.", "gratuit", "15 min", null],
       ["++", "Moda et son front de mer", "Quartier résidentiel aux maisons anciennes, avec une longue promenade et des cafés face aux îles des Princes et au coucher du soleil.", "gratuit", "45–75 min", null],
       ["++", "Gare de Haydarpaşa — extérieur", "Gare néo-allemande de 1909 posée sur l’eau, ancienne porte de l’Anatolie et du Bagdadbahn.", "extérieur gratuit", "15–20 min", null]
     ]
@@ -145,7 +158,8 @@ const districts = [
     monuments: [
       ["+++", "Mosquée Eyüp Sultan", "Élevée sur la tombe d’Abu Ayyub al-Ansari, compagnon du Prophète. Les sultans y ceignaient l’épée lors de leur avènement.", "gratuit", "30–45 min", "10 min vers le cimetière"],
       ["++", "Cimetière historique", "Stèles ottomanes sculptées de turbans et de fleurs, sur la colline qui monte vers Pierre Loti.", "gratuit", "20–30 min", "Téléphérique vers Pierre Loti"],
-      ["+++", "Colline Pierre Loti", "Café et belvédère nommés d’après l’écrivain français, avec une vue plongeante sur la Corne d’Or. Montée en téléphérique.", "vue gratuite · téléphérique env. 0,85 €", "45 min–1 h", null]
+      ["+++", "Colline Pierre Loti", "Café et belvédère nommés d’après l’écrivain français, avec une vue plongeante sur la Corne d’Or. Montée en téléphérique.", "vue gratuite · téléphérique env. 0,85 €", "45 min–1 h", null],
+      ["++", "Sainte-Marie-des-Blachernes", "Église orthodoxe bâtie sur la source sacrée où l’on gardait l’icône de la Vierge protectrice de Constantinople. À Ayvansaray, entre Balat et Eyüp.", "gratuit · offrande bienvenue", "20–30 min", null]
     ]
   },
   {
@@ -154,6 +168,7 @@ const districts = [
     routes: [["Uber", "35–55 min · env. 13–20 €"], ["Tram + bus", "T1 jusqu’à Kabataş puis bus 22/25E · 50–65 min · env. 1,70 €"], ["Ferry", "Lignes du Bosphore, horaires limités"], ["À pied", "Non réaliste"]],
     monuments: [
       ["++", "Maisons ottomanes d’Arnavutköy", "Yalı et maisons en bois aux façades colorées, témoins de l’ancien village grec du Bosphore.", "gratuit", "30–45 min", "25–30 min à pied vers Bebek"],
+      ["++", "Église des Taxiarques (Taksiarhis)", "Grande église grecque orthodoxe d’Arnavutköy, avec sa source sacrée (ayazma) dans un passage souterrain.", "gratuit", "15–20 min", null],
       ["+++", "Promenade du Bosphore", "Le quai entre Arnavutköy et Bebek longe l’eau au plus près, avec la forteresse de Rumeli Hisarı en vue.", "gratuit", "30–45 min", null],
       ["++", "Village et parc de Bebek", "Petite baie élégante, cafés, glaciers et la mosquée de Bebek au bord du parc.", "gratuit", "30–45 min", null]
     ]
@@ -256,7 +271,7 @@ const districtButtons = document.querySelector("#districtButtons");
 districtButtons.innerHTML = districts.map((d, i) => `<button class="district-button" data-id="${d.id}"><strong>${i + 1}. ${d.name}</strong><span>${d.subtitle}</span></button>`).join("");
 
 function sheetState(openSheet) {
-  [detailSheet, districtList, infoSheet, restoSheet, journalSheet].forEach(sheet => {
+  [detailSheet, districtList, infoSheet, restoSheet, journalSheet, churchSheet].forEach(sheet => {
     const open = sheet === openSheet;
     sheet.classList.toggle("is-open", open);
     sheet.setAttribute("aria-hidden", String(!open));
@@ -285,6 +300,7 @@ function openDistrict(id) {
       <div class="routes">${district.routes.map(r => `<div class="route"><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")}</div>
     </section>
     <section class="musts"><h3>Les indispensables</h3><div class="must-list">${district.monuments.filter(m => m[0] === "+++").map(m => `<span class="must">${m[1]}</span>`).join("")}</div></section>
+    ${(() => { const ch = district.monuments.filter(m => CHURCH_WORDS.test(m[1])); return ch.length ? `<section class="churches"><h3>Églises qui valent le déplacement</h3>${ch.map(m => `<div class="church-row"><span class="rank-pill ${rankClass(m[0])}">${m[0]}</span><span>${m[1]}</span></div>`).join("")}</section>` : ""; })()}
     ${extras[district.id] ? `<section class="tips"><h3>À savoir</h3><ul>${extras[district.id].tips.map(t => `<li>${t}</li>`).join("")}</ul></section>` : ""}
     <section class="monuments">
       <h3>À voir — par ordre de priorité</h3>
@@ -391,6 +407,17 @@ document.addEventListener("click", async e => {
   await dbRun("readwrite", st => st.delete(Number(btn.dataset.photo)));
   renderPhotos(currentDistrict); drawJournal();
 });
+
+/* ---- Églises & cathédrales ---- */
+const churchSheet = document.querySelector("#churchSheet");
+function renderChurches() {
+  const order = { "+++": 0, "++": 1, "+": 2 };
+  const rows = districts.flatMap(d => d.monuments.filter(m => CHURCH_WORDS.test(m[1])).map(m => ({ d, m })));
+  rows.sort((a, b) => order[a.m[0]] - order[b.m[0]]);
+  document.querySelector("#churchList").innerHTML = rows.map(({ d, m }) => `<article class="monument"><span class="rank ${rankClass(m[0])}">${m[0]}</span><h4>${m[1]}</h4><p>${m[2]}</p><div class="facts"><span>${m[3]}</span><span>${m[4]}</span></div><button class="resto-district" data-id="${d.id}">${d.name}</button></article>`).join("");
+}
+document.querySelector("#churchList").addEventListener("click", e => { const b = e.target.closest("[data-id]"); if (b) openDistrict(b.dataset.id); });
+document.querySelector("#churchButton").addEventListener("click", () => { renderChurches(); sheetState(churchSheet); });
 
 /* ---- Liste des restaurants ---- */
 const restoSheet = document.querySelector("#restoSheet");

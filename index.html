@@ -45,6 +45,7 @@
 
   <footer class="source-note">
     <button id="journalButton">Mon carnet</button>
+    <button id="churchButton">Églises</button>
     <button id="restoButton">Restaurants</button>
     <button id="infoButton">Infos pratiques</button>
   </footer>
@@ -62,6 +63,15 @@
       <p class="photos-note">Les photos ajoutées dans les fiches se placent sur la carte : à leur position GPS si l’iPhone l’a conservée, sinon sur le tracé à l’heure de la prise de vue. Tout reste sur cet appareil.</p>
     </div>
     <div id="journalDays"></div>
+  </section>
+
+  <section id="churchSheet" class="info-sheet" aria-hidden="true">
+    <div class="sheet-handle"></div>
+    <button class="close-button detail-close" data-close="church" aria-label="Fermer">×</button>
+    <p class="eyebrow">Parcours</p>
+    <h2>Églises & cathédrales</h2>
+    <p>Istanbul compte des églises byzantines, grecques, arméniennes, catholiques et anglicanes. Les plus belles mosaïques sont à Sainte-Sophie, Chora et Pammakaristos. Les églises actives se visitent en tenue sobre, hors des offices ; une petite offrande est appréciée.</p>
+    <div id="churchList" class="monuments church-list"></div>
   </section>
 
   <section id="restoSheet" class="info-sheet resto-sheet" aria-hidden="true">
