@@ -7,15 +7,15 @@
   <meta name="description" content="Le guide complet d’Istanbul au départ du Mövenpick Old Town : 14 quartiers en photos, où manger, coutumes et repères sur la Turquie.">
   <meta property="og:title" content="Istanbul · Octobre 2026 — le guide">
   <meta property="og:description" content="14 quartiers en photos, où manger, coutumes et repères sur la Turquie.">
-  <link rel="stylesheet" href="leaflet.css?v=10271847">
-  <link rel="stylesheet" href="planner.css?v=10271847">
+  <link rel="stylesheet" href="leaflet.css?v=10271925">
+  <link rel="stylesheet" href="planner.css?v=10271925">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@400;600;700;800&display=swap">
   <style>
     /* Mise en page : magazine en colonnes larges, une couleur par zone de la ville, encarts colorés. */
     :root {
-      --ink: #14241d; --paper: #fbf7ef; --sand: #f3ead8; --line: rgba(20,36,29,.12);
+      --ink: #14241d; --deep: #2e6b57; --paper: #fbf7ef; --sand: #f3ead8; --line: rgba(20,36,29,.12);
       --muted: #55665d; --gold: #d4a24c;
       --z1: #b2452c; --z2: #2f6f9f; --z3: #7b4fa0; --z4: #1f7a72; --z5: #c07a12;
       --r3: #b2452c; --r2: #2f7a52; --r1: #8a8f8c;
@@ -30,7 +30,7 @@
     .wrap { max-width: 1180px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
 
     /* Barre de navigation */
-    .nav { position: sticky; top: 0; z-index: 50; background: rgba(20,36,29,.94); backdrop-filter: blur(10px); color: white; }
+    .nav { position: sticky; top: 0; z-index: 50; background: rgba(46,107,87,.96); backdrop-filter: blur(10px); color: white; }
     .nav .wrap { display: flex; align-items: center; gap: 22px; height: 58px; overflow-x: auto; white-space: nowrap; }
     .nav b { font-family: var(--display); font-weight: 400; font-size: 20px; margin-right: auto; }
     .nav a { text-decoration: none; font-weight: 700; font-size: 13px; opacity: .85; white-space: nowrap; }
@@ -105,7 +105,7 @@
     .hcard p { margin: 0; font-size: 14.5px; line-height: 1.5; }
     .hcard em { margin-top: auto; padding-top: 6px; font-style: normal; font-weight: 800; color: #152820; }
     .hotelbox, .hhow { border-radius: 16px; padding: 16px 18px; margin: 16px 0; line-height: 1.55; }
-    .hotelbox { background: #152820; color: #e9efe9; } .hotelbox b { color: #d4a24c; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; } .hotelbox p { margin: 0; }
+    .hotelbox { background: var(--deep); color: #e9efe9; } .hotelbox b { color: #d4a24c; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; } .hotelbox p { margin: 0; }
     .hhow { background: #e6eef5; } .hhow.sport { background: #e5f1e6; } .hhow b { margin-right: 8px; }
     .sub2 { font-size: 22px; margin: 26px 0 4px; }
     .lead.small { font-size: 15px; margin: 0; }
@@ -116,7 +116,7 @@
     .top10 b { display: block; font-size: 17px; } .top10 small { color: #6b7d74; font-weight: 600; }
     .tmeta { text-align: right; font-size: 13px; font-weight: 700; color: #6b7d74; } .tmeta em { font-style: normal; color: #152820; }
     .xplan { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
-    .xday { background: #152820; color: #e9efe9; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+    .xday { background: var(--deep); color: #e9efe9; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 6px; }
     .xday .xd { color: #d4a24c; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; font-size: 12px; }
     .xday b { font: 400 21px/1.15 "DM Serif Display", serif; color: white; } .xday p { margin: 0; font-size: 14px; line-height: 1.5; } .xday small { margin-top: auto; color: #9fb3a8; font-weight: 700; }
     @media (max-width: 1000px) { .xplan { grid-template-columns: 1fr 1fr; } .top10 { grid-template-columns: 1fr; } }
@@ -141,9 +141,9 @@
     @media (max-width: 1000px) { .lexgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     .plinks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
     .pl { display: inline-flex; align-items: center; min-height: 30px; padding: 0 11px; border-radius: 999px; border: 1px solid rgba(21,40,32,.18); background: #fff; color: #152820; font: 700 12px/1 "Source Sans 3", sans-serif; text-decoration: none; cursor: pointer; }
-    .pl.copy { background: #152820; color: #fff; border-color: #152820; }
+    .pl.copy { background: var(--deep); color: #fff; border-color: #152820; }
     .ip { font-style: normal; font-weight: 800; font-size: 13px; color: #152820; margin-top: auto; padding-top: 4px; }
-    .flash { background: var(--ink); color: white; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
+    .flash { background: var(--deep); color: white; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
     .flash .label { grid-row: span 2; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 800; color: var(--gold); padding-top: 4px; }
     .flash ol { margin: 0; padding-left: 22px; font-weight: 700; display: grid; gap: 4px; }
     .flash .tip { margin: 0; font-size: 14.5px; color: #d3ddd6; }
@@ -247,9 +247,9 @@
 
   <main id="guide"></main>
 
-  <script src="leaflet.js?v=10271847"></script>
-  <script src="data.js?v=10271847"></script>
-  <script src="guide.js?v=10271847"></script>
-  <script src="planner.js?v=10271847"></script>
+  <script src="leaflet.js?v=10271925"></script>
+  <script src="data.js?v=10271925"></script>
+  <script src="guide.js?v=10271925"></script>
+  <script src="planner.js?v=10271925"></script>
 </body>
 </html>

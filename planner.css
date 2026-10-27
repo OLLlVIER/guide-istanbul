@@ -9,7 +9,7 @@
 .planner .daychip { border: 1.5px solid var(--line); background: var(--sand); border-radius: 12px; padding: 8px 4px; font: inherit; cursor: pointer; color: var(--muted); text-align: center; }
 .planner .daychip b { display: block; font-size: 13px; }
 .planner .daychip .wx { display: block; font-size: 11px; line-height: 1.25; }
-.planner .daychip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.planner .daychip.on { background: var(--deep, #2e6b57); color: #fff; border-color: var(--ink); }
 .planner #wxsrc { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
 .planner #hours { display: flex; gap: 6px; flex-wrap: wrap; }
 .planner #hours button, .planner .quick button, .planner #share { border: 1.5px solid var(--line); background: var(--sand); border-radius: 999px; padding: 7px 13px; font: 700 13px var(--body); cursor: pointer; color: var(--ink); }
@@ -50,12 +50,12 @@
 .planner .pitems li p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
 .planner .pi-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 .planner .pi-head .meta { font-size: 12px; color: var(--muted); }
-.planner .peve { margin-top: 10px; background: var(--ink); color: #fff; border-radius: 12px; padding: 10px 12px; }
+.planner .peve { margin-top: 10px; background: var(--deep, #2e6b57); color: #fff; border-radius: 12px; padding: 10px 12px; }
 .planner .peve p { font-size: 14px; margin: 4px 0; }
 .planner .peve .pl { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
 .planner .pleft { margin: 6px 0 0; padding-left: 20px; font-size: 14px; }
 .planner .empty { color: var(--muted); background: #fff; border-radius: 18px; padding: 20px; border: 1px dashed var(--line); }
-.planner .jump { display: none;  position: fixed; left: 50%; transform: translateX(-50%); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 30; background: var(--ink); color: #fff; text-decoration: none; font-weight: 800; padding: 12px 20px; border-radius: 999px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.planner .jump { display: none;  position: fixed; left: 50%; transform: translateX(-50%); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 30; background: var(--deep, #2e6b57); color: #fff; text-decoration: none; font-weight: 800; padding: 12px 20px; border-radius: 999px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
 .planner .jump.show { display: block; }
 @media (min-width: 960px) { .planner .jump.show { display: none; } }
 .planner #plan { scroll-margin-top: 70px; }
