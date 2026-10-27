@@ -230,6 +230,13 @@ function render() {
     <p class="sign">Bon voyage. İyi yolculuklar !</p>
   </div></section>
 
+  <section id="programme" class="block"><div class="wrap">
+    <div class="kicker">Mon programme</div>
+    <h2 class="title">Cochez, on s’occupe du reste</h2>
+    <p class="lead">Choisissez vos jours et ce que vous voulez vraiment voir : le programme se construit tout seul. Il regroupe les quartiers voisins, évite les jours de fermeture, met les visites à l’abri les jours de pluie et profite des événements. Vos choix restent enregistrés sur cet appareil.</p>
+    <div id="plannerMount"></div>
+  </div></section>
+
   <footer><div class="wrap">
     Photos : Wikimedia Commons, sous licences libres (cliquer sur « Photo Wikimedia Commons » pour l’auteur et la licence).
     Prix et horaires vérifiés le 27 octobre 2026, au taux de 1 € = 55,67 TL ; ils peuvent changer.

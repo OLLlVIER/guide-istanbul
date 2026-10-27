@@ -1,6 +1,7 @@
 // « Mon programme » : on coche ce qu'on veut voir, on choisit ses jours, le programme se construit
 // en regroupant les quartiers voisins et en tenant compte des fermetures, des événements et de la météo.
 
+(() => {
 const TRIP = [
   { date: "2026-10-28", label: "Mer. 28", dow: 3 },
   { date: "2026-10-29", label: "Jeu. 29", dow: 4 },
@@ -101,6 +102,30 @@ const KEY = "istanbul-programme-v1";
 let state = { picked: ITEMS.filter(i => i.level === "+++").map(i => i.id), days: TRIP.map(t => t.date), hours: 3 };
 try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.picked) state = Object.assign(state, s); } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+
+// ---------- Mise en page ----------
+const mount = document.getElementById("plannerMount");
+if (mount) mount.innerHTML = `<div class="planner"><div class="grid">
+  <section>
+    <div class="step"><h2 class="ph">1. Vos jours <small>touchez pour enlever</small></h2><div id="days"></div><p id="wxsrc"></p></div>
+    <div class="step"><h2 class="ph">2. Temps de visite par jour</h2>
+      <div id="hours"><button type="button" data-h="2">2 h</button><button type="button" data-h="3">3 h</button><button type="button" data-h="5">5 h</button><button type="button" data-h="7">Toute la journée</button></div></div>
+    <div class="step"><h2 class="ph">3. Ce que vous voulez voir</h2>
+      <div class="quick"><button type="button" data-quick="top">Les incontournables +++</button><button type="button" data-quick="churches">+ Églises</button><button type="button" data-quick="rain">+ Plan pluie</button><button type="button" data-quick="none">Tout décocher</button></div>
+      <p id="count"></p><div id="picker"></div></div>
+  </section>
+  <a class="jump" href="#plan">Voir mon programme ↓</a>
+  <section class="out" id="out">
+    <div class="outhead"><h2 class="ph">Votre programme</h2><button type="button" id="share">Envoyer sur WhatsApp</button></div>
+    <div id="plan"></div>
+  </section>
+</div></div>`;
+
+// Le bouton « Voir mon programme » n'apparaît que pendant qu'on coche.
+if (mount && "IntersectionObserver" in window) {
+  const jump = mount.querySelector(".jump");
+  new IntersectionObserver(es => es.forEach(e => jump.classList.toggle("show", e.isIntersecting))).observe(mount.querySelector("#picker"));
+}
 
 // ---------- Construction du programme ----------
 function weatherCost(chunk, date) {
@@ -204,7 +229,7 @@ function renderPicker() {
   districts.forEach((d, di) => {
     const items = ITEMS.filter(i => i.di === di);
     const n = items.filter(i => state.picked.includes(i.id)).length;
-    html += `<details class="dpick" ${di < 2 ? "open" : ""}><summary><span class="num" style="background:${ZONE_COLORS[di]}">${di + 1}</span>${esc(d.name)}<em>${n ? n + " choisi" + (n > 1 ? "s" : "") : ""}</em></summary><div class="opts">`;
+    html += `<details class="dpick" ${di < 2 ? "open" : ""}><summary><span class="pnum" style="background:${ZONE_COLORS[di]}">${di + 1}</span>${esc(d.name)}<em>${n ? n + " choisi" + (n > 1 ? "s" : "") : ""}</em></summary><div class="opts">`;
     items.forEach(i => {
       const on = state.picked.includes(i.id);
       const tripClosed = (CLOSED[i.name] || []).filter(x => TRIP.some(t => t.dow === x));
@@ -318,3 +343,4 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude=41.01&longitude=28.97&dai
   }).catch(() => {});
 
 renderAll();
+})();

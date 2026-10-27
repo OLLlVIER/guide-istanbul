@@ -1,0 +1,61 @@
+/* « Mon programme » : partagé par programme.html et la fin du guide. */
+.planner { --rain: #2f6f9f; --r3: #b2452c; --r2: #2f7a52; --r1: #8a8f8c; }
+.planner h2.ph { font-family: var(--display); font-weight: 400; font-size: 24px; margin: 0 0 10px; }
+.planner h2.ph small { font: 700 12px var(--body); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; margin-left: 6px; }
+.planner .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; padding-bottom: 60px; }
+@media (min-width: 960px) { .planner .grid { grid-template-columns: minmax(0, 440px) minmax(0, 1fr); align-items: start; } .planner .out { position: sticky; top: 70px; max-height: calc(100vh - 84px); overflow-y: auto; padding-right: 4px; } }
+.planner .step { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 16px; }
+.planner #days { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.planner .daychip { border: 1.5px solid var(--line); background: var(--sand); border-radius: 12px; padding: 8px 4px; font: inherit; cursor: pointer; color: var(--muted); text-align: center; }
+.planner .daychip b { display: block; font-size: 13px; }
+.planner .daychip .wx { display: block; font-size: 11px; line-height: 1.25; }
+.planner .daychip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.planner #wxsrc { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+.planner #hours { display: flex; gap: 6px; flex-wrap: wrap; }
+.planner #hours button, .planner .quick button, .planner #share { border: 1.5px solid var(--line); background: var(--sand); border-radius: 999px; padding: 7px 13px; font: 700 13px var(--body); cursor: pointer; color: var(--ink); }
+.planner #hours button.on { background: var(--gold); border-color: var(--gold); }
+.planner .quick { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.planner #count { font-size: 13px; font-weight: 700; color: var(--r2); }
+.planner .dpick { border-top: 1px solid var(--line); }
+.planner .dpick summary { display: flex; align-items: center; gap: 10px; padding: 10px 0; cursor: pointer; font-weight: 800; list-style: none; }
+.planner .dpick summary::-webkit-details-marker { display: none; }
+.planner .dpick summary em { margin-left: auto; font-style: normal; font-size: 12px; color: var(--r2); }
+.planner .pnum { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: #fff; font-size: 13px; flex: none; }
+.planner .opts { display: grid; gap: 6px; padding-bottom: 12px; }
+.planner .opt { display: grid; grid-template-columns: 22px 36px 1fr; gap: 2px 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: var(--paper); cursor: pointer; border: 1.5px solid transparent; }
+.planner .opt.on { border-color: var(--r2); background: #eef6f0; }
+.planner .opt input { width: 18px; height: 18px; accent-color: var(--r2); margin: 0; }
+.planner .opt .meta { grid-column: 3; font-size: 12px; color: var(--muted); }
+.planner .on-name { font-weight: 700; line-height: 1.25; }
+.planner .lv { display: inline-block; font: 800 11px var(--body); color: #fff; border-radius: 6px; padding: 2px 5px; text-align: center; }
+.planner .lv.l3 { background: var(--r3); } .lv.l2 { background: var(--r2); } .lv.l1 { background: var(--r1); }
+.planner .sh { font-size: 11px; font-weight: 700; border-radius: 6px; padding: 0 5px; }
+.planner .sh.in { background: #e3eef7; color: var(--rain); } .sh.mix { background: #f1ecdf; color: #7a5b17; } .sh.out { background: #e8f3ea; color: var(--r2); }
+.planner .warn { font-size: 11px; font-weight: 700; color: var(--r3); }
+.planner .outhead { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.planner #share { background: #25d366; border-color: #25d366; color: #fff; }
+.planner .pday { background: #fff; border: 1px solid var(--line); border-left: 6px solid var(--gold); border-radius: 18px; padding: 16px; margin-bottom: 14px; }
+.planner .pday.wet { border-left-color: var(--rain); }
+.planner .pday.left { border-left-color: var(--r1); background: var(--sand); }
+.planner .pday header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.planner .pd { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.planner .pday h3 { font-family: var(--display); font-weight: 400; font-size: 22px; margin: 2px 0 6px; line-height: 1.15; }
+.planner .pw { text-align: right; font-weight: 700; font-size: 14px; white-space: nowrap; }
+.planner .pw small { display: block; font-weight: 600; color: var(--muted); }
+.planner .pnote { margin: 6px 0; font-size: 14px; background: var(--sand); border-radius: 10px; padding: 7px 10px; }
+.planner .wet .pnote:first-of-type { background: #e3eef7; }
+.planner .proute { font-size: 14px; color: var(--muted); margin: 8px 0; }
+.planner .pitems { margin: 8px 0 0; padding-left: 22px; }
+.planner .pitems li { padding: 8px 0; border-top: 1px dashed var(--line); }
+.planner .pitems li p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+.planner .pi-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.planner .pi-head .meta { font-size: 12px; color: var(--muted); }
+.planner .peve { margin-top: 10px; background: var(--ink); color: #fff; border-radius: 12px; padding: 10px 12px; }
+.planner .peve p { font-size: 14px; margin: 4px 0; }
+.planner .peve .pl { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+.planner .pleft { margin: 6px 0 0; padding-left: 20px; font-size: 14px; }
+.planner .empty { color: var(--muted); background: #fff; border-radius: 18px; padding: 20px; border: 1px dashed var(--line); }
+.planner .jump { display: none;  position: fixed; left: 50%; transform: translateX(-50%); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 30; background: var(--ink); color: #fff; text-decoration: none; font-weight: 800; padding: 12px 20px; border-radius: 999px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.planner .jump.show { display: block; }
+@media (min-width: 960px) { .planner .jump.show { display: none; } }
+.planner #plan { scroll-margin-top: 70px; }
