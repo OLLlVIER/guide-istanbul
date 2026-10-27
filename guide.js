@@ -265,3 +265,8 @@ render();
   pts.push(HOTEL.coords);
   map.fitBounds(L.latLngBounds(pts), { padding: [24, 24] });
 })();
+
+// Le guide s'ouvre toujours en haut, même depuis un lien qui pointe vers une rubrique ou après un rechargement.
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+window.scrollTo(0, 0);
