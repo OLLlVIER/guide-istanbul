@@ -108,6 +108,18 @@
     .hhow { background: #e6eef5; } .hhow.sport { background: #e5f1e6; } .hhow b { margin-right: 8px; }
     .sub2 { font-size: 22px; margin: 26px 0 4px; }
     .lead.small { font-size: 15px; margin: 0; }
+    .top10 { list-style: none; margin: 18px 0 30px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 22px; }
+    .top10 li { display: grid; grid-template-columns: 46px minmax(0, 1fr) auto; gap: 14px; align-items: center; background: white; border-radius: 16px; padding: 12px 16px; box-shadow: 0 6px 18px rgba(20,40,30,.08); }
+    .tnum { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--z1); color: white; font: 400 24px/1 "DM Serif Display", serif; }
+    .top10 li:nth-child(n+4) .tnum { background: var(--z2); } .top10 li:nth-child(n+7) .tnum { background: var(--z4); }
+    .top10 b { display: block; font-size: 17px; } .top10 small { color: #6b7d74; font-weight: 600; }
+    .tmeta { text-align: right; font-size: 13px; font-weight: 700; color: #6b7d74; } .tmeta em { font-style: normal; color: #152820; }
+    .xplan { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .xday { background: #152820; color: #e9efe9; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+    .xday .xd { color: #d4a24c; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; font-size: 12px; }
+    .xday b { font: 400 21px/1.15 "DM Serif Display", serif; color: white; } .xday p { margin: 0; font-size: 14px; line-height: 1.5; } .xday small { margin-top: auto; color: #9fb3a8; font-weight: 700; }
+    @media (max-width: 1000px) { .xplan { grid-template-columns: 1fr 1fr; } .top10 { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .xplan { grid-template-columns: 1fr; } }
     .flash { background: var(--ink); color: white; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
     .flash .label { grid-row: span 2; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 800; color: var(--gold); padding-top: 4px; }
     .flash ol { margin: 0; padding-left: 22px; font-weight: 700; display: grid; gap: 4px; }
@@ -194,6 +206,7 @@
       <a href="#sejour">Le séjour</a>
       <a href="#quartiers">Les quartiers</a>
       <a href="#manger">Manger</a>
+      <a href="#essentiel">Top 10</a>
       <a href="#hammams">Hammams</a>
       <a href="#regles">Règles d’or</a>
       <a href="#turquie">La Turquie</a>
