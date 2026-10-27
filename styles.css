@@ -203,3 +203,8 @@ body.has-sheet .source-note { opacity: 0; pointer-events: none; }
 .leisure li { color: #33463d; font-size: 12.5px; line-height: 1.5; }
 .info-sheet table { display: block; overflow-x: auto; }
 .info-sheet td:first-child { white-space: nowrap; }
+.essay { margin: 30px -24px 10px; padding: 26px 24px; background: var(--ink); color: #e9efe9; }
+.essay .eyebrow { color: var(--gold); opacity: 1; }
+.essay h3 { margin: 4px 0 14px !important; color: white; font: 500 26px/1.15 Georgia, serif !important; text-wrap: balance; }
+.essay p { color: #d6e0d9 !important; font: 15px/1.7 Georgia, serif !important; max-width: 65ch; }
+.essay .signature { color: var(--gold) !important; font-style: italic !important; margin-top: 16px; }
