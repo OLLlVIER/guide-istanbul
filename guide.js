@@ -298,3 +298,9 @@ window.scrollTo(0, 0);
     };
   };
 })();
+
+// Plusieurs photos à faire défiler en tête de chaque quartier.
+districts.forEach(d => districtSlides(d).then(slides => {
+  const host = document.querySelector(`#${CSS.escape(d.id)} .photo`);
+  buildCarousel(host, slides);
+}).catch(() => {}));

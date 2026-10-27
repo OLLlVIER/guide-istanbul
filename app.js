@@ -83,6 +83,14 @@ function openDistrict(id) {
   currentDistrict = district.id;
   document.querySelector("#photoInput").addEventListener("change", e => addPhotos(district.id, e.target.files));
   renderPhotos(district.id);
+  const hero = document.querySelector("#detailSheet .hero-photo");
+  if (hero) districtSlides(district).then(slides => {
+    if (currentDistrict !== district.id || !hero.isConnected) return;
+    hero.style.aspectRatio = "16 / 10"; hero.style.overflow = "hidden";
+    hero.querySelector("img").style.visibility = "hidden";
+    const cap = hero.querySelector("figcaption"); if (cap) cap.remove();
+    buildCarousel(hero, slides);
+  }).catch(() => {});
   sheetState(detailSheet);
   map.flyTo(district.coords, 14, { duration: .65 });
   requestAnimationFrame(() => detailSheet.scrollTop = 0);

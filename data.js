@@ -583,3 +583,87 @@ document.addEventListener("click", e => {
   e.preventDefault(); sayTurkish(b.dataset.say);
   b.classList.add("saying"); setTimeout(() => b.classList.remove("saying"), 1200);
 });
+
+// ---------- Photos qui défilent en tête de chaque quartier ----------
+// Photo principale de l'article Wikipédia (anglais) de chaque lieu, chargée à l'ouverture de la page.
+const WIKI = {
+  "Sainte-Sophie": "Hagia Sophia", "Citerne-Basilique": "Basilica Cistern", "Mosquée Bleue": "Blue Mosque", "Hippodrome & obélisques": "Hippodrome of Constantinople", "Petite Sainte-Sophie (Saints-Serge-et-Bacchus)": "Little Hagia Sophia",
+  "Palais de Topkapı": "Topkapı Palace", "Musées archéologiques": "Istanbul Archaeology Museums", "Parc de Gülhane": "Gülhane Park", "Sainte-Irène": "Hagia Irene",
+  "Bazar aux épices": "Spice Bazaar", "Nouvelle Mosquée": "New Mosque, Istanbul", "Mosquée Rüstem Paşa": "Rüstem Pasha Mosque", "Gare de Sirkeci": "Sirkeci railway station",
+  "Grand Bazar": "Grand Bazaar, Istanbul", "Mosquée Nuruosmaniye": "Nuruosmaniye Mosque", "Mosquée & place Beyazıt": "Bayezid II Mosque, Istanbul", "Sahaflar Çarşısı": "Sahaflar Çarşısı",
+  "Mosquée Süleymaniye": "Süleymaniye Mosque", "Mosquée Kalenderhane": "Kalenderhane Mosque", "Aqueduc de Valens": "Valens Aqueduct", "Mosquée Zeyrek": "Zeyrek Mosque",
+  "Église Saint-Étienne-des-Bulgares": "Bulgarian St. Stephen Church", "Rues de Balat": "Balat, Fatih", "Mosquée Kariye / ancienne Chora": "Chora Church", "Sainte-Marie-des-Mongols": "Church of St. Mary of the Mongols",
+  "Mosquée Eyüp Sultan": "Eyüp Sultan Mosque", "Cimetière historique": "Eyüp Cemetery", "Colline Pierre Loti": "Pierre Loti Hill", "Sainte-Marie-des-Blachernes": "Church of St. Mary of Blachernae (Istanbul)",
+  "Tour de Galata": "Galata Tower", "Galata Mevlevihanesi": "Galata Mevlevi House Museum", "Mosquée Kılıç Ali Paşa": "Kılıç Ali Pasha Mosque", "Église Saint-Pierre-et-Saint-Paul": "Church of SS. Peter and Paul, Istanbul",
+  "Avenue İstiklal & passages": "İstiklal Avenue", "Église Saint-Antoine-de-Padoue": "St. Anthony of Padua Church, Istanbul", "Musée de Pera": "Pera Museum", "Place Taksim & monument de la République": "Taksim Square", "Cathédrale du Saint-Esprit": "Cathedral of the Holy Spirit, Istanbul", "Église Sainte-Trinité (Aya Triada)": "Hagia Triada Greek Orthodox Church, Taksim",
+  "Palais de Dolmabahçe": "Dolmabahçe Palace", "Musée naval": "Istanbul Naval Museum", "Palais de Yıldız": "Yıldız Palace",
+  "Mosquée d’Ortaköy": "Ortaköy Mosque", "Place et marché d’Ortaköy": "Ortaköy", "Palais de Çırağan — extérieur": "Çırağan Palace", "Parc Yıldız": "Yıldız Park",
+  "Maisons ottomanes d’Arnavutköy": "Arnavutköy", "Promenade du Bosphore": "Bosphorus", "Village et parc de Bebek": "Bebek, Beşiktaş",
+  "Traversée en ferry": "Ferries in Istanbul", "Église arménienne Surp Takavor": "Surp Takavor Armenian Church", "Moda et son front de mer": "Moda, Kadıköy", "Gare de Haydarpaşa — extérieur": "Haydarpaşa railway station",
+  "Mosquée Mihrimah Sultan": "Mihrimah Sultan Mosque (Üsküdar)", "Mosquée Şemsi Paşa": "Şemsi Pasha Mosque", "Promenade de Salacak & tour de Léandre": "Maiden's Tower"
+};
+let wikiImages = null;
+function loadWikiImages() {
+  if (wikiImages) return wikiImages;
+  try { const c = JSON.parse(sessionStorage.getItem("wiki-img-v1")); if (c) return (wikiImages = Promise.resolve(c)); } catch (e) {}
+  const titles = [...new Set(Object.values(WIKI))];
+  const batches = []; for (let i = 0; i < titles.length; i += 45) batches.push(titles.slice(i, i + 45));
+  wikiImages = Promise.all(batches.map(b => fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=1280&titles=" + encodeURIComponent(b.join("|")))
+    .then(r => r.json()).catch(() => null)))
+    .then(rs => {
+      const out = {};
+      rs.forEach(r => {
+        if (!r || !r.query) return;
+        const back = {}; (r.query.normalized || []).concat(r.query.redirects || []).forEach(x => { back[x.to] = back[x.from] || x.from; });
+        Object.values(r.query.pages || {}).forEach(p => { if (p.thumbnail) { const t = back[p.title] || p.title; out[t] = { src: p.thumbnail.source, page: "https://en.wikipedia.org/wiki/" + encodeURIComponent(p.title.replace(/ /g, "_")) }; } });
+      });
+      try { sessionStorage.setItem("wiki-img-v1", JSON.stringify(out)); } catch (e) {}
+      return out;
+    });
+  return wikiImages;
+}
+// Diapositives d'un quartier : la photo actuelle d'abord, puis un lieu par photo.
+async function districtSlides(d) {
+  const slides = [];
+  if (FLASH[d.id]) slides.push({ src: photoUrl(FLASH[d.id].photo, 1280), caption: d.name, page: photoPage(FLASH[d.id].photo) });
+  const imgs = await loadWikiImages();
+  const seen = new Set(slides.map(s => s.src));
+  d.monuments.forEach(m => { const w = imgs[WIKI[m[1]]]; if (w && !seen.has(w.src)) { seen.add(w.src); slides.push({ src: w.src, caption: m[1], page: w.page }); } });
+  return slides;
+}
+// Carrousel : on glisse du doigt, ou flèches et points.
+function buildCarousel(host, slides) {
+  if (!host || slides.length < 2) return;
+  if (!document.getElementById("carousel-style")) {
+    const st = document.createElement("style"); st.id = "carousel-style";
+    st.textContent = `.car{position:absolute;inset:0;overflow:hidden;border-radius:inherit}
+.car-track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.car-track::-webkit-scrollbar{display:none}
+.car-slide{flex:0 0 100%;height:100%;margin:0;position:relative;scroll-snap-align:start}
+.car-slide img{width:100%;height:100%;object-fit:cover;display:block;background:#dfe8e2}
+.car-slide figcaption{position:absolute;left:12px;bottom:12px;max-width:75%;color:#fff;font:700 14px/1.25 "Source Sans 3",-apple-system,sans-serif;background:rgba(0,0,0,.5);padding:6px 10px;border-radius:10px}
+.car-slide figcaption a{color:#fff;opacity:.8;font-weight:600;font-size:11px;display:block;text-decoration:none}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#14241d;font-size:22px;font-weight:800;cursor:pointer;z-index:2;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.car-prev{left:10px}.car-next{right:10px}
+.car-dots{position:absolute;right:12px;bottom:14px;display:flex;gap:5px;z-index:2}
+.car-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55)}
+.car-dots i.on{background:#fff;width:18px;border-radius:4px}
+.car .car-slide figcaption{right:auto;top:auto}
+.car .car-slide figcaption a{background:none;padding:0;border-radius:0}`;
+    document.head.appendChild(st);
+  }
+  const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  const car = document.createElement("div"); car.className = "car";
+  car.innerHTML = `<div class="car-track">${slides.map((s, i) => `<figure class="car-slide"><img src="${esc(s.src)}" alt="${esc(s.caption)}" ${i ? 'loading="lazy"' : ""} onerror="this.closest('figure').remove()"><figcaption>${esc(s.caption)}<a href="${esc(s.page)}" target="_blank" rel="noreferrer">Photo Wikimedia</a></figcaption></figure>`).join("")}</div>
+    <button type="button" class="car-btn car-prev" aria-label="Photo précédente">‹</button><button type="button" class="car-btn car-next" aria-label="Photo suivante">›</button>
+    <div class="car-dots">${slides.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>`;
+  host.querySelectorAll(".credit").forEach(c => c.remove());
+  host.appendChild(car);
+  const track = car.querySelector(".car-track");
+  const n = () => track.children.length;
+  const cur = () => Math.round(track.scrollLeft / track.clientWidth);
+  const go = i => track.scrollTo({ left: ((i + n()) % n()) * track.clientWidth, behavior: "smooth" });
+  car.querySelector(".car-prev").addEventListener("click", e => { e.stopPropagation(); go(cur() - 1); });
+  car.querySelector(".car-next").addEventListener("click", e => { e.stopPropagation(); go(cur() + 1); });
+  track.addEventListener("scroll", () => { const i = cur(); car.querySelectorAll(".car-dots i").forEach((d, k) => d.classList.toggle("on", k === i)); }, { passive: true });
+}
