@@ -300,12 +300,12 @@ function openDistrict(id) {
       <div class="routes">${district.routes.map(r => `<div class="route"><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")}</div>
     </section>
     <section class="musts"><h3>Les indispensables</h3><div class="must-list">${district.monuments.filter(m => m[0] === "+++").map(m => `<span class="must">${m[1]}</span>`).join("")}</div></section>
-    ${(() => { const ch = district.monuments.filter(m => CHURCH_WORDS.test(m[1])); return ch.length ? `<section class="churches"><h3>Églises qui valent le déplacement</h3>${ch.map(m => `<div class="church-row"><span class="rank-pill ${rankClass(m[0])}">${m[0]}</span><span>${m[1]}</span></div>`).join("")}</section>` : ""; })()}
     ${extras[district.id] ? `<section class="tips"><h3>À savoir</h3><ul>${extras[district.id].tips.map(t => `<li>${t}</li>`).join("")}</ul></section>` : ""}
     <section class="monuments">
       <h3>À voir — par ordre de priorité</h3>
       ${district.monuments.map(m => `<article class="monument"><span class="rank ${rankClass(m[0])}">${m[0]}</span><h4>${m[1]}</h4><p>${m[2]}</p><div class="facts"><span>${m[3]}</span><span>${m[4]}</span></div>${m[5] ? `<p class="walk-next">À pied : ${m[5]}</p>` : ""}</article>`).join("")}
     </section>
+    ${(() => { const ch = district.monuments.filter(m => CHURCH_WORDS.test(m[1])); return ch.length ? `<section class="churches"><h3>Églises qui valent le déplacement</h3>${ch.map(m => `<div class="church-row"><span class="rank-pill ${rankClass(m[0])}">${m[0]}</span><span>${m[1]}</span></div>`).join("")}</section>` : ""; })()}
     ${extras[district.id] ? `<section class="food"><h3>Où manger</h3>${extras[district.id].food.map(f => `<div class="food-item"><div><b>${f[0]}</b><span>${f[1]}</span></div><em class="price ${priceBand(f[2]).cls}">${f[2]}</em></div>`).join("")}</section>` : ""}
     <section class="photos"><h3>Mes photos</h3>
       <p class="photos-note">Elles restent sur cet appareil, dans ce navigateur.</p>
