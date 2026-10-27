@@ -256,3 +256,7 @@ details.leisure h3, details.leisure ul { margin-left: 6px; margin-right: 6px; }
 .classify figure { margin: 0; }
 .classify img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; display: block; }
 .classify select { width: 100%; margin-top: 6px; min-height: 40px; font: inherit; font-size: 16px; border-radius: 10px; border: 1px solid rgba(20,36,29,.2); background: white; }
+
+/* Bouton d'écoute des mots turcs */
+.say { border: 0; background: #efe7f6; border-radius: 999px; width: 36px; height: 36px; font-size: 17px; cursor: pointer; vertical-align: middle; margin-left: 4px; }
+.say.saying { background: #7b4fa0; }

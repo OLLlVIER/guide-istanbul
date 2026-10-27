@@ -562,3 +562,24 @@ document.addEventListener("click", async e => {
   catch (err) { window.prompt("Copie ce texte :", text); }
   setTimeout(() => { b.textContent = "Copier"; }, 1600);
 });
+
+
+// Prononciation des mots turcs : voix turque du téléphone (iPhone : « Yelda »), sans fichier audio.
+// Un deuxième appui dans les 4 secondes répète le mot plus lentement.
+let sayLast = { text: "", at: 0 };
+function sayTurkish(text) {
+  if (!("speechSynthesis" in window)) { alert("La lecture audio n’est pas disponible sur ce navigateur."); return; }
+  const slow = sayLast.text === text && Date.now() - sayLast.at < 4000;
+  sayLast = { text, at: Date.now() };
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "tr-TR"; u.rate = slow ? 0.55 : 0.85;
+  const voice = speechSynthesis.getVoices().find(v => /^tr/i.test(v.lang));
+  if (voice) u.voice = voice;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+if ("speechSynthesis" in window) speechSynthesis.getVoices();
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-say]"); if (!b) return;
+  e.preventDefault(); sayTurkish(b.dataset.say);
+  b.classList.add("saying"); setTimeout(() => b.classList.remove("saying"), 1200);
+});
