@@ -67,6 +67,7 @@ function openDistrict(id) {
       <div class="routes">${district.routes.map(r => `<div class="route"><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")}</div>
     </section>
     ${extras[district.id] ? `<section class="tips"><h3>À savoir</h3><ul>${extras[district.id].tips.map(t => `<li>${t}</li>`).join("")}</ul></section>` : ""}
+    ${typeof HOTSPOTS !== "undefined" && HOTSPOTS[district.id] ? `<section class="hotspots"><h3>Branché et à ne pas manquer</h3><ul>${HOTSPOTS[district.id].go.concat(HOTSPOTS[district.id].see).map(t => `<li>${t}</li>`).join("")}</ul></section>` : ""}
     <section class="monuments">
       <h3>À voir — par ordre de priorité</h3>
       ${district.monuments.map(m => `<article class="monument"><span class="rank ${rankClass(m[0])}">${m[0]}</span><h4>${m[1]}</h4><p>${m[2]}</p><div class="facts"><span>${m[3]}</span><span>${m[4]}</span></div>${m[5] ? `<p class="walk-next">À pied : ${m[5]}</p>` : ""}</article>`).join("")}

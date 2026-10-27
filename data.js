@@ -172,7 +172,7 @@ const districts = [
 const extras = {
   sultanahmet: {
     tips: ["Sainte-Sophie et la Mosquée Bleue ferment aux visiteurs pendant les prières, surtout le vendredi midi.", "Épaules et genoux couverts, foulard pour les femmes (prêté à l’entrée), chaussures retirées.", "Museum Pass non valable à Sainte-Sophie ni à la Citerne : arrivez à l’ouverture pour éviter la file."],
-    food: [["Tarihi Sultanahmet Köftecisi", "Köfte grillées et salade de haricots piyaz, institution depuis 1920", "10–18 €"], ["Matbah", "Recettes des cuisines du palais ottoman", "35–60 €"], ["Hafız Mustafa 1864", "Lokum, baklava et sütlaç (riz au lait)", "4–10 €"]]
+    food: [["Tarihi Sultanahmet Köftecisi", "Köfte grillées et salade de haricots piyaz, institution depuis 1920", "10–18 €"], ["Hafız Mustafa 1864", "Lokum, baklava et sütlaç (riz au lait)", "4–10 €"]]
   },
   topkapi: {
     tips: ["Topkapı est fermé le mardi. Arrivez à 9h et commencez par le Harem, le plus fréquenté.", "Audioguide inclus dans le billet : prévoyez des écouteurs filaires.", "Le Trésor et les Reliques sacrées exigent une tenue respectueuse ; pas de photo aux Reliques."],
@@ -192,7 +192,7 @@ const extras = {
   },
   "fener-balat": {
     tips: ["Chora (Kariye) : 20 €, fermée aux visiteurs le vendredi, visite hors heures de prière.", "Rues très pentues et pavées : chaussures confortables.", "Le Patriarcat est un lieu de culte actif : tenue sobre et silence."],
-    food: [["Asitane", "Recettes reconstituées des banquets ottomans, à côté de Chora", "30–55 €"], ["Balat Sahil", "Mezzés et poissons frais au bord de la Corne d’Or", "25–45 €"], ["Cumbalı Kahve", "Café turc dans une maison colorée de Balat", "3–8 €"]]
+    food: [["Balat Sahil", "Mezzés et poissons frais au bord de la Corne d’Or", "25–45 €"], ["Cumbalı Kahve", "Café turc dans une maison colorée de Balat", "3–8 €"]]
   },
   galata: {
     tips: ["Tour de Galata ouverte tous les jours 8h30–23h ; file d’ascenseur longue au coucher du soleil.", "Le Mevlevihanesi propose des cérémonies de derviches certains soirs : vérifiez sur place."],
@@ -224,7 +224,7 @@ const extras = {
   },
   bebek: {
     tips: ["Réservez le restaurant de poisson le week-end.", "Combinez avec Ortaköy en continuant vers le nord en bus ou en taxi."],
-    food: [["Restaurants de poisson d’Arnavutköy", "Mezzés froids, poisson du jour et vue sur l’eau", "30–60 €"], ["Cafés de Bebek", "Café et pâtisserie face à la baie", "5–12 €"]]
+    food: [["Cafés de Bebek", "Café et pâtisserie face à la baie", "5–12 €"]]
   }
 };
 
@@ -236,8 +236,7 @@ const NEAR_HOTEL = [
   ["Karadeniz Pide Kebab Salonu", "Pide et güveç de la mer Noire, adresse de quartier", "8–15 €", "7 min à pied · Vefa"],
   ["Vefa Bozacısı", "Boza (millet fermenté) dans une boutique de 1876, saison froide", "2–4 €", "8 min à pied · Vefa"],
   ["Zeyrekhane", "Cuisine ottomane en terrasse sous le Pantocrator, vue sur la Corne d’Or. Fermé le lundi, réservation conseillée", "20–40 €", "6 min à pied · Zeyrek"],
-  ["Akdeniz Hatay Sofrası", "Cuisine d’Antakya : agneau et poulet en croûte de sel, mezzés épicés. Pour un dîner généreux", "20–35 €", "15 min à pied ou 5 min en taxi · Fatih"],
-  ["Cibalikapı Balıkçısı", "Meyhane de poisson réputée sur la Corne d’Or : mezzés, poisson du jour, rakı", "35–60 €", "18 min à pied ou 5 min en taxi · Cibali"]
+  ["Akdeniz Hatay Sofrası", "Cuisine d’Antakya : agneau et poulet en croûte de sel, mezzés épicés. Pour un dîner généreux", "20–35 €", "15 min à pied ou 5 min en taxi · Fatih"]
 ];
 
 // Présentation de chaque quartier, affichée avant les lieux à voir.
@@ -320,3 +319,156 @@ function drawGroups(map, L) {
       .addTo(map).bindTooltip(g.label, { sticky: true });
   });
 }
+
+
+// Pour chaque quartier : les adresses branchées et les spots à ne pas manquer.
+const HOTSPOTS = {
+ "sultanahmet": {
+  "go": [
+   "Seven Hills Restaurant : terrasse sur le toit face à Sainte-Sophie et à la Mosquée Bleue, au petit-déjeuner",
+   "Hafız Mustafa 1864 : la vitrine de lokum et baklava la plus photographiée"
+  ],
+  "see": [
+   "La place Sultanahmet au lever du soleil, avant 9 h",
+   "La cour de la Mosquée Bleue à l’ouverture",
+   "Les têtes de Méduse de la Citerne, en début de visite"
+  ]
+ },
+ "topkapi": {
+  "go": [
+   "Le çay bahçesi au bout du parc de Gülhane, face au Bosphore"
+  ],
+  "see": [
+   "La terrasse de la 4e cour de Topkapı, sur la rencontre des deux mers",
+   "Le Harem dès l’ouverture, avant la foule"
+  ]
+ },
+ "eminonu": {
+  "go": [
+   "Hamdi : kebab en terrasse avec la Corne d’Or en fond",
+   "Pandeli : la salle de faïences turquoise au-dessus du bazar"
+  ],
+  "see": [
+   "Les voûtes du Bazar aux épices, en semaine le matin",
+   "Le pont de Galata au coucher du soleil, avec les pêcheurs"
+  ]
+ },
+ "beyazit": {
+  "go": [
+   "Le thé sous les arbres de la cour Çorlulu Ali Paşa",
+   "Şeyhmuz Kebap, l’adresse des habitués du bazar"
+  ],
+  "see": [
+   "Les boutiques de lampes du Grand Bazar",
+   "La grande porte de l’Université d’Istanbul"
+  ]
+ },
+ "suleymaniye": {
+  "go": [
+   "Zeyrekhane : terrasse sous le Pantocrator, vue sur la Corne d’Or",
+   "Siirt Şeref Büryan : le repas que les Stambouliotes font découvrir"
+  ],
+  "see": [
+   "La terrasse de Süleymaniye au lever ou au coucher du soleil",
+   "L’aqueduc de Valens vu du parc de Saraçhane"
+  ]
+ },
+ "fener-balat": {
+  "go": [
+   "Cumbalı Kahve : café dans une maison colorée",
+   "Balat Sahil : poisson et mezzés au bord de l’eau"
+  ],
+  "see": [
+   "Les façades de Kiremit Caddesi, tôt le matin",
+   "Le lycée grec rouge de Fener vu des ruelles"
+  ]
+ },
+ "eyup": {
+  "go": [
+   "Le café Pierre Loti, thé face à la Corne d’Or"
+  ],
+  "see": [
+   "La vue de la colline Pierre Loti au coucher du soleil",
+   "Le téléphérique au-dessus du cimetière ottoman"
+  ]
+ },
+ "galata": {
+  "go": [
+   "Karaköy Güllüoğlu : le baklava le plus célèbre de la ville",
+   "Karaköy Lokantası : la salle turquoise la plus élégante du quartier",
+   "Fil Books : café-librairie aux chaises suspendues"
+  ],
+  "see": [
+   "Les escaliers Camondo",
+   "La rue Büyük Hendek avec la tour au bout, tôt le matin",
+   "La promenade de Galataport au coucher du soleil"
+  ]
+ },
+ "beyoglu": {
+  "go": [
+   "Hacı Abdullah : plats ottomans dans une salle de 1888",
+   "La Pâtisserie de Pera, au Pera Palace",
+   "Les meyhanes de Nevizade, le soir"
+  ],
+  "see": [
+   "Le petit tram rouge sur İstiklal",
+   "La verrière du Çiçek Pasajı, le matin",
+   "Les escaliers arc-en-ciel entre Cihangir et Fındıklı"
+  ]
+ },
+ "besiktas": {
+  "go": [
+   "Les bars de Çarşı, le QG des supporters de Beşiktaş",
+   "La rue du petit-déjeuner pour un kahvaltı géant",
+   "Le marché aux poissons de Beşiktaş, poisson grillé à l’étal"
+  ],
+  "see": [
+   "Les grilles de Dolmabahçe à l’ouverture",
+   "Le stade de Beşiktaş au bord du Bosphore"
+  ]
+ },
+ "ortakoy": {
+  "go": [
+   "Les kumpir et gaufres de la place, face au pont",
+   "Les terrasses de thé au bord de l’eau",
+   "Les clubs du bord du Bosphore à Kuruçeşme"
+  ],
+  "see": [
+   "La mosquée d’Ortaköy sous le pont illuminé",
+   "Un kumpir sur la place, face à l’eau"
+  ]
+ },
+ "bebek": {
+  "go": [
+   "Les cafés de la baie de Bebek",
+   "Un thé ou une glace face à la baie"
+  ],
+  "see": [
+   "Les maisons en bois d’Arnavutköy",
+   "La forteresse de Rumeli Hisarı depuis la promenade",
+   "Le jardin japonais de Baltalimanı"
+  ]
+ },
+ "kadikoy": {
+  "go": [
+   "Çiya Sofrası : la cuisine d’Anatolie que les chefs viennent goûter",
+   "Les bars de la rue Kadife",
+   "Yanyalı Fehmi, Bib Gourmand Michelin 2026"
+  ],
+  "see": [
+   "Le street art de Yeldeğirmeni",
+   "Le coucher de soleil depuis le front de mer de Moda",
+   "L’ambiance autour du stade de Fenerbahçe"
+  ]
+ },
+ "uskudar": {
+  "go": [
+   "Kanaat Lokantası : la lokanta familiale de 1933",
+   "Le café aux bougainvilliers de Kuzguncuk"
+  ],
+  "see": [
+   "La tour de Léandre et toute la vieille ville au coucher du soleil depuis Salacak",
+   "Les maisons pastel de Kuzguncuk"
+  ]
+ }
+};

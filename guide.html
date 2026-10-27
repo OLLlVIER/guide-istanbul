@@ -125,6 +125,10 @@
     .icard, .pcard { border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
     .icard { background: linear-gradient(135deg, #f7e3ef, #fbeee0); } .pcard { background: #e5f1e6; }
     .icard b, .pcard b { font-size: 16px; } .icard small, .pcard small { font-weight: 700; color: #6b7d74; } .icard p, .pcard p { margin: 0; font-size: 14px; line-height: 1.5; }
+    .hot { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; padding: 16px 18px; border-radius: 16px; background: linear-gradient(135deg, #2b1d3a, #4a2a4f); color: #f3e9f5; }
+    .hot h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #ffb3c7; }
+    .hot ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: 14.5px; line-height: 1.45; }
+    @media (max-width: 700px) { .hot { grid-template-columns: 1fr; } }
     .flash { background: var(--ink); color: white; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
     .flash .label { grid-row: span 2; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 800; color: var(--gold); padding-top: 4px; }
     .flash ol { margin: 0; padding-left: 22px; font-weight: 700; display: grid; gap: 4px; }
