@@ -125,6 +125,7 @@ function render() {
     <div class="infos">
       <div class="info"><h3>L’hôtel</h3><p>Mövenpick Istanbul Old Town, Atatürk Bulvarı 9, Unkapanı. À 12 min à pied de Süleymaniye, tram T1 à Aksaray, métro M2 à Vezneciler.</p></div>
       <div class="info"><h3>Se déplacer</h3><p>Carte Istanbulkart : 42 TL le trajet (env. 0,75 €) en tram, métro, bus et ferry. En taxi : Uber ou BiTaksi.</p></div>
+      <div class="info"><h3>Payer</h3><p>Revolut sur le téléphone ou la carte passe presque partout : restaurants, boutiques, supermarchés, Uber, bornes Istanbulkart. Garde 500 à 1 000 TL en petits billets (10 à 20 €) pour les pourboires, le simit, les petits cafés, les bazars et certains hammams. Retrait aux distributeurs des banques (Ziraat, İş Bankası, Garanti) et toujours payer en livres turques, jamais en euros.</p></div>
       <div class="info"><h3>Fermetures</h3><p>Topkapı le mardi, Dolmabahçe le lundi, Chora le vendredi, Grand Bazar le dimanche. Mosquées fermées aux visiteurs pendant les prières.</p></div>
     </div>
   </div></section>
