@@ -130,6 +130,8 @@ function render() {
     <div class="kicker" style="color:var(--z2)">Les quartiers</div>
     <h2 class="title">Quatorze quartiers, cinq zones</h2>
     <p class="lead">Les lieux sont classés en trois niveaux : <span class="rank r3" style="padding:0 8px">+++</span> à ne pas rater, <span class="rank r2" style="padding:0 8px">++</span> si tu as le temps, <span class="rank r1" style="padding:0 8px">+</span> en passant. Prix pour un visiteur étranger, octobre 2026.</p>
+    <div class="zmap-wrap"><div id="zmap" class="zmap" aria-label="Carte des quatorze quartiers"></div>
+      <aside class="zindex">${ZONES.map(z => `<div class="zgroup"><h5 style="color:var(--${z.id})">${z.name}</h5>${z.ids.map(id => `<a href="#${id}"><b style="background:var(--${z.id})">${districts.findIndex(d => d.id === id) + 1}</b>${districts.find(d => d.id === id).name}</a>`).join("")}</div>`).join("")}<div class="zgroup"><a><b style="background:#d4a24c;color:#1d1608">H</b>Mövenpick Old Town</a></div><p class="zhint">Clique sur un numéro ou un nom pour aller au quartier.</p></aside></div>
     ${zones}
   </div></section>
 
@@ -180,3 +182,23 @@ function render() {
   </div></footer>`;
 }
 render();
+
+// Carte des quartiers, numérotés et colorés par zone.
+(function initMap() {
+  if (!window.L) return;
+  const css = getComputedStyle(document.documentElement);
+  const zoneOf = id => ZONES.find(z => z.ids.includes(id));
+  const map = L.map("zmap", { scrollWheelZoom: false, zoomControl: true, zoomSnap: 0.25 });
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap" }).addTo(map);
+  const pin = (label, name, color, cls = "") => L.divIcon({ className: "zpin " + cls, html: `<b style="background:${color}">${label}</b>`, iconSize: [34, 34], iconAnchor: [17, 17] });
+  const pts = [];
+  districts.forEach((d, i) => {
+    const z = zoneOf(d.id); const color = css.getPropertyValue(`--${z.id}`).trim();
+    L.marker(d.coords, { icon: pin(i + 1, d.name, color) }).addTo(map).bindTooltip(`${i + 1}. ${d.name}`, { direction: "top", offset: [0, -16] })
+      .on("click", () => document.getElementById(d.id)?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    pts.push(d.coords);
+  });
+  L.marker(HOTEL.coords, { icon: pin("H", "Mövenpick Old Town", "#d4a24c", "hotel"), zIndexOffset: 1000 }).addTo(map).bindTooltip("Mövenpick Old Town", { direction: "top", offset: [0, -16] });
+  pts.push(HOTEL.coords);
+  map.fitBounds(L.latLngBounds(pts), { padding: [24, 24] });
+})();
