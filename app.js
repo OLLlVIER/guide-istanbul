@@ -275,6 +275,26 @@ const LEISURE = {
   bebek: { green: ["Parc de Bebek, au bord de la baie", "Parc d’Emirgan, plus au nord : grands jardins et pavillons ottomans"], more: ["Course à pied ou vélo le long du Bosphore, d’Arnavutköy à Rumeli Hisarı", "Forteresse de Rumeli Hisarı (1452), sur la colline au nord de Bebek", "Campus de l’université du Bosphore, l’un des plus beaux de la ville"] }
 };
 
+// Version courte et visuelle de chaque quartier (photos libres de Wikimedia Commons).
+const FLASH = {
+  sultanahmet: { photo: "Hagia_Sophia_(Aya_Sofya)_front_facade,_Istanbul,_Turkey_(9606808746).jpg", line: "Le cœur de Byzance : mille ans d’empire en quelques centaines de mètres.", top: ["Sainte-Sophie", "Citerne-Basilique", "Mosquée Bleue"], tip: "Viens dès l’ouverture, avant les groupes." },
+  topkapi: { photo: "Topkapi_Palace_(Topkapı_Sarayı),_Istanbul,_Turkey_(9603571659).jpg", line: "Le palais des sultans, leurs trésors et leur harem.", top: ["Le Harem", "Le Trésor", "La terrasse sur le Bosphore"], tip: "Fermé le mardi. Commence par le Harem." },
+  eminonu: { photo: "Istanbul_spice_bazaar_02.jpg", line: "Le port, les épices et le sandwich au poisson face à la Corne d’Or.", top: ["Bazar aux épices", "Mosquée Rüstem Paşa", "Balık ekmek sur les quais"], tip: "Le bazar est bondé après 11 h." },
+  beyazit: { photo: "Istanbul_asv2021-11_img41_Grand_Bazaar.jpg", line: "Des milliers de boutiques sous des voûtes : ici, on négocie.", top: ["Grand Bazar", "Thé dans la cour Çorlulu Ali Paşa", "Marché des bouquinistes"], tip: "Fermé le dimanche. Commence à 50–60 % du prix." },
+  suleymaniye: { photo: "Süleymaniye_Mosque,_İstanbul_(12965958983).jpg", line: "Le quartier de l’hôtel : la plus belle mosquée de Sinan et la meilleure vue gratuite.", top: ["Mosquée Süleymaniye et sa terrasse", "Zeyrek, l’ancien Pantocrator", "Büryan à Kadınlar Pazarı"], tip: "À 12 min à pied : parfait au coucher du soleil." },
+  "fener-balat": { photo: "Balat_houses.jpg", line: "Maisons colorées, églises et les plus belles mosaïques byzantines.", top: ["Chora", "Sainte-Marie-des-Mongols", "Les ruelles de Balat"], tip: "Chora est fermée aux visiteurs le vendredi." },
+  galata: { photo: "Galata_Tower_of_Istanbul.jpg", line: "La tour génoise, les escaliers et les cafés de Karaköy.", top: ["Tour de Galata", "Escaliers Camondo", "Baklava chez Güllüoğlu"], tip: "Monte à la tour tôt : file longue au coucher du soleil." },
+  beyoglu: { photo: "Istanbul_İstiklâl_Caddesi_old_tram_2022-05.jpg", line: "L’avenue qui ne dort jamais.", top: ["İstiklal et son tram rouge", "Cathédrale du Saint-Esprit", "Mezzés à Nevizade"], tip: "Le soir, sac fermé devant toi." },
+  besiktas: { photo: "Dolmabahçe_Palace,_Istanbul_cropped.jpg", line: "Le Versailles du Bosphore et le quartier des supporters.", top: ["Palais de Dolmabahçe", "Kahvaltı rue du petit-déjeuner", "Ambiance de Çarşı"], tip: "Dolmabahçe est fermé le lundi." },
+  ortakoy: { photo: "Ortaköy_Mosque_and_Bosphorus_Bridge,_Istanbul_2008.jpg", line: "La photo la plus célèbre d’Istanbul.", top: ["La mosquée sous le pont", "Un kumpir sur la place", "Le pont illuminé à la nuit"], tip: "Viens en fin d’après-midi." },
+  kadikoy: { photo: "Kadikoy_Pier_Library.IMG_1698.jpg", line: "L’Istanbul des jeunes, côté Asie.", top: ["La traversée en ferry", "Le marché", "Les bars de la rue Kadife"], tip: "Samedi 31 : Fenerbahçe joue à domicile." },
+  uskudar: { photo: "Istanbul_asv2020-02_img53_Maiden's_Tower.jpg", line: "Le plus beau coucher de soleil de la ville.", top: ["Salacak et la tour de Léandre", "Mosquée Şemsi Paşa", "Un çay sur les marches"], tip: "Soleil couchant vers 18 h : sois là à 17 h 30." },
+  eyup: { photo: "20110711_Pierre_Loti_hill_view_Istanbul_Turkey_Panorama.jpg", line: "Le lieu saint et la vue de Pierre Loti sur la Corne d’Or.", top: ["Mosquée Eyüp Sultan", "Le téléphérique", "Un thé au café Pierre Loti"], tip: "Tenue couvrante, surtout le vendredi." },
+  bebek: { photo: "Bebek_Istanbul.jpg", line: "Une balade au bord de l’eau pour finir en douceur.", top: ["Promenade Arnavutköy–Bebek", "Les maisons en bois", "Poisson face au Bosphore"], tip: "Réserve le restaurant le week-end." }
+};
+const photoUrl = (f, w = 900) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=${w}`;
+const photoPage = f => `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(f)}`;
+
 const map = L.map("map", { zoomControl: true, attributionControl: true }).setView([41.024, 28.982], 13);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
@@ -308,7 +328,7 @@ const infoSheet = document.querySelector("#infoSheet");
 const listButton = document.querySelector("#listButton");
 const districtButtons = document.querySelector("#districtButtons");
 
-districtButtons.innerHTML = districts.map((d, i) => `<button class="district-button" data-id="${d.id}"><strong>${i + 1}. ${d.name}</strong><span>${d.subtitle}</span></button>`).join("");
+districtButtons.innerHTML = districts.map((d, i) => `<button class="district-button" data-id="${d.id}">${FLASH[d.id] ? `<img src="${photoUrl(FLASH[d.id].photo, 400)}" alt="" loading="lazy" onerror="this.remove()">` : ""}<strong>${i + 1}. ${d.name}</strong><span>${FLASH[d.id]?.line || d.subtitle}</span></button>`).join("");
 
 function sheetState(openSheet) {
   [detailSheet, districtList, infoSheet, restoSheet, journalSheet].forEach(sheet => {
@@ -329,24 +349,24 @@ function openDistrict(id) {
   const marker = markers.get(id);
   if (marker?._icon) marker._icon.classList.add("is-selected");
   detailContent.innerHTML = `
+    ${FLASH[district.id] ? `<figure class="hero-photo"><img src="${photoUrl(FLASH[district.id].photo)}" alt="${district.name}" loading="lazy" onerror="this.closest('figure').remove()"><figcaption><a href="${photoPage(FLASH[district.id].photo)}" target="_blank" rel="noreferrer">Photo Wikimedia Commons</a></figcaption></figure>` : ""}
     <header class="detail-hero">
       <span class="number">${index + 1}</span>
       <h2>${district.name}</h2>
-      <p>${district.subtitle}</p>
-      <p>${district.intro}</p>
+      <p class="punch">${FLASH[district.id]?.line || district.subtitle}</p>
     </header>
-    ${DESCRIPTIONS[district.id] ? `<section class="district-desc"><h3>Le quartier</h3><p>${DESCRIPTIONS[district.id]}</p></section>` : ""}
+    ${FLASH[district.id] ? `<section class="flash"><h3>En bref</h3><ol>${FLASH[district.id].top.map(t => `<li>${t}</li>`).join("")}</ol><p class="flash-tip">Le bon plan : ${FLASH[district.id].tip}</p></section>` : ""}
+    ${DESCRIPTIONS[district.id] ? `<details class="district-desc"><summary>L’histoire du quartier en 2 minutes</summary><p>${DESCRIPTIONS[district.id]}</p></details>` : ""}
     <section class="route-card">
       <h3>Depuis le Mövenpick Old Town</h3>
       <div class="routes">${district.routes.map(r => `<div class="route"><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")}</div>
     </section>
-    <section class="musts"><h3>Les indispensables</h3><div class="must-list">${district.monuments.filter(m => m[0] === "+++").map(m => `<span class="must">${m[1]}</span>`).join("")}</div></section>
     ${extras[district.id] ? `<section class="tips"><h3>À savoir</h3><ul>${extras[district.id].tips.map(t => `<li>${t}</li>`).join("")}</ul></section>` : ""}
     <section class="monuments">
       <h3>À voir — par ordre de priorité</h3>
       ${district.monuments.map(m => `<article class="monument"><span class="rank ${rankClass(m[0])}">${m[0]}</span><h4>${m[1]}</h4><p>${m[2]}</p><div class="facts"><span>${m[3]}</span><span>${m[4]}</span></div>${m[5] ? `<p class="walk-next">À pied : ${m[5]}</p>` : ""}</article>`).join("")}
     </section>
-    ${LEISURE[district.id] ? `<section class="leisure"><h3>Jardins & cafés</h3><ul>${LEISURE[district.id].green.map(t => `<li>${t}</li>`).join("")}</ul><h3>Autres plaisirs</h3><ul>${LEISURE[district.id].more.map(t => `<li>${t}</li>`).join("")}</ul></section>` : ""}
+    ${LEISURE[district.id] ? `<details class="leisure"><summary>Jardins, cafés et autres plaisirs</summary><h3>Jardins & cafés</h3><ul>${LEISURE[district.id].green.map(t => `<li>${t}</li>`).join("")}</ul><h3>Autres plaisirs</h3><ul>${LEISURE[district.id].more.map(t => `<li>${t}</li>`).join("")}</ul></details>` : ""}
     ${extras[district.id] ? `<section class="food"><h3>Où manger</h3>${extras[district.id].food.map(f => `<div class="food-item"><div><b>${f[0]}</b><span>${f[1]}</span><a class="maps-link" href="${mapsLink(f[0])}" target="_blank" rel="noreferrer">Itinéraire ↗</a></div><em class="price ${priceBand(f[2]).cls}">${f[2]}</em></div>`).join("")}</section>` : ""}
     <section class="photos"><h3>Mes photos</h3>
       <p class="photos-note">Elles restent sur cet appareil, dans ce navigateur.</p>
