@@ -81,7 +81,7 @@ const districts = [
     routes: [["Uber", "10–20 min · env. 5–8 €"], ["Métro", "M2 Vezneciler → Şişhane · 15–22 min · env. 0,75 €"], ["Tramway", "T1 vers Karaköy · 18–25 min · env. 0,75 €"], ["À pied", "28–35 min via le pont de Galata"]],
     monuments: [
       ["+++", "Tour de Galata", "Élevée par les Génois en 1348, la tour fut tour de guet, prison et observatoire. Son belvédère offre un panorama circulaire sur la vieille ville et le Bosphore.", "30 € · e-billet galatakulesi.gov.tr", "45–75 min", "6 min vers le Mevlevihanesi"],
-      ["++", "Galata Mevlevihanesi", "Premier couvent mevlevi d’Istanbul, fondé en 1491. Le musée présente l’histoire des derviches tourneurs, leur musique et leurs objets rituels.", "env. 7 €", "45–60 min", "10 min vers SALT Galata"],
+      ["++", "Galata Mevlevihanesi", "Premier couvent mevlevi d’Istanbul, fondé en 1491. Le musée présente l’histoire des derviches tourneurs, leur musique et leurs objets rituels.", "tarif à vérifier sur place", "45–60 min", "10 min vers SALT Galata"],
       ["++", "SALT Galata", "Installé dans l’ancienne Banque ottomane, ce centre culturel associe architecture fin XIXe, archives, expositions, bibliothèque et vues sur la ville.", "gratuit", "45–75 min", "7 min vers Kılıç Ali Paşa"],
       ["++", "Mosquée Kılıç Ali Paşa", "Mimar Sinan construisit ce complexe au XVIe siècle pour l’amiral Kılıç Ali Paşa. Son plan fait clairement écho à Sainte-Sophie.", "gratuit", "25–40 min", null],
       ["++", "Église Saint-Pierre-et-Saint-Paul", "Église dominicaine reconstruite par les frères Fossati en 1843, cachée derrière une cour au pied de la tour de Galata.", "gratuit · ouverte surtout le matin", "15–25 min", null]
@@ -214,7 +214,7 @@ const extras = {
     food: [["Çiya Sofrası", "Cuisine régionale d’Anatolie, plats rarement servis ailleurs", "15–25 €"], ["Yanyalı Fehmi", "Lokanta historique de plats mijotés", "12–22 €"], ["Midye dolma du marché", "Moules farcies au riz épicé, à l’unité", "0,50–1 € pièce"]]
   },
   uskudar: {
-    tips: ["Quartier conservateur : tenue couvrante, alcool rare dans les restaurants.", "Coucher du soleil à Salacak vers 17h45 fin octobre, plus tôt en novembre."],
+    tips: ["Quartier conservateur : tenue couvrante, alcool rare dans les restaurants.", "Le soleil se couche vers 18 h pendant le séjour : soyez à Salacak vers 17 h 30. Dernier bateau retour de la tour de Léandre à 17 h 45."],
     food: [["Kanaat Lokantası", "Lokanta familiale de 1933 : plats du jour et desserts au lait", "12–25 €"], ["Çay au bord de l’eau", "Thé et simit sur les marches de Salacak", "1–3 €"]]
   },
   eyup: {
