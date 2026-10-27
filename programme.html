@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Istanbul · Mon programme</title>
+  <meta name="description" content="Cochez ce que vous voulez voir, choisissez vos jours : le programme d’Istanbul se construit selon la météo, les fermetures et les événements.">
+  <meta property="og:title" content="Istanbul · Mon programme">
+  <meta property="og:description" content="Cochez, choisissez vos jours : le programme se construit tout seul, selon la météo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700;800&display=swap">
+  <style>
+    :root {
+      --ink: #14241d; --paper: #fbf7ef; --sand: #f3ead8; --line: rgba(20,36,29,.12); --muted: #55665d; --gold: #d4a24c;
+      --r3: #b2452c; --r2: #2f7a52; --r1: #8a8f8c; --rain: #2f6f9f;
+      --display: "DM Serif Display", Georgia, serif; --body: "Source Sans 3", -apple-system, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.5 var(--body); }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-left)); }
+    .nav { position: sticky; top: 0; z-index: 20; background: rgba(20,36,29,.95); color: #fff; }
+    .nav .wrap { display: flex; align-items: center; gap: 14px; height: 54px; }
+    .nav b { font-family: var(--display); font-weight: 400; font-size: 19px; margin-right: auto; }
+    .nav a { color: #fff; text-decoration: none; font-weight: 700; font-size: 13px; opacity: .85; white-space: nowrap; }
+    .nav a.gold { background: var(--gold); color: var(--ink); padding: 6px 12px; border-radius: 999px; opacity: 1; }
+    h1 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 6vw, 52px); line-height: 1.05; margin: 28px 0 8px; }
+    .lead { color: var(--muted); max-width: 720px; margin: 0 0 22px; }
+    h2 { font-family: var(--display); font-weight: 400; font-size: 24px; margin: 0 0 10px; }
+    h2 small { font: 700 12px var(--body); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; margin-left: 6px; }
+    .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; padding-bottom: 60px; }
+    @media (min-width: 960px) { .grid { grid-template-columns: minmax(0, 440px) minmax(0, 1fr); align-items: start; } .out { position: sticky; top: 70px; max-height: calc(100vh - 84px); overflow-y: auto; padding-right: 4px; } }
+    .step { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 16px; }
+    #days { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+    .daychip { border: 1.5px solid var(--line); background: var(--sand); border-radius: 12px; padding: 8px 4px; font: inherit; cursor: pointer; color: var(--muted); text-align: center; }
+    .daychip b { display: block; font-size: 13px; }
+    .daychip .wx { display: block; font-size: 11px; line-height: 1.25; }
+    .daychip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+    #wxsrc { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+    #hours { display: flex; gap: 6px; flex-wrap: wrap; }
+    #hours button, .quick button, #share { border: 1.5px solid var(--line); background: var(--sand); border-radius: 999px; padding: 7px 13px; font: 700 13px var(--body); cursor: pointer; color: var(--ink); }
+    #hours button.on { background: var(--gold); border-color: var(--gold); }
+    .quick { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    #count { font-size: 13px; font-weight: 700; color: var(--r2); }
+    .dpick { border-top: 1px solid var(--line); }
+    .dpick summary { display: flex; align-items: center; gap: 10px; padding: 10px 0; cursor: pointer; font-weight: 800; list-style: none; }
+    .dpick summary::-webkit-details-marker { display: none; }
+    .dpick summary em { margin-left: auto; font-style: normal; font-size: 12px; color: var(--r2); }
+    .num { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: #fff; font-size: 13px; flex: none; }
+    .opts { display: grid; gap: 6px; padding-bottom: 12px; }
+    .opt { display: grid; grid-template-columns: 22px 36px 1fr; gap: 2px 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: var(--paper); cursor: pointer; border: 1.5px solid transparent; }
+    .opt.on { border-color: var(--r2); background: #eef6f0; }
+    .opt input { width: 18px; height: 18px; accent-color: var(--r2); margin: 0; }
+    .opt .meta { grid-column: 3; font-size: 12px; color: var(--muted); }
+    .on-name { font-weight: 700; line-height: 1.25; }
+    .lv { display: inline-block; font: 800 11px var(--body); color: #fff; border-radius: 6px; padding: 2px 5px; text-align: center; }
+    .lv.l3 { background: var(--r3); } .lv.l2 { background: var(--r2); } .lv.l1 { background: var(--r1); }
+    .sh { font-size: 11px; font-weight: 700; border-radius: 6px; padding: 0 5px; }
+    .sh.in { background: #e3eef7; color: var(--rain); } .sh.mix { background: #f1ecdf; color: #7a5b17; } .sh.out { background: #e8f3ea; color: var(--r2); }
+    .warn { font-size: 11px; font-weight: 700; color: var(--r3); }
+    .outhead { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    #share { background: #25d366; border-color: #25d366; color: #fff; }
+    .pday { background: #fff; border: 1px solid var(--line); border-left: 6px solid var(--gold); border-radius: 18px; padding: 16px; margin-bottom: 14px; }
+    .pday.wet { border-left-color: var(--rain); }
+    .pday.left { border-left-color: var(--r1); background: var(--sand); }
+    .pday header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .pd { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+    .pday h3 { font-family: var(--display); font-weight: 400; font-size: 22px; margin: 2px 0 6px; line-height: 1.15; }
+    .pw { text-align: right; font-weight: 700; font-size: 14px; white-space: nowrap; }
+    .pw small { display: block; font-weight: 600; color: var(--muted); }
+    .pnote { margin: 6px 0; font-size: 14px; background: var(--sand); border-radius: 10px; padding: 7px 10px; }
+    .wet .pnote:first-of-type { background: #e3eef7; }
+    .proute { font-size: 14px; color: var(--muted); margin: 8px 0; }
+    .pitems { margin: 8px 0 0; padding-left: 22px; }
+    .pitems li { padding: 8px 0; border-top: 1px dashed var(--line); }
+    .pitems li p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+    .pi-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .pi-head .meta { font-size: 12px; color: var(--muted); }
+    .peve { margin-top: 10px; background: var(--ink); color: #fff; border-radius: 12px; padding: 10px 12px; }
+    .peve p { font-size: 14px; margin: 4px 0; }
+    .peve .pl { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+    .pleft { margin: 6px 0 0; padding-left: 20px; font-size: 14px; }
+    .empty { color: var(--muted); background: #fff; border-radius: 18px; padding: 20px; border: 1px dashed var(--line); }
+    .jump { position: fixed; left: 50%; transform: translateX(-50%); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 30; background: var(--ink); color: #fff; text-decoration: none; font-weight: 800; padding: 12px 20px; border-radius: 999px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    @media (min-width: 960px) { .jump { display: none; } }
+    #plan { scroll-margin-top: 70px; }
+    .plinks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .pl { display: inline-flex; align-items: center; min-height: 30px; padding: 0 11px; border-radius: 999px; border: 1px solid rgba(21,40,32,.18); background: #fff; color: #152820; font: 700 12px/1 var(--body); text-decoration: none; cursor: pointer; }
+    .pl.copy { background: #152820; color: #fff; border-color: #152820; }
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="wrap"><b>Mon programme</b><a href="guide.html">Le guide</a><a class="gold" href="./">La carte</a></div></nav>
+  <main class="wrap">
+    <h1>Cochez, on s’occupe du reste</h1>
+    <p class="lead">Choisissez vos jours et ce que vous voulez vraiment voir. Le programme regroupe les quartiers voisins, évite les jours de fermeture, met les visites à l’abri les jours de pluie et profite des événements (feux d’artifice, match, ferries gratuits). Vos choix restent enregistrés sur ce téléphone.</p>
+    <div class="grid">
+      <section>
+        <div class="step"><h2>1. Vos jours <small>touchez pour enlever</small></h2><div id="days"></div><p id="wxsrc"></p></div>
+        <div class="step"><h2>2. Temps de visite par jour</h2>
+          <div id="hours"><button type="button" data-h="2">2 h</button><button type="button" data-h="3">3 h</button><button type="button" data-h="5">5 h</button><button type="button" data-h="7">Toute la journée</button></div></div>
+        <div class="step"><h2>3. Ce que vous voulez voir</h2>
+          <div class="quick"><button type="button" data-quick="top">Les incontournables +++</button><button type="button" data-quick="churches">+ Églises</button><button type="button" data-quick="rain">+ Plan pluie</button><button type="button" data-quick="none">Tout décocher</button></div>
+          <p id="count"></p><div id="picker"></div></div>
+      </section>
+      <a class="jump" href="#plan">Voir mon programme ↓</a>
+      <section class="out" id="out">
+        <div class="outhead"><h2>Votre programme</h2><button type="button" id="share">Envoyer sur WhatsApp</button></div>
+        <div id="plan"></div>
+      </section>
+    </div>
+  </main>
+  <script src="data.js"></script>
+  <script src="planner.js"></script>
+</body>
+</html>
