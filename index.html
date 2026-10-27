@@ -24,6 +24,7 @@
     <aside class="legend" aria-label="Légende">
       <span><i class="hotel-dot"></i> Hôtel</span>
       <span><i class="district-dot"></i> Quartier</span>
+      <span class="lvl r3">+++</span><span class="lvl r2">++</span><span class="lvl r1">+</span>
     </aside>
 
     <section id="districtList" class="district-list" aria-hidden="true">
@@ -43,8 +44,19 @@
   </main>
 
   <footer class="source-note">
-    <button id="infoButton">Culture, cuisine et infos pratiques</button>
+    <button id="restoButton">Restaurants</button>
+    <button id="infoButton">Culture et infos pratiques</button>
   </footer>
+
+  <section id="restoSheet" class="info-sheet resto-sheet" aria-hidden="true">
+    <div class="sheet-handle"></div>
+    <button class="close-button detail-close" data-close="resto" aria-label="Fermer">×</button>
+    <p class="eyebrow">Où manger</p>
+    <h2>Restaurants par prix</h2>
+    <p>Prix par personne, boissons non alcoolisées comprises. Touchez un quartier pour ouvrir sa fiche.</p>
+    <div id="restoFilters" class="chips"></div>
+    <div id="restoList" class="food"></div>
+  </section>
 
   <section id="infoSheet" class="info-sheet" aria-hidden="true">
     <div class="sheet-handle"></div>

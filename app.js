@@ -256,7 +256,7 @@ const districtButtons = document.querySelector("#districtButtons");
 districtButtons.innerHTML = districts.map((d, i) => `<button class="district-button" data-id="${d.id}"><strong>${i + 1}. ${d.name}</strong><span>${d.subtitle}</span></button>`).join("");
 
 function sheetState(openSheet) {
-  [detailSheet, districtList, infoSheet].forEach(sheet => {
+  [detailSheet, districtList, infoSheet, restoSheet].forEach(sheet => {
     const open = sheet === openSheet;
     sheet.classList.toggle("is-open", open);
     sheet.setAttribute("aria-hidden", String(!open));
@@ -284,16 +284,124 @@ function openDistrict(id) {
       <h3>Depuis le Mövenpick Old Town</h3>
       <div class="routes">${district.routes.map(r => `<div class="route"><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")}</div>
     </section>
+    <section class="musts"><h3>Les indispensables</h3><div class="must-list">${district.monuments.filter(m => m[0] === "+++").map(m => `<span class="must">${m[1]}</span>`).join("")}</div></section>
     ${extras[district.id] ? `<section class="tips"><h3>À savoir</h3><ul>${extras[district.id].tips.map(t => `<li>${t}</li>`).join("")}</ul></section>` : ""}
     <section class="monuments">
       <h3>À voir — par ordre de priorité</h3>
-      ${district.monuments.map(m => `<article class="monument"><span class="rank">${m[0]}</span><h4>${m[1]}</h4><p>${m[2]}</p><div class="facts"><span>${m[3]}</span><span>${m[4]}</span></div>${m[5] ? `<p class="walk-next">À pied : ${m[5]}</p>` : ""}</article>`).join("")}
+      ${district.monuments.map(m => `<article class="monument"><span class="rank ${rankClass(m[0])}">${m[0]}</span><h4>${m[1]}</h4><p>${m[2]}</p><div class="facts"><span>${m[3]}</span><span>${m[4]}</span></div>${m[5] ? `<p class="walk-next">À pied : ${m[5]}</p>` : ""}</article>`).join("")}
     </section>
-    ${extras[district.id] ? `<section class="food"><h3>Où manger</h3>${extras[district.id].food.map(f => `<div class="food-item"><div><b>${f[0]}</b><span>${f[1]}</span></div><em>${f[2]}</em></div>`).join("")}</section>` : ""}`;
+    ${extras[district.id] ? `<section class="food"><h3>Où manger</h3>${extras[district.id].food.map(f => `<div class="food-item"><div><b>${f[0]}</b><span>${f[1]}</span></div><em class="price ${priceBand(f[2]).cls}">${f[2]}</em></div>`).join("")}</section>` : ""}
+    <section class="photos"><h3>Mes photos</h3>
+      <p class="photos-note">Elles restent sur cet appareil, dans ce navigateur.</p>
+      <label class="add-photo" for="photoInput">+ Ajouter des photos</label>
+      <input id="photoInput" type="file" accept="image/*" multiple hidden>
+      <div id="photoGrid" class="photo-grid"></div>
+    </section>`;
+  currentDistrict = district.id;
+  document.querySelector("#photoInput").addEventListener("change", e => addPhotos(district.id, e.target.files));
+  renderPhotos(district.id);
   sheetState(detailSheet);
   map.flyTo(district.coords, 14, { duration: .65 });
   requestAnimationFrame(() => detailSheet.scrollTop = 0);
 }
+
+function rankClass(r) { return r === "+++" ? "r3" : r === "++" ? "r2" : "r1"; }
+
+// Fourchette de prix par personne, d'après le prix le plus haut indiqué.
+const BANDS = [
+  { cls: "p1", label: "€", desc: "moins de 10 €", max: 10 },
+  { cls: "p2", label: "€€", desc: "10 à 25 €", max: 25 },
+  { cls: "p3", label: "€€€", desc: "25 à 45 €", max: 45 },
+  { cls: "p4", label: "€€€€", desc: "plus de 45 €", max: Infinity }
+];
+function priceBand(text) {
+  const nums = (text.match(/\d+(?:,\d+)?/g) || []).map(n => parseFloat(n.replace(",", ".")));
+  const top = nums.length ? Math.max(...nums) : 0;
+  return BANDS.find(b => top <= b.max);
+}
+
+/* ---- Photos personnelles (IndexedDB, locales à l'appareil) ---- */
+let currentDistrict = null;
+const DB_NAME = "guide-istanbul-photos";
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = () => req.result.createObjectStore("photos", { keyPath: "id", autoIncrement: true }).createIndex("district", "district");
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+async function dbRun(mode, fn) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("photos", mode);
+    const out = fn(tx.objectStore("photos"));
+    tx.oncomplete = () => resolve(out && out.result);
+    tx.onerror = () => reject(tx.error);
+  });
+}
+function shrink(file) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, 1600 / Math.max(img.width, img.height));
+      const c = document.createElement("canvas");
+      c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(img.src);
+      c.toBlob(b => resolve(b || file), "image/jpeg", .82);
+    };
+    img.onerror = () => resolve(file);
+    img.src = URL.createObjectURL(file);
+  });
+}
+async function addPhotos(district, files) {
+  try {
+    for (const f of files) {
+      const blob = await shrink(f);
+      await dbRun("readwrite", st => st.add({ district, blob, date: Date.now() }));
+    }
+  } catch (e) { alertPhotos("Impossible d’enregistrer : espace de stockage indisponible dans ce navigateur."); }
+  renderPhotos(district);
+}
+function alertPhotos(msg) { const g = document.querySelector("#photoGrid"); if (g) g.innerHTML = `<p class="photos-note">${msg}</p>`; }
+async function renderPhotos(district) {
+  const grid = document.querySelector("#photoGrid");
+  if (!grid) return;
+  let items = [];
+  try { items = await dbRun("readonly", st => st.index("district").getAll(district)); }
+  catch (e) { return alertPhotos("Les photos ne peuvent pas être enregistrées dans ce navigateur (navigation privée ?)."); }
+  if (district !== currentDistrict) return;
+  grid.querySelectorAll("img").forEach(i => URL.revokeObjectURL(i.src));
+  grid.innerHTML = items.length ? items.map(it => `<figure><img src="${URL.createObjectURL(it.blob)}" alt="Photo personnelle"><button class="del-photo" data-photo="${it.id}" aria-label="Supprimer la photo">×</button></figure>`).join("") : `<p class="photos-note">Aucune photo pour ce quartier.</p>`;
+}
+document.addEventListener("click", async e => {
+  const btn = e.target.closest("[data-photo]");
+  if (!btn) return;
+  if (btn.dataset.armed !== "1") { btn.dataset.armed = "1"; btn.textContent = "Suppr. ?"; btn.classList.add("armed"); return; }
+  await dbRun("readwrite", st => st.delete(Number(btn.dataset.photo)));
+  renderPhotos(currentDistrict);
+});
+
+/* ---- Liste des restaurants ---- */
+const restoSheet = document.querySelector("#restoSheet");
+let restoFilter = "all";
+function renderRestos() {
+  const all = districts.flatMap(d => (extras[d.id]?.food || []).map(f => ({ d, name: f[0], desc: f[1], price: f[2], band: priceBand(f[2]) })));
+  all.sort((a, b) => BANDS.indexOf(a.band) - BANDS.indexOf(b.band));
+  const shown = restoFilter === "all" ? all : all.filter(r => r.band.cls === restoFilter);
+  document.querySelector("#restoFilters").innerHTML = [`<button class="chip ${restoFilter === "all" ? "on" : ""}" data-band="all">Tous</button>`]
+    .concat(BANDS.map(b => `<button class="chip ${b.cls} ${restoFilter === b.cls ? "on" : ""}" data-band="${b.cls}">${b.label} <small>${b.desc}</small></button>`)).join("");
+  document.querySelector("#restoList").innerHTML = shown.map(r => `<div class="food-item"><div><b>${r.name}</b><span>${r.desc}</span><button class="resto-district" data-id="${r.d.id}">${r.d.name}</button></div><em class="price ${r.band.cls}">${r.band.label} · ${r.price}</em></div>`).join("");
+}
+document.querySelector("#restoFilters").addEventListener("click", e => {
+  const b = e.target.closest("[data-band]"); if (!b) return;
+  restoFilter = b.dataset.band; renderRestos();
+});
+document.querySelector("#restoList").addEventListener("click", e => {
+  const b = e.target.closest("[data-id]"); if (b) openDistrict(b.dataset.id);
+});
+document.querySelector("#restoButton").addEventListener("click", () => { renderRestos(); sheetState(restoSheet); });
 
 listButton.addEventListener("click", () => sheetState(districtList));
 document.querySelector("#infoButton").addEventListener("click", () => sheetState(infoSheet));
