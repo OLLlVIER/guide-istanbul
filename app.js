@@ -9,8 +9,8 @@ const districts = [
     id: "sultanahmet", name: "Sultanahmet", subtitle: "Le cœur byzantin et ottoman", coords: [41.0055, 28.9767],
     intro: "Le quartier le plus dense en chefs-d’œuvre : arrivez tôt et avancez à pied autour de l’ancien Hippodrome.",
     routes: [
-      ["Uber", "15–25 min · env. 5–8 €"], ["Tramway", "18–25 min · T1 depuis Aksaray · env. 0,85 €"],
-      ["Métro + marche", "20–28 min · M2 Vezneciler puis marche · env. 0,85 €"], ["À pied", "32–38 min · 2,7 km"]
+      ["Uber", "15–25 min · env. 5–8 €"], ["Tramway", "18–25 min · T1 depuis Aksaray · env. 0,75 €"],
+      ["Métro + marche", "20–28 min · M2 Vezneciler puis marche · env. 0,75 €"], ["À pied", "32–38 min · 2,7 km"]
     ],
     monuments: [
       ["+++", "Sainte-Sophie", "Édifiée par Justinien entre 532 et 537, elle fut basilique impériale, mosquée, musée puis mosquée. Sa coupole et ses mosaïques racontent quinze siècles d’histoire.", "25 € · galerie touristique (Museum Pass non valable)", "1 h 15–1 h 45", "4 min vers la Citerne-Basilique"],
@@ -23,10 +23,10 @@ const districts = [
   {
     id: "topkapi", name: "Topkapı & Gülhane", subtitle: "Pouvoir impérial et collections", coords: [41.0115, 28.9833],
     intro: "Une demi-journée de palais, de trésors archéologiques et de jardins dominant le Bosphore.",
-    routes: [["Uber", "15–25 min · env. 5–8 €"], ["Tramway", "20–28 min · T1 vers Gülhane · env. 0,85 €"], ["Métro + marche", "22–30 min · M2 + 18 min à pied · env. 0,85 €"], ["À pied", "35–42 min · 3 km"]],
+    routes: [["Uber", "15–25 min · env. 5–8 €"], ["Tramway", "20–28 min · T1 vers Gülhane · env. 0,75 €"], ["Métro + marche", "22–30 min · M2 + 18 min à pied · env. 0,75 €"], ["À pied", "35–42 min · 3 km"]],
     monuments: [
       ["+++", "Palais de Topkapı", "Résidence et centre de gouvernement des sultans ottomans du XVe au XIXe siècle. Les cours, le Trésor, le Harem et les vues sur le Bosphore justifient une longue visite.", "2 750 TL · env. 49 € (palais + Harem + Sainte-Irène)", "3–4 h", "4 min vers les Musées archéologiques"],
-      ["+++", "Musées archéologiques", "Trois musées réunissant des œuvres de l’Anatolie, de la Mésopotamie, de l’Égypte et du monde gréco-romain, dont le célèbre sarcophage d’Alexandre.", "env. 15 €", "1 h 30–2 h", "5 min vers Gülhane"],
+      ["+++", "Musées archéologiques", "Trois musées réunissant des œuvres de l’Anatolie, de la Mésopotamie, de l’Égypte et du monde gréco-romain, dont le célèbre sarcophage d’Alexandre. Le Kiosque aux faïences est en restauration en 2026.", "15–17 € · ouvert tous les jours", "1 h 30–2 h", "5 min vers Gülhane"],
       ["++", "Parc de Gülhane", "Ancien jardin extérieur du palais, ouvert au public en 1912. Ses allées offrent une pause ombragée entre la vieille ville et la Corne d’Or.", "gratuit", "30–50 min", null],
       ["++", "Sainte-Irène", "Église byzantine du VIe siècle, jamais transformée en mosquée. Sa grande croix iconoclaste en mosaïque domine l’abside nue, à l’acoustique remarquable.", "incluse dans le billet Topkapı", "20–30 min", null]
     ]
@@ -34,7 +34,7 @@ const districts = [
   {
     id: "eminonu", name: "Eminönü & Sirkeci", subtitle: "Marchés, mosquées et Corne d’Or", coords: [41.0165, 28.9706],
     intro: "Un quartier vivant à parcourir tôt le matin, entre les parfums du Bazar aux épices et les quais.",
-    routes: [["Uber", "8–15 min · env. 4–6 €"], ["Tramway", "12–18 min · T1 depuis Aksaray · env. 0,85 €"], ["Bus", "12–20 min · selon circulation · env. 0,85 €"], ["À pied", "20–25 min · 1,7 km"]],
+    routes: [["Uber", "8–15 min · env. 4–6 €"], ["Tramway", "12–18 min · T1 depuis Aksaray · env. 0,75 €"], ["Bus", "12–20 min · selon circulation · env. 0,75 €"], ["À pied", "20–25 min · 1,7 km"]],
     monuments: [
       ["+++", "Bazar aux épices", "Construit au XVIIe siècle comme partie du complexe de la Nouvelle Mosquée, il demeure un marché d’épices, de fruits secs, de douceurs et de produits traditionnels.", "gratuit", "45–75 min", "3 min vers la Nouvelle Mosquée"],
       ["++", "Nouvelle Mosquée", "Commencée en 1597 et achevée en 1665, elle forme avec le marché voisin un vaste ensemble pieux financé par les sultanes de la cour.", "gratuit", "25–40 min", "6 min vers Rüstem Paşa"],
@@ -45,7 +45,7 @@ const districts = [
   {
     id: "beyazit", name: "Beyazıt & Grand Bazar", subtitle: "Le labyrinthe commerçant", coords: [41.0108, 28.9680],
     intro: "Prévoyez du temps pour vous perdre : les monuments encadrent un réseau de rues commerçantes couvertes et découvertes.",
-    routes: [["Uber", "8–15 min · env. 4–6 €"], ["Métro", "5–10 min · M2 Vezneciler puis marche · env. 0,85 €"], ["Tramway", "8–14 min · T1 depuis Aksaray · env. 0,85 €"], ["À pied", "17–22 min · 1,4 km"]],
+    routes: [["Uber", "8–15 min · env. 4–6 €"], ["Métro", "5–10 min · M2 Vezneciler puis marche · env. 0,75 €"], ["Tramway", "8–14 min · T1 depuis Aksaray · env. 0,75 €"], ["À pied", "17–22 min · 1,4 km"]],
     monuments: [
       ["+++", "Grand Bazar", "Fondé après la conquête de 1453 et agrandi pendant des siècles, ce réseau de hans et de rues couvertes rassemble des milliers de boutiques sous ses voûtes.", "gratuit", "1 h 30–3 h", "5 min vers Nuruosmaniye"],
       ["++", "Mosquée Nuruosmaniye", "Achevée en 1755, elle marque l’apparition du baroque ottoman. Sa cour en fer à cheval et sa lumière la distinguent des mosquées classiques.", "gratuit", "25–40 min", "9 min vers la place Beyazıt"],
@@ -56,7 +56,7 @@ const districts = [
   {
     id: "suleymaniye", name: "Süleymaniye & Vefa", subtitle: "Sinan, coupoles et vues", coords: [41.0162, 28.9638],
     intro: "Le quartier le plus proche de l’hôtel : une promenade architecturale avec des vues spectaculaires sur la Corne d’Or.",
-    routes: [["Uber", "4–8 min · env. 3–5 €"], ["À pied", "10–16 min · itinéraire en pente"], ["Bus", "8–14 min · env. 0,85 €"], ["Métro", "M2 peu utile pour ce trajet"]],
+    routes: [["Uber", "4–8 min · env. 3–5 €"], ["À pied", "10–16 min · itinéraire en pente"], ["Bus", "8–14 min · env. 0,75 €"], ["Métro", "M2 peu utile pour ce trajet"]],
     monuments: [
       ["+++", "Mosquée Süleymaniye", "Construite par Mimar Sinan pour Soliman le Magnifique entre 1550 et 1557, elle domine la Corne d’Or par l’équilibre de ses volumes et de son complexe social.", "gratuit", "45–70 min", "10 min vers Vefa"],
       ["++", "Mosquée Kalenderhane", "Ancienne église byzantine probablement dédiée à la Theotokos Kyriotissa, convertie en mosquée après 1453. Elle conserve une architecture médiobyzantine lisible.", "gratuit", "25–40 min", "8 min vers l’aqueduc"],
@@ -67,7 +67,7 @@ const districts = [
   {
     id: "fener-balat", name: "Fener & Balat", subtitle: "Mémoires grecques, juives et ottomanes", coords: [41.0298, 28.9496],
     intro: "Un itinéraire de rues en pente et de lieux de culte : chaussures confortables et tenue respectueuse recommandées.",
-    routes: [["Uber", "10–18 min · env. 4–7 €"], ["Bus", "15–25 min vers Fener · env. 0,85 €"], ["Tramway T5", "Rejoindre Cibali puis T5 · 20–30 min · env. 1,70 €"], ["À pied", "25–35 min · 2,3 km"]],
+    routes: [["Uber", "10–18 min · env. 4–7 €"], ["Bus", "15–25 min vers Fener · env. 0,75 €"], ["Tramway T5", "Rejoindre Cibali puis T5 · 20–30 min · env. 1,50 €"], ["À pied", "25–35 min · 2,3 km"]],
     monuments: [
       ["++", "Église Saint-Étienne-des-Bulgares", "Cette église de la fin du XIXe siècle est célèbre pour sa structure préfabriquée en fonte, assemblée sur la rive de la Corne d’Or.", "gratuit", "30–45 min", "20 min vers Balat"],
       ["+", "Rues de Balat", "Maisons colorées, escaliers, petits commerces et édifices religieux témoignent du passé cosmopolite du quartier, longtemps habité par des communautés grecques, juives et arméniennes.", "gratuit", "1–1 h 30", "18 min vers Kariye"],
@@ -78,7 +78,7 @@ const districts = [
   {
     id: "galata", name: "Galata & Karaköy", subtitle: "Génois, banques et création", coords: [41.0257, 28.9741],
     intro: "Commencez par la tour avant l’affluence, puis descendez vers Karaköy à travers escaliers, passages et cafés.",
-    routes: [["Uber", "10–20 min · env. 5–8 €"], ["Métro", "M2 Vezneciler → Şişhane · 15–22 min · env. 0,85 €"], ["Tramway", "T1 vers Karaköy · 18–25 min · env. 0,85 €"], ["À pied", "28–35 min via le pont de Galata"]],
+    routes: [["Uber", "10–20 min · env. 5–8 €"], ["Métro", "M2 Vezneciler → Şişhane · 15–22 min · env. 0,75 €"], ["Tramway", "T1 vers Karaköy · 18–25 min · env. 0,75 €"], ["À pied", "28–35 min via le pont de Galata"]],
     monuments: [
       ["+++", "Tour de Galata", "Élevée par les Génois en 1348, la tour fut tour de guet, prison et observatoire. Son belvédère offre un panorama circulaire sur la vieille ville et le Bosphore.", "30 € · e-billet galatakulesi.gov.tr", "45–75 min", "6 min vers le Mevlevihanesi"],
       ["++", "Galata Mevlevihanesi", "Premier couvent mevlevi d’Istanbul, fondé en 1491. Le musée présente l’histoire des derviches tourneurs, leur musique et leurs objets rituels.", "env. 7 €", "45–60 min", "10 min vers SALT Galata"],
@@ -90,7 +90,7 @@ const districts = [
   {
     id: "beyoglu", name: "Beyoğlu & Taksim", subtitle: "Passages, ambassades et modernité", coords: [41.0359, 28.9824],
     intro: "Une promenade urbaine à faire de préférence en fin d’après-midi, lorsque l’avenue İstiklal s’anime.",
-    routes: [["Uber", "18–30 min · env. 7–11 €"], ["Métro", "M2 Vezneciler → Taksim · 12–18 min · env. 0,85 €"], ["Tramway + funiculaire", "T1 + F1 · 25–35 min · env. 1,70 €"], ["À pied", "45–55 min · montée soutenue"]],
+    routes: [["Uber", "18–30 min · env. 7–11 €"], ["Métro", "M2 Vezneciler → Taksim · 12–18 min · env. 0,75 €"], ["Tramway + funiculaire", "T1 + F1 · 25–35 min · env. 1,50 €"], ["À pied", "45–55 min · montée soutenue"]],
     monuments: [
       ["+++", "Avenue İstiklal & passages", "Grande artère cosmopolite de Pera, bordée d’immeubles des XIXe et XXe siècles, de consulats, de passages, de lieux de culte et du tramway historique.", "gratuit", "1 h 30–3 h", "4 min vers Saint-Antoine"],
       ["++", "Église Saint-Antoine-de-Padoue", "La plus grande église catholique d’Istanbul, reconstruite en style néogothique vénitien au début du XXe siècle.", "gratuit", "20–30 min", "6 min vers le musée de Pera"],
@@ -103,7 +103,7 @@ const districts = [
   {
     id: "besiktas", name: "Beşiktaş & Dolmabahçe", subtitle: "Le Bosphore impérial", coords: [41.0392, 29.0005],
     intro: "Palais, collections et front de mer : consacrez au moins une demi-journée à cette portion du Bosphore.",
-    routes: [["Uber", "20–35 min · env. 9–14 €"], ["Métro + marche", "M2 vers Taksim puis 22 min à pied · env. 0,85 €"], ["Tramway + marche", "T1 vers Kabataş puis 12 min à pied · env. 0,85 €"], ["Ferry", "Via Eminönü → Beşiktaş · 35–50 min · env. 1–2 €"]],
+    routes: [["Uber", "20–35 min · env. 9–14 €"], ["Métro + marche", "M2 vers Taksim puis 22 min à pied · env. 0,75 €"], ["Tramway + marche", "T1 vers Kabataş puis 12 min à pied · env. 0,75 €"], ["Ferry", "Via Eminönü → Beşiktaş · 35–50 min · env. 1–2 €"]],
     monuments: [
       ["+++", "Palais de Dolmabahçe", "Résidence impériale achevée en 1856, elle mêle organisation ottomane et décors baroque, rococo et néoclassique. Atatürk y passa ses derniers jours.", "2 000 TL · env. 36 € (Selamlık + Harem + peinture)", "2 h 30–3 h 30", "12 min vers le Musée naval"],
       ["++", "Musée naval", "L’une des grandes collections maritimes de Turquie : caïques impériaux, maquettes, instruments et objets retraçant l’histoire de la marine ottomane.", "env. 8–12 € · à vérifier", "1–1 h 30", "20 min vers Yıldız"],
@@ -113,7 +113,7 @@ const districts = [
   {
     id: "ortakoy", name: "Ortaköy", subtitle: "Mosquée, palais et rive du Bosphore", coords: [41.0474, 29.0268],
     intro: "Un quartier compact, particulièrement agréable en fin d’après-midi pour la lumière sur le Bosphore et le pont.",
-    routes: [["Uber", "25–45 min · env. 11–17 €"], ["Bus", "Depuis Eminönü ou Beşiktaş · 35–55 min · env. 0,85–1,70 €"], ["Ferry", "Eminönü → Ortaköy selon horaires · env. 1–2 €"], ["Tram + bus", "T1 jusqu’à Kabataş puis bus · 40–55 min · env. 1,70 €"]],
+    routes: [["Uber", "25–45 min · env. 11–17 €"], ["Bus", "Depuis Eminönü ou Beşiktaş · 35–55 min · env. 0,75–1,50 €"], ["Ferry", "Eminönü → Ortaköy selon horaires · env. 1–2 €"], ["Tram + bus", "T1 jusqu’à Kabataş puis bus · 40–55 min · env. 1,50 €"]],
     monuments: [
       ["+++", "Mosquée d’Ortaköy", "La Büyük Mecidiye Camii fut achevée en 1854 par la famille Balyan. Son décor néobaroque et sa situation au bord de l’eau en font une icône du Bosphore.", "gratuit", "25–40 min", "10 min vers Çırağan"],
       ["+", "Place et marché d’Ortaköy", "Petite place vivante tournée vers le Bosphore, entourée de cafés, d’étals d’artisans et de vendeurs de kumpir.", "gratuit", "45–75 min", "10 min vers Çırağan"],
@@ -124,9 +124,9 @@ const districts = [
   {
     id: "kadikoy", name: "Kadıköy & Moda", subtitle: "La rive asiatique et ses marchés", coords: [40.9905, 29.0255],
     intro: "Peu de grands monuments, mais l’Istanbul du quotidien : marché, cafés, librairies et promenade de Moda. La traversée en ferry fait partie de la visite.",
-    routes: [["Ferry", "Marche ou tram jusqu’à Eminönü puis 20–25 min de traversée · env. 0,85 €"], ["Marmaray", "Yenikapı → Ayrılık Çeşmesi puis M4 · 30–40 min · env. 1,70 €"], ["Uber", "30–45 min par le pont · env. 12–18 €"], ["À pied", "Non réaliste : rive asiatique"]],
+    routes: [["Ferry", "Marche ou tram jusqu’à Eminönü puis 20–25 min de traversée · env. 0,75 €"], ["Marmaray", "Yenikapı → Ayrılık Çeşmesi puis M4 · 30–40 min · env. 1,50 €"], ["Uber", "30–45 min par le pont · env. 12–18 €"], ["À pied", "Non réaliste : rive asiatique"]],
     monuments: [
-      ["+++", "Traversée en ferry", "Vingt minutes sur la mer de Marmara, avec la vieille ville, la tour de Léandre et la gare de Haydarpaşa en toile de fond. Prenez un çay et un simit à bord.", "env. 0,85 € avec l’Istanbulkart", "20–25 min", "8 min vers le marché"],
+      ["+++", "Traversée en ferry", "Vingt minutes sur la mer de Marmara, avec la vieille ville, la tour de Léandre et la gare de Haydarpaşa en toile de fond. Prenez un çay et un simit à bord.", "env. 0,75 € avec l’Istanbulkart", "20–25 min", "8 min vers le marché"],
       ["++", "Marché de Kadıköy", "Ruelles de poissonniers, primeurs, fromagers, épiciers et traiteurs de mezzés autour de Güneşlibahçe Sokak.", "gratuit", "45–75 min", "5 min vers Surp Takavor"],
       ["+", "Église arménienne Surp Takavor", "Église arménienne du XIXe siècle, discrète au milieu du quartier commerçant.", "gratuit", "15 min", "15 min vers Moda"],
       ["++", "Moda et son front de mer", "Quartier résidentiel aux maisons anciennes, avec une longue promenade et des cafés face aux îles des Princes et au coucher du soleil.", "gratuit", "45–75 min", null],
@@ -136,28 +136,28 @@ const districts = [
   {
     id: "uskudar", name: "Üsküdar", subtitle: "Mosquées de Sinan et coucher de soleil", coords: [41.0262, 29.0150],
     intro: "Un quartier conservateur et paisible, à visiter en fin d’après-midi pour la vue sur la péninsule historique au coucher du soleil.",
-    routes: [["Marmaray", "Yenikapı ou Sirkeci → Üsküdar · 15–25 min · env. 0,85 €"], ["Ferry", "Eminönü → Üsküdar · 15 min · env. 0,85 €"], ["Uber", "25–40 min · env. 10–15 €"], ["À pied", "Non réaliste : rive asiatique"]],
+    routes: [["Marmaray", "Yenikapı ou Sirkeci → Üsküdar · 15–25 min · env. 0,75 €"], ["Ferry", "Eminönü → Üsküdar · 15 min · env. 0,75 €"], ["Uber", "25–40 min · env. 10–15 €"], ["À pied", "Non réaliste : rive asiatique"]],
     monuments: [
       ["++", "Mosquée Mihrimah Sultan", "Construite par Mimar Sinan pour la fille de Soliman vers 1548, face à l’embarcadère.", "gratuit", "20–30 min", "7 min vers Şemsi Paşa"],
       ["++", "Mosquée Şemsi Paşa", "Petite mosquée de Sinan de 1580 au ras de l’eau, l’une des plus délicates de la ville.", "gratuit", "15–20 min", "20 min vers Salacak"],
-      ["+++", "Promenade de Salacak & tour de Léandre", "Le quai le plus photographié au coucher du soleil, face à la tour sur son îlot et à la silhouette de Sainte-Sophie et Topkapı.", "vue gratuite · visite de la tour avec bateau, tarif à vérifier", "45 min–1 h 30", null]
+      ["+++", "Promenade de Salacak & tour de Léandre", "Le quai le plus photographié au coucher du soleil, face à la tour sur son îlot et à la silhouette de Sainte-Sophie et Topkapı.", "vue gratuite · visite de la tour 27 € + bateau 110 TL depuis Salacak ou Karaköy", "45 min–1 h 30", null]
     ]
   },
   {
     id: "eyup", name: "Eyüp & Pierre Loti", subtitle: "Lieu saint et panorama sur la Corne d’Or", coords: [41.0478, 28.9337],
     intro: "Le lieu de pèlerinage le plus vénéré d’Istanbul. Atmosphère recueillie : tenue couvrante et discrétion, surtout le vendredi.",
-    routes: [["Uber", "15–25 min · env. 5–8 €"], ["Tramway T5", "Depuis Cibali → Eyüpsultan · 20–30 min · env. 0,85 €"], ["Bus", "Le long de la Corne d’Or · 25–35 min · env. 0,85 €"], ["Ferry", "Lignes de la Corne d’Or, horaires limités"]],
+    routes: [["Uber", "15–25 min · env. 5–8 €"], ["Tramway T5", "Depuis Cibali → Eyüpsultan · 20–30 min · env. 0,75 €"], ["Bus", "Le long de la Corne d’Or · 25–35 min · env. 0,75 €"], ["Ferry", "Lignes de la Corne d’Or, horaires limités"]],
     monuments: [
       ["+++", "Mosquée Eyüp Sultan", "Élevée sur la tombe d’Abu Ayyub al-Ansari, compagnon du Prophète. Les sultans y ceignaient l’épée lors de leur avènement.", "gratuit", "30–45 min", "10 min vers le cimetière"],
       ["++", "Cimetière historique", "Stèles ottomanes sculptées de turbans et de fleurs, sur la colline qui monte vers Pierre Loti.", "gratuit", "20–30 min", "Téléphérique vers Pierre Loti"],
-      ["+++", "Colline Pierre Loti", "Café et belvédère nommés d’après l’écrivain français, avec une vue plongeante sur la Corne d’Or. Montée en téléphérique.", "vue gratuite · téléphérique env. 0,85 €", "45 min–1 h", null],
+      ["+++", "Colline Pierre Loti", "Café et belvédère nommés d’après l’écrivain français, avec une vue plongeante sur la Corne d’Or. Montée en téléphérique.", "vue gratuite · téléphérique env. 0,75 €", "45 min–1 h", null],
       ["++", "Sainte-Marie-des-Blachernes", "Église orthodoxe bâtie sur la source sacrée où l’on gardait l’icône de la Vierge protectrice de Constantinople. À Ayvansaray, entre Balat et Eyüp.", "gratuit · offrande bienvenue", "20–30 min", null]
     ]
   },
   {
     id: "bebek", name: "Arnavutköy & Bebek", subtitle: "Les villages du Bosphore", coords: [41.0720, 29.0435],
     intro: "Maisons ottomanes en bois, promenade au ras de l’eau et déjeuner de poisson : la meilleure fin de séjour, sans musée.",
-    routes: [["Uber", "35–55 min · env. 13–20 €"], ["Tram + bus", "T1 jusqu’à Kabataş puis bus 22/25E · 50–65 min · env. 1,70 €"], ["Ferry", "Lignes du Bosphore, horaires limités"], ["À pied", "Non réaliste"]],
+    routes: [["Uber", "35–55 min · env. 13–20 €"], ["Tram + bus", "T1 jusqu’à Kabataş puis bus 22/25E · 50–65 min · env. 1,50 €"], ["Ferry", "Lignes du Bosphore, horaires limités"], ["À pied", "Non réaliste"]],
     monuments: [
       ["++", "Maisons ottomanes d’Arnavutköy", "Yalı et maisons en bois aux façades colorées, témoins de l’ancien village grec du Bosphore.", "gratuit", "30–45 min", "25–30 min à pied vers Bebek"],
       ["++", "Église des Taxiarques (Taksiarhis)", "Grande église grecque orthodoxe d’Arnavutköy, avec sa source sacrée (ayazma) dans un passage souterrain.", "gratuit", "15–20 min", null],
@@ -198,7 +198,7 @@ const extras = {
     food: [["Karaköy Güllüoğlu", "La référence du baklava à la pistache depuis 1949", "5–12 €"], ["Karaköy Lokantası", "Mezzés, poissons et plats du jour dans une salle de faïences turquoise", "20–40 €"]]
   },
   beyoglu: {
-    tips: ["İstiklal est très fréquentée le soir et le week-end : surveillez sacs et téléphones.", "Le Musée de Pera est gratuit le vendredi de 18h à 22h."],
+    tips: ["İstiklal est très fréquentée le soir et le week-end : surveillez sacs et téléphones.", "Le Musée de Pera est gratuit le vendredi de 18h à 22h, et l’était aussi le 29 octobre 2025 : à vérifier pour 2026."],
     food: [["Hacı Abdullah", "Plats ottomans mijotés et compotes maison depuis 1888", "20–40 €"], ["Çiçek Pasajı", "Meyhanes : mezzés et rakı dans un passage du XIXe siècle", "25–45 €"]]
   },
   besiktas: {
