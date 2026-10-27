@@ -1,8 +1,21 @@
 const map = L.map("map", { zoomControl: true, attributionControl: true }).setView([41.024, 28.982], 13);
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+const baseTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: "© OpenStreetMap contributors"
 }).addTo(map);
+// Plan des transports en commun : métro, tram, funiculaires, Marmaray et ferries avec leurs stations.
+const transitTiles = L.tileLayer("https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png", {
+  maxZoom: 18,
+  attribution: "Transports : © memomaps.de (CC BY-SA), données © OpenStreetMap contributors"
+});
+let transitOn = false;
+function toggleTransit(on) {
+  transitOn = on;
+  if (on) { map.removeLayer(baseTiles); transitTiles.addTo(map); } else { map.removeLayer(transitTiles); baseTiles.addTo(map); }
+  document.querySelector("#transitButton").classList.toggle("on", on);
+  document.querySelector("#transitButton").setAttribute("aria-pressed", on);
+  document.querySelector("#transitBox").hidden = !on;
+}
 
 drawGroups(map, L);
 
@@ -456,3 +469,6 @@ map.fitBounds(L.latLngBounds([HOTEL.coords, ...districts.map(d => d.coords)]), {
   paddingBottomRight: [54, 100],
   maxZoom: 12
 });
+
+document.querySelector("#transitButton").addEventListener("click", () => toggleTransit(!transitOn));
+document.querySelector("#transitClose").addEventListener("click", () => { document.querySelector("#transitBox").hidden = true; });

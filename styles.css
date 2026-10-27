@@ -261,3 +261,17 @@ details.leisure h3, details.leisure ul { margin-left: 6px; margin-right: 6px; }
 /* Bouton d'écoute des mots turcs */
 .say { border: 0; background: #efe7f6; border-radius: 999px; width: 36px; height: 36px; font-size: 17px; cursor: pointer; vertical-align: middle; margin-left: 4px; }
 .say.saying { background: #7b4fa0; }
+
+/* Plan des transports */
+.transit-btn { border: 0; border-radius: 999px; padding: 5px 11px; background: var(--deep); color: #fff; font: inherit; font-size: 11px; font-weight: 800; cursor: pointer; }
+.transit-btn.on { background: var(--gold); color: #1d1608; }
+.transit-box { position: fixed; z-index: 650; left: 12px; right: 12px; top: 150px; max-width: 360px; background: rgba(255,253,248,.97); border-radius: 18px; padding: 14px 16px; box-shadow: 0 12px 30px rgba(15,38,28,.22); font-size: 13px; line-height: 1.4; }
+.transit-box[hidden] { display: none; }
+.transit-box > b { font-size: 15px; }
+.transit-box ul { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 6px; }
+.transit-box li { display: grid; grid-template-columns: 10px 1fr; gap: 0 8px; align-items: start; }
+.transit-box li i { width: 10px; height: 10px; border-radius: 3px; margin-top: 4px; }
+.transit-box li b { display: inline; margin-right: 4px; }
+.transit-box p { margin: 6px 0; color: #55665d; }
+.transit-box a { color: var(--deep); font-weight: 800; text-decoration: none; }
+.transit-x { position: absolute; top: 8px; right: 8px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #efeae0; font-size: 20px; cursor: pointer; }

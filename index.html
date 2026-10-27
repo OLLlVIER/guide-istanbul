@@ -12,8 +12,8 @@
   <meta property="og:url" content="https://olllvier.github.io/guide-istanbul/">
   <meta name="apple-mobile-web-app-title" content="Istanbul 2026">
   <link rel="preconnect" href="https://tile.openstreetmap.org">
-  <link rel="stylesheet" href="leaflet.css?v=10271935">
-  <link rel="stylesheet" href="styles.css?v=10271935">
+  <link rel="stylesheet" href="leaflet.css?v=10271938">
+  <link rel="stylesheet" href="styles.css?v=10271938">
 </head>
 <body>
   <header class="topbar">
@@ -30,6 +30,20 @@
       <span><i class="hotel-dot"></i> Hôtel</span>
       <span><i class="district-dot"></i> Quartier</span>
       <span class="lvl r3">+++</span><span class="lvl r2">++</span><span class="lvl r1">+</span>
+      <button type="button" id="transitButton" class="transit-btn" aria-pressed="false">🚇 Métro & tram</button>
+    </aside>
+    <aside id="transitBox" class="transit-box" hidden>
+      <button type="button" id="transitClose" class="transit-x" aria-label="Masquer la liste des lignes">×</button>
+      <b>Les lignes utiles</b>
+      <ul>
+        <li><i style="background:#1f6fb5"></i><span><b>T1 tram</b> Sultanahmet · Gülhane · Sirkeci · Eminönü · Karaköy · Kabataş</span></li>
+        <li><i style="background:#2f8f3a"></i><span><b>M2 métro</b> Vezneciler (près de l’hôtel) · Haliç · Şişhane (Galata) · Taksim</span></li>
+        <li><i style="background:#8b5a2b"></i><span><b>F1 funiculaire</b> Kabataş ↔ Taksim, 2 min</span></li>
+        <li><i style="background:#c43c3c"></i><span><b>Marmaray</b> Sirkeci ↔ Üsküdar sous le Bosphore</span></li>
+        <li><i style="background:#0a8ea0"></i><span><b>Ferries</b> Eminönü, Karaköy, Beşiktaş ↔ Kadıköy, Üsküdar</span></li>
+      </ul>
+      <p>Une seule carte Istanbulkart pour tout. Zoomez pour voir les stations ; touchez à nouveau « Métro & tram » pour revenir au plan normal.</p>
+      <a href="https://www.google.com/maps/@41.015,28.975,13z/data=!5m1!1e2" target="_blank" rel="noreferrer">Itinéraires en transports dans Google Maps ↗</a>
     </aside>
 
     <section id="districtList" class="district-list" aria-hidden="true">
@@ -288,8 +302,8 @@
     </ul>
   </section>
 
-  <script src="leaflet.js?v=10271935"></script>
-  <script src="data.js?v=10271935"></script>
-  <script src="app.js?v=10271935"></script>
+  <script src="leaflet.js?v=10271938"></script>
+  <script src="data.js?v=10271938"></script>
+  <script src="app.js?v=10271938"></script>
 </body>
 </html>
