@@ -32,7 +32,7 @@
     .nav { position: sticky; top: 0; z-index: 50; background: rgba(20,36,29,.94); backdrop-filter: blur(10px); color: white; }
     .nav .wrap { display: flex; align-items: center; gap: 22px; height: 58px; overflow-x: auto; white-space: nowrap; }
     .nav b { font-family: var(--display); font-weight: 400; font-size: 20px; margin-right: auto; }
-    .nav a { text-decoration: none; font-weight: 700; font-size: 14px; opacity: .85; }
+    .nav a { text-decoration: none; font-weight: 700; font-size: 13px; opacity: .85; white-space: nowrap; }
     .nav a:hover, .nav a:focus-visible { opacity: 1; color: var(--gold); }
     .nav .map-link { background: var(--gold); color: var(--ink); padding: 7px 14px; border-radius: 999px; opacity: 1; }
 
@@ -134,6 +134,9 @@
     .lex { background: white; border-radius: 16px; padding: 14px 16px; border-left: 5px solid var(--z3); display: flex; flex-direction: column; gap: 3px; box-shadow: 0 6px 18px rgba(20,40,30,.08); }
     .lex b { font: 400 22px/1.15 "DM Serif Display", serif; } .lex span { font-size: 13px; color: #6b7d74; font-weight: 700; } .lex em { font-style: normal; font-weight: 700; }
     @media (max-width: 1000px) { .lexgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .plinks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .pl { display: inline-flex; align-items: center; min-height: 30px; padding: 0 11px; border-radius: 999px; border: 1px solid rgba(21,40,32,.18); background: #fff; color: #152820; font: 700 12px/1 "Source Sans 3", sans-serif; text-decoration: none; cursor: pointer; }
+    .pl.copy { background: #152820; color: #fff; border-color: #152820; }
     .flash { background: var(--ink); color: white; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
     .flash .label { grid-row: span 2; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 800; color: var(--gold); padding-top: 4px; }
     .flash ol { margin: 0; padding-left: 22px; font-weight: 700; display: grid; gap: 4px; }

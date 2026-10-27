@@ -70,10 +70,10 @@ function openDistrict(id) {
     ${typeof HOTSPOTS !== "undefined" && HOTSPOTS[district.id] ? `<section class="hotspots"><h3>Branché et à ne pas manquer</h3><ul>${HOTSPOTS[district.id].go.concat(HOTSPOTS[district.id].see).map(t => `<li>${t}</li>`).join("")}</ul></section>` : ""}
     <section class="monuments">
       <h3>À voir — par ordre de priorité</h3>
-      ${district.monuments.map(m => `<article class="monument"><span class="rank ${rankClass(m[0])}">${m[0]}</span><h4>${m[1]}</h4><p>${m[2]}</p><div class="facts"><span>${m[3]}</span><span>${m[4]}</span></div>${m[5] ? `<p class="walk-next">À pied : ${m[5]}</p>` : ""}</article>`).join("")}
+      ${district.monuments.map(m => `<article class="monument"><span class="rank ${rankClass(m[0])}">${m[0]}</span><h4>${m[1]}</h4><p>${m[2]}</p><div class="facts"><span>${m[3]}</span><span>${m[4]}</span></div>${placeLinks(m[1])}${m[5] ? `<p class="walk-next">À pied : ${m[5]}</p>` : ""}</article>`).join("")}
     </section>
     ${LEISURE[district.id] ? `<details class="leisure"><summary>Jardins, cafés et autres plaisirs</summary><h3>Jardins & cafés</h3><ul>${LEISURE[district.id].green.map(t => `<li>${t}</li>`).join("")}</ul><h3>Autres plaisirs</h3><ul>${LEISURE[district.id].more.map(t => `<li>${t}</li>`).join("")}</ul></details>` : ""}
-    ${extras[district.id] ? `<section class="food"><h3>Où manger</h3>${extras[district.id].food.map(f => `<div class="food-item"><div><b>${f[0]}</b><span>${f[1]}</span><a class="maps-link" href="${mapsLink(f[0])}" target="_blank" rel="noreferrer">Itinéraire ↗</a></div><em class="price ${priceBand(f[2]).cls}">${f[2]}</em></div>`).join("")}</section>` : ""}
+    ${extras[district.id] ? `<section class="food"><h3>Où manger</h3>${extras[district.id].food.map(f => `<div class="food-item"><div><b>${f[0]}</b><span>${f[1]}</span>${placeLinks(f[0])}</div><em class="price ${priceBand(f[2]).cls}">${f[2]}</em></div>`).join("")}</section>` : ""}
     <section class="photos"><h3>Mes photos</h3>
       <p class="photos-note">Elles restent sur cet appareil, dans ce navigateur.</p>
       <label class="add-photo" for="photoInput">+ Ajouter des photos</label>
@@ -181,7 +181,7 @@ let restoFilter = "all";
 const mapsLink = name => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + " Istanbul")}`;
 function restoRow(name, desc, price, extra) {
   const band = priceBand(price);
-  return `<div class="food-item"><div><b>${name}</b><span>${desc}</span>${extra || ""}<a class="maps-link" href="${mapsLink(name)}" target="_blank" rel="noreferrer">Itinéraire ↗</a></div><em class="price ${band.cls}">${band.label} · ${price}</em></div>`;
+  return `<div class="food-item"><div><b>${name}</b><span>${desc}</span>${extra || ""}${placeLinks(name)}</div><em class="price ${band.cls}">${band.label} · ${price}</em></div>`;
 }
 const keep = price => restoFilter === "all" || priceBand(price).cls === restoFilter;
 function renderRestos() {

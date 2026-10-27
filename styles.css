@@ -244,3 +244,8 @@ details.leisure h3, details.leisure ul { margin-left: 6px; margin-right: 6px; }
 .hotspots { margin: 0 15px 18px; padding: 15px 16px; border-radius: 17px; background: linear-gradient(135deg, #2b1d3a, #4a2a4f); color: #f3e9f5; }
 .hotspots h3 { margin: 0 0 9px; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: #ffb3c7; }
 .hotspots ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13px; line-height: 1.45; }
+
+.plinks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.pl { display: inline-flex; align-items: center; min-height: 30px; padding: 0 11px; border-radius: 999px; border: 1px solid rgba(21,40,32,.18); background: #fff; color: #152820; font: 700 12px/1 inherit; font-family: inherit; text-decoration: none; cursor: pointer; }
+.pl.copy { background: #152820; color: #fff; border-color: #152820; }
+.pl:focus-visible { outline: 3px solid #d4a24c; outline-offset: 2px; }

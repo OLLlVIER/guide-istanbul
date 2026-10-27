@@ -472,3 +472,83 @@ const HOTSPOTS = {
   ]
  }
 };
+
+
+// Nom local (turc) de chaque lieu : c’est ce nom qu’Uber, Waze et Google Maps reconnaissent.
+const LOCAL_NAMES = {
+ "Sainte-Sophie": "Ayasofya",
+ "Citerne-Basilique": "Yerebatan Sarnıcı",
+ "Mosquée Bleue": "Sultanahmet Camii",
+ "Hippodrome & obélisques": "Sultanahmet Meydanı",
+ "Petite Sainte-Sophie (Saints-Serge-et-Bacchus)": "Küçük Ayasofya Camii",
+ "Palais de Topkapı": "Topkapı Sarayı",
+ "Musées archéologiques": "İstanbul Arkeoloji Müzeleri",
+ "Parc de Gülhane": "Gülhane Parkı",
+ "Sainte-Irène": "Aya İrini",
+ "Bazar aux épices": "Mısır Çarşısı",
+ "Nouvelle Mosquée": "Yeni Cami",
+ "Mosquée Rüstem Paşa": "Rüstem Paşa Camii",
+ "Gare de Sirkeci": "Sirkeci Garı",
+ "Grand Bazar": "Kapalıçarşı",
+ "Mosquée Nuruosmaniye": "Nuruosmaniye Camii",
+ "Mosquée & place Beyazıt": "Beyazıt Meydanı",
+ "Sahaflar Çarşısı": "Sahaflar Çarşısı",
+ "Mosquée Süleymaniye": "Süleymaniye Camii",
+ "Mosquée Kalenderhane": "Kalenderhane Camii",
+ "Aqueduc de Valens": "Bozdoğan Kemeri",
+ "Mosquée Zeyrek": "Zeyrek Camii",
+ "Église Saint-Étienne-des-Bulgares": "Sveti Stefan Kilisesi",
+ "Rues de Balat": "Balat",
+ "Mosquée Kariye / ancienne Chora": "Kariye Camii",
+ "Sainte-Marie-des-Mongols": "Kanlı Kilise Fener",
+ "Tour de Galata": "Galata Kulesi",
+ "Galata Mevlevihanesi": "Galata Mevlevihanesi Müzesi",
+ "SALT Galata": "SALT Galata",
+ "Mosquée Kılıç Ali Paşa": "Kılıç Ali Paşa Camii",
+ "Église Saint-Pierre-et-Saint-Paul": "Sen Piyer Kilisesi Galata",
+ "Avenue İstiklal & passages": "İstiklal Caddesi",
+ "Église Saint-Antoine-de-Padoue": "Sent Antuan Kilisesi",
+ "Musée de Pera": "Pera Müzesi",
+ "Place Taksim & monument de la République": "Taksim Meydanı",
+ "Cathédrale du Saint-Esprit": "Sen Esprit Katedrali",
+ "Église Sainte-Trinité (Aya Triada)": "Aya Triada Kilisesi",
+ "Palais de Dolmabahçe": "Dolmabahçe Sarayı",
+ "Musée naval": "Deniz Müzesi Beşiktaş",
+ "Palais de Yıldız": "Yıldız Sarayı",
+ "Mosquée d’Ortaköy": "Ortaköy Camii",
+ "Place et marché d’Ortaköy": "Ortaköy Meydanı",
+ "Palais de Çırağan — extérieur": "Çırağan Sarayı",
+ "Parc Yıldız": "Yıldız Parkı",
+ "Traversée en ferry": "Eminönü İskelesi",
+ "Marché de Kadıköy": "Kadıköy Çarşı",
+ "Église arménienne Surp Takavor": "Surp Takavor Kilisesi",
+ "Moda et son front de mer": "Moda Sahili",
+ "Gare de Haydarpaşa — extérieur": "Haydarpaşa Garı",
+ "Mosquée Mihrimah Sultan": "Mihrimah Sultan Camii Üsküdar",
+ "Mosquée Şemsi Paşa": "Şemsi Paşa Camii",
+ "Promenade de Salacak & tour de Léandre": "Kız Kulesi Salacak",
+ "Mosquée Eyüp Sultan": "Eyüp Sultan Camii",
+ "Cimetière historique": "Eyüp Sultan Mezarlığı",
+ "Colline Pierre Loti": "Piyer Loti Tepesi",
+ "Sainte-Marie-des-Blachernes": "Ayvansaray Meryem Ana Ayazması",
+ "Maisons ottomanes d’Arnavutköy": "Arnavutköy",
+ "Église des Taxiarques (Taksiarhis)": "Taksiyarhis Kilisesi Arnavutköy",
+ "Promenade du Bosphore": "Arnavutköy Sahil",
+ "Village et parc de Bebek": "Bebek Parkı",
+ "Hammam Mihrimah Sultan": "Mihrimah Sultan Hamamı Edirnekapı"
+};
+
+// Boutons « Copier » (à coller dans Uber), Maps et Waze pour une adresse.
+function placeLinks(name) {
+  const q = (LOCAL_NAMES[name] || name) + ", İstanbul";
+  const e = encodeURIComponent(q);
+  const a = q.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+  return `<span class="plinks"><button type="button" class="pl copy" data-copy="${a}">Copier</button><a class="pl" href="https://www.google.com/maps/search/?api=1&query=${e}" target="_blank" rel="noreferrer">Maps</a><a class="pl" href="https://waze.com/ul?q=${e}&navigate=yes" target="_blank" rel="noreferrer">Waze</a></span>`;
+}
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-copy]"); if (!b) return;
+  const text = b.dataset.copy;
+  try { await navigator.clipboard.writeText(text); b.textContent = "Copié !"; }
+  catch (err) { window.prompt("Copie ce texte :", text); }
+  setTimeout(() => { b.textContent = "Copier"; }, 1600);
+});
