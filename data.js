@@ -296,3 +296,27 @@ const FLASH = {
 const photoUrl = (f, w = 900) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=${w}`;
 const photoPage = f => `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(f)}`;
 
+
+
+// Quartiers qui se font ensemble dans la même sortie (affichés en cercles clairs sur les cartes).
+const GROUPS = [
+  { ids: ["sultanahmet", "topkapi"], label: "Sultanahmet + Topkapı : une journée à pied", color: "#b2452c" },
+  { ids: ["eminonu", "beyazit", "suleymaniye"], label: "Bazars et Süleymaniye : une journée à pied depuis l’hôtel", color: "#d0763f" },
+  { ids: ["fener-balat", "eyup"], label: "Fener, Balat et Eyüp : une demi-journée le long de la Corne d’Or", color: "#2f6f9f" },
+  { ids: ["galata", "beyoglu"], label: "Galata et Beyoğlu : un après-midi et une soirée", color: "#7b4fa0" },
+  { ids: ["besiktas", "ortakoy", "bebek"], label: "Le Bosphore : Dolmabahçe, Ortaköy puis Bebek", color: "#1f7a72" },
+  { ids: ["kadikoy", "uskudar"], label: "Côté Asie : Kadıköy puis coucher de soleil à Üsküdar", color: "#c07a12" }
+];
+
+// Trace un cercle clair autour de chaque groupe de quartiers.
+function drawGroups(map, L) {
+  const R = 6371000, rad = x => x * Math.PI / 180;
+  const dist = (a, b) => 2 * R * Math.asin(Math.sqrt(Math.sin(rad(b[0] - a[0]) / 2) ** 2 + Math.cos(rad(a[0])) * Math.cos(rad(b[0])) * Math.sin(rad(b[1] - a[1]) / 2) ** 2));
+  GROUPS.forEach(g => {
+    const pts = g.ids.map(id => districts.find(d => d.id === id).coords);
+    const c = [pts.reduce((s, p) => s + p[0], 0) / pts.length, pts.reduce((s, p) => s + p[1], 0) / pts.length];
+    const r = Math.max(...pts.map(p => dist(c, p))) + 550;
+    L.circle(c, { radius: r, color: g.color, weight: 2, dashArray: "6 6", fillColor: g.color, fillOpacity: 0.12, interactive: true })
+      .addTo(map).bindTooltip(g.label, { sticky: true });
+  });
+}

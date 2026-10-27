@@ -4,6 +4,8 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "© OpenStreetMap contributors"
 }).addTo(map);
 
+drawGroups(map, L);
+
 function pinIcon(type, label, name) {
   return L.divIcon({
     className: "custom-marker",
