@@ -239,3 +239,4 @@ details.leisure h3, details.leisure ul { margin-left: 6px; margin-right: 6px; }
 .district-button span { display: block; }
 .district-buttons { grid-template-columns: 1fr 1fr; }
 @media (max-width: 360px) { .district-buttons { grid-template-columns: 1fr; } }
+.guide-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 13px; border-radius: 999px; background: var(--gold); color: #1d1608; font-size: 11px; font-weight: 800; text-decoration: none; box-shadow: 0 8px 25px rgba(15,38,28,.18); }

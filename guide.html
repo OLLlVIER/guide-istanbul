@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Istanbul · Octobre 2026 — le guide</title>
+  <meta name="description" content="Le guide complet d’Istanbul au départ du Mövenpick Old Town : 14 quartiers en photos, où manger, coutumes et repères sur la Turquie.">
+  <meta property="og:title" content="Istanbul · Octobre 2026 — le guide">
+  <meta property="og:description" content="14 quartiers en photos, où manger, coutumes et repères sur la Turquie.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@400;600;700;800&display=swap">
+  <style>
+    /* Mise en page : magazine en colonnes larges, une couleur par zone de la ville, encarts colorés. */
+    :root {
+      --ink: #14241d; --paper: #fbf7ef; --sand: #f3ead8; --line: rgba(20,36,29,.12);
+      --muted: #55665d; --gold: #d4a24c;
+      --z1: #b2452c; --z2: #2f6f9f; --z3: #7b4fa0; --z4: #1f7a72; --z5: #c07a12;
+      --r3: #b2452c; --r2: #2f7a52; --r1: #8a8f8c;
+      --display: "DM Serif Display", Georgia, serif;
+      --body: "Source Sans 3", -apple-system, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.6 var(--body); }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+
+    /* Barre de navigation */
+    .nav { position: sticky; top: 0; z-index: 50; background: rgba(20,36,29,.94); backdrop-filter: blur(10px); color: white; }
+    .nav .wrap { display: flex; align-items: center; gap: 22px; height: 58px; overflow-x: auto; white-space: nowrap; }
+    .nav b { font-family: var(--display); font-weight: 400; font-size: 20px; margin-right: auto; }
+    .nav a { text-decoration: none; font-weight: 700; font-size: 14px; opacity: .85; }
+    .nav a:hover, .nav a:focus-visible { opacity: 1; color: var(--gold); }
+    .nav .map-link { background: var(--gold); color: var(--ink); padding: 7px 14px; border-radius: 999px; opacity: 1; }
+
+    /* Ouverture */
+    .hero { position: relative; min-height: 520px; display: flex; align-items: flex-end; color: white; background: #233 center / cover no-repeat; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,16,.15) 30%, rgba(10,20,16,.85)); }
+    .hero .wrap { position: relative; z-index: 1; padding-block: 60px 48px; width: 100%; }
+    .kicker { text-transform: uppercase; letter-spacing: .16em; font-size: 13px; font-weight: 800; color: var(--gold); }
+    .hero h1 { margin: 8px 0 12px; font: 400 clamp(46px, 7vw, 92px)/.98 var(--display); text-wrap: balance; }
+    .hero p { max-width: 640px; font-size: 20px; margin: 0; }
+    .credit { position: absolute; right: 12px; bottom: 8px; z-index: 2; font-size: 11px; opacity: .7; }
+
+    section.block { padding-block: 64px; }
+    h2.title { font: 400 clamp(34px, 4.4vw, 52px)/1.05 var(--display); margin: 6px 0 14px; text-wrap: balance; }
+    .lead { font-size: 20px; color: var(--muted); max-width: 760px; margin: 0 0 30px; }
+
+    /* Le séjour */
+    .days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .day { border-radius: 18px; padding: 18px; color: white; min-height: 200px; }
+    .day:nth-child(1) { background: var(--z5); } .day:nth-child(2) { background: var(--z1); } .day:nth-child(3) { background: var(--z3); } .day:nth-child(4) { background: var(--z2); } .day:nth-child(5) { background: var(--z4); }
+    .day .date { font: 400 30px/1 var(--display); }
+    .day .dow { text-transform: uppercase; letter-spacing: .12em; font-size: 12px; font-weight: 800; opacity: .85; }
+    .day h3 { margin: 12px 0 6px; font-size: 18px; line-height: 1.25; }
+    .day p { margin: 0; font-size: 14.5px; line-height: 1.45; opacity: .95; }
+    .infos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+    .info { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+    .info h3 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+    .info p { margin: 0; font-size: 15.5px; }
+
+    /* Zones et quartiers */
+    .zone { padding-block: 26px 10px; }
+    .zone-head { display: flex; align-items: baseline; gap: 16px; border-top: 6px solid var(--zc); padding-top: 18px; margin-bottom: 18px; flex-wrap: wrap; }
+    .zone-head h2 { margin: 0; font: 400 clamp(32px, 4vw, 46px)/1 var(--display); color: var(--zc); }
+    .zone-head p { margin: 0; color: var(--muted); font-size: 17px; max-width: 640px; }
+    .district { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0; background: white; border-radius: 22px; overflow: hidden; margin-bottom: 26px; box-shadow: 0 10px 30px rgba(20,36,29,.08); }
+    .district .photo { position: relative; min-height: 360px; background: var(--sand) center / cover no-repeat; }
+    .district .photo .num { position: absolute; left: 18px; top: 18px; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--zc); color: white; font: 400 26px/1 var(--display); }
+    .district .photo .credit { color: white; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+    .district .body { padding: 28px 32px 30px; min-width: 0; }
+    .district h3.name { margin: 0; font: 400 38px/1.05 var(--display); }
+    .district .punch { margin: 6px 0 16px; font-size: 19px; font-weight: 700; color: var(--zc); }
+    .district .story { margin: 0 0 18px; color: #34463d; font-size: 16px; }
+    .flash { background: var(--ink); color: white; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
+    .flash .label { grid-row: span 2; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 800; color: var(--gold); padding-top: 4px; }
+    .flash ol { margin: 0; padding-left: 22px; font-weight: 700; display: grid; gap: 4px; }
+    .flash .tip { margin: 0; font-size: 14.5px; color: #d3ddd6; }
+    .sights { margin: 0 0 18px; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .sights li { display: grid; grid-template-columns: 46px 1fr auto; gap: 12px; align-items: start; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+    .sights li:last-child { border-bottom: 0; }
+    .rank { display: inline-grid; place-items: center; height: 24px; border-radius: 999px; color: white; font-size: 12px; font-weight: 800; }
+    .rank.r3 { background: var(--r3); } .rank.r2 { background: var(--r2); } .rank.r1 { background: var(--r1); }
+    .sights b { display: block; font-size: 16.5px; }
+    .sights span.d { font-size: 14.5px; color: var(--muted); line-height: 1.45; }
+    .sights .price { font-size: 13px; font-weight: 800; color: var(--ink); background: var(--sand); padding: 4px 9px; border-radius: 999px; white-space: nowrap; max-width: 210px; white-space: normal; text-align: center; }
+    .boxes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .box { border-radius: 14px; padding: 14px 16px; font-size: 14.5px; line-height: 1.5; }
+    .box h4 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    .box ul { margin: 0; padding-left: 18px; }
+    .box.eat { background: #fbe6dc; } .box.eat h4 { color: #94351f; }
+    .box.know { background: #f7ecd2; } .box.know h4 { color: #8a5a17; }
+    .box.pause { background: #e1efe8; } .box.pause h4 { color: #1f6a4c; }
+    .go { margin-top: 14px; font-size: 14px; color: var(--muted); }
+    .go b { color: var(--ink); }
+
+    /* Manger */
+    .food-band { background: var(--z1); color: white; }
+    .food-band .lead { color: #fde8df; }
+    .dishes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .dish { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 16px; padding: 16px; }
+    .dish b { font: 400 22px/1.1 var(--display); display: block; margin-bottom: 4px; }
+    .dish span { font-size: 14.5px; line-height: 1.45; }
+    .near { margin-top: 30px; background: white; color: var(--ink); border-radius: 20px; padding: 22px 24px; }
+    .near h3 { margin: 0 0 12px; font: 400 28px/1.1 var(--display); }
+    .near table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    .near th, .near td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .near th { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+    .near td:nth-child(3), .near td:nth-child(4) { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .table-scroll { overflow-x: auto; }
+
+    /* Règles */
+    .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .rule-col { border-radius: 20px; padding: 22px 24px; }
+    .rule-col.do { background: #e1efe8; } .rule-col.dont { background: #f8e0d8; }
+    .rule-col h3 { margin: 0 0 10px; font: 400 30px/1 var(--display); }
+    .rule-col.do h3 { color: #1f6a4c; } .rule-col.dont h3 { color: #94351f; }
+    .rule-col ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 15.5px; }
+
+    /* Chiffres */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .stat { background: white; border-radius: 18px; padding: 18px; border-top: 6px solid var(--sc); }
+    .stat .v { font: 400 34px/1.05 var(--display); color: var(--sc); }
+    .stat .l { font-size: 14.5px; color: var(--muted); margin-top: 4px; }
+    .politics { margin-top: 18px; background: var(--sand); border-radius: 18px; padding: 18px 22px; font-size: 15.5px; }
+    .timeline { margin-top: 18px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .timeline div { border-left: 4px solid var(--z2); padding: 4px 0 4px 12px; font-size: 14.5px; }
+    .timeline b { display: block; font: 400 24px/1 var(--display); color: var(--z2); }
+
+    /* Fin */
+    .end { position: relative; color: white; background: #233 center / cover no-repeat; }
+    .end::after { content: ""; position: absolute; inset: 0; background: rgba(10,20,16,.72); }
+    .end .wrap { position: relative; z-index: 1; padding-block: 80px; }
+    .end p { max-width: 720px; font-size: 19px; }
+    .end .sign { font: italic 400 28px/1.2 var(--display); color: var(--gold); }
+    footer { padding-block: 34px; font-size: 13.5px; color: var(--muted); }
+    footer a { color: var(--z2); }
+
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+    @media (max-width: 1000px) {
+      .days { grid-template-columns: repeat(2, 1fr); } .infos, .boxes { grid-template-columns: 1fr; }
+      .dishes, .stats { grid-template-columns: repeat(2, 1fr); } .timeline { grid-template-columns: repeat(2, 1fr); }
+      .district { grid-template-columns: 1fr; } .district .photo { min-height: 260px; }
+    }
+    @media (max-width: 620px) {
+      body { font-size: 16px; } .days, .dishes, .rules, .stats, .timeline { grid-template-columns: 1fr; }
+      .district .body { padding: 22px 18px; } .flash { grid-template-columns: 1fr; } .flash .label { grid-row: auto; }
+      .sights li { grid-template-columns: 40px 1fr; } .sights .price { grid-column: 2; justify-self: start; }
+      .hero { min-height: 440px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Sommaire">
+    <div class="wrap">
+      <b>Istanbul · Octobre 2026</b>
+      <a href="#sejour">Le séjour</a>
+      <a href="#quartiers">Les quartiers</a>
+      <a href="#manger">Manger</a>
+      <a href="#regles">Règles d’or</a>
+      <a href="#turquie">La Turquie</a>
+      <a class="map-link" href="./">Carte et carnet</a>
+    </div>
+  </nav>
+
+  <main id="guide"></main>
+
+  <script src="data.js"></script>
+  <script src="guide.js"></script>
+</body>
+</html>
