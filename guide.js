@@ -305,3 +305,7 @@ districts.forEach(d => districtSlides(d).then(slides => {
   const host = document.querySelector(`#${CSS.escape(d.id)} .photo`);
   buildCarousel(host, slides);
 }).catch(() => {}));
+
+// Des liens partout où un lieu est nommé.
+autoPlaceLinks(document, ".icard, .hcard, .pcard, .top10 li > div", false);
+autoPlaceLinks(document, ".hot li, .box.pause li", true);

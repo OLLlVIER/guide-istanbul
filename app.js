@@ -96,6 +96,7 @@ function openDistrict(id) {
   currentDistrict = district.id;
   document.querySelector("#photoInput").addEventListener("change", e => addPhotos(district.id, e.target.files));
   renderPhotos(district.id);
+  autoPlaceLinks(detailSheet, ".hotspots li, .leisure li", true);
   const hero = document.querySelector("#detailSheet .hero-photo");
   if (hero) districtSlides(district).then(slides => {
     if (currentDistrict !== district.id || !hero.isConnected) return;
@@ -472,3 +473,7 @@ map.fitBounds(L.latLngBounds([HOTEL.coords, ...districts.map(d => d.coords)]), {
 
 document.querySelector("#transitButton").addEventListener("click", () => toggleTransit(!transitOn));
 document.querySelector("#transitClose").addEventListener("click", () => { document.querySelector("#transitBox").hidden = true; });
+
+// Liens Maps dans les infos pratiques (incontournables, tables, hammams, insolite, vues et parcs).
+autoPlaceLinks(document.querySelector("#infoSheet"), "[data-places] td:first-child, [data-places] li", true);
+document.querySelectorAll("#infoSheet [data-inline-places]").forEach(linkInlinePlaces);

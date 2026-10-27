@@ -549,11 +549,19 @@ const LOCAL_NAMES = {
 };
 
 // Boutons « Copier » (à coller dans Uber), Maps et Waze pour une adresse.
+// Sites officiels (billetterie, horaires), vérifiés.
+const OFFICIAL = {
+  "Palais de Topkapı": "https://muze.gov.tr/", "Palais de Topkapı et Harem": "https://muze.gov.tr/", "Musées archéologiques": "https://muze.gov.tr/",
+  "Citerne-Basilique": "https://yerebatan.com/", "Palais de Dolmabahçe": "https://www.millisaraylar.gov.tr/", "Palais de Yıldız": "https://www.millisaraylar.gov.tr/",
+  "Tour de Galata": "https://galatakulesi.gov.tr/", "Musée de Pera": "https://www.peramuseum.org/",
+  "Traversée en ferry": "https://www.sehirhatlari.istanbul/en", "Croisière sur le Bosphore": "https://www.sehirhatlari.istanbul/en"
+};
 function placeLinks(name) {
   const q = (LOCAL_NAMES[name] || name) + ", İstanbul";
   const e = encodeURIComponent(q);
   const a = q.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-  return `<span class="plinks"><button type="button" class="pl copy" data-copy="${a}">Copier</button><a class="pl" href="https://www.google.com/maps/search/?api=1&query=${e}" target="_blank" rel="noreferrer">Maps</a><a class="pl" href="https://waze.com/ul?q=${e}&navigate=yes" target="_blank" rel="noreferrer">Waze</a></span>`;
+  const site = OFFICIAL[name] ? `<a class="pl site" href="${OFFICIAL[name]}" target="_blank" rel="noreferrer">Site officiel</a>` : "";
+  return `<span class="plinks"><button type="button" class="pl copy" data-copy="${a}">Copier</button><a class="pl" href="https://www.google.com/maps/search/?api=1&query=${e}" target="_blank" rel="noreferrer">Maps</a><a class="pl" href="https://waze.com/ul?q=${e}&navigate=yes" target="_blank" rel="noreferrer">Waze</a>${site}</span>`;
 }
 document.addEventListener("click", async e => {
   const b = e.target.closest("[data-copy]"); if (!b) return;
@@ -666,4 +674,51 @@ function buildCarousel(host, slides) {
   car.querySelector(".car-prev").addEventListener("click", e => { e.stopPropagation(); go(cur() - 1); });
   car.querySelector(".car-next").addEventListener("click", e => { e.stopPropagation(); go(cur() + 1); });
   track.addEventListener("scroll", () => { const i = cur(); car.querySelectorAll(".car-dots i").forEach((d, k) => d.classList.toggle("on", k === i)); }, { passive: true });
+}
+
+
+// Ajoute des liens Maps / Waze partout où un lieu est nommé sans en avoir.
+const NOT_PLACES = /^(Hammams?|Hammam local|Vie nocturne|Quartier étudiant|Une traversée en ferry.*|Les derviches tourneurs|Le kahve falı|Shopping|Sport|Football|Musique|Concert|Nuit|Sortir|Courir|Running|Thé|Café|Le bon plan|À l’hôtel|Les plus belles vues|Parcs|Bon à savoir|Astuce)$/i;
+function placeNameOf(el) {
+  const b = el.querySelector(":scope > b, :scope > div > b, :scope > .hhead > b, :scope > strong");
+  if (b && !NOT_PLACES.test(b.textContent.trim())) return b.textContent.trim().replace(/\s*\(.*$/, "");
+  const t = el.textContent.trim(), i = t.indexOf(" : ");
+  if (i < 2) return null;
+  let n = t.slice(0, i).trim();
+  if (/^Hammams?( local)?$/i.test(n)) n = t.slice(i + 3).split(/[,(:;]/)[0].trim();
+  if (NOT_PLACES.test(n) || n.length > 45) return null;
+  return n;
+}
+function autoPlaceLinks(root, selector, compact) {
+  if (!root) return;
+  root.querySelectorAll(selector).forEach(el => {
+    if (el.querySelector(".plinks, .mini-maps") || el.dataset.linked) return;
+    const n = placeNameOf(el); if (!n) return;
+    el.dataset.linked = "1";
+    if (compact) {
+      const q = encodeURIComponent((LOCAL_NAMES[n] || n) + ", İstanbul");
+      el.insertAdjacentHTML("beforeend", ` <a class="mini-maps" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noreferrer">📍 Maps</a>` + (OFFICIAL[n] ? ` <a class="mini-maps" href="${OFFICIAL[n]}" target="_blank" rel="noreferrer">Site officiel</a>` : ""));
+    } else el.insertAdjacentHTML("beforeend", placeLinks(n));
+  });
+}
+// « Nom (quartier) · Nom (quartier) » : chaque nom devient un lien vers Google Maps.
+function linkInlinePlaces(p) {
+  if (!p || p.dataset.linked) return; p.dataset.linked = "1";
+  const b = p.querySelector("b"); if (!b) return;
+  let node = b.nextSibling; const parts = [];
+  while (node) { parts.push(node.textContent); const nx = node.nextSibling; node.remove(); node = nx; }
+  const text = parts.join("").replace(/^\s*:\s*/, "");
+  const html = text.split(" · ").map(item => {
+    const m = item.match(/^([^(]+?)(\s*\(.*)?$/); if (!m) return item;
+    const q = encodeURIComponent(m[1].trim() + ", İstanbul");
+    return `<a class="inline-place" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noreferrer">${m[1].trim()}</a>${m[2] || ""}`;
+  }).join(" · ");
+  b.insertAdjacentHTML("afterend", " : " + html);
+}
+if (!document.getElementById("autolinks-style")) {
+  const st = document.createElement("style"); st.id = "autolinks-style";
+  st.textContent = `.mini-maps{display:inline-block;margin-left:4px;padding:1px 8px;border-radius:999px;border:1px solid rgba(21,40,32,.2);background:#fff;color:#2e6b57;font-size:11px;font-weight:800;text-decoration:none;white-space:nowrap;vertical-align:middle}
+.inline-place{color:#2e6b57;font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+.pl.site{background:#d4a24c;border-color:#d4a24c;color:#1d1608}`;
+  document.head.appendChild(st);
 }
