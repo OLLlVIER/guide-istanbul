@@ -129,6 +129,11 @@
     .hot h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #ffb3c7; }
     .hot ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: 14.5px; line-height: 1.45; }
     @media (max-width: 700px) { .hot { grid-template-columns: 1fr; } }
+    .xw { font-size: 13px; font-weight: 700; color: #d6e0d9; } .xw i { font-style: normal; color: #d4a24c; }
+    .lexgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .lex { background: white; border-radius: 16px; padding: 14px 16px; border-left: 5px solid var(--z3); display: flex; flex-direction: column; gap: 3px; box-shadow: 0 6px 18px rgba(20,40,30,.08); }
+    .lex b { font: 400 22px/1.15 "DM Serif Display", serif; } .lex span { font-size: 13px; color: #6b7d74; font-weight: 700; } .lex em { font-style: normal; font-weight: 700; }
+    @media (max-width: 1000px) { .lexgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     .flash { background: var(--ink); color: white; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
     .flash .label { grid-row: span 2; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 800; color: var(--gold); padding-top: 4px; }
     .flash ol { margin: 0; padding-left: 22px; font-weight: 700; display: grid; gap: 4px; }
@@ -218,6 +223,7 @@
       <a href="#essentiel">Top 10</a>
       <a href="#healthy">Restos & photos</a>
       <a href="#hammams">Hammams</a>
+      <a href="#lexique">Lexique</a>
       <a href="#regles">Règles d’or</a>
       <a href="#turquie">La Turquie</a>
       <a class="map-link" href="./">Carte et carnet</a>
