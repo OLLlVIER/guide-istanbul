@@ -66,7 +66,11 @@
       <label class="add-photo" for="gpxInput">+ Importer un tracé (.gpx)</label>
       <input id="gpxInput" type="file" accept=".gpx,application/gpx+xml,application/xml,text/xml" multiple hidden>
       <p id="gpxStatus" class="photos-note" aria-live="polite"></p>
-      <p class="photos-note">Les photos ajoutées dans les fiches se placent sur la carte : à leur position GPS si l’iPhone l’a conservée, sinon sur le tracé à l’heure de la prise de vue. Tout reste sur cet appareil.</p>
+      <p><b>Vos photos rangées toutes seules :</b> choisissez d’un coup toutes les photos de la journée. Chacune va à la fin du quartier où elle a été prise (parmi les 14), d’après sa position GPS ou, à défaut, le tracé du jour à l’heure de la photo.</p>
+      <label class="add-photo" for="autoPhotoInput">+ Ajouter mes photos</label>
+      <input id="autoPhotoInput" type="file" accept="image/*" multiple hidden>
+      <p id="autoStatus" class="photos-note" aria-live="polite"></p>
+      <p class="photos-note">Conseil : importez d’abord le tracé du jour, puis les photos. Tout reste sur cet appareil.</p>
     </div>
     <div id="journalDays"></div>
   </section>

@@ -270,3 +270,30 @@ render();
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 window.scrollTo(0, 0);
+
+// Mes photos : celles ajoutées dans le carnet de la carte apparaissent à la fin de chaque quartier (même appareil, même navigateur).
+(function () {
+  if (!("indexedDB" in window)) return;
+  const req = indexedDB.open("guide-istanbul-photos", 2);
+  req.onupgradeneeded = e => {
+    const db = req.result;
+    if (e.oldVersion < 1) db.createObjectStore("photos", { keyPath: "id", autoIncrement: true }).createIndex("district", "district");
+    if (e.oldVersion < 2) { db.createObjectStore("tracks", { keyPath: "id", autoIncrement: true }); db.createObjectStore("notes", { keyPath: "day" }); }
+  };
+  req.onsuccess = () => {
+    let all;
+    try { all = req.result.transaction("photos").objectStore("photos").getAll(); } catch (e) { return; }
+    all.onsuccess = () => {
+      const photos = (all.result || []).filter(p => p.district).sort((a, b) => (a.taken || a.date) - (b.taken || b.date));
+      districts.forEach(d => {
+        const mine = photos.filter(p => p.district === d.id);
+        const card = document.getElementById(d.id);
+        if (!mine.length || !card) return;
+        const box = document.createElement("div");
+        box.className = "myphotos";
+        box.innerHTML = `<h4>Mes photos · ${mine.length}</h4><div class="mygrid">${mine.map(p => { const u = URL.createObjectURL(p.blob); return `<a href="${u}" target="_blank" rel="noopener"><img src="${u}" alt="Photo personnelle, ${d.name}" loading="lazy"></a>`; }).join("")}</div>`;
+        card.appendChild(box);
+      });
+    };
+  };
+})();

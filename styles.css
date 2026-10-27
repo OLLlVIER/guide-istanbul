@@ -249,3 +249,10 @@ details.leisure h3, details.leisure ul { margin-left: 6px; margin-right: 6px; }
 .pl { display: inline-flex; align-items: center; min-height: 30px; padding: 0 11px; border-radius: 999px; border: 1px solid rgba(21,40,32,.18); background: #fff; color: #152820; font: 700 12px/1 inherit; font-family: inherit; text-decoration: none; cursor: pointer; }
 .pl.copy { background: #152820; color: #fff; border-color: #152820; }
 .pl:focus-visible { outline: 3px solid #d4a24c; outline-offset: 2px; }
+
+/* Photos à classer dans le carnet */
+.journal-day.pending { border-left: 4px solid var(--gold, #d4a24c); }
+.classify { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.classify figure { margin: 0; }
+.classify img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; display: block; }
+.classify select { width: 100%; margin-top: 6px; min-height: 40px; font: inherit; font-size: 16px; border-radius: 10px; border: 1px solid rgba(20,36,29,.2); background: white; }

@@ -75,7 +75,7 @@ function openDistrict(id) {
     ${LEISURE[district.id] ? `<details class="leisure"><summary>Jardins, cafés et autres plaisirs</summary><h3>Jardins & cafés</h3><ul>${LEISURE[district.id].green.map(t => `<li>${t}</li>`).join("")}</ul><h3>Autres plaisirs</h3><ul>${LEISURE[district.id].more.map(t => `<li>${t}</li>`).join("")}</ul></details>` : ""}
     ${extras[district.id] ? `<section class="food"><h3>Où manger</h3>${extras[district.id].food.map(f => `<div class="food-item"><div><b>${f[0]}</b><span>${f[1]}</span>${placeLinks(f[0])}</div><em class="price ${priceBand(f[2]).cls}">${f[2]}</em></div>`).join("")}</section>` : ""}
     <section class="photos"><h3>Mes photos</h3>
-      <p class="photos-note">Elles restent sur cet appareil, dans ce navigateur.</p>
+      <p class="photos-note">Astuce : dans « Mon carnet », ajoutez toutes les photos de la journée d’un coup, elles se rangent seules dans le bon quartier. Elles restent sur cet appareil.</p>
       <label class="add-photo" for="photoInput">+ Ajouter des photos</label>
       <input id="photoInput" type="file" accept="image/*" multiple hidden>
       <div id="photoGrid" class="photo-grid"></div>
@@ -156,6 +156,66 @@ async function addPhotos(district, files) {
   } catch (e) { alertPhotos("Impossible d’enregistrer : espace de stockage indisponible dans ce navigateur."); }
   renderPhotos(district);
 }
+// Classement automatique : le quartier le plus proche de l'endroit où la photo a été prise.
+// Points de repère des lieux principaux de chaque quartier (pour départager Sainte-Sophie et Topkapı, par exemple).
+const ANCHORS = {
+  sultanahmet: [[41.0086, 28.9802], [41.0054, 28.9768], [41.0084, 28.9779], [41.0057, 28.9752], [41.0027, 28.9741]],
+  topkapi: [[41.0115, 28.9834], [41.0117, 28.9813], [41.0129, 28.9810], [41.0093, 28.9813]],
+  eminonu: [[41.0166, 28.9706], [41.0167, 28.9719], [41.0177, 28.9694], [41.0150, 28.9766]],
+  beyazit: [[41.0107, 28.9681], [41.0103, 28.9717], [41.0103, 28.9640]],
+  suleymaniye: [[41.0162, 28.9640], [41.0153, 28.9584], [41.0156, 28.9555], [41.0198, 28.9573]],
+  "fener-balat": [[41.0310, 28.9390], [41.0299, 28.9496], [41.0287, 28.9488], [41.0317, 28.9468]],
+  eyup: [[41.0480, 28.9337], [41.0555, 28.9336], [41.0386, 28.9424]],
+  galata: [[41.0256, 28.9742], [41.0228, 28.9770], [41.0262, 28.9802]],
+  beyoglu: [[41.0335, 28.9777], [41.0369, 28.9850], [41.0339, 28.9763], [41.0319, 28.9748]],
+  besiktas: [[41.0391, 29.0004], [41.0428, 29.0076], [41.0496, 29.0128]],
+  ortakoy: [[41.0473, 29.0270], [41.0437, 29.0157], [41.0486, 29.0154]],
+  bebek: [[41.0770, 29.0434], [41.0672, 29.0430]],
+  kadikoy: [[40.9925, 29.0230], [40.9897, 29.0260], [40.9830, 29.0260]],
+  uskudar: [[41.0270, 29.0158], [41.0211, 29.0041], [41.0244, 29.0109]]
+};
+function nearestDistrict(pos) {
+  if (!pos) return null;
+  let best = null, dist = 2000; // au-delà de 2 km de tout repère : à classer à la main
+  districts.forEach(d => (ANCHORS[d.id] || []).concat([d.coords]).forEach(a => { const m = haversine(pos, a); if (m < dist) { dist = m; best = d.id; } }));
+  return best;
+}
+function posFromTracks(taken, tracks) {
+  let best = null, gap = 20 * 60 * 1000;
+  tracks.forEach(tr => tr.points.forEach(p => { if (p[2] && Math.abs(p[2] - taken) < gap) { gap = Math.abs(p[2] - taken); best = [p[0], p[1]]; } }));
+  return best;
+}
+async function addPhotosAuto(files) {
+  const status = document.querySelector("#autoStatus");
+  status.textContent = "Classement en cours…";
+  let tracks = [];
+  try { tracks = await dbRun("readonly", st => st.getAll(), "tracks") || []; } catch (e) {}
+  const count = {}; let waiting = 0;
+  try {
+    for (const f of files) {
+      const meta = await readExif(f);
+      const taken = meta.taken || f.lastModified || Date.now();
+      const pos = isFinite(meta.lat) ? [meta.lat, meta.lon] : posFromTracks(taken, tracks);
+      const district = nearestDistrict(pos);
+      const blob = await shrink(f);
+      await dbRun("readwrite", st => st.add({ district: district || "", auto: true, blob, date: Date.now(), taken, lat: meta.lat, lon: meta.lon }));
+      if (district) count[district] = (count[district] || 0) + 1; else waiting++;
+    }
+  } catch (e) { status.textContent = "Impossible d’enregistrer : espace de stockage indisponible dans ce navigateur."; return; }
+  const done = Object.entries(count).map(([id, n]) => `${districts.find(d => d.id === id).name} (${n})`);
+  status.textContent = (done.length ? `Rangées : ${done.join(", ")}.` : "") + (waiting ? ` ${waiting} photo(s) à classer ci-dessous.` : "");
+  await drawJournal(); renderJournal();
+}
+// Après l'import d'un tracé, on range les photos qui attendaient faute de position.
+async function reclassify() {
+  let photos = [], tracks = [];
+  try { photos = await dbRun("readonly", st => st.getAll()) || []; tracks = await dbRun("readonly", st => st.getAll(), "tracks") || []; } catch (e) { return; }
+  for (const ph of photos.filter(p => p.auto && !p.district && !isFinite(p.lat))) {
+    const d = nearestDistrict(posFromTracks(ph.taken, tracks));
+    if (d) { ph.district = d; await dbRun("readwrite", st => st.put(ph)); }
+  }
+}
+
 function alertPhotos(msg) { const g = document.querySelector("#photoGrid"); if (g) g.innerHTML = `<p class="photos-note">${msg}</p>`; }
 async function renderPhotos(district) {
   const grid = document.querySelector("#photoGrid");
@@ -241,6 +301,7 @@ async function importTracks(files) {
     } catch (e) { /* fichier illisible : ignoré */ }
   }
   status.textContent = ok ? `${ok} tracé(s) importé(s).` : "Aucun tracé lisible : choisissez un fichier .gpx.";
+  if (ok) await reclassify();
   await drawJournal(); renderJournal();
 }
 
@@ -320,8 +381,12 @@ async function drawJournal() {
 async function renderJournal() {
   const { tracks, photos, notes, days } = await loadJournal();
   const box = document.querySelector("#journalDays");
-  if (!days.length) { box.innerHTML = `<p class="photos-note">Votre carnet est vide. Importez le tracé de votre première journée ou ajoutez des photos depuis la fiche d’un quartier.</p>`; return; }
-  box.innerHTML = days.map((day, i) => {
+  const loose = photos.filter(p => !p.district);
+  const pending = loose.length ? `<article class="journal-day pending"><header><h3>À classer (${loose.length})</h3></header>
+    <p class="photos-note">Pas de position pour ces photos : choisissez le quartier, ou importez le tracé GPS du jour pour qu’elles se rangent seules.</p>
+    <div class="classify">${loose.map(p => `<figure><img src="${URL.createObjectURL(p.blob)}" alt="Photo à classer"><select data-classify="${p.id}" aria-label="Quartier de cette photo"><option value="">Quartier…</option>${districts.map((d, i) => `<option value="${d.id}">${i + 1}. ${d.name}</option>`).join("")}</select></figure>`).join("")}</div></article>` : "";
+  if (!days.length && !pending) { box.innerHTML = `<p class="photos-note">Votre carnet est vide. Importez le tracé de votre première journée ou ajoutez des photos depuis la fiche d’un quartier.</p>`; return; }
+  box.innerHTML = pending + days.map((day, i) => {
     const color = DAY_COLORS[i % DAY_COLORS.length];
     const dayTracks = tracks.filter(t => t.day === day);
     const pts = dayTracks.flatMap(t => t.points);
@@ -342,6 +407,14 @@ async function renderJournal() {
 }
 
 document.querySelector("#journalButton").addEventListener("click", () => { renderJournal(); sheetState(journalSheet); });
+document.querySelector("#autoPhotoInput").addEventListener("change", e => { addPhotosAuto([...e.target.files]); e.target.value = ""; });
+document.querySelector("#journalDays").addEventListener("change", async e => {
+  const sel = e.target.closest("[data-classify]"); if (!sel || !sel.value) return;
+  const all = await dbRun("readonly", st => st.getAll());
+  const ph = all.find(p => p.id === Number(sel.dataset.classify)); if (!ph) return;
+  ph.district = sel.value; await dbRun("readwrite", st => st.put(ph));
+  await drawJournal(); renderJournal();
+});
 document.querySelector("#gpxInput").addEventListener("change", e => importTracks(e.target.files));
 document.querySelector("#journalDays").addEventListener("input", e => {
   const ta = e.target.closest(".day-note"); if (!ta) return;
