@@ -77,6 +77,17 @@ const districts = [
     ]
   },
   {
+    id: "eyup", name: "Eyüp & Pierre Loti", subtitle: "Lieu saint et panorama sur la Corne d’Or", coords: [41.0478, 28.9337],
+    intro: "Le lieu de pèlerinage le plus vénéré d’Istanbul. Atmosphère recueillie : tenue couvrante et discrétion, surtout le vendredi.",
+    routes: [["Uber", "15–25 min · env. 5–8 €"], ["Tramway T5", "Depuis Cibali → Eyüpsultan · 20–30 min · env. 0,75 €"], ["Bus", "Le long de la Corne d’Or · 25–35 min · env. 0,75 €"], ["Ferry", "Lignes de la Corne d’Or, horaires limités"]],
+    monuments: [
+      ["+++", "Mosquée Eyüp Sultan", "Élevée sur la tombe d’Abu Ayyub al-Ansari, compagnon du Prophète. Les sultans y ceignaient l’épée lors de leur avènement.", "gratuit", "30–45 min", "10 min vers le cimetière"],
+      ["++", "Cimetière historique", "Stèles ottomanes sculptées de turbans et de fleurs, sur la colline qui monte vers Pierre Loti.", "gratuit", "20–30 min", "Téléphérique vers Pierre Loti"],
+      ["+++", "Colline Pierre Loti", "Café et belvédère nommés d’après l’écrivain français, avec une vue plongeante sur la Corne d’Or. Montée en téléphérique.", "vue gratuite · téléphérique env. 0,75 €", "45 min–1 h", null],
+      ["++", "Sainte-Marie-des-Blachernes", "Église orthodoxe bâtie sur la source sacrée où l’on gardait l’icône de la Vierge protectrice de Constantinople. À Ayvansaray, entre Balat et Eyüp.", "gratuit · offrande bienvenue", "20–30 min", null]
+    ]
+  },
+  {
     id: "galata", name: "Galata & Karaköy", subtitle: "Génois, banques et création", coords: [41.0257, 28.9741],
     intro: "Commencez par la tour avant l’affluence, puis descendez vers Karaköy à travers escaliers, passages et cafés.",
     routes: [["Uber", "10–20 min · env. 5–8 €"], ["Métro", "M2 Vezneciler → Şişhane · 15–22 min · env. 0,75 €"], ["Tramway", "T1 vers Karaköy · 18–25 min · env. 0,75 €"], ["À pied", "28–35 min via le pont de Galata"]],
@@ -123,6 +134,17 @@ const districts = [
     ]
   },
   {
+    id: "bebek", name: "Arnavutköy & Bebek", subtitle: "Les villages du Bosphore", coords: [41.0720, 29.0435],
+    intro: "Maisons ottomanes en bois, promenade au ras de l’eau et déjeuner de poisson : la meilleure fin de séjour, sans musée.",
+    routes: [["Uber", "35–55 min · env. 13–20 €"], ["Tram + bus", "T1 jusqu’à Kabataş puis bus 22/25E · 50–65 min · env. 1,50 €"], ["Ferry", "Lignes du Bosphore, horaires limités"], ["À pied", "Non réaliste"]],
+    monuments: [
+      ["++", "Maisons ottomanes d’Arnavutköy", "Yalı et maisons en bois aux façades colorées, témoins de l’ancien village grec du Bosphore.", "gratuit", "30–45 min", "25–30 min à pied vers Bebek"],
+      ["++", "Église des Taxiarques (Taksiarhis)", "Grande église grecque orthodoxe d’Arnavutköy, avec sa source sacrée (ayazma) dans un passage souterrain.", "gratuit", "15–20 min", null],
+      ["+++", "Promenade du Bosphore", "Le quai entre Arnavutköy et Bebek longe l’eau au plus près, avec la forteresse de Rumeli Hisarı en vue.", "gratuit", "30–45 min", null],
+      ["++", "Village et parc de Bebek", "Petite baie élégante, cafés, glaciers et la mosquée de Bebek au bord du parc.", "gratuit", "30–45 min", null]
+    ]
+  },
+  {
     id: "kadikoy", name: "Kadıköy & Moda", subtitle: "La rive asiatique et ses marchés", coords: [40.9905, 29.0255],
     intro: "Peu de grands monuments, mais l’Istanbul du quotidien : marché, cafés, librairies et promenade de Moda. La traversée en ferry fait partie de la visite.",
     routes: [["Ferry", "Marche ou tram jusqu’à Eminönü puis 20–25 min de traversée · env. 0,75 €"], ["Marmaray", "Yenikapı → Ayrılık Çeşmesi puis M4 · 30–40 min · env. 1,50 €"], ["Uber", "30–45 min par le pont · env. 12–18 €"], ["À pied", "Non réaliste : rive asiatique"]],
@@ -142,28 +164,6 @@ const districts = [
       ["++", "Mosquée Mihrimah Sultan", "Construite par Mimar Sinan pour la fille de Soliman vers 1548, face à l’embarcadère.", "gratuit", "20–30 min", "7 min vers Şemsi Paşa"],
       ["++", "Mosquée Şemsi Paşa", "Petite mosquée de Sinan de 1580 au ras de l’eau, l’une des plus délicates de la ville.", "gratuit", "15–20 min", "20 min vers Salacak"],
       ["+++", "Promenade de Salacak & tour de Léandre", "Le quai le plus photographié au coucher du soleil, face à la tour sur son îlot et à la silhouette de Sainte-Sophie et Topkapı.", "vue gratuite · visite de la tour 27 € + bateau 110 TL depuis Salacak ou Karaköy", "45 min–1 h 30", null]
-    ]
-  },
-  {
-    id: "eyup", name: "Eyüp & Pierre Loti", subtitle: "Lieu saint et panorama sur la Corne d’Or", coords: [41.0478, 28.9337],
-    intro: "Le lieu de pèlerinage le plus vénéré d’Istanbul. Atmosphère recueillie : tenue couvrante et discrétion, surtout le vendredi.",
-    routes: [["Uber", "15–25 min · env. 5–8 €"], ["Tramway T5", "Depuis Cibali → Eyüpsultan · 20–30 min · env. 0,75 €"], ["Bus", "Le long de la Corne d’Or · 25–35 min · env. 0,75 €"], ["Ferry", "Lignes de la Corne d’Or, horaires limités"]],
-    monuments: [
-      ["+++", "Mosquée Eyüp Sultan", "Élevée sur la tombe d’Abu Ayyub al-Ansari, compagnon du Prophète. Les sultans y ceignaient l’épée lors de leur avènement.", "gratuit", "30–45 min", "10 min vers le cimetière"],
-      ["++", "Cimetière historique", "Stèles ottomanes sculptées de turbans et de fleurs, sur la colline qui monte vers Pierre Loti.", "gratuit", "20–30 min", "Téléphérique vers Pierre Loti"],
-      ["+++", "Colline Pierre Loti", "Café et belvédère nommés d’après l’écrivain français, avec une vue plongeante sur la Corne d’Or. Montée en téléphérique.", "vue gratuite · téléphérique env. 0,75 €", "45 min–1 h", null],
-      ["++", "Sainte-Marie-des-Blachernes", "Église orthodoxe bâtie sur la source sacrée où l’on gardait l’icône de la Vierge protectrice de Constantinople. À Ayvansaray, entre Balat et Eyüp.", "gratuit · offrande bienvenue", "20–30 min", null]
-    ]
-  },
-  {
-    id: "bebek", name: "Arnavutköy & Bebek", subtitle: "Les villages du Bosphore", coords: [41.0720, 29.0435],
-    intro: "Maisons ottomanes en bois, promenade au ras de l’eau et déjeuner de poisson : la meilleure fin de séjour, sans musée.",
-    routes: [["Uber", "35–55 min · env. 13–20 €"], ["Tram + bus", "T1 jusqu’à Kabataş puis bus 22/25E · 50–65 min · env. 1,50 €"], ["Ferry", "Lignes du Bosphore, horaires limités"], ["À pied", "Non réaliste"]],
-    monuments: [
-      ["++", "Maisons ottomanes d’Arnavutköy", "Yalı et maisons en bois aux façades colorées, témoins de l’ancien village grec du Bosphore.", "gratuit", "30–45 min", "25–30 min à pied vers Bebek"],
-      ["++", "Église des Taxiarques (Taksiarhis)", "Grande église grecque orthodoxe d’Arnavutköy, avec sa source sacrée (ayazma) dans un passage souterrain.", "gratuit", "15–20 min", null],
-      ["+++", "Promenade du Bosphore", "Le quai entre Arnavutköy et Bebek longe l’eau au plus près, avec la forteresse de Rumeli Hisarı en vue.", "gratuit", "30–45 min", null],
-      ["++", "Village et parc de Bebek", "Petite baie élégante, cafés, glaciers et la mosquée de Bebek au bord du parc.", "gratuit", "30–45 min", null]
     ]
   }
 ];
