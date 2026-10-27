@@ -201,3 +201,5 @@ body.has-sheet .source-note { opacity: 0; pointer-events: none; }
 .leisure h3 + ul + h3 { margin-top: 14px; }
 .leisure ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
 .leisure li { color: #33463d; font-size: 12.5px; line-height: 1.5; }
+.info-sheet table { display: block; overflow-x: auto; }
+.info-sheet td:first-child { white-space: nowrap; }
