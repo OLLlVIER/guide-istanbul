@@ -110,4 +110,106 @@ search.addEventListener('input',render);filter.addEventListener('change',render)
   show(active);
   if (!entered) { document.body.classList.remove("entered"); history.replaceState(null, "", "#accueil"); }
 })();
+</script><style id="mobile-best">
+/* Version téléphone uniquement : l'affichage ordinateur n'est pas modifié. */
+.lk-short,.more-btn{display:none}
+@media(max-width:900px){
+  html{-webkit-text-size-adjust:100%}
+  body{background:#f7f6f4}
+  /* Accueil */
+  #welcome{padding:0;align-items:stretch;background:#fff}
+  .welcome-card{border:0;border-radius:0;box-shadow:none;padding:34px 20px calc(30px + env(safe-area-inset-bottom))}
+  .welcome-card h1{font-size:44px;letter-spacing:-1.8px}
+  .welcome-sub{font-size:17px;margin-bottom:22px}
+  .welcome-letter{font-size:16px;line-height:1.7}
+  .welcome-btn{width:100%;padding:18px;font-size:16px;border-radius:14px}
+  .tile{min-height:88px;padding:14px 12px;font-size:14.5px;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:anywhere}
+  /* En-tête du chapitre */
+  .main{padding:18px 16px calc(40px + env(safe-area-inset-bottom))}
+  .hero h1{font-size:32px;letter-spacing:-1px;margin:8px 0 6px;line-height:1.1}
+  .hero p{font-size:15px;line-height:1.5;margin:0}
+  .eyebrow{font-size:11px}
+  .intro-toggle{margin:16px 0 10px;padding:14px 16px}
+  .notice{font-size:13px;padding:12px 14px;margin:10px 0 0;line-height:1.5}
+  .toolbar{gap:8px;margin:16px 0 6px;flex-direction:column}
+  .toolbar input,.toolbar select{font-size:16px;width:100%!important;min-width:0!important;max-width:none!important;flex:none!important;padding:13px 14px}
+  .links a:nth-child(even):last-child{grid-column:1 / -1}
+  .chapter-intro{font-size:16px;line-height:1.65}
+  .chapter-intro p.rule{display:none}
+  .section-title{font-size:20px;margin:26px 0 12px}
+  /* Fiches */
+  .cards{gap:14px}
+  .card{padding:18px 16px;border-radius:18px}
+  .card-top{align-items:flex-start}
+  .card h3{font-size:19px;line-height:1.25}
+  .card h3 .t-sub{display:block;font-size:14px;font-weight:600;color:#827d89;letter-spacing:0;margin-top:4px}
+  .card h3 .t-sep{display:none}
+  .pill{display:none}
+  .card .activity p{font-size:15.5px;line-height:1.6;color:#45414d;margin:8px 0 0}
+  .card-label{margin-top:16px}
+  .card .source-body,.card .card-label:not(.contact-label):not(:first-child){display:none}
+  .card .activity .card-label{display:block}
+  .card.open .source-body,.card.open .card-label{display:block}
+  .card .source-body{font-size:15px;line-height:1.65}
+  .more-btn{display:flex;width:100%;justify-content:center;align-items:center;gap:6px;margin-top:14px;border:0;border-radius:12px;background:#f3f0f5;color:#4d4757;font:inherit;font-weight:700;font-size:14px;padding:12px;cursor:pointer}
+  .links{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .links a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:10px 8px;font-size:14px;border-radius:12px;line-height:1.2}
+  .links a.primary{grid-column:1 / -1}
+  .links a .lk-full{display:none}
+  .links a .lk-short{display:inline}
+  .chap-nav button{padding:16px}
+}
+</style><script id="mobile-best-js">
+(function(){
+  // Libellés courts pour les boutons de liens (affichés seulement sur téléphone).
+  function label(a){
+    var h = a.getAttribute("href") || "";
+    if (/^mailto:/.test(h)) return "✉️ Écrire un e-mail";
+    if (/^tel:/.test(h)) return "📞 Appeler";
+    if (/google\.[a-z.]+\/maps/.test(h)) return "📍 Voir sur le plan";
+    if (/google\.[a-z.]+\/search/.test(h)) return "🔎 Rechercher";
+    if (/career|jobs|job|recrut|recruit|seek\.|indeed\.|workday|taleo|jobvite|pageup|apply|employmenthero|recruitee|vacanc|work-with|join/i.test(h)) return "💼 Offres d’emploi";
+    var d = h.replace(/^https?:\/\/(www\.)?/, "").split(/[\/?#]/)[0];
+    return (a.classList.contains("primary") ? "🌐 " : "🔗 ") + d;
+  }
+  function enhance(){
+    var root = document.getElementById("content"); if (!root) return;
+    root.querySelectorAll(".chapter-intro p").forEach(function(p){ if (/^[━\s\-_=]+$/.test(p.textContent)) p.classList.add("rule"); });
+    root.querySelectorAll(".card").forEach(function(c){
+      if (c.dataset.mob) return; c.dataset.mob = "1";
+      var h = c.querySelector("h3");
+      if (h && h.innerHTML.indexOf(" — ") > 0 && !h.querySelector(".t-sub")) {
+        var i = h.innerHTML.indexOf(" — ");
+        h.innerHTML = h.innerHTML.slice(0, i) + '<span class="t-sep"> — </span><span class="t-sub">' + h.innerHTML.slice(i + 3) + "</span>";
+      }
+      // Le libellé écrit dans la fiche (« - Bureau de Melbourne : https://… ») donne le meilleur nom de bouton.
+      var norm = function(u){ return (u || "").replace(/\/+$/, "").replace(/^https?:\/\/(www\.)?/, ""); };
+      var named = {};
+      c.querySelectorAll(".source-body a").forEach(function(x){
+        var par = x.closest("p,li"); if (!par) return;
+        var txt = par.textContent; var k = txt.indexOf(x.textContent); var before = txt.slice(0, k > 0 ? k : 0);
+        before = before.replace(/^[\s\-–•]+/, "").replace(/[\s:：]+$/, "").trim();
+        if (before && before.length <= 40 && !named[norm(x.getAttribute("href"))]) named[norm(x.getAttribute("href"))] = before;
+      });
+      var seen = {};
+      c.querySelectorAll(".links a").forEach(function(a){
+        if (a.querySelector(".lk-full")) return;
+        var base = label(a), emoji = base.split(" ")[0], nm = named[norm(a.getAttribute("href"))];
+        var txt = nm ? emoji + " " + nm.charAt(0).toUpperCase() + nm.slice(1) : base;
+        if (seen[txt]) txt += " (" + (++seen[txt]) + ")"; else seen[txt] = 1;
+        var t = a.innerHTML; a.innerHTML = '<span class="lk-full">' + t + '</span><span class="lk-short">' + txt + "</span>";
+      });
+      var body = c.querySelector(".source-body");
+      if (body && body.textContent.trim()) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "more-btn"; b.textContent = "Lire les détails ▾";
+        var links = c.querySelector(".contact-label") || c.querySelector(".links");
+        c.insertBefore(b, links);
+        b.addEventListener("click", function(){ var o = c.classList.toggle("open"); b.textContent = o ? "Masquer les détails ▴" : "Lire les détails ▾"; });
+      }
+    });
+  }
+  var root = document.getElementById("content");
+  if (root) new MutationObserver(enhance).observe(root, { childList: true });
+  enhance();
+})();
 </script></body></html>
