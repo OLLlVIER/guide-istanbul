@@ -426,9 +426,21 @@ Prix courants à Melbourne en 2026, avec l’équivalent en euros (1 AUD ≈ 0,6
 
 🗺️ **Carte à placer : les stades et sites sportifs** · [MCG](https://www.google.com/maps/search/?api=1&query=Melbourne%20Cricket%20Ground) · [Melbourne Park](https://www.google.com/maps/search/?api=1&query=Melbourne%20Park) · [Marvel Stadium](https://www.google.com/maps/search/?api=1&query=Marvel%20Stadium) · [AAMI Park](https://www.google.com/maps/search/?api=1&query=AAMI%20Park) · [Flemington](https://www.google.com/maps/search/?api=1&query=Flemington%20Racecourse) · [Albert Park](https://www.google.com/maps/search/?api=1&query=Albert%20Park%20Circuit)
 
-**L’AFL, c’est quoi ?**
+**Que pratiquent les Australiens ?** (enquête nationale AusPlay 2025, nombre de pratiquants)
 
-Le **football australien** (« footy ») est né à Melbourne en 1858-1859, inventé par des joueurs de cricket pour rester en forme l’hiver. C’est le sport roi du Victoria, à ne pas confondre avec le rugby ni avec le football.
+| | Les 3 premiers sports ou activités |
+|---|---|
+| Garçons (0-14 ans) | Natation (555 000), football (525 000), basket (230 000) ; puis football australien et cricket |
+| Filles (0-14 ans) | Natation (568 000), gymnastique (259 000), **netball** (223 000) ; puis football et danse |
+| Hommes de 25 à 54 ans | Course à pied (1 442 000), natation (901 000), vélo (613 000) ; puis football, basket, tennis, golf |
+| Femmes de 25 à 54 ans | Natation (1 033 000), course à pied (1 011 000), vélo (420 000) |
+| Plus de 55 ans | Natation, vélo, golf, course à pied, tennis, boules |
+
+- **Qui fait du sport chaque semaine** : 34 % des hommes et 21 % des femmes de 15 ans et plus pratiquent un sport au moins une fois par semaine ; 40 % des garçons et 37 % des filles dans un club, en dehors de l’école.
+- **Le netball**, cousin du basket sans dribble, est le grand sport d’équipe féminin ; le football progresse vite chez les filles. Chez les garçons, le choix se fait entre football, football australien, basket et cricket.
+**Le sport le plus regardé : le football australien (AFL)**
+
+Le **football australien** (« footy ») est né à Melbourne en 1858-1859, inventé par des joueurs de cricket pour rester en forme l’hiver. Ce n’est pas un mélange de rugby et de football, même s’il leur emprunte : le ballon ovale et les plaquages font penser au rugby, le jeu au pied au football, mais il n’y a ni mêlée, ni hors-jeu, ni passe à la main. Certains historiens y voient aussi une influence du football gaélique irlandais. C’est surtout le sport le plus suivi du Victoria, plus regardé que pratiqué.
 
 | Règle | En clair |
 |---|---|
@@ -455,18 +467,6 @@ Le **football australien** (« footy ») est né à Melbourne en 1858-1859, inve
 | Netball (Super Netball) | Melbourne Vixens | Avril à août |
 | Cricket (Big Bash) | Melbourne Stars, Melbourne Renegades | Décembre à janvier |
 
-**Que pratiquent les Australiens ?** (enquête nationale AusPlay 2025, nombre de pratiquants)
-
-| | Les 3 premiers sports ou activités |
-|---|---|
-| Garçons (0-14 ans) | Natation (555 000), football (525 000), basket (230 000) ; puis football australien et cricket |
-| Filles (0-14 ans) | Natation (568 000), gymnastique (259 000), **netball** (223 000) ; puis football et danse |
-| Hommes de 25 à 54 ans | Course à pied (1 442 000), natation (901 000), vélo (613 000) ; puis football, basket, tennis, golf |
-| Femmes de 25 à 54 ans | Natation (1 033 000), course à pied (1 011 000), vélo (420 000) |
-| Plus de 55 ans | Natation, vélo, golf, course à pied, tennis, boules |
-
-- **Qui fait du sport chaque semaine** : 34 % des hommes et 21 % des femmes de 15 ans et plus pratiquent un sport au moins une fois par semaine ; 40 % des garçons et 37 % des filles dans un club, en dehors de l’école.
-- **Le netball**, cousin du basket sans dribble, est le grand sport d’équipe féminin ; le football progresse vite chez les filles. Chez les garçons, le choix se fait entre football, football australien, basket et cricket.
 - **Les grands rendez-vous de la saison 2026-2027** :
 
 | Date | Événement |
