@@ -15,7 +15,6 @@
 5. Économie, études et travail
 6. Vivre à Melbourne : logement, transports, météo et prix
 7. Manger, sortir et faire du sport
-8. Melbourne et Sydney
 
 **Australie**
 1. Le pays en un regard
@@ -514,20 +513,6 @@ Le **football australien** (« footy ») est né à Melbourne en 1858-1859, inve
 
 🔗 **Liens** : [NGV](https://www.ngv.vic.gov.au/) · [ACMI](https://www.acmi.net.au/) · [Arts Centre Melbourne](https://www.artscentremelbourne.com.au/) · [Midsumma](https://www.midsumma.org.au/) · [Comedy Festival](https://www.comedyfestival.com.au/) · [What’s On Melbourne](https://whatson.melbourne.vic.gov.au/) · [Ville de littérature](https://cityofliterature.com.au/)
 
-## 8. Melbourne et Sydney
-
-| | Sydney | Melbourne |
-|---|---|---|
-| Habitants | 5,64 millions | 5,44 millions, mais croît plus vite |
-| Image | Le port, l’Opéra, les plages | Les ruelles, les cafés, les stades |
-| Climat | Doux et ensoleillé | Changeant, plus frais |
-| Sport | Rugby à XIII | Football australien |
-| Logement médian | 1,22 million AUD (≈ 740 000 €) | 787 000 AUD (≈ 480 000 €) |
-| Loyer médian | 750 à 780 AUD (≈ 460 à 480 €) par semaine (2025) | 600 AUD (≈ 370 €) par semaine (2026) |
-| Caractère | Extravertie, tournée vers l’océan | Intérieure, à découvrir quartier par quartier |
-
-> **À retenir.** Sydney séduit en une journée ; Melbourne se révèle avec le temps.
-
 ---
 
 # AUSTRALIE
@@ -986,6 +971,16 @@ Ce que l’on veut savoir avant de vivre ou de travailler dans le pays.
 - **L’égalité femmes-hommes** : les femmes ont voté dès 1902, parmi les premières au monde. Le consentement est enseigné à l’école dans tous les États depuis 2023.
 - **Une société ouverte** : le mariage homosexuel a été approuvé par 61,6 % des votants en 2017. Melbourne (Midsumma) et Sydney (Mardi Gras) ont parmi les plus grandes fêtes LGBTQ+ du monde.
 - **Le multiculturalisme** : 84 % des Australiens estiment qu’il a été bon pour le pays (Scanlon Foundation, 2025). Mais deux personnes nées en Afrique ou en Asie sur cinq déclarent avoir subi une discrimination dans l’année.
+
+**Les âges légaux** (règles du Victoria quand elles varient selon les États)
+
+| À partir de | Ce qui est permis |
+|---|---|
+| 12 ans | Responsabilité pénale (âge relevé de 10 à 12 ans en 2024) |
+| 16 ans | Majorité sexuelle (17 ans en Australie-Méridionale et en Tasmanie) ; permis d’apprenti conducteur, accompagné ; inscription anticipée sur les listes électorales ; réseaux sociaux autorisés |
+| 16-17 ans | Mariage seulement avec l’accord d’un juge et des parents, et avec une personne majeure |
+| 17 ans | Fin de la scolarité obligatoire |
+| 18 ans | Majorité : vote obligatoire, mariage, alcool, tabac, boîtes de nuit, jeux d’argent, permis de conduire probatoire (17 ans dans la plupart des autres États) |
 
 **Les sorties, l’alcool et la nuit**
 - **L’âge légal** est de 18 ans pour boire et entrer en boîte de nuit. Une pièce d’identité avec photo est presque toujours demandée : passeport ou permis.
