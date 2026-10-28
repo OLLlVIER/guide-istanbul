@@ -1,0 +1,1231 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>L’Australie, puis Melbourne</title>
+  <meta name="description" content="Exposé : comprendre l’Australie puis Melbourne. Territoire, histoire, habitants, économie, vie quotidienne, nature, culture, sport et personnalités.">
+  <meta property="og:title" content="L’Australie, puis Melbourne">
+  <meta property="og:description" content="Comprendre l’Australie puis Melbourne : 36 chapitres, cartes, chiffres et liens.">
+  <link rel="stylesheet" href="../leaflet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700;800&display=swap">
+  <style>
+    :root { --ink:#16202a; --paper:#f8f5ef; --sand:#efe8dc; --line:rgba(22,32,42,.12); --muted:#5a6470; --gold:#e0a43a; --deep:#24506b; --red:#c4532e; --green:#2f7a52;
+      --display:"DM Serif Display",Georgia,serif; --body:"Source Sans 3",-apple-system,"Segoe UI",sans-serif; --side:300px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:16px; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.65 var(--body); }
+    a { color:var(--deep); }
+    img { max-width:100%; display:block; }
+    /* Plan à gauche (ordinateur) */
+    .side { position:fixed; inset:0 auto 0 0; width:var(--side); background:#fff; border-right:1px solid var(--line); overflow-y:auto; padding:22px 16px 40px; z-index:20; }
+    .side .brand { font:400 24px/1.1 var(--display); margin:0 6px 4px; }
+    .side .brand small { display:block; font:600 12px var(--body); color:var(--muted); margin-top:4px; }
+    .toc-part { margin:22px 6px 8px; font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red); }
+    .toc-part:nth-of-type(n+2) { color:var(--deep); }
+    .side ol { list-style:none; margin:0; padding:0; }
+    .side li a { display:flex; gap:10px; align-items:baseline; padding:6px 8px; border-radius:10px; text-decoration:none; color:var(--ink); font-size:14.5px; line-height:1.3; }
+    .side li a span { flex:none; width:22px; font-weight:800; color:var(--muted); font-size:13px; text-align:right; }
+    .side li a:hover { background:var(--sand); }
+    .side li a.on { background:var(--ink); color:#fff; }
+    .side li a.on span { color:var(--gold); }
+    main { margin-left:var(--side); }
+    .wrap { max-width:860px; margin:0 auto; padding:0 28px; }
+    /* Barre du haut (téléphone) */
+    .mbar { display:none; }
+    @media (max-width: 980px) {
+      .side { transform:translateX(-102%); transition:transform .25s; width:min(88vw,360px); box-shadow:0 0 40px rgba(0,0,0,.25); padding-top:70px; }
+      .side.open { transform:none; }
+      main { margin-left:0; }
+      .wrap { padding:0 16px; }
+      .mbar { display:flex; position:sticky; top:0; z-index:30; align-items:center; gap:8px; background:var(--ink); color:#fff; padding:8px 8px; }
+      .mbar button { border:0; color:#fff; background:#ffffff1f; border-radius:12px; font:inherit; cursor:pointer; }
+      .mbar .arrow { width:44px; height:44px; font-size:22px; font-weight:800; flex:none; }
+      .mbar .mid { flex:1; min-width:0; height:44px; padding:0 10px; text-align:left; line-height:1.15; }
+      .mbar .mid small { display:block; font-size:11px; opacity:.75; letter-spacing:.06em; text-transform:uppercase; }
+      .mbar .mid b { display:block; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .scrim { position:fixed; inset:0; background:#0006; z-index:15; display:none; }
+      .scrim.on { display:block; }
+      html { scroll-padding-top:70px; }
+    }
+    /* Couverture */
+    .cover { background:linear-gradient(135deg,#24506b,#16202a 70%); color:#fff; padding:90px 0 50px; }
+    .cover .kicker { color:var(--gold); }
+    .cover h1 { font:400 clamp(44px,8vw,84px)/1 var(--display); margin:10px 0 14px; }
+    .cover p { font-size:19px; max-width:640px; opacity:.92; margin:0; }
+    .cover .go { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+    .cover .go a { text-decoration:none; color:var(--ink); background:var(--gold); padding:12px 18px; border-radius:999px; font-weight:800; }
+    .cover .go a.alt { background:#fff; }
+    .kicker { text-transform:uppercase; letter-spacing:.14em; font-size:12.5px; font-weight:800; color:var(--red); }
+    /* Ouverture de partie */
+    .part-open { margin:56px 0 10px; padding:26px; border-radius:24px; background:var(--ink); color:#fff; }
+    .part-open h2 { font:400 clamp(32px,5vw,48px)/1.05 var(--display); margin:6px 0 16px; }
+    .part-open .kicker { color:var(--gold); }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+    .stats div { background:#ffffff14; border-radius:14px; padding:10px 12px; }
+    .stats b { display:block; font:400 26px/1.1 var(--display); color:var(--gold); }
+    .stats span { font-size:13px; opacity:.85; }
+    /* Chapitres */
+    .chap { margin:34px 0 0; background:#fff; border-radius:24px; border:1px solid var(--line); overflow:hidden; box-shadow:0 10px 30px rgba(20,30,40,.05); }
+    .chap-photo { position:relative; min-height:220px; background:linear-gradient(135deg,#24506b,#16202a) center/cover no-repeat; display:flex; align-items:flex-end; }
+    .chap[data-part="a"] .chap-photo { background-color:#8a3a20; background-image:linear-gradient(135deg,#c4532e,#5a2414); }
+    .chap-photo::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.72)); }
+    .chap-photo.has-img { background-size:cover; background-position:center; }
+    .chap-head { position:relative; z-index:1; padding:18px 24px; color:#fff; }
+    .chap-head .kicker { color:var(--gold); }
+    .chap-head h3 { font:400 clamp(28px,4.4vw,42px)/1.08 var(--display); margin:4px 0 0; }
+    .chap-photo .credit { position:absolute; right:10px; top:10px; z-index:2; font-size:10px; color:#fff; background:rgba(0,0,0,.45); padding:2px 8px; border-radius:999px; text-decoration:none; }
+    .chap-body { padding:20px 24px 24px; }
+    @media (max-width: 600px) { .chap-body { padding:16px 16px 20px; } .chap-head { padding:14px 16px; } .chap { border-radius:18px; } }
+    .chap-body p { margin:10px 0; }
+    .chap-body ul, .chap-body ol { padding-left:20px; margin:10px 0; }
+    .chap-body li { margin:6px 0; }
+    .chap-body h3, .chap-body p > strong:only-child { font-family:var(--display); font-weight:400; }
+    .chap-body > p > strong:only-child { display:block; font-size:22px; margin-top:18px; }
+    /* Tableaux → fiches sur téléphone */
+    .tbl-wrap { margin:14px 0; overflow-x:auto; }
+    table.tbl { width:100%; border-collapse:collapse; font-size:15px; background:#fff; }
+    table.tbl th { text-align:left; background:var(--ink); color:#fff; padding:9px 10px; font-size:13px; letter-spacing:.02em; }
+    table.tbl td { padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+    table.tbl tr:nth-child(even) td { background:#faf8f3; }
+    table.kv thead { display:none; }
+    table.kv td:first-child { font-weight:800; width:28%; color:var(--deep); }
+    @media (max-width: 700px) {
+      table.tbl thead { display:none; }
+      table.tbl, table.tbl tbody, table.tbl tr, table.tbl td { display:block; width:100%; }
+      table.tbl tr { background:var(--paper); border-radius:14px; padding:8px 12px; margin:0 0 10px; border:1px solid var(--line); }
+      table.tbl tr:nth-child(even) td { background:transparent; }
+      table.tbl td { border:0; padding:3px 0; }
+      table.tbl td[data-label]::before { content:attr(data-label); display:block; font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+      table.tbl td:first-child { font-weight:800; font-size:16px; }
+      table.kv td:first-child { width:auto; }
+    }
+    /* Encadrés */
+    .callout { margin:16px 0; padding:14px 16px; border-radius:16px; border-left:6px solid; }
+    .callout p { margin:0; }
+    .callout.retenir { background:#fdf3e1; border-color:var(--gold); }
+    .callout.recue { background:#eef3fb; border-color:#3a7bd5; }
+    .callout.attention { background:#fdecea; border-color:var(--red); }
+    /* Liens */
+    .links { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 0; padding-top:14px; border-top:1px dashed var(--line); }
+    .links-t { width:100%; font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+    .btn { display:inline-flex; align-items:center; min-height:34px; padding:0 12px; border-radius:999px; border:1px solid rgba(22,32,42,.18); background:#fff; color:var(--ink); text-decoration:none; font-weight:700; font-size:13.5px; }
+    .btn.primary { background:var(--deep); color:#fff; border-color:var(--deep); }
+    /* Cartes */
+    .map-fig { margin:18px 0; }
+    .map { height:340px; border-radius:16px; border:1px solid var(--line); background:#dfe8e2; z-index:1; }
+    @media (max-width:600px) { .map { height:280px; } }
+    .map-fig figcaption { font-size:14px; color:var(--muted); margin-top:8px; font-weight:600; }
+    .map-fig .btns { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+    .mk { width:14px; height:14px; border-radius:50%; background:var(--red); border:2px solid #fff; box-shadow:0 1px 5px rgba(0,0,0,.4); }
+    .mk.lbl { width:auto; height:auto; border-radius:999px; padding:2px 8px; color:#fff; font:800 11px var(--body); white-space:nowrap; }
+    /* Graphiques */
+    .chart { margin:18px 0; padding:14px 16px; background:var(--paper); border-radius:16px; }
+    .chart figcaption { font-weight:800; font-size:14px; margin-bottom:10px; }
+    .bar { display:grid; grid-template-columns:130px 1fr 64px; gap:10px; align-items:center; margin:6px 0; font-size:14px; }
+    @media (max-width:500px) { .bar { grid-template-columns:100px 1fr 56px; } }
+    .bt { height:14px; background:#fff; border-radius:999px; overflow:hidden; }
+    .bt i { display:block; height:100%; border-radius:999px; }
+    .bv { font-weight:800; text-align:right; }
+    .chart svg { width:100%; height:auto; }
+    .chart .tv { font:800 12px var(--body); text-anchor:middle; fill:var(--ink); }
+    .chart .tv.lo { fill:#2a5aa8; }
+    .chart .tm { font:700 12px var(--body); text-anchor:middle; fill:var(--muted); }
+    /* Personnalités */
+    #a18 .chap-body ul { list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:10px; }
+    #a18 .chap-body li { margin:0; background:var(--paper); border-radius:14px; padding:10px 12px; font-size:15px; }
+    /* Navigation entre chapitres */
+    .next { display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 0; }
+    .next button { flex:1 1 220px; border:0; border-radius:16px; padding:14px 16px; font:inherit; font-weight:800; cursor:pointer; text-align:left; background:var(--sand); color:var(--ink); }
+    .next button.n { background:var(--deep); color:#fff; text-align:right; }
+    .next button small { display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; opacity:.75; }
+    footer { margin:40px 0 80px; font-size:13px; color:var(--muted); }
+    footer ul { padding-left:18px; }
+  </style>
+</head>
+<body>
+  <div class="mbar"><button type="button" class="arrow" id="mPrev" aria-label="Chapitre précédent">‹</button><button type="button" class="mid" id="mMenu"><small id="mPart">Le plan</small><b id="mTitle">Tous les chapitres ▾</b></button><button type="button" class="arrow" id="mNext" aria-label="Chapitre suivant">›</button></div>
+  <div class="scrim" id="scrim"></div>
+  <nav class="side" id="side" aria-label="Plan de l’exposé">
+    <div class="brand">L’Australie, puis Melbourne<small>Exposé · octobre 2026</small></div>
+    <div class="toc-part">Comprendre l’Australie</div><ol><li><a href="#a1" data-id="a1"><span>1</span>Le pays en un regard</a></li><li><a href="#a2" data-id="a2"><span>2</span>Un continent habité depuis au moins 65 000 ans</a></li><li><a href="#a3" data-id="a3"><span>3</span>Comment l’Australie est devenue un pays</a></li><li><a href="#a4" data-id="a4"><span>4</span>Une géographie hors norme</a></li><li><a href="#a5" data-id="a5"><span>5</span>Climats et saisons</a></li><li><a href="#a6" data-id="a6"><span>6</span>Les États et territoires</a></li><li><a href="#a7" data-id="a7"><span>7</span>Qui sont les Australiens ?</a></li><li><a href="#a8" data-id="a8"><span>8</span>Une grande société d’immigration</a></li><li><a href="#a9" data-id="a9"><span>9</span>Comment fonctionne le pays</a></li><li><a href="#a10" data-id="a10"><span>10</span>L’économie australienne</a></li><li><a href="#a11" data-id="a11"><span>11</span>Travailler et étudier en Australie</a></li><li><a href="#a12" data-id="a12"><span>12</span>La vie quotidienne</a></li><li><a href="#a13" data-id="a13"><span>13</span>Santé, urgences et sécurité</a></li><li><a href="#a14" data-id="a14"><span>14</span>Faune et flore</a></li><li><a href="#a15" data-id="a15"><span>15</span>Les animaux dangereux : réalité et légendes</a></li><li><a href="#a16" data-id="a16"><span>16</span>Culture australienne</a></li><li><a href="#a17" data-id="a17"><span>17</span>Sport et identité nationale</a></li><li><a href="#a18" data-id="a18"><span>18</span>Australiens célèbres</a></li><li><a href="#a19" data-id="a19"><span>19</span>Où aller selon ce que l’on recherche ?</a></li></ol><div class="toc-part">Comprendre Melbourne</div><ol><li><a href="#b1" data-id="b1"><span>1</span>Melbourne en un regard</a></li><li><a href="#b2" data-id="b2"><span>2</span>Les Premiers Peuples et la rivière</a></li><li><a href="#b3" data-id="b3"><span>3</span>La création de la ville</a></li><li><a href="#b4" data-id="b4"><span>4</span>L’or et l’enrichissement spectaculaire</a></li><li><a href="#b5" data-id="b5"><span>5</span>L’architecture victorienne</a></li><li><a href="#b6" data-id="b6"><span>6</span>Les vagues migratoires</a></li><li><a href="#b7" data-id="b7"><span>7</span>La sociologie actuelle</a></li><li><a href="#b8" data-id="b8"><span>8</span>Les communautés et les quartiers</a></li><li><a href="#b9" data-id="b9"><span>9</span>L’économie de Melbourne</a></li><li><a href="#b10" data-id="b10"><span>10</span>Étudier et travailler à Melbourne</a></li><li><a href="#b11" data-id="b11"><span>11</span>Se loger et se déplacer</a></li><li><a href="#b12" data-id="b12"><span>12</span>Comprendre la météo melburnienne</a></li><li><a href="#b13" data-id="b13"><span>13</span>Manger et boire</a></li><li><a href="#b14" data-id="b14"><span>14</span>Sport et vie collective</a></li><li><a href="#b15" data-id="b15"><span>15</span>Concerts, arts et événements</a></li><li><a href="#b16" data-id="b16"><span>16</span>Ce qui distingue Melbourne de Sydney</a></li><li><a href="#b17" data-id="b17"><span>17</span>Les 16 quartiers et les 90 lieux</a></li></ol>
+    <div class="toc-part" style="color:var(--green)">À voir aussi</div>
+    <ol><li><a href="../melbourne/"><span>→</span>Le dossier : 16 quartiers et 90 lieux</a></li></ol>
+  </nav>
+  <main>
+    <header class="cover"><div class="wrap">
+      <div class="kicker">Exposé · chiffres vérifiés en octobre 2026</div>
+      <h1>L’Australie, puis Melbourne</h1>
+      <p>Le territoire, l’histoire, les habitants, le fonctionnement du pays, l’économie, la vie quotidienne, la nature, la culture, le sport et les personnalités. Puis Melbourne, dans le même ordre.</p>
+      <div class="go"><a href="#a1">Partie 1 · L’Australie</a><a class="alt" href="#b1">Partie 2 · Melbourne</a></div>
+    </div></header>
+    <div class="wrap">
+      <div class="part-open"><div class="kicker">Partie 1</div><h2>Comprendre l’Australie</h2><div class="stats"><div><b>27,9 M</b><span>habitants</span></div><div><b>7,69 M km²</b><span>14 fois la France</span></div><div><b>32 %</b><span>nés à l’étranger</span></div><div><b>12e</b><span>économie mondiale</span></div></div></div><section class="chap" id="a1" data-title="Le pays en un regard" data-part="a">
+  <div class="chap-photo" data-wiki="Uluru"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 1</div><h3>Le pays en un regard</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="points" data-markers='[{"n": "Canberra", "lat": -35.2809, "lon": 149.13, "url": "https://www.google.com/maps/search/?api=1&query=Canberra%20ACT"}, {"n": "Sydney", "lat": -33.8688, "lon": 151.2093, "url": "https://www.google.com/maps/search/?api=1&query=Sydney%20NSW"}, {"n": "Melbourne", "lat": -37.8136, "lon": 144.9631, "url": "https://www.google.com/maps/search/?api=1&query=Melbourne%20VIC"}, {"n": "Brisbane", "lat": -27.4698, "lon": 153.0251, "url": "https://www.google.com/maps/search/?api=1&query=Brisbane%20QLD"}, {"n": "Perth", "lat": -31.9505, "lon": 115.8605, "url": "https://www.google.com/maps/search/?api=1&query=Perth%20WA"}, {"n": "Adélaïde", "lat": -34.9285, "lon": 138.6007, "url": "https://www.google.com/maps/search/?api=1&query=Adelaide%20SA"}, {"n": "Hobart", "lat": -42.8821, "lon": 147.3272, "url": "https://www.google.com/maps/search/?api=1&query=Hobart%20TAS"}, {"n": "Darwin", "lat": -12.4634, "lon": 130.8456, "url": "https://www.google.com/maps/search/?api=1&query=Darwin%20NT"}]'></div><figcaption>🗺️ l’Australie et ses huit capitales, avec la France à la même échelle</figcaption></figure><div class="tbl-wrap"><table class="tbl kv">
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Où</strong></td>
+<td>Entre l’océan Indien et le Pacifique, à environ 17 000 km de la France. Saisons inversées : l’été va de décembre à février.</td>
+</tr>
+<tr>
+<td><strong>Taille</strong></td>
+<td>7,69 millions de km² : 14 fois la France métropolitaine, presque autant que les États-Unis sans l’Alaska.</td>
+</tr>
+<tr>
+<td><strong>Habitants</strong></td>
+<td>27,9 millions (mars 2026), +1,4 % en un an : moins que le Benelux, sur un continent entier.</td>
+</tr>
+<tr>
+<td><strong>Capitale</strong></td>
+<td>Canberra : environ <strong>490 000 habitants</strong> (489 700 pour le Territoire de la capitale en mars 2026), seulement la 8e ville du pays. Les deux métropoles sont Sydney (5,64 millions) et Melbourne (5,44 millions).</td>
+</tr>
+<tr>
+<td><strong>Où vivent-ils</strong></td>
+<td>68 % dans les huit capitales, presque tous sur la côte. L’intérieur est désertique.</td>
+</tr>
+<tr>
+<td><strong>Heure</strong></td>
+<td>Melbourne et Sydney : UTC+11 en été (10 h de plus qu’à Paris en novembre). Trois fuseaux principaux.</td>
+</tr>
+</tbody>
+</table></div><aside class="callout retenir">
+<p><strong>À retenir.</strong> Un pays grand comme un continent, peuplé comme un pays moyen, et presque entièrement urbain et côtier.</p>
+</aside><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.australia.com/fr-fr" target="_blank" rel="noreferrer">Australia.com, site officiel du tourisme ↗</a><a class="btn" href="https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/latest-release" target="_blank" rel="noreferrer">Population (ABS) ↗</a></div></div>
+</section>
+<section class="chap" id="a2" data-title="Un continent habité depuis au moins 65 000 ans" data-part="a">
+  <div class="chap-photo" data-wiki="Ubirr"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 2</div><h3>Un continent habité depuis au moins 65 000 ans</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Les Premiers Peuples</strong> : Aborigènes et insulaires du détroit de Torres. Ce ne sont pas un peuple mais <strong>plus de 250 nations</strong>, avec leurs langues ; une centaine sont encore parlées, la plupart menacées.</li>
+<li><strong>Le « Country »</strong> : la terre n’est pas une propriété mais un lien de responsabilité entre les êtres, les ancêtres, les récits (le « Dreaming ») et le territoire.</li>
+<li><strong>Aujourd’hui</strong> : 812 728 personnes se déclarent aborigènes ou insulaires (recensement 2021), soit <strong>3,2 %</strong> de la population, avec un âge médian bien plus jeune que la moyenne.</li>
+</ul><p><strong>Les grandes étapes de la reconnaissance des Premiers Peuples</strong></p><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Année</th>
+<th>Ce qui s’est passé</th>
+<th>Ce que cela a changé</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Année">1910-1970</td>
+<td data-label="Ce qui s’est passé">Des milliers d’enfants aborigènes sont retirés de force à leur famille : les « générations volées ».</td>
+<td data-label="Ce que cela a changé">Un traumatisme encore très présent dans les familles.</td>
+</tr>
+<tr>
+<td data-label="Année">1967</td>
+<td data-label="Ce qui s’est passé">Référendum approuvé à <strong>90,8 %</strong>.</td>
+<td data-label="Ce que cela a changé">Les Aborigènes sont enfin comptés dans la population et l’État fédéral peut légiférer pour eux.</td>
+</tr>
+<tr>
+<td data-label="Année">1992</td>
+<td data-label="Ce qui s’est passé">Décision <strong>Mabo</strong> de la Haute Cour.</td>
+<td data-label="Ce que cela a changé">Fin de la « terra nullius », l’idée que la terre n’appartenait à personne avant 1788 : les droits fonciers autochtones sont reconnus.</td>
+</tr>
+<tr>
+<td data-label="Année">2008</td>
+<td data-label="Ce qui s’est passé">Le Premier ministre Kevin Rudd présente les <strong>excuses officielles</strong> de la nation (13 février).</td>
+<td data-label="Ce que cela a changé">Reconnaissance publique du tort fait aux « générations volées ».</td>
+</tr>
+<tr>
+<td data-label="Année">2023</td>
+<td data-label="Ce qui s’est passé">Référendum sur une « <strong>Voix</strong> » autochtone au Parlement, rejeté à <strong>60 %</strong>.</td>
+<td data-label="Ce que cela a changé">Le débat sur la place des Premiers Peuples reste ouvert.</td>
+</tr>
+</tbody>
+</table></div><ul>
+<li><strong>Dans la vie quotidienne</strong> : on entend souvent, au début d’un événement, un « Acknowledgement of Country », hommage aux peuples du lieu.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://aiatsis.gov.au/explore/first-peoples-australia" target="_blank" rel="noreferrer">AIATSIS, institut des études aborigènes ↗</a><a class="btn" href="https://aiatsis.gov.au/explore/map-indigenous-australia" target="_blank" rel="noreferrer">Carte des peuples et langues aborigènes ↗</a><a class="btn" href="https://www.abs.gov.au/statistics/people/aboriginal-and-torres-strait-islander-peoples/aboriginal-and-torres-strait-islander-people-census/2021" target="_blank" rel="noreferrer">Recensement 2021 des peuples autochtones (ABS) ↗</a></div></div>
+</section>
+<section class="chap" id="a3" data-title="Comment l’Australie est devenue un pays" data-part="a">
+  <div class="chap-photo" data-wiki="First Fleet"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 3</div><h3>Comment l’Australie est devenue un pays</h3></div></div>
+  <div class="chap-body"><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Date</th>
+<th>Événement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Date">1770</td>
+<td data-label="Événement">James Cook longe la côte est et la revendique pour la Couronne.</td>
+</tr>
+<tr>
+<td data-label="Date">1788</td>
+<td data-label="Événement">La First Fleet (11 navires, environ 1 500 personnes dont 750 forçats) fonde Sydney. Jusqu’en 1868, environ <strong>162 000 bagnards</strong> sont déportés.</td>
+</tr>
+<tr>
+<td data-label="Date">1835</td>
+<td data-label="Événement">Fondation de Melbourne.</td>
+</tr>
+<tr>
+<td data-label="Date">1851</td>
+<td data-label="Événement">Ruées vers l’or en Victoria et Nouvelle-Galles du Sud : la population du pays presque triplée en dix ans.</td>
+</tr>
+<tr>
+<td data-label="Date">1er janvier 1901</td>
+<td data-label="Événement">Les six colonies forment la <strong>Fédération australienne</strong>. Melbourne est capitale provisoire.</td>
+</tr>
+<tr>
+<td data-label="Date">1901-1973</td>
+<td data-label="Événement">Politique de l’« Australie blanche » qui limite l’immigration non européenne, abandonnée progressivement jusqu’en 1973.</td>
+</tr>
+<tr>
+<td data-label="Date">1927</td>
+<td data-label="Événement">Le Parlement s’installe à Canberra, ville créée pour départager Sydney et Melbourne.</td>
+</tr>
+<tr>
+<td data-label="Date">Après 1945</td>
+<td data-label="Événement">« Populate or perish » : immigration massive d’Européens, puis d’Asiatiques à partir des années 1970.</td>
+</tr>
+<tr>
+<td data-label="Date">1999</td>
+<td data-label="Événement">Référendum sur la République rejeté (55 % de « non ») : le roi reste chef d’État.</td>
+</tr>
+</tbody>
+</table></div><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.nma.gov.au/" target="_blank" rel="noreferrer">Musée national d’Australie ↗</a><a class="btn" href="https://peo.gov.au/" target="_blank" rel="noreferrer">Fédération de 1901 (Parlement) ↗</a></div></div>
+</section>
+<section class="chap" id="a4" data-title="Une géographie hors norme" data-part="a">
+  <div class="chap-photo" data-wiki="Great Barrier Reef"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 4</div><h3>Une géographie hors norme</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="points" data-markers='[{"n": "Uluru", "lat": -25.3444, "lon": 131.0369, "url": "https://www.google.com/maps/search/?api=1&query=Uluru"}, {"n": "Mont Kosciuszko", "lat": -36.456, "lon": 148.2636, "url": "https://www.google.com/maps/search/?api=1&query=Mount%20Kosciuszko"}, {"n": "Lac Eyre", "lat": -28.37, "lon": 137.37, "url": "https://www.google.com/maps/search/?api=1&query=Lake%20Eyre"}, {"n": "Grande Barrière", "lat": -18.2871, "lon": 147.6992, "url": "https://www.google.com/maps/search/?api=1&query=Great%20Barrier%20Reef"}]'></div><figcaption>🗺️ relief, déserts, Grande Barrière et distances entre les villes</figcaption></figure><ul>
+<li><strong>Le plus plat et le plus sec des continents habités</strong> : environ 70 % du territoire est aride ou semi-aride.</li>
+<li><strong>Les extrêmes</strong> : point culminant, le mont Kosciuszko (<strong>2 228 m</strong>) ; point le plus bas, le lac Eyre (<strong>–15 m</strong>), à sec la plupart du temps ; Uluru s’élève de <strong>348 m</strong> au-dessus de la plaine.</li>
+<li><strong>La Grande Barrière de corail</strong> : 2 300 km, près de 2 900 récifs, patrimoine mondial depuis 1981.</li>
+<li><strong>Les distances</strong> : Melbourne–Sydney 880 km par la route ; Sydney–Perth 3 900 km ; Melbourne–Perth environ 4 h d’avion, autant que Paris–Moscou.</li>
+<li><strong>On skie en Australie</strong> : les Alpes australiennes reçoivent de la neige de début juin (ouverture le 6 juin en 2026) à la fin septembre ou début octobre. En Victoria, à 3 ou 4 heures de Melbourne : Mount Buller, Falls Creek, Mount Hotham. En Nouvelle-Galles du Sud : Perisher et Thredbo. Montagnes basses et arrondies, neige variable, et beaucoup de neige de culture.</li>
+<li><strong>Six milieux</strong> : côtes tempérées du sud-est, tropiques humides du nord, Centre rouge, Alpes australiennes (neige l’hiver), côte ouest sauvage, et l’île de Tasmanie.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.ga.gov.au/" target="_blank" rel="noreferrer">Geoscience Australia ↗</a><a class="btn" href="https://www.gbrmpa.gov.au/" target="_blank" rel="noreferrer">Grande Barrière de corail (GBRMPA) ↗</a><a class="btn" href="https://parksaustralia.gov.au/uluru/" target="_blank" rel="noreferrer">Uluru-Kata Tjuta ↗</a></div></div>
+</section>
+<section class="chap" id="a5" data-title="Climats et saisons" data-part="a">
+  <div class="chap-photo" data-wiki="Simpson Desert"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 5</div><h3>Climats et saisons</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="climate" data-markers='[{"n": "Darwin", "lat": -12.4634, "lon": 130.8456, "extra": "Janvier 32° / 25° · Juillet 31° / 19°"}, {"n": "Brisbane", "lat": -27.4698, "lon": 153.0251, "extra": "Janvier 29° / 21° · Juillet 21° / 9°"}, {"n": "Perth", "lat": -31.9505, "lon": 115.8605, "extra": "Janvier 31° / 18° · Juillet 18° / 9°"}, {"n": "Sydney", "lat": -33.8688, "lon": 151.2093, "extra": "Janvier 26° / 19° · Juillet 17° / 8°"}, {"n": "Melbourne", "lat": -37.8136, "lon": 144.9631, "extra": "Janvier 26° / 14° · Juillet 13° / 5°"}, {"n": "Alice Springs", "lat": -23.698, "lon": 133.8807, "extra": "Janvier 36° / 21° · Juillet 19° / 3°"}, {"n": "Hobart", "lat": -42.8821, "lon": 147.3272, "extra": "Janvier 20° / 10° · Juillet 9° / 2°"}]'></div><figcaption>🗺️ les zones climatiques (tropical, désertique, tempéré, alpin)</figcaption></figure><p><strong>Températures moyennes (max / min)</strong></p><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Ville</th>
+<th>Janvier (été)</th>
+<th>Juillet (hiver)</th>
+<th>À savoir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Ville">Darwin</td>
+<td data-label="Janvier (été)">32° / 25°</td>
+<td data-label="Juillet (hiver)">31° / 19°</td>
+<td data-label="À savoir">Saison des pluies de décembre à mars : 428 mm en janvier, 1 mm en juillet</td>
+</tr>
+<tr>
+<td data-label="Ville">Brisbane</td>
+<td data-label="Janvier (été)">29° / 21°</td>
+<td data-label="Juillet (hiver)">21° / 9°</td>
+<td data-label="À savoir">Subtropical, été humide et orageux</td>
+</tr>
+<tr>
+<td data-label="Ville">Perth</td>
+<td data-label="Janvier (été)">31° / 18°</td>
+<td data-label="Juillet (hiver)">18° / 9°</td>
+<td data-label="À savoir">Méditerranéen, le plus ensoleillé des capitales</td>
+</tr>
+<tr>
+<td data-label="Ville">Sydney</td>
+<td data-label="Janvier (été)">26° / 19°</td>
+<td data-label="Juillet (hiver)">17° / 8°</td>
+<td data-label="À savoir">Doux toute l’année</td>
+</tr>
+<tr>
+<td data-label="Ville"><strong>Melbourne</strong></td>
+<td data-label="Janvier (été)"><strong>26° / 14°</strong></td>
+<td data-label="Juillet (hiver)"><strong>13° / 5°</strong></td>
+<td data-label="À savoir">Très changeant ; pointes au-delà de 40° en été</td>
+</tr>
+<tr>
+<td data-label="Ville">Alice Springs</td>
+<td data-label="Janvier (été)">36° / 21°</td>
+<td data-label="Juillet (hiver)">19° / 3°</td>
+<td data-label="À savoir">Désert : nuits froides en hiver</td>
+</tr>
+<tr>
+<td data-label="Ville">Hobart</td>
+<td data-label="Janvier (été)">20° / 10°</td>
+<td data-label="Juillet (hiver)">9° / 2°</td>
+<td data-label="À savoir">La capitale la plus fraîche</td>
+</tr>
+</tbody>
+</table></div><ul>
+<li><strong>Records</strong> : <strong>50,7 °C</strong> à Oodnadatta (1960) et à Onslow (2022) ; <strong>–23 °C</strong> à Charlotte Pass (1994).</li>
+<li><strong>Réchauffement</strong> : <strong>+1,51 °C</strong> depuis 1910 (Bureau of Meteorology et CSIRO, 2024). Les pluies d’hiver ont baissé de 9 % dans le sud-est depuis 1994.</li>
+<li><strong>Les risques</strong> : cyclones dans le nord (novembre-avril), sécheresses, inondations, feux de brousse. L’été 2019-2020 (« Black Summer ») a brûlé environ 24 millions d’hectares, presque la moitié de la France.</li>
+<li><strong>Le soleil</strong> : indice UV « extrême » (11) en été à Melbourne. Un des taux de cancers de la peau les plus élevés au monde.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.bom.gov.au/" target="_blank" rel="noreferrer">Bureau of Meteorology ↗</a><a class="btn" href="https://www.csiro.au/en/news/all/articles/2024/november/state-of-the-climate" target="_blank" rel="noreferrer">State of the Climate 2024 ↗</a></div></div>
+</section>
+<section class="chap" id="a6" data-title="Les États et territoires" data-part="a">
+  <div class="chap-photo" data-wiki="Sydney Harbour Bridge"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 6</div><h3>Les États et territoires</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="states" data-markers='[{"n": "Sydney", "lat": -33.8688, "lon": 151.2093, "extra": "Nouvelle-Galles du Sud · 8,67 millions habitants"}, {"n": "Melbourne", "lat": -37.8136, "lon": 144.9631, "extra": "Victoria · 7,15 millions habitants"}, {"n": "Brisbane", "lat": -27.4698, "lon": 153.0251, "extra": "Queensland · 5,74 millions habitants"}, {"n": "Perth", "lat": -31.9505, "lon": 115.8605, "extra": "Australie-Occidentale · 3,10 millions habitants"}, {"n": "Adélaïde", "lat": -34.9285, "lon": 138.6007, "extra": "Australie-Méridionale · 1,92 million habitants"}, {"n": "Hobart", "lat": -42.8821, "lon": 147.3272, "extra": "Tasmanie · 580 700 habitants"}, {"n": "Darwin", "lat": -12.4634, "lon": 130.8456, "extra": "Territoire du Nord · 268 900 habitants"}, {"n": "Canberra", "lat": -35.2809, "lon": 149.13, "extra": "Territoire de la capitale · 489 700 habitants"}]'></div><figcaption>🗺️ les huit États et territoires, colorés, avec leur capitale</figcaption></figure><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>État ou territoire</th>
+<th>Habitants (mars 2026)</th>
+<th>Capitale</th>
+<th>Climat</th>
+<th>Identité</th>
+<th>Pourquoi y aller</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="État ou territoire">Nouvelle-Galles du Sud</td>
+<td data-label="Habitants (mars 2026)">8,67 millions</td>
+<td data-label="Capitale">Sydney</td>
+<td data-label="Climat">Tempéré</td>
+<td data-label="Identité">Finance, port, plages</td>
+<td data-label="Pourquoi y aller">Opéra, Blue Mountains</td>
+</tr>
+<tr>
+<td data-label="État ou territoire">Victoria</td>
+<td data-label="Habitants (mars 2026)">7,15 millions</td>
+<td data-label="Capitale">Melbourne</td>
+<td data-label="Climat">Tempéré, changeant</td>
+<td data-label="Identité">Culture, sport, gastronomie</td>
+<td data-label="Pourquoi y aller">Melbourne, Great Ocean Road</td>
+</tr>
+<tr>
+<td data-label="État ou territoire">Queensland</td>
+<td data-label="Habitants (mars 2026)">5,74 millions</td>
+<td data-label="Capitale">Brisbane</td>
+<td data-label="Climat">Subtropical à tropical</td>
+<td data-label="Identité">Plages, soleil, croissance</td>
+<td data-label="Pourquoi y aller">Barrière de corail, Daintree</td>
+</tr>
+<tr>
+<td data-label="État ou territoire">Australie-Occidentale</td>
+<td data-label="Habitants (mars 2026)">3,10 millions</td>
+<td data-label="Capitale">Perth</td>
+<td data-label="Climat">Méditerranéen à désertique</td>
+<td data-label="Identité">Mines, grands espaces</td>
+<td data-label="Pourquoi y aller">Ningaloo, Kimberley</td>
+</tr>
+<tr>
+<td data-label="État ou territoire">Australie-Méridionale</td>
+<td data-label="Habitants (mars 2026)">1,92 million</td>
+<td data-label="Capitale">Adélaïde</td>
+<td data-label="Climat">Méditerranéen, sec</td>
+<td data-label="Identité">Vin, festivals</td>
+<td data-label="Pourquoi y aller">Barossa, Kangaroo Island</td>
+</tr>
+<tr>
+<td data-label="État ou territoire">Tasmanie</td>
+<td data-label="Habitants (mars 2026)">580 700</td>
+<td data-label="Capitale">Hobart</td>
+<td data-label="Climat">Frais, humide</td>
+<td data-label="Identité">Nature, forêts anciennes</td>
+<td data-label="Pourquoi y aller">Cradle Mountain, musée MONA</td>
+</tr>
+<tr>
+<td data-label="État ou territoire">Territoire du Nord</td>
+<td data-label="Habitants (mars 2026)">268 900</td>
+<td data-label="Capitale">Darwin</td>
+<td data-label="Climat">Tropical et désertique</td>
+<td data-label="Identité">Cultures aborigènes</td>
+<td data-label="Pourquoi y aller">Kakadu, Uluru</td>
+</tr>
+<tr>
+<td data-label="État ou territoire">Territoire de la capitale</td>
+<td data-label="Habitants (mars 2026)">489 700</td>
+<td data-label="Capitale">Canberra</td>
+<td data-label="Climat">Continental</td>
+<td data-label="Identité">Institutions</td>
+<td data-label="Pourquoi y aller">Musées nationaux, Parlement</td>
+</tr>
+</tbody>
+</table></div><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.visitmelbourne.com/" target="_blank" rel="noreferrer">Visit Victoria ↗</a><a class="btn" href="https://www.sydney.com/" target="_blank" rel="noreferrer">Destination NSW ↗</a><a class="btn" href="https://www.queensland.com/" target="_blank" rel="noreferrer">Tourism Queensland ↗</a><a class="btn" href="https://www.westernaustralia.com/" target="_blank" rel="noreferrer">Tourism Western Australia ↗</a><a class="btn" href="https://southaustralia.com/" target="_blank" rel="noreferrer">South Australia ↗</a><a class="btn" href="https://www.discovertasmania.com.au/" target="_blank" rel="noreferrer">Tasmanie ↗</a><a class="btn" href="https://northernterritory.com/" target="_blank" rel="noreferrer">Territoire du Nord ↗</a><a class="btn" href="https://visitcanberra.com.au/" target="_blank" rel="noreferrer">Canberra ↗</a></div></div>
+</section>
+<section class="chap" id="a7" data-title="Qui sont les Australiens ?" data-part="a">
+  <div class="chap-photo" data-wiki="Bondi Beach"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 7</div><h3>Qui sont les Australiens ?</h3></div></div>
+  <div class="chap-body"><p><strong>Familles et modes de vie</strong></p><ul>
+<li><strong>1,48 enfant par femme</strong> en 2024, un record bas (1,80 en 2014). Âge médian des mères : <strong>32,1 ans</strong>. 292 318 naissances.</li>
+<li><strong>Mariage</strong> : 120 844 mariages en 2024 ; âge médian <strong>32,8 ans</strong> pour les hommes, <strong>31,2 ans</strong> pour les femmes. Le mariage homosexuel est légal depuis décembre 2017 (4 746 mariages en 2024).</li>
+<li><strong>Divorce</strong> : 47 216 divorces en 2024, soit environ <strong>un divorce pour 2,5 mariages</strong> ; durée médiane du mariage avant divorce : <strong>13,2 ans</strong>.</li>
+<li><strong>Couples mixtes</strong> : environ <strong>un couple sur quatre</strong> réunit des partenaires nés dans des pays différents. <strong>48 %</strong> des Australiens ont au moins un parent né à l’étranger.</li>
+<li><strong>Logement</strong> : environ deux ménages sur trois sont propriétaires, souvent d’une maison avec jardin en banlieue.</li>
+<li><strong>Animaux</strong> : <strong>69 % des foyers</strong> ont un animal ; près d’un sur deux a un chien.</li>
+</ul><p><strong>Langues et religions</strong></p><ul>
+<li>Plus de 5,6 millions de personnes parlent une autre langue que l’anglais à la maison : d’abord le mandarin, puis l’arabe.</li>
+<li><strong>Religion (2021)</strong> : chrétiens <strong>43,9 %</strong> (catholiques 20 %, anglicans 9,8 %), <strong>sans religion 38,9 %</strong> (30,1 % en 2016), islam 3,2 %, hindouisme 2,7 %, bouddhisme 2,4 %, sikhisme 0,8 %.</li>
+<li><strong>Édifices remarquables</strong> : cathédrales néogothiques St Mary’s (Sydney) et St Patrick’s (Melbourne) ; temple bouddhiste Nan Tien près de Wollongong, le plus grand de l’hémisphère sud ; mosquée de Lakemba à Sydney ; temples hindous et gurdwaras sikhs dans les banlieues ; et des lieux sacrés aborigènes comme Uluru, où l’escalade est interdite depuis 2019.</li>
+</ul><figure class="chart"><figcaption>Religion en Australie (recensement 2021, en %)</figcaption><div class="bar"><span class="bl">Christianisme</span><span class="bt"><i style="width:100.0%;background:#7a4fa0"></i></span><span class="bv">43,9 %</span></div><div class="bar"><span class="bl">Sans religion</span><span class="bt"><i style="width:88.6%;background:#7a4fa0"></i></span><span class="bv">38,9 %</span></div><div class="bar"><span class="bl">Islam</span><span class="bt"><i style="width:7.3%;background:#7a4fa0"></i></span><span class="bv">3,2 %</span></div><div class="bar"><span class="bl">Hindouisme</span><span class="bt"><i style="width:6.2%;background:#7a4fa0"></i></span><span class="bv">2,7 %</span></div><div class="bar"><span class="bl">Bouddhisme</span><span class="bt"><i style="width:5.5%;background:#7a4fa0"></i></span><span class="bv">2,4 %</span></div><div class="bar"><span class="bl">Sikhisme</span><span class="bt"><i style="width:1.8%;background:#7a4fa0"></i></span><span class="bv">0,8 %</span></div></figure><p><strong>Âge et santé</strong></p><ul>
+<li>Âge médian : <strong>38 ans</strong>. Espérance de vie : environ <strong>81 ans</strong> pour les hommes et <strong>85 ans</strong> pour les femmes, parmi les plus élevées au monde.</li>
+</ul><aside class="callout recue">
+<p><strong>Idée reçue.</strong> L’Australien du bush, chapeau et kangourou, est un personnage de cinéma : l’Australien moyen vit en banlieue d’une grande ville, travaille dans les services et a un parent né à l’étranger.</p>
+</aside><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.abs.gov.au/statistics/people/population/births-australia/latest-release" target="_blank" rel="noreferrer">Naissances 2024 (ABS) ↗</a><a class="btn" href="https://www.abs.gov.au/statistics/people/people-and-communities/marriages-and-divorces-australia/2024" target="_blank" rel="noreferrer">Mariages et divorces 2024 (ABS) ↗</a><a class="btn" href="https://www.abs.gov.au/articles/religious-affiliation-australia" target="_blank" rel="noreferrer">Religion, recensement 2021 (ABS) ↗</a><a class="btn" href="https://theconversation.com/language-of-love-a-quarter-of-australians-are-in-inter-ethnic-relationships-120416" target="_blank" rel="noreferrer">Couples mixtes (The Conversation) ↗</a><a class="btn" href="https://www.nantien.org.au/" target="_blank" rel="noreferrer">Temple Nan Tien ↗</a></div></div>
+</section>
+<section class="chap" id="a8" data-title="Une grande société d’immigration" data-part="a">
+  <div class="chap-photo" data-wiki="Immigration Museum, Melbourne"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 8</div><h3>Une grande société d’immigration</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="points" data-markers='[{"n": "Lakemba", "lat": -33.92, "lon": 151.0759, "url": "https://www.google.com/maps/search/?api=1&query=Lakemba%20NSW"}, {"n": "Cabramatta", "lat": -33.8947, "lon": 150.9369, "url": "https://www.google.com/maps/search/?api=1&query=Cabramatta%20NSW"}, {"n": "Harris Park", "lat": -33.8233, "lon": 151.0083, "url": "https://www.google.com/maps/search/?api=1&query=Harris%20Park%20NSW"}, {"n": "Box Hill", "lat": -37.8189, "lon": 145.125, "url": "https://www.google.com/maps/search/?api=1&query=Box%20Hill%20VIC"}, {"n": "Footscray", "lat": -37.8, "lon": 144.899, "url": "https://www.google.com/maps/search/?api=1&query=Footscray%20VIC"}, {"n": "Dandenong", "lat": -37.9875, "lon": 145.2149, "url": "https://www.google.com/maps/search/?api=1&query=Dandenong%20VIC"}]'></div><figcaption>🗺️ où vivent les grandes communautés dans Sydney et Melbourne</figcaption></figure><ul>
+<li><strong>8,8 millions</strong> de personnes nées à l’étranger (juin 2025), soit <strong>32 %</strong> de la population, presque le record historique de 1891 (32,4 %).</li>
+<li><strong>Premiers pays de naissance</strong> : <strong>Inde et Angleterre</strong> (environ <strong>971 000</strong> chacun ; l’Inde est passée devant en 2025), puis Chine, Nouvelle-Zélande, Philippines, Vietnam.</li>
+<li><strong>Les vagues</strong> : Britanniques et Irlandais (XIXe siècle) ; Italiens, Grecs, Néerlandais et Yougoslaves après 1945 ; Vietnamiens dans les années 1970-1980 ; Chinois, Indiens, Philippins, Moyen-Orientaux et Africains depuis les années 1990.</li>
+<li><strong>Pourquoi l’arabe ?</strong> C’est la <strong>deuxième langue parlée à la maison</strong> après le mandarin : <strong>367 159 personnes</strong> en 2021, environ 1,4 % de la population. Elle vient de plusieurs vagues : des Libanais dès la fin du XIXe siècle, en majorité chrétiens, puis beaucoup plus nombreux pendant la guerre civile libanaise (1975-1990) ; des Égyptiens, dont de nombreux coptes, dans les années 1960-1970 ; des réfugiés d’Irak, de Syrie, du Soudan et de Palestine depuis les années 1990. Ils vivent surtout dans l’ouest et le sud-ouest de Sydney (Lakemba, Bankstown) et, à Melbourne, dans le nord (Coburg, Broadmeadows, Sydney Road). Parler arabe ne dit rien de la religion : une grande partie des Libanais et des Égyptiens d’Australie sont chrétiens.</li>
+<li><strong>Deux Australie</strong> : les natifs ont un âge médian de 35 ans, les immigrés de 43 ans. Les Italiens et les Anglais, venus après la guerre, ont plus de 60 ans en médiane.</li>
+<li><strong>Pourquoi venir</strong> : salaires élevés, universités, qualité de vie, regroupement familial ; le pays sélectionne surtout des migrants qualifiés.</li>
+</ul><figure class="chart"><figcaption>Premiers pays de naissance des immigrés (2025, en milliers)</figcaption><div class="bar"><span class="bl">Inde</span><span class="bt"><i style="width:100.0%;background:#2f7a52"></i></span><span class="bv">971 k</span></div><div class="bar"><span class="bl">Angleterre</span><span class="bt"><i style="width:100.0%;background:#2f7a52"></i></span><span class="bv">971 k</span></div><div class="bar"><span class="bl">Chine</span><span class="bt"><i style="width:75.4%;background:#2f7a52"></i></span><span class="bv">732 k</span></div><div class="bar"><span class="bl">Nouvelle-Zélande</span><span class="bt"><i style="width:65.7%;background:#2f7a52"></i></span><span class="bv">638 k</span></div><div class="bar"><span class="bl">Philippines</span><span class="bt"><i style="width:42.5%;background:#2f7a52"></i></span><span class="bv">413 k</span></div><div class="bar"><span class="bl">Vietnam</span><span class="bt"><i style="width:33.7%;background:#2f7a52"></i></span><span class="bv">327 k</span></div></figure><aside class="callout attention">
+<p><strong>Précaution.</strong> Une origine ne dit rien du métier ou du parcours d’une personne : ces chiffres racontent des histoires collectives.</p>
+</aside><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.abs.gov.au/media-centre/media-releases/8-things-interest-about-australias-overseas-born-population" target="_blank" rel="noreferrer">Population née à l’étranger 2025 (ABS) ↗</a><a class="btn" href="https://museumsvictoria.com.au/immigrationmuseum/" target="_blank" rel="noreferrer">Musée de l’immigration, Melbourne ↗</a></div></div>
+</section>
+<section class="chap" id="a9" data-title="Comment fonctionne le pays" data-part="a">
+  <div class="chap-photo" data-wiki="Parliament House, Canberra"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 9</div><h3>Comment fonctionne le pays</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Monarchie constitutionnelle fédérale</strong> : le chef d’État est le roi <strong>Charles III</strong>, représenté par la gouverneure générale <strong>Sam Mostyn</strong>. Son rôle est surtout symbolique.</li>
+<li><strong>Le pouvoir réel</strong> : le Premier ministre, <strong>Anthony Albanese</strong> (travailliste), réélu en mai 2025. Parlement à deux chambres : 150 députés, 76 sénateurs.</li>
+<li><strong>Le fédéralisme</strong> : chaque État a son parlement et son Premier ministre ; il gère écoles, hôpitaux, police et transports. En Victoria, élection le <strong>28 novembre 2026</strong>.</li>
+<li><strong>Le vote est obligatoire</strong> depuis 1924 : amende en cas d’abstention, participation proche de 90 %. On vote le samedi, souvent avec une saucisse grillée à la sortie, la « democracy sausage ».</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.aph.gov.au/" target="_blank" rel="noreferrer">Parlement australien ↗</a><a class="btn" href="https://www.pm.gov.au/" target="_blank" rel="noreferrer">Premier ministre ↗</a><a class="btn" href="https://www.gg.gov.au/" target="_blank" rel="noreferrer">Gouverneure générale ↗</a><a class="btn" href="https://www.aec.gov.au/" target="_blank" rel="noreferrer">Commission électorale ↗</a><a class="btn" href="https://www.vec.vic.gov.au/" target="_blank" rel="noreferrer">Élection de Victoria 2026 ↗</a></div></div>
+</section>
+<section class="chap" id="a10" data-title="L’économie australienne" data-part="a">
+  <div class="chap-photo" data-wiki="Port Hedland, Western Australia"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 10</div><h3>L’économie australienne</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>12e économie mondiale</strong> : PIB d’environ <strong>2 120 milliards de dollars US</strong> en 2026, environ <strong>75 600 $ US par habitant</strong> (FMI). Le pays n’a connu aucune récession de 1991 à 2020.</li>
+<li><strong>Exportations 2024-2025</strong> : 646,6 milliards de dollars australiens (AUD).</li>
+</ul><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Produit</th>
+<th>Montant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Produit">Minerai de fer (premier exportateur mondial)</td>
+<td data-label="Montant">116,4 milliards AUD</td>
+</tr>
+<tr>
+<td data-label="Produit">Charbon</td>
+<td data-label="Montant">71,3 milliards AUD</td>
+</tr>
+<tr>
+<td data-label="Produit">Gaz naturel</td>
+<td data-label="Montant">64,7 milliards AUD</td>
+</tr>
+<tr>
+<td data-label="Produit">Éducation des étudiants étrangers</td>
+<td data-label="Montant">53,6 milliards AUD</td>
+</tr>
+<tr>
+<td data-label="Produit">Or</td>
+<td data-label="Montant">46,9 milliards AUD</td>
+</tr>
+</tbody>
+</table></div><ul>
+<li><strong>Clients</strong> : Chine <strong>29,2 %</strong>, Japon 10,8 %, États-Unis 8,4 %, Corée du Sud 6,4 %, Inde 5,4 %. Le pays vit de l’Asie.</li>
+<li><strong>Emploi</strong> : chômage <strong>4,7 %</strong> (septembre 2026), en hausse.</li>
+<li><strong>Salaire moyen</strong> : <strong>2 084 AUD par semaine</strong> pour un adulte à plein temps (mai 2026), avant impôt.</li>
+<li><strong>Impôts</strong> : TVA (GST) de 10 % ; impôt sur le revenu progressif, avec 18 200 AUD exonérés pour les résidents.</li>
+<li><strong>Le logement est le grand problème</strong> : maison ou appartement médian à 1,22 million AUD à Sydney et 787 000 AUD à Melbourne (août 2026).</li>
+</ul><figure class="chart"><figcaption>Les cinq premières exportations (2024-2025, milliards AUD)</figcaption><div class="bar"><span class="bl">Minerai de fer</span><span class="bt"><i style="width:100.0%;background:#c08a12"></i></span><span class="bv">116,4</span></div><div class="bar"><span class="bl">Charbon</span><span class="bt"><i style="width:61.3%;background:#c08a12"></i></span><span class="bv">71,3</span></div><div class="bar"><span class="bl">Gaz naturel</span><span class="bt"><i style="width:55.6%;background:#c08a12"></i></span><span class="bv">64,7</span></div><div class="bar"><span class="bl">Éducation</span><span class="bt"><i style="width:46.0%;background:#c08a12"></i></span><span class="bv">53,6</span></div><div class="bar"><span class="bl">Or</span><span class="bt"><i style="width:40.3%;background:#c08a12"></i></span><span class="bv">46,9</span></div></figure><aside class="callout retenir">
+<p><strong>À retenir.</strong> Un pays riche grâce à son sous-sol et à ses universités, mais où le logement absorbe une grande part des revenus.</p>
+</aside><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.dfat.gov.au/sites/default/files/australia-goods-services-exports-imports-2024-25.pdf" target="_blank" rel="noreferrer">Commerce extérieur 2024-2025 (DFAT) ↗</a><a class="btn" href="https://www.rba.gov.au/" target="_blank" rel="noreferrer">Banque centrale (RBA) ↗</a><a class="btn" href="https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/sep-2026" target="_blank" rel="noreferrer">Chômage (ABS) ↗</a><a class="btn" href="https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/average-weekly-earnings-australia/sort" target="_blank" rel="noreferrer">Salaires (ABS) ↗</a></div></div>
+</section>
+<section class="chap" id="a11" data-title="Travailler et étudier en Australie" data-part="a">
+  <div class="chap-photo" data-wiki="University of Sydney"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 11</div><h3>Travailler et étudier en Australie</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Universités</strong> : neuf dans le top 100 mondial (QS 2026), dont Melbourne (<strong>19e</strong>), UNSW (20e), Sydney (25e), ANU (32e) et Monash (36e). Les étudiants étrangers sont la quatrième source d’exportation du pays.</li>
+<li><strong>Salaire minimum</strong> : <strong>26,44 AUD de l’heure</strong> (1 004,90 AUD par semaine) depuis le 1er juillet 2026, l’un des plus élevés au monde. Les emplois « casual », sans congés payés, sont majorés de <strong>25 %</strong>.</li>
+<li><strong>Retraite (« super »)</strong> : l’employeur verse <strong>12 %</strong> du salaire sur un compte d’épargne-retraite. Les détenteurs de visa vacances-travail peuvent en récupérer une partie à leur départ (le « DASP »), taxée à 65 %.</li>
+<li><strong>Visa vacances-travail</strong> : impôt de <strong>15 %</strong> jusqu’à 45 000 AUD. Indispensable : un numéro fiscal (TFN), sinon 45 % de prélèvement. Pour une deuxième année, il faut <strong>88 jours</strong> de travail en région.</li>
+<li><strong>Culture du travail</strong> : hiérarchie légère, tout le monde s’appelle par son prénom, horaires tenus, pas de travail le soir. Les syndicats et les conventions collectives (« awards ») fixent salaires et majorations.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/work-holiday-417" target="_blank" rel="noreferrer">Visa vacances-travail (Home Affairs) ↗</a><a class="btn" href="https://www.fairwork.gov.au/" target="_blank" rel="noreferrer">Fair Work : salaires et droits ↗</a><a class="btn" href="https://www.ato.gov.au/" target="_blank" rel="noreferrer">Numéro fiscal TFN (ATO) ↗</a><a class="btn" href="https://www.ato.gov.au/" target="_blank" rel="noreferrer">Retraite au départ, DASP (ATO) ↗</a><a class="btn" href="https://www.studyaustralia.gov.au/en/tools-and-resources/news/qs-world-university-rankings-2026" target="_blank" rel="noreferrer">Classement QS 2026 ↗</a><a class="btn" href="https://pvtistes.net/" target="_blank" rel="noreferrer">PVTistes, guide en français ↗</a></div></div>
+</section>
+<section class="chap" id="a12" data-title="La vie quotidienne" data-part="a">
+  <div class="chap-photo" data-wiki="Manly, New South Wales"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 12</div><h3>La vie quotidienne</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Horaires</strong> : magasins de 9 h à 17 h 30, nocturne le jeudi ou le vendredi ; supermarchés jusqu’à 22 h ou plus. On déjeune tôt (12 h) et on dîne tôt (18 h-19 h).</li>
+<li><strong>Payer</strong> : la carte et le paiement par téléphone partout. <strong>Pas de pourboire obligatoire.</strong> Les restaurants « BYO » laissent apporter son vin.</li>
+<li><strong>Alcool</strong> : 18 ans minimum, papiers d’identité souvent demandés. Alcool en vente dans des « bottle shops », pas dans les rayons des supermarchés. Boire dans la rue est souvent interdit.</li>
+<li><strong>Politesse</strong> : décontractée et directe. On dit « How are you going? », on remercie le chauffeur de bus en descendant, et on conduit à gauche.</li>
+<li><strong>Les codes</strong> : le « mate », l’autodérision, la méfiance envers ceux qui se mettent en avant (le « tall poppy syndrome »).</li>
+<li><strong>Les loisirs</strong> :</li>
+<li>les activités physiques favorites des adultes sont la marche, la salle de sport, la randonnée (« bushwalking »), la course et la natation ; le padel, le pickleball et le pilates sont en plein essor ;</li>
+<li>la plage, le surf et le barbecue public gratuit des parcs ;</li>
+<li>le camping et le « road trip » en van, le jardinage, le pub ;</li>
+<li>le ski l’hiver, de juin à septembre, dans les Alpes australiennes ;</li>
+<li>le sport à la télévision ou au stade, le week-end en famille.</li>
+<li><strong>Une face sombre</strong> : les Australiens sont les <strong>plus gros perdants au jeu du monde</strong>, avec 1 635 AUD par adulte en 2022, surtout aux machines à sous (« pokies »).</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.ausport.gov.au/media-centre/news/new-ausplay-data-released-aussies-embracing-sport-for-life" target="_blank" rel="noreferrer">AusPlay, pratiques sportives ↗</a><a class="btn" href="https://www.gamblinghelponline.org.au/" target="_blank" rel="noreferrer">Jeu et dépendance (Gambling Help) ↗</a></div></div>
+</section>
+<section class="chap" id="a13" data-title="Santé, urgences et sécurité" data-part="a">
+  <div class="chap-photo" data-wiki="Surf Life Saving Australia"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 13</div><h3>Santé, urgences et sécurité</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Urgences : 000.</strong></li>
+<li><strong>Santé</strong> : système public (Medicare) excellent, mais <strong>non accessible aux Français</strong> (pas d’accord de réciprocité) : une assurance privée est indispensable.</li>
+<li><strong>Plages</strong> : <strong>357 noyades</strong> en 2024-2025, un record, dont 82 sur des plages. Se baigner <strong>entre les drapeaux rouges et jaunes</strong>.</li>
+<li><strong>Soleil</strong> : crème, chapeau et lunettes même par temps couvert. La campagne nationale « Slip, Slop, Slap » existe depuis 1981.</li>
+<li><strong>Feux</strong> : consulter l’application VicEmergency en été ; certains jours de « Total Fire Ban », tout feu est interdit.</li>
+<li><strong>Randonnée</strong> : prévenir de son itinéraire, emporter beaucoup d’eau ; le réseau téléphonique disparaît vite hors des villes.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://beachsafe.org.au/" target="_blank" rel="noreferrer">Beachsafe, sécurité des plages ↗</a><a class="btn" href="https://emergency.vic.gov.au/" target="_blank" rel="noreferrer">VicEmergency ↗</a><a class="btn" href="https://www.servicesaustralia.gov.au/medicare" target="_blank" rel="noreferrer">Medicare et accords de réciprocité ↗</a><a class="btn" href="https://www.royallifesaving.com.au/library/national-drowning-report/national-drowning-report-2025" target="_blank" rel="noreferrer">Noyades 2025 (Royal Life Saving) ↗</a><a class="btn" href="https://www.smartraveller.gov.au/" target="_blank" rel="noreferrer">Smartraveller (conseils officiels) ↗</a></div></div>
+</section>
+<section class="chap" id="a14" data-title="Faune et flore" data-part="a">
+  <div class="chap-photo" data-wiki="Koala"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 14</div><h3>Faune et flore</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Un monde à part</strong> : <strong>84 %</strong> des plantes, <strong>83 %</strong> des mammifères et <strong>45 %</strong> des oiseaux n’existent qu’en Australie.</li>
+<li><strong>Marsupiaux</strong> : kangourous, koalas, wombats, wallabies. <strong>Monotrèmes</strong>, des mammifères qui pondent des œufs : ornithorynque et échidné.</li>
+<li><strong>Oiseaux</strong> : émeu, casoar, cacatoès, kookaburra au cri moqueur, et le cygne noir, symbole de l’Australie-Occidentale.</li>
+<li><strong>Flore</strong> : plus de 800 espèces d’eucalyptus et de nombreux acacias (le « wattle », emblème national), adaptés au feu.</li>
+<li><strong>Menaces</strong> : le koala est classé « en danger » dans le Queensland, la Nouvelle-Galles du Sud et le territoire de Canberra depuis 2022. La Grande Barrière a connu au moins cinq blanchissements massifs depuis 2016. L’Australie détient l’un des pires records mondiaux d’extinction de mammifères, surtout à cause des chats et renards introduits.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.dcceew.gov.au/" target="_blank" rel="noreferrer">Biodiversité (ministère de l’Environnement) ↗</a><a class="btn" href="https://www.ala.org.au/" target="_blank" rel="noreferrer">Atlas of Living Australia ↗</a></div></div>
+</section>
+<section class="chap" id="a15" data-title="Les animaux dangereux : réalité et légendes" data-part="a">
+  <div class="chap-photo" data-wiki="Saltwater crocodile"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 15</div><h3>Les animaux dangereux : réalité et légendes</h3></div></div>
+  <div class="chap-body"><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Danger</th>
+<th>Réalité</th>
+<th>Bon réflexe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Danger">Requins</td>
+<td data-label="Réalité">19 incidents et 1 mort en 2024, pour des millions de baigneurs</td>
+<td data-label="Bon réflexe">Éviter l’aube, le crépuscule et les eaux troubles</td>
+</tr>
+<tr>
+<td data-label="Danger">Courants (« rips »)</td>
+<td data-label="Réalité">Le vrai danger des plages</td>
+<td data-label="Bon réflexe">Drapeaux rouges et jaunes ; nager parallèlement à la côte</td>
+</tr>
+<tr>
+<td data-label="Danger">Serpents</td>
+<td data-label="Réalité">En moyenne 2 morts par an ; un antivenin existe pour toutes les espèces</td>
+<td data-label="Bon réflexe">Chaussures fermées, ne jamais en approcher un</td>
+</tr>
+<tr>
+<td data-label="Danger">Araignées</td>
+<td data-label="Réalité">Aucun mort confirmé depuis 1979</td>
+<td data-label="Bon réflexe">Secouer chaussures et vêtements laissés dehors</td>
+</tr>
+<tr>
+<td data-label="Danger">Crocodiles marins</td>
+<td data-label="Réalité">Uniquement dans le nord tropical</td>
+<td data-label="Bon réflexe">Ne jamais se baigner sans panneau officiel</td>
+</tr>
+<tr>
+<td data-label="Danger">Méduses-boîtes</td>
+<td data-label="Réalité">Nord tropical, d’octobre-novembre à mai</td>
+<td data-label="Bon réflexe">Combinaison et plages protégées par des filets</td>
+</tr>
+<tr>
+<td data-label="Danger">Chaleur</td>
+<td data-label="Réalité">Le risque le plus fréquent</td>
+<td data-label="Bon réflexe">Eau, ombre, pas d’effort aux heures chaudes</td>
+</tr>
+</tbody>
+</table></div><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.taronga.org.au/conservation-and-science/australian-shark-incident-file/resources" target="_blank" rel="noreferrer">Base de données des requins (Taronga) ↗</a><a class="btn" href="https://beachsafe.org.au/" target="_blank" rel="noreferrer">Beachsafe : courants ↗</a></div></div>
+</section>
+<section class="chap" id="a16" data-title="Culture australienne" data-part="a">
+  <div class="chap-photo" data-wiki="Sydney Opera House"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 16</div><h3>Culture australienne</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Littérature</strong> : Patrick White, prix Nobel 1973 ; Peter Carey, deux fois Booker Prize ; <a href="https://fr.wikipedia.org/wiki/Richard_Flanagan" rel="noreferrer" target="_blank">Richard Flanagan</a>, Booker 2014.</li>
+<li><strong>Cinéma</strong> : <em>Mad Max</em>, <em>Crocodile Dundee</em>, <em>Pique-nique à Hanging Rock</em>, les films de Baz Luhrmann (<em>Moulin Rouge !</em>, <em>Elvis</em>).</li>
+<li><strong>Télévision</strong> : <em>Neighbours</em>, tournée dans la banlieue de Melbourne depuis 1985 ; <em>Bluey</em>, dessin animé de Brisbane devenu un phénomène mondial.</li>
+<li><strong>Musique</strong> : AC/DC, INXS, Kylie Minogue, Sia, Tame Impala, Gotye.</li>
+<li><strong>Arts aborigènes</strong> : la plus ancienne tradition artistique vivante au monde ; la peinture à points est née à Papunya en 1971 ; <a href="https://fr.wikipedia.org/wiki/Albert_Namatjira" rel="noreferrer" target="_blank">Albert Namatjira</a> et <a href="https://fr.wikipedia.org/wiki/Emily_Kame_Kngwarreye" rel="noreferrer" target="_blank">Emily Kame Kngwarreye</a> sont des figures majeures.</li>
+<li><strong>Architecture</strong> : l’Opéra de Sydney de Jørn Utzon (patrimoine mondial 2007), les maisons sur pilotis « Queenslanders », l’architecture victorienne de Melbourne.</li>
+<li><strong>Humour</strong> : ironie, autodérision, irrévérence envers l’autorité.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.sydneyoperahouse.com/" target="_blank" rel="noreferrer">Opéra de Sydney ↗</a><a class="btn" href="https://nga.gov.au/" target="_blank" rel="noreferrer">National Gallery of Australia ↗</a><a class="btn" href="https://www.screenaustralia.gov.au/" target="_blank" rel="noreferrer">Screen Australia ↗</a></div></div>
+</section>
+<section class="chap" id="a17" data-title="Sport et identité nationale" data-part="a">
+  <div class="chap-photo" data-wiki="Sydney Cricket Ground"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 17</div><h3>Sport et identité nationale</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Une nation sportive</strong> : <strong>4e</strong> aux Jeux de Paris 2024 avec <strong>18 médailles d’or</strong> et 53 au total, son meilleur bilan en or. Brisbane accueillera les <strong>Jeux de 2032</strong>.</li>
+<li><strong>Une carte des passions</strong> : au sud et à l’ouest le <strong>football australien (AFL)</strong> ; à Sydney et Brisbane le <strong>rugby à XIII</strong> (le duel annuel « State of Origin ») ; partout le <strong>cricket</strong> l’été.</li>
+<li><strong>Rugby à XV</strong> : les Wallabies, deux fois champions du monde (1991, 1999).</li>
+<li><strong>Tennis</strong> : <a href="https://fr.wikipedia.org/wiki/Rod_Laver" rel="noreferrer" target="_blank">Rod Laver</a>, seul joueur à deux Grands Chelems sur une année (1962, 1969) ; Ash Barty ; l’Open d’Australie à Melbourne.</li>
+<li><strong>Natation et surf</strong> : une culture de la plage née avec les clubs de sauveteurs bénévoles (« surf lifesavers »), au début du XXe siècle.</li>
+<li><strong>Rivalités</strong> : Sydney contre Melbourne, Nouvelle-Galles du Sud contre Queensland, et l’Australie contre l’Angleterre (les « Ashes » de cricket depuis 1882).</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.afl.com.au/" target="_blank" rel="noreferrer">AFL ↗</a><a class="btn" href="https://www.nrl.com/" target="_blank" rel="noreferrer">NRL (rugby à XIII) ↗</a><a class="btn" href="https://www.cricket.com.au/" target="_blank" rel="noreferrer">Cricket Australia ↗</a><a class="btn" href="https://www.olympics.com.au/" target="_blank" rel="noreferrer">Comité olympique australien ↗</a><a class="btn" href="https://www.brisbane2032.com.au/" target="_blank" rel="noreferrer">Brisbane 2032 ↗</a></div></div>
+</section>
+<section class="chap" id="a18" data-title="Australiens célèbres" data-part="a">
+  <div class="chap-photo" data-wiki=""><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 18</div><h3>Australiens célèbres</h3></div></div>
+  <div class="chap-body"><p><strong>Premiers Peuples</strong></p><ul>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Eddie_Mabo" rel="noreferrer" target="_blank">Eddie Mabo</a></strong> : sa victoire en justice (1992) a renversé la « terra nullius ».</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Cathy_Freeman" rel="noreferrer" target="_blank">Cathy Freeman</a></strong> : allume la flamme et gagne le 400 m aux Jeux de Sydney 2000.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Evonne_Goolagong" rel="noreferrer" target="_blank">Evonne Goolagong Cawley</a></strong> : 7 titres du Grand Chelem en simple.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/David_Unaipon" rel="noreferrer" target="_blank">David Unaipon</a></strong> : inventeur et écrivain, sur le billet de 50 dollars.</li>
+</ul><p><strong>Sciences</strong></p><ul>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Howard_Florey" rel="noreferrer" target="_blank">Howard Florey</a></strong> : Nobel 1945 pour la pénicilline.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Elizabeth_Blackburn" rel="noreferrer" target="_blank">Elizabeth Blackburn</a></strong> : Nobel 2009 pour ses travaux sur les télomères.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Graeme_Clark" rel="noreferrer" target="_blank">Graeme Clark</a></strong> : invente à Melbourne l’implant cochléaire.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/David_Warren_(inventeur)" rel="noreferrer" target="_blank">David Warren</a></strong> : invente à Melbourne la « boîte noire » des avions.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Fiona_Wood" rel="noreferrer" target="_blank">Fiona Wood</a></strong> : la peau en spray pour les grands brûlés.</li>
+<li>Le Wi-Fi doit beaucoup à un brevet de l’agence scientifique australienne CSIRO.</li>
+</ul><p><strong>Sport</strong></p><ul>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Donald_Bradman" rel="noreferrer" target="_blank">Don Bradman</a></strong> : 99,94 de moyenne au cricket, un record jamais approché.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Ian_Thorpe" rel="noreferrer" target="_blank">Ian Thorpe</a></strong> : 5 titres olympiques en natation.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Shane_Warne" rel="noreferrer" target="_blank">Shane Warne</a></strong> : 708 guichets en Test.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Ashleigh_Barty" rel="noreferrer" target="_blank">Ash Barty</a></strong> : 3 titres du Grand Chelem.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Oscar_Piastri" rel="noreferrer" target="_blank">Oscar Piastri</a></strong> : pilote de F1 né à Melbourne.</li>
+</ul><p><strong>Cinéma</strong></p><ul>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Cate_Blanchett" rel="noreferrer" target="_blank">Cate Blanchett</a></strong> : née à Melbourne, deux Oscars.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Nicole_Kidman" rel="noreferrer" target="_blank">Nicole Kidman</a></strong>, <strong><a href="https://fr.wikipedia.org/wiki/Hugh_Jackman" rel="noreferrer" target="_blank">Hugh Jackman</a></strong>, <strong><a href="https://fr.wikipedia.org/wiki/Heath_Ledger" rel="noreferrer" target="_blank">Heath Ledger</a></strong> (Oscar posthume) et <strong><a href="https://fr.wikipedia.org/wiki/Margot_Robbie" rel="noreferrer" target="_blank">Margot Robbie</a></strong>.</li>
+</ul><p><strong>Musique</strong></p><ul>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Kylie_Minogue" rel="noreferrer" target="_blank">Kylie Minogue</a></strong> : née à Melbourne.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/AC/DC" rel="noreferrer" target="_blank">AC/DC</a></strong> et <strong><a href="https://fr.wikipedia.org/wiki/Nick_Cave" rel="noreferrer" target="_blank">Nick Cave</a></strong>.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Sia_(chanteuse)" rel="noreferrer" target="_blank">Sia</a></strong> et <strong><a href="https://fr.wikipedia.org/wiki/Paul_Kelly_(musicien)" rel="noreferrer" target="_blank">Paul Kelly</a></strong>.</li>
+</ul><p><strong>Lettres et arts</strong></p><ul>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Germaine_Greer" rel="noreferrer" target="_blank">Germaine Greer</a></strong> : <em>La Femme eunuque</em>, née à Melbourne.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Barry_Humphries" rel="noreferrer" target="_blank">Barry Humphries</a></strong> : alias Dame Edna, né à Melbourne.</li>
+<li><strong><a href="https://fr.wikipedia.org/wiki/Patrick_White" rel="noreferrer" target="_blank">Patrick White</a></strong> et <strong><a href="https://fr.wikipedia.org/wiki/Peter_Carey" rel="noreferrer" target="_blank">Peter Carey</a></strong>.</li>
+</ul></div>
+</section>
+<section class="chap" id="a19" data-title="Où aller selon ce que l’on recherche ?" data-part="a">
+  <div class="chap-photo" data-wiki="Twelve Apostles (Victoria)"><div class="chap-head"><div class="kicker">Comprendre l’Australie · chapitre 19</div><h3>Où aller selon ce que l’on recherche ?</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="points" data-markers='[{"n": "Cairns", "lat": -16.9186, "lon": 145.7781, "url": "https://www.google.com/maps/search/?api=1&query=Cairns%20QLD"}, {"n": "Uluru", "lat": -25.3444, "lon": 131.0369, "url": "https://www.google.com/maps/search/?api=1&query=Uluru"}, {"n": "Ningaloo", "lat": -22.565, "lon": 113.81, "url": "https://www.google.com/maps/search/?api=1&query=Ningaloo%20Reef"}, {"n": "Cradle Mountain", "lat": -41.6848, "lon": 145.9511, "url": "https://www.google.com/maps/search/?api=1&query=Cradle%20Mountain%20TAS"}, {"n": "Byron Bay", "lat": -28.6474, "lon": 153.602, "url": "https://www.google.com/maps/search/?api=1&query=Byron%20Bay%20NSW"}, {"n": "Barossa", "lat": -34.5333, "lon": 138.95, "url": "https://www.google.com/maps/search/?api=1&query=Barossa%20Valley%20SA"}]'></div><figcaption>🗺️ les destinations, avec les temps de vol depuis Melbourne</figcaption></figure><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Envie</th>
+<th>Où</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Envie">Grandes villes</td>
+<td data-label="Où">Sydney, Melbourne</td>
+</tr>
+<tr>
+<td data-label="Envie">Chaleur tropicale</td>
+<td data-label="Où">Darwin, Cairns (de mai à octobre, en saison sèche)</td>
+</tr>
+<tr>
+<td data-label="Envie">Plages et surf</td>
+<td data-label="Où">Gold Coast, Byron Bay, côte de la Nouvelle-Galles du Sud</td>
+</tr>
+<tr>
+<td data-label="Envie">Désert</td>
+<td data-label="Où">Uluru et le Centre rouge (d’avril à septembre)</td>
+</tr>
+<tr>
+<td data-label="Envie">Fraîcheur et forêts</td>
+<td data-label="Où">Tasmanie</td>
+</tr>
+<tr>
+<td data-label="Envie">Récif et faune marine</td>
+<td data-label="Où">Grande Barrière, Ningaloo (requins-baleines de mars à juillet)</td>
+</tr>
+<tr>
+<td data-label="Envie">Vignobles</td>
+<td data-label="Où">Barossa (Australie-Méridionale), Yarra Valley (Victoria)</td>
+</tr>
+<tr>
+<td data-label="Envie">Route mythique</td>
+<td data-label="Où">Great Ocean Road (Victoria)</td>
+</tr>
+</tbody>
+</table></div><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.australia.com/fr-fr" target="_blank" rel="noreferrer">Australia.com ↗</a><a class="btn" href="https://www.westernaustralia.com/" target="_blank" rel="noreferrer">Ningaloo ↗</a><a class="btn" href="https://www.visitgreatoceanroad.org.au/" target="_blank" rel="noreferrer">Great Ocean Road ↗</a></div></div>
+</section>
+<div class="part-open"><div class="kicker">Partie 2</div><h2>Comprendre Melbourne</h2><div class="stats"><div><b>5,44 M</b><span>habitants</span></div><div><b>+2,0 %</b><span>de croissance en un an</span></div><div><b>4e</b><span>ville la plus agréable à vivre</span></div><div><b>100 024</b><span>places au MCG</span></div></div></div><section class="chap" id="b1" data-title="Melbourne en un regard" data-part="b">
+  <div class="chap-photo" data-wiki="Melbourne"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 1</div><h3>Melbourne en un regard</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="quartiers" data-markers='[{"n": "1. Flinders & Collins", "lat": -37.8164, "lon": 144.967, "url": "../melbourne/#q-cbd-sud"}, {"n": "2. Chinatown, Bibliothèque & Marché", "lat": -37.8113, "lon": 144.963, "url": "../melbourne/#q-cbd-nord"}, {"n": "3. Parlement & Fitzroy Gardens", "lat": -37.8125, "lon": 144.9766, "url": "../melbourne/#q-parlement"}, {"n": "4. Southbank & le quartier des arts", "lat": -37.822, "lon": 144.964, "url": "../melbourne/#q-southbank"}, {"n": "5. Kings Domain & Jardins botaniques", "lat": -37.8281, "lon": 144.9754, "url": "../melbourne/#q-kings-domain"}, {"n": "6. Richmond & le quartier des stades", "lat": -37.8203, "lon": 144.9952, "url": "../melbourne/#q-richmond"}, {"n": "7. Fitzroy & Collingwood", "lat": -37.8012, "lon": 144.9811, "url": "../melbourne/#q-fitzroy"}, {"n": "8. Carlton & Parkville", "lat": -37.7977, "lon": 144.9648, "url": "../melbourne/#q-carlton"}, {"n": "9. Abbotsford & Yarra Bend", "lat": -37.7983, "lon": 145.0047, "url": "../melbourne/#q-abbotsford"}, {"n": "10. South Melbourne & Albert Park", "lat": -37.8394, "lon": 144.9631, "url": "../melbourne/#q-south-melbourne"}, {"n": "11. St Kilda", "lat": -37.8661, "lon": 144.9756, "url": "../melbourne/#q-st-kilda"}, {"n": "12. South Yarra, Prahran & Windsor", "lat": -37.8572, "lon": 144.9936, "url": "../melbourne/#q-prahran"}, {"n": "13. Brighton & la côte sud", "lat": -37.9614, "lon": 145.0106, "url": "../melbourne/#q-bayside"}, {"n": "14. Williamstown, Footscray & l’ouest", "lat": -37.8401, "lon": 144.8974, "url": "../melbourne/#q-ouest"}, {"n": "15. Heide & Montsalvat", "lat": -37.7417, "lon": 145.1114, "url": "../melbourne/#q-nord-est"}, {"n": "16. Les grandes escapades", "lat": -38.0172, "lon": 144.9049, "url": "../melbourne/#q-escapades"}]'></div><figcaption>🗺️ le Grand Melbourne autour de la baie de Port Phillip, avec le centre, la Yarra et les 16 quartiers <span class="btns"><a class="btn primary" href="../melbourne/">Ouvrir le dossier des 16 quartiers</a></span></figcaption></figure><div class="tbl-wrap"><table class="tbl kv">
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Habitants</strong></td>
+<td><strong>5 435 590</strong> (juin 2025), soit 19 % des Australiens</td>
+</tr>
+<tr>
+<td><strong>Croissance</strong></td>
+<td><strong>+2,0 %</strong> en un an (105 000 habitants de plus), plus vite que Sydney (+1,4 %)</td>
+</tr>
+<tr>
+<td><strong>Surface</strong></td>
+<td>9 993 km², plus que la Corse, pour 31 communes</td>
+</tr>
+<tr>
+<td><strong>État</strong></td>
+<td>Capitale de Victoria (7,15 millions d’habitants)</td>
+</tr>
+<tr>
+<td><strong>Rang</strong></td>
+<td><strong>4e ville la plus agréable à vivre</strong> au monde (EIU 2025) ; première de 2011 à 2017</td>
+</tr>
+<tr>
+<td><strong>Surnoms</strong></td>
+<td>« Marvellous Melbourne », capitale culturelle, sportive et du café</td>
+</tr>
+</tbody>
+</table></div><aside class="callout attention">
+<p><strong>Attention.</strong> La « City of Melbourne » n’est que la commune du centre ; quand on parle de Melbourne, on parle du Grand Melbourne.</p>
+</aside><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://abs.gov.au/statistics/people/population/regional-population/latest-release" target="_blank" rel="noreferrer">Population 2025 (ABS) ↗</a><a class="btn" href="https://www.invest.vic.gov.au/news-and-events/news/2025/june/melbourne-ranks-1-in-australia-for-liveability-and-4-in-the-world" target="_blank" rel="noreferrer">Classement EIU 2025 ↗</a><a class="btn" href="https://www.melbourne.vic.gov.au/" target="_blank" rel="noreferrer">Ville de Melbourne ↗</a></div></div>
+</section>
+<section class="chap" id="b2" data-title="Les Premiers Peuples et la rivière" data-part="b">
+  <div class="chap-photo" data-wiki="Yarra River"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 2</div><h3>Les Premiers Peuples et la rivière</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="points" data-markers='[{"n": "Yarra River", "lat": -37.82, "lon": 144.965, "url": "https://www.google.com/maps/search/?api=1&query=Yarra%20River%20Melbourne"}]'></div><figcaption>🗺️ les terres wurundjeri et bunurong, la Yarra et la baie</figcaption></figure><p>Melbourne est sur les terres de la nation <strong>kulin</strong> : les <strong>Wurundjeri Woi-wurrung</strong> au nord de la Yarra, les <strong>Bunurong / Boon Wurrung</strong> sur la côte. Ils vivaient de la pêche, des anguilles et de la chasse, et la baie, alors en partie à sec, était un territoire parcouru il y a 10 000 ans. <strong><a href="https://fr.wikipedia.org/wiki/William_Barak" rel="noreferrer" target="_blank">William Barak</a></strong>, ancien wurundjeri du XIXe siècle, artiste et défenseur de son peuple, a aujourd’hui une tour à son effigie dans le centre.</p><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.wurundjeri.com.au/" target="_blank" rel="noreferrer">Wurundjeri Woi-wurrung ↗</a><a class="btn" href="https://www.bunuronglc.org/" target="_blank" rel="noreferrer">Bunurong Land Council ↗</a><a class="btn" href="https://museumsvictoria.com.au/melbournemuseum/" target="_blank" rel="noreferrer">Bunjilaka, centre culturel aborigène (Melbourne Museum) ↗</a></div></div>
+</section>
+<section class="chap" id="b3" data-title="La création de la ville" data-part="b">
+  <div class="chap-photo" data-wiki="Collins Street, Melbourne"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 3</div><h3>La création de la ville</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>1835</strong> : <a href="https://fr.wikipedia.org/wiki/John_Batman" rel="noreferrer" target="_blank">John Batman</a>, venu de Tasmanie, prétend « acheter » 240 000 hectares aux anciens wurundjeri contre des couvertures et des outils. Le gouverneur annule ce traité. La même année, John Pascoe Fawkner s’installe au bord de la Yarra.</li>
+<li><strong>1837</strong> : la ville est baptisée du nom du Premier ministre britannique, <strong>Lord Melbourne</strong>. <a href="https://fr.wikipedia.org/wiki/Robert_Hoddle" rel="noreferrer" target="_blank">Robert Hoddle</a> trace le quadrillage du centre (le « Hoddle Grid »), qui structure toujours le CBD.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.emelbourne.net.au/" target="_blank" rel="noreferrer">Histoire de Melbourne (eMelbourne) ↗</a></div></div>
+</section>
+<section class="chap" id="b4" data-title="L’or et l’enrichissement spectaculaire" data-part="b">
+  <div class="chap-photo" data-wiki="Sovereign Hill"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 4</div><h3>L’or et l’enrichissement spectaculaire</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="points" data-markers='[{"n": "Ballarat", "lat": -37.5622, "lon": 143.8503, "url": "https://www.google.com/maps/search/?api=1&query=Ballarat%20VIC"}, {"n": "Bendigo", "lat": -36.757, "lon": 144.2794, "url": "https://www.google.com/maps/search/?api=1&query=Bendigo%20VIC"}]'></div><figcaption>🗺️ Melbourne et les villes de l’or, Ballarat et Bendigo</figcaption></figure><ul>
+<li><strong>1851</strong> : l’or est découvert à Ballarat et Bendigo. La population de Melbourne passe de 25 000 à 40 000 habitants en quelques mois.</li>
+<li><strong>1865</strong> : Melbourne dépasse Sydney et devient la plus grande ville d’Australie.</li>
+<li><strong>1880 et 1888</strong> : deux expositions universelles. En <strong>1885</strong>, un journaliste anglais la baptise « <strong>Marvellous Melbourne</strong> » : l’une des villes les plus riches du monde.</li>
+<li><strong>1891-1893</strong> : la bulle immobilière éclate, les banques font faillite, une décennie de crise suit.</li>
+<li><strong>1901-1927</strong> : capitale de l’Australie ; le premier Parlement fédéral s’ouvre au Royal Exhibition Building.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://sovereignhill.com.au/" target="_blank" rel="noreferrer">Sovereign Hill, Ballarat ↗</a><a class="btn" href="https://museumsvictoria.com.au/reb/" target="_blank" rel="noreferrer">Royal Exhibition Building ↗</a></div></div>
+</section>
+<section class="chap" id="b5" data-title="L’architecture victorienne" data-part="b">
+  <div class="chap-photo" data-wiki="Royal Exhibition Building"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 5</div><h3>L’architecture victorienne</h3></div></div>
+  <div class="chap-body"><p>L’or a laissé un centre-ville et des faubourgs victoriens parmi les mieux conservés du monde :</p><ul>
+<li>le <strong>Royal Exhibition Building</strong>, patrimoine mondial de l’UNESCO en 2004 ;</li>
+<li>les galeries Royal Arcade (1869) et Block Arcade (1892) ;</li>
+<li>la Bibliothèque d’État (1856) ;</li>
+<li>la gare de Flinders Street (1910) ;</li>
+<li>les rangées de maisons à balcons de fonte de Carlton, Fitzroy et East Melbourne.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://whc.unesco.org/fr/list/1131" target="_blank" rel="noreferrer">Patrimoine mondial UNESCO ↗</a><a class="btn" href="https://www.slv.vic.gov.au/" target="_blank" rel="noreferrer">State Library Victoria ↗</a><a class="btn" href="https://theblockarcade.com.au/" target="_blank" rel="noreferrer">Block Arcade ↗</a></div></div>
+</section>
+<section class="chap" id="b6" data-title="Les vagues migratoires" data-part="b">
+  <div class="chap-photo" data-wiki="Lygon Street"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 6</div><h3>Les vagues migratoires</h3></div></div>
+  <div class="chap-body"><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Période</th>
+<th>Arrivées</th>
+<th>Traces dans la ville</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Période">Années 1850</td>
+<td data-label="Arrivées">Britanniques, Irlandais, Chinois de la ruée vers l’or</td>
+<td data-label="Traces dans la ville">Chinatown, l’un des plus anciens quartiers chinois du monde occidental</td>
+</tr>
+<tr>
+<td data-label="Période">1945-1970</td>
+<td data-label="Arrivées">Italiens, Grecs, Maltais, Néerlandais</td>
+<td data-label="Traces dans la ville">Lygon Street ; Melbourne devient la plus grande ville de langue grecque hors de Grèce et de Chypre</td>
+</tr>
+<tr>
+<td data-label="Période">1975-1990</td>
+<td data-label="Arrivées">Réfugiés vietnamiens et cambodgiens</td>
+<td data-label="Traces dans la ville">Victoria Street à Richmond, Footscray, Springvale</td>
+</tr>
+<tr>
+<td data-label="Période">Depuis 1990</td>
+<td data-label="Arrivées">Chinois, Indiens, Sri-Lankais, Africains de l’Est, Moyen-Orientaux</td>
+<td data-label="Traces dans la ville">Box Hill, Glen Waverley, Dandenong, Footscray</td>
+</tr>
+</tbody>
+</table></div><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://museumsvictoria.com.au/immigrationmuseum/" target="_blank" rel="noreferrer">Immigration Museum ↗</a><a class="btn" href="https://chinesemuseum.com.au/" target="_blank" rel="noreferrer">Musée chinois de Melbourne ↗</a></div></div>
+</section>
+<section class="chap" id="b7" data-title="La sociologie actuelle" data-part="b">
+  <div class="chap-photo" data-wiki="Melbourne Central"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 7</div><h3>La sociologie actuelle</h3></div></div>
+  <div class="chap-body"><p>Les chiffres disponibles portent sur l’État de Victoria, dont Melbourne rassemble les trois quarts des habitants.</p><ul>
+<li><strong>30 %</strong> de nés à l’étranger (davantage dans le Grand Melbourne). Après l’Australie, les premiers pays de naissance sont l’Inde (4 %), l’Angleterre (2,7 %), la Chine (2,6 %) et la Nouvelle-Zélande (1,5 %).</li>
+<li><strong>Langues à la maison</strong> : mandarin (3,4 %), vietnamien (1,8 %), grec (1,6 %), pendjabi (1,6 %).</li>
+<li><strong>Sans religion : 39,3 %</strong>, le premier groupe.</li>
+<li><strong>Âge médian : 38 ans.</strong> Aborigènes et insulaires : 1 % (3,2 % en Australie).</li>
+<li><strong>Une ville étudiante</strong> : les universités de Melbourne, Monash et RMIT accueillent ensemble plus de 200 000 étudiants.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.abs.gov.au/articles/snapshot-vic-2021" target="_blank" rel="noreferrer">Recensement 2021, Victoria (ABS) ↗</a></div></div>
+</section>
+<section class="chap" id="b8" data-title="Les communautés et les quartiers" data-part="b">
+  <div class="chap-photo" data-wiki="Footscray, Victoria"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 8</div><h3>Les communautés et les quartiers</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="points" data-markers='[{"n": "Carlton", "lat": -37.8, "lon": 144.967, "url": "https://www.google.com/maps/search/?api=1&query=Carlton%20VIC"}, {"n": "Oakleigh", "lat": -37.899, "lon": 145.088, "url": "https://www.google.com/maps/search/?api=1&query=Oakleigh%20VIC"}, {"n": "Richmond", "lat": -37.811, "lon": 144.998, "url": "https://www.google.com/maps/search/?api=1&query=Victoria%20Street%20Richmond%20VIC"}, {"n": "Footscray", "lat": -37.8, "lon": 144.899, "url": "https://www.google.com/maps/search/?api=1&query=Footscray%20VIC"}, {"n": "Box Hill", "lat": -37.8189, "lon": 145.125, "url": "https://www.google.com/maps/search/?api=1&query=Box%20Hill%20VIC"}, {"n": "Dandenong", "lat": -37.9875, "lon": 145.2149, "url": "https://www.google.com/maps/search/?api=1&query=Dandenong%20VIC"}, {"n": "Coburg", "lat": -37.744, "lon": 144.964, "url": "https://www.google.com/maps/search/?api=1&query=Coburg%20VIC"}, {"n": "Balaclava", "lat": -37.869, "lon": 144.993, "url": "https://www.google.com/maps/search/?api=1&query=Balaclava%20VIC"}]'></div><figcaption>🗺️ les quartiers des communautés</figcaption></figure><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Quartier</th>
+<th>Ce qu’on y trouve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Quartier">Carlton</td>
+<td data-label="Ce qu’on y trouve">Mémoire italienne, cafés des années 1950, université</td>
+</tr>
+<tr>
+<td data-label="Quartier">Lonsdale Street et Oakleigh</td>
+<td data-label="Ce qu’on y trouve">Communauté grecque, fête Antipodes chaque année</td>
+</tr>
+<tr>
+<td data-label="Quartier">Richmond et Springvale</td>
+<td data-label="Ce qu’on y trouve">Pho, bánh mì, épiceries vietnamiennes</td>
+</tr>
+<tr>
+<td data-label="Quartier">Footscray</td>
+<td data-label="Ce qu’on y trouve">Marché vietnamien, cafés éthiopiens, restaurants africains</td>
+</tr>
+<tr>
+<td data-label="Quartier">Box Hill et Glen Waverley</td>
+<td data-label="Ce qu’on y trouve">Communautés chinoises, restaurants de toute la Chine</td>
+</tr>
+<tr>
+<td data-label="Quartier">Dandenong</td>
+<td data-label="Ce qu’on y trouve">« Little India » et quartier afghan, l’une des communes les plus diverses du pays</td>
+</tr>
+<tr>
+<td data-label="Quartier">Balaclava et St Kilda Est</td>
+<td data-label="Ce qu’on y trouve">Communauté juive, boulangeries et pâtisseries</td>
+</tr>
+</tbody>
+</table></div><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://antipodesfestival.com.au/" target="_blank" rel="noreferrer">Festival Antipodes ↗</a><a class="btn" href="https://www.footscraymarket.com.au/" target="_blank" rel="noreferrer">Footscray Market ↗</a></div></div>
+</section>
+<section class="chap" id="b9" data-title="L’économie de Melbourne" data-part="b">
+  <div class="chap-photo" data-wiki="Port of Melbourne"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 9</div><h3>L’économie de Melbourne</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Une ville de services</strong> : finance, santé, recherche médicale (pôle de Parkville), éducation, conseil, tourisme et grands événements.</li>
+<li><strong>Le premier port à conteneurs d’Australie</strong> : <strong>3,52 millions</strong> de conteneurs (EVP) en 2025-2026, un record.</li>
+<li><strong>La fin de l’automobile</strong> : Ford ferme son usine en 2016, Toyota en 2017 ; des milliers d’emplois industriels disparaissent dans l’ouest et le nord.</li>
+<li><strong>Les nouveaux moteurs</strong> : les étudiants étrangers, la tech, la construction, et des institutions comme l’Australian Open ou le Grand Prix.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.portofmelbourne.com/" target="_blank" rel="noreferrer">Port de Melbourne ↗</a><a class="btn" href="https://www.invest.vic.gov.au/" target="_blank" rel="noreferrer">Invest Victoria ↗</a></div></div>
+</section>
+<section class="chap" id="b10" data-title="Étudier et travailler à Melbourne" data-part="b">
+  <div class="chap-photo" data-wiki="University of Melbourne"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 10</div><h3>Étudier et travailler à Melbourne</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="points" data-markers='[{"n": "University of Melbourne", "lat": -37.7983, "lon": 144.961, "url": "https://www.google.com/maps/search/?api=1&query=University%20of%20Melbourne%20Parkville"}, {"n": "Monash Clayton", "lat": -37.9105, "lon": 145.1362, "url": "https://www.google.com/maps/search/?api=1&query=Monash%20University%20Clayton"}, {"n": "RMIT", "lat": -37.8083, "lon": 144.9631, "url": "https://www.google.com/maps/search/?api=1&query=RMIT%20University%20Melbourne"}]'></div><figcaption>🗺️ les universités</figcaption></figure><ul>
+<li><strong>Universités</strong> : University of Melbourne (<strong>19e</strong> mondiale, QS 2026), Monash (36e), RMIT, Deakin, La Trobe, Swinburne, Victoria University.</li>
+<li><strong>Emplois accessibles</strong> : hôtellerie, restauration, événementiel, commerce, accueil, études de marché, figuration. Pour servir de l’alcool, il faut la certification <strong>RSA</strong> de l’État de Victoria.</li>
+<li><strong>Le calendrier compte</strong> : beaucoup d’emplois saisonniers sont liés aux grands événements (courses hippiques en octobre-novembre, cricket en été, Open d’Australie en janvier, F1 en avril).</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.studymelbourne.vic.gov.au/" target="_blank" rel="noreferrer">Study Melbourne ↗</a><a class="btn" href="https://www.vic.gov.au/rsa-training" target="_blank" rel="noreferrer">Certificat RSA (Victoria) ↗</a><a class="btn" href="https://www.unimelb.edu.au/" target="_blank" rel="noreferrer">University of Melbourne ↗</a><a class="btn" href="https://www.monash.edu/" target="_blank" rel="noreferrer">Monash ↗</a><a class="btn" href="https://www.rmit.edu.au/" target="_blank" rel="noreferrer">RMIT ↗</a></div></div>
+</section>
+<section class="chap" id="b11" data-title="Se loger et se déplacer" data-part="b">
+  <div class="chap-photo" data-wiki="Trams in Melbourne"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 11</div><h3>Se loger et se déplacer</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="stations" data-markers='[{"n": "Flinders Street", "lat": -37.8183, "lon": 144.9671}, {"n": "Southern Cross", "lat": -37.8184, "lon": 144.9525}, {"n": "Melbourne Central", "lat": -37.81, "lon": 144.9628}, {"n": "Parliament", "lat": -37.8114, "lon": 144.973}, {"n": "Flagstaff", "lat": -37.812, "lon": 144.956}, {"n": "State Library (Metro Tunnel)", "lat": -37.8098, "lon": 144.9645}, {"n": "Town Hall (Metro Tunnel)", "lat": -37.815, "lon": 144.9665}, {"n": "Anzac (Metro Tunnel)", "lat": -37.832, "lon": 144.972}, {"n": "Parkville (Metro Tunnel)", "lat": -37.799, "lon": 144.958}, {"n": "Arden (Metro Tunnel)", "lat": -37.801, "lon": 144.94}]'></div><figcaption>🗺️ le réseau de trains et de trams, et la zone de tram gratuit <span class="btns"><a class="btn" href="https://www.ptv.vic.gov.au/" target="_blank" rel="noreferrer">Plans officiels du réseau (PTV)</a></span></figcaption></figure><ul>
+<li><strong>Loyer</strong> : <strong>600 AUD par semaine</strong> en médiane pour une maison comme pour un appartement (septembre 2026) ; à Sydney, c’était déjà 750 à 780 AUD un an plus tôt. La colocation (« share house ») est la norme pour les jeunes.</li>
+<li><strong>Achat</strong> : logement médian à <strong>786 718 AUD</strong> (août 2026), un tiers moins cher qu’à Sydney.</li>
+<li><strong>Transports</strong> :</li>
+<li>le plus grand réseau de tram du monde ;</li>
+<li>le <strong>tram gratuit dans le centre</strong> (Free Tram Zone) ;</li>
+<li>la carte <strong>myki</strong> ou le paiement par téléphone : 5,70 AUD les 2 h, plafond de 11,40 AUD par jour en semaine et 8 AUD le week-end ;</li>
+<li>le <strong>Metro Tunnel</strong>, nouveau tunnel ferroviaire sous le centre, avec cinq nouvelles gares.</li>
+<li><strong>Conduite</strong> : à gauche, avec le célèbre « hook turn » du centre : pour tourner à droite, on se place à gauche et on attend.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.ptv.vic.gov.au/" target="_blank" rel="noreferrer">PTV, transports ↗</a><a class="btn" href="https://bigbuild.vic.gov.au/projects/metro-tunnel" target="_blank" rel="noreferrer">Metro Tunnel ↗</a><a class="btn" href="https://flatmates.com.au/" target="_blank" rel="noreferrer">Flatmates, colocation ↗</a><a class="btn" href="https://www.domain.com.au/" target="_blank" rel="noreferrer">Domain, locations ↗</a><a class="btn" href="https://www.consumer.vic.gov.au/housing/renting" target="_blank" rel="noreferrer">Droits des locataires (Consumer Affairs Victoria) ↗</a></div></div>
+</section>
+<section class="chap" id="b12" data-title="Comprendre la météo melburnienne" data-part="b">
+  <div class="chap-photo" data-wiki="Brighton, Victoria"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 12</div><h3>Comprendre la météo melburnienne</h3></div></div>
+  <div class="chap-body"><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Mois</th>
+<th>Max / Min</th>
+<th>Mer</th>
+<th>Soleil par jour</th>
+<th>UV</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Mois">Octobre</td>
+<td data-label="Max / Min">19° / 9°</td>
+<td data-label="Mer">14°</td>
+<td data-label="Soleil par jour">6 h</td>
+<td data-label="UV">7, élevé</td>
+</tr>
+<tr>
+<td data-label="Mois"><strong>Novembre</strong></td>
+<td data-label="Max / Min"><strong>22° / 10°</strong></td>
+<td data-label="Mer">16°</td>
+<td data-label="Soleil par jour">7 h</td>
+<td data-label="UV">9, très élevé</td>
+</tr>
+<tr>
+<td data-label="Mois">Décembre</td>
+<td data-label="Max / Min">24° / 12°</td>
+<td data-label="Mer">18°</td>
+<td data-label="Soleil par jour">8 h</td>
+<td data-label="UV">11, extrême</td>
+</tr>
+<tr>
+<td data-label="Mois">Janvier</td>
+<td data-label="Max / Min">26° / 14°</td>
+<td data-label="Mer">19°</td>
+<td data-label="Soleil par jour">9 h</td>
+<td data-label="UV">11, extrême</td>
+</tr>
+<tr>
+<td data-label="Mois">Février</td>
+<td data-label="Max / Min">26° / 14°</td>
+<td data-label="Mer">20°</td>
+<td data-label="Soleil par jour">8 h</td>
+<td data-label="UV">10</td>
+</tr>
+<tr>
+<td data-label="Mois">Mars</td>
+<td data-label="Max / Min">24° / 13°</td>
+<td data-label="Mer">20°</td>
+<td data-label="Soleil par jour">7 h</td>
+<td data-label="UV">8</td>
+</tr>
+<tr>
+<td data-label="Mois">Avril</td>
+<td data-label="Max / Min">20° / 10°</td>
+<td data-label="Mer">18°</td>
+<td data-label="Soleil par jour">5 h</td>
+<td data-label="UV">5</td>
+</tr>
+<tr>
+<td data-label="Mois">Juillet</td>
+<td data-label="Max / Min">13° / 5°</td>
+<td data-label="Mer">12°</td>
+<td data-label="Soleil par jour">4 h</td>
+<td data-label="UV">2</td>
+</tr>
+</tbody>
+</table></div><ul>
+<li><strong>« Quatre saisons en une journée »</strong> : un vent du nord venu du désert peut faire monter le thermomètre à plus de 35 °C, puis un front froid le fait chuter de plus de 10 degrés en moins d’une heure.</li>
+<li><strong>Records</strong> : <strong>46,4 °C</strong> le 7 février 2009, le jour du « Black Saturday » où les feux ont tué 173 personnes en Victoria ; –2,8 °C en 1869. Il n’a plus neigé dans le centre depuis 1986.</li>
+<li><strong>Conseil</strong> : toujours une veste dans le sac, et de la crème solaire même s’il fait frais.</li>
+</ul><figure class="chart"><figcaption>Melbourne : températures moyennes, du maximum (en haut) au minimum (en bas)</figcaption>
+<svg viewBox="0 0 560 220" role="img" aria-label="Températures moyennes à Melbourne"><defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0703a"/><stop offset="1" stop-color="#3a7bd5"/></linearGradient></defs><rect x="41.2" y="88.7" width="40.0" height="53.3" rx="6" fill="url(#tg)"/><text x="61.2" y="82.7" class="tv">19°</text><text x="61.2" y="156.0" class="tv lo">9°</text><text x="61.2" y="212" class="tm">Oct</text><rect x="103.8" y="72.7" width="40.0" height="64.0" rx="6" fill="url(#tg)"/><text x="123.8" y="66.7" class="tv">22°</text><text x="123.8" y="150.7" class="tv lo">10°</text><text x="123.8" y="212" class="tm">Nov</text><rect x="166.2" y="62.0" width="40.0" height="64.0" rx="6" fill="url(#tg)"/><text x="186.2" y="56.0" class="tv">24°</text><text x="186.2" y="140.0" class="tv lo">12°</text><text x="186.2" y="212" class="tm">Déc</text><rect x="228.8" y="51.3" width="40.0" height="64.0" rx="6" fill="url(#tg)"/><text x="248.8" y="45.3" class="tv">26°</text><text x="248.8" y="129.3" class="tv lo">14°</text><text x="248.8" y="212" class="tm">Jan</text><rect x="291.2" y="51.3" width="40.0" height="64.0" rx="6" fill="url(#tg)"/><text x="311.2" y="45.3" class="tv">26°</text><text x="311.2" y="129.3" class="tv lo">14°</text><text x="311.2" y="212" class="tm">Fév</text><rect x="353.8" y="62.0" width="40.0" height="58.7" rx="6" fill="url(#tg)"/><text x="373.8" y="56.0" class="tv">24°</text><text x="373.8" y="134.7" class="tv lo">13°</text><text x="373.8" y="212" class="tm">Mar</text><rect x="416.2" y="83.3" width="40.0" height="53.3" rx="6" fill="url(#tg)"/><text x="436.2" y="77.3" class="tv">20°</text><text x="436.2" y="150.7" class="tv lo">10°</text><text x="436.2" y="212" class="tm">Avr</text><rect x="478.8" y="120.7" width="40.0" height="42.7" rx="6" fill="url(#tg)"/><text x="498.8" y="114.7" class="tv">13°</text><text x="498.8" y="177.3" class="tv lo">5°</text><text x="498.8" y="212" class="tm">Juil</text></svg></figure><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.bom.gov.au/vic/forecasts/melbourne.shtml" target="_blank" rel="noreferrer">Prévisions Melbourne (BoM) ↗</a><a class="btn" href="https://www.arpansa.gov.au/" target="_blank" rel="noreferrer">Indice UV (ARPANSA) ↗</a></div></div>
+</section>
+<section class="chap" id="b13" data-title="Manger et boire" data-part="b">
+  <div class="chap-photo" data-wiki="Queen Victoria Market"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 13</div><h3>Manger et boire</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Le café</strong> : Melbourne en est la capitale australienne. Flat white, long black et le « magic », une spécialité locale (double ristretto et lait). Les chaînes y réussissent mal : Starbucks a fermé la plupart de ses cafés australiens en 2008.</li>
+<li><strong>Le brunch</strong> : avocat écrasé sur pain grillé, œufs, et files d’attente le week-end.</li>
+<li><strong>Les plats d’ici</strong> : meat pie, chicken parma au pub, fish and chips, et le <strong>dim sim</strong>, gros ravioli inventé à Melbourne.</li>
+<li><strong>Le monde dans l’assiette</strong> : grec (souvlaki), italien (Lygon Street), vietnamien (pho), chinois (dumplings), indien, éthiopien.</li>
+<li><strong>Les marchés</strong> :</li>
+<li><strong>Queen Victoria Market</strong> (1878), le plus grand marché à ciel ouvert de l’hémisphère sud ;</li>
+<li><strong>South Melbourne</strong> (1867) ;</li>
+<li><strong>Prahran</strong> (1864) ;</li>
+<li><strong>Footscray</strong>.</li>
+<li><strong>À boire</strong> : les vins de la Yarra Valley et de la péninsule de Mornington, et les rooftops et bars cachés des ruelles.</li>
+<li><strong>Les douceurs</strong> : lamingtons, pavlova, Tim Tam et Vegemite au petit-déjeuner, à goûter au moins une fois.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://qvm.com.au/" target="_blank" rel="noreferrer">Queen Victoria Market ↗</a><a class="btn" href="https://southmelbournemarket.com.au/" target="_blank" rel="noreferrer">South Melbourne Market ↗</a><a class="btn" href="https://www.prahranmarket.com.au/" target="_blank" rel="noreferrer">Prahran Market ↗</a><a class="btn" href="https://www.broadsheet.com.au/melbourne" target="_blank" rel="noreferrer">Broadsheet Melbourne (adresses) ↗</a><a class="btn" href="https://melbournefoodandwine.com.au/" target="_blank" rel="noreferrer">Melbourne Food & Wine Festival ↗</a></div></div>
+</section>
+<section class="chap" id="b14" data-title="Sport et vie collective" data-part="b">
+  <div class="chap-photo" data-wiki="Melbourne Cricket Ground"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 14</div><h3>Sport et vie collective</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="points" data-markers='[{"n": "MCG", "lat": -37.82, "lon": 144.9834, "url": "https://www.google.com/maps/search/?api=1&query=Melbourne%20Cricket%20Ground"}, {"n": "Melbourne Park", "lat": -37.8217, "lon": 144.9785, "url": "https://www.google.com/maps/search/?api=1&query=Melbourne%20Park"}, {"n": "Flemington", "lat": -37.789, "lon": 144.912, "url": "https://www.google.com/maps/search/?api=1&query=Flemington%20Racecourse"}, {"n": "Albert Park", "lat": -37.8497, "lon": 144.968, "url": "https://www.google.com/maps/search/?api=1&query=Albert%20Park%20Grand%20Prix%20circuit"}]'></div><figcaption>🗺️ les stades et sites sportifs</figcaption></figure><ul>
+<li><strong>Le MCG</strong> (1853, <strong>100 024 places</strong>) est le temple du sport. La finale AFL du 26 septembre 2026 y a réuni <strong>100 023 spectateurs</strong> : Brisbane a battu Fremantle de 7 points et gagné son troisième titre de suite.</li>
+<li><strong>L’AFL est une religion locale</strong> : 10 des 18 clubs sont de Victoria. On choisit son club pour la vie (Collingwood, Carlton, Richmond, Essendon…).</li>
+<li><strong>Les grands rendez-vous de la saison 2026-2027</strong> :</li>
+</ul><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th>Date</th>
+<th>Événement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Date">Mardi 3 novembre 2026</td>
+<td data-label="Événement"><strong>Melbourne Cup</strong> à Flemington : 3 200 m, 10 millions AUD de dotation, jour férié</td>
+</tr>
+<tr>
+<td data-label="Date">26-30 décembre 2026</td>
+<td data-label="Événement"><strong>Boxing Day Test</strong> au MCG : Australie contre Nouvelle-Zélande</td>
+</tr>
+<tr>
+<td data-label="Date">11-31 janvier 2027</td>
+<td data-label="Événement"><strong>Open d’Australie</strong> à Melbourne Park (plus de 1,36 million de spectateurs en 2026)</td>
+</tr>
+<tr>
+<td data-label="Date">11-15 mars 2027</td>
+<td data-label="Événement"><strong>Test du 150e anniversaire</strong> contre l’Angleterre au MCG, où s’est joué le tout premier Test en 1877</td>
+</tr>
+<tr>
+<td data-label="Date">2-4 avril 2027</td>
+<td data-label="Événement"><strong>Grand Prix de F1</strong> à Albert Park, avec une course sprint</td>
+</tr>
+<tr>
+<td data-label="Date">Mars à septembre</td>
+<td data-label="Événement">Saison d’AFL ; le 25 avril, match de l’Anzac Day entre Collingwood et Essendon</td>
+</tr>
+</tbody>
+</table></div><ul>
+<li><strong>Pratiquer</strong> :</li>
+<li>courir sur The Tan, une boucle de 3,8 km autour des jardins botaniques ;</li>
+<li>faire le tour du lac d’Albert Park, 5 km ;</li>
+<li>le vélo sur les pistes le long de la baie ;</li>
+<li>surfer à Torquay, à 1 h 30 ;</li>
+<li>le padel et le pickleball, qui explosent.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.mcg.org.au/" target="_blank" rel="noreferrer">MCG ↗</a><a class="btn" href="https://www.vrc.com.au/" target="_blank" rel="noreferrer">Melbourne Cup (VRC) ↗</a><a class="btn" href="https://ausopen.com/" target="_blank" rel="noreferrer">Australian Open ↗</a><a class="btn" href="https://www.grandprix.com.au/" target="_blank" rel="noreferrer">Grand Prix de F1 ↗</a><a class="btn" href="https://www.mcg.org.au/news/2026/march/international-cricket-schedule-confirmed-for-202627" target="_blank" rel="noreferrer">Calendrier cricket 2026-2027 ↗</a><a class="btn" href="https://www.afl.com.au/" target="_blank" rel="noreferrer">AFL ↗</a></div></div>
+</section>
+<section class="chap" id="b15" data-title="Concerts, arts et événements" data-part="b">
+  <div class="chap-photo" data-wiki="National Gallery of Victoria"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 15</div><h3>Concerts, arts et événements</h3></div></div>
+  <div class="chap-body"><ul>
+<li><strong>Les institutions</strong> :</li>
+<li>la <strong>National Gallery of Victoria</strong>, la plus ancienne et la plus visitée des galeries d’Australie, gratuite ;</li>
+<li>l’<strong>ACMI</strong>, musée de l’image en mouvement ;</li>
+<li>l’<strong>Arts Centre</strong> ;</li>
+<li>le <strong>Melbourne Museum</strong>.</li>
+<li><strong>Une ville de livres</strong> : deuxième « Ville de littérature » de l’UNESCO, en 2008.</li>
+<li><strong>La musique</strong> : une des capitales mondiales de la musique live, avec Paul Kelly, Nick Cave, <a href="https://fr.wikipedia.org/wiki/Courtney_Barnett" rel="noreferrer" target="_blank">Courtney Barnett</a> et des centaines de petites salles à Fitzroy, Collingwood et Brunswick.</li>
+<li><strong>Le street art</strong> : Hosier Lane et AC/DC Lane.</li>
+<li><strong>Les festivals jusqu’en avril 2027</strong> :</li>
+<li>le feu d’artifice du 31 décembre sur la Yarra ;</li>
+<li><strong>Midsumma</strong>, festival LGBTQ+, du 17 janvier au 7 février 2027 ;</li>
+<li>le Nouvel An lunaire le 6 février 2027 ;</li>
+<li><strong>Moomba</strong>, plus grande fête gratuite du pays, le week-end du Labour Day début mars ;</li>
+<li>le Festival international de la comédie, de fin mars à avril.</li>
+</ul><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://www.ngv.vic.gov.au/" target="_blank" rel="noreferrer">NGV ↗</a><a class="btn" href="https://www.acmi.net.au/" target="_blank" rel="noreferrer">ACMI ↗</a><a class="btn" href="https://www.artscentremelbourne.com.au/" target="_blank" rel="noreferrer">Arts Centre Melbourne ↗</a><a class="btn" href="https://www.midsumma.org.au/" target="_blank" rel="noreferrer">Midsumma ↗</a><a class="btn" href="https://www.comedyfestival.com.au/" target="_blank" rel="noreferrer">Comedy Festival ↗</a><a class="btn" href="https://whatson.melbourne.vic.gov.au/" target="_blank" rel="noreferrer">What’s On Melbourne ↗</a><a class="btn" href="https://cityofliterature.com.au/" target="_blank" rel="noreferrer">Ville de littérature ↗</a></div></div>
+</section>
+<section class="chap" id="b16" data-title="Ce qui distingue Melbourne de Sydney" data-part="b">
+  <div class="chap-photo" data-wiki="Southbank, Victoria"><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 16</div><h3>Ce qui distingue Melbourne de Sydney</h3></div></div>
+  <div class="chap-body"><div class="tbl-wrap"><table class="tbl">
+<thead>
+<tr>
+<th></th>
+<th>Sydney</th>
+<th>Melbourne</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Habitants</td>
+<td data-label="Sydney">5,64 millions</td>
+<td data-label="Melbourne">5,44 millions, mais croît plus vite</td>
+</tr>
+<tr>
+<td>Image</td>
+<td data-label="Sydney">Le port, l’Opéra, les plages</td>
+<td data-label="Melbourne">Les ruelles, les cafés, les stades</td>
+</tr>
+<tr>
+<td>Climat</td>
+<td data-label="Sydney">Doux et ensoleillé</td>
+<td data-label="Melbourne">Changeant, plus frais</td>
+</tr>
+<tr>
+<td>Sport</td>
+<td data-label="Sydney">Rugby à XIII</td>
+<td data-label="Melbourne">Football australien</td>
+</tr>
+<tr>
+<td>Logement médian</td>
+<td data-label="Sydney">1,22 million AUD</td>
+<td data-label="Melbourne">787 000 AUD</td>
+</tr>
+<tr>
+<td>Loyer médian</td>
+<td data-label="Sydney">750 à 780 AUD par semaine (2025)</td>
+<td data-label="Melbourne">600 AUD par semaine (2026)</td>
+</tr>
+<tr>
+<td>Caractère</td>
+<td data-label="Sydney">Extravertie, tournée vers l’océan</td>
+<td data-label="Melbourne">Intérieure, à découvrir quartier par quartier</td>
+</tr>
+</tbody>
+</table></div><aside class="callout retenir">
+<p><strong>À retenir.</strong> Sydney séduit en une journée ; Melbourne se révèle avec le temps.</p>
+</aside></div>
+</section>
+<section class="chap" id="b17" data-title="Les 16 quartiers et les 90 lieux" data-part="b">
+  <div class="chap-photo" data-wiki=""><div class="chap-head"><div class="kicker">Comprendre Melbourne · chapitre 17</div><h3>Les 16 quartiers et les 90 lieux</h3></div></div>
+  <div class="chap-body"><figure class="map-fig"><div class="map" data-kind="quartiers" data-markers='[{"n": "1. Flinders & Collins", "lat": -37.8164, "lon": 144.967, "url": "../melbourne/#q-cbd-sud"}, {"n": "2. Chinatown, Bibliothèque & Marché", "lat": -37.8113, "lon": 144.963, "url": "../melbourne/#q-cbd-nord"}, {"n": "3. Parlement & Fitzroy Gardens", "lat": -37.8125, "lon": 144.9766, "url": "../melbourne/#q-parlement"}, {"n": "4. Southbank & le quartier des arts", "lat": -37.822, "lon": 144.964, "url": "../melbourne/#q-southbank"}, {"n": "5. Kings Domain & Jardins botaniques", "lat": -37.8281, "lon": 144.9754, "url": "../melbourne/#q-kings-domain"}, {"n": "6. Richmond & le quartier des stades", "lat": -37.8203, "lon": 144.9952, "url": "../melbourne/#q-richmond"}, {"n": "7. Fitzroy & Collingwood", "lat": -37.8012, "lon": 144.9811, "url": "../melbourne/#q-fitzroy"}, {"n": "8. Carlton & Parkville", "lat": -37.7977, "lon": 144.9648, "url": "../melbourne/#q-carlton"}, {"n": "9. Abbotsford & Yarra Bend", "lat": -37.7983, "lon": 145.0047, "url": "../melbourne/#q-abbotsford"}, {"n": "10. South Melbourne & Albert Park", "lat": -37.8394, "lon": 144.9631, "url": "../melbourne/#q-south-melbourne"}, {"n": "11. St Kilda", "lat": -37.8661, "lon": 144.9756, "url": "../melbourne/#q-st-kilda"}, {"n": "12. South Yarra, Prahran & Windsor", "lat": -37.8572, "lon": 144.9936, "url": "../melbourne/#q-prahran"}, {"n": "13. Brighton & la côte sud", "lat": -37.9614, "lon": 145.0106, "url": "../melbourne/#q-bayside"}, {"n": "14. Williamstown, Footscray & l’ouest", "lat": -37.8401, "lon": 144.8974, "url": "../melbourne/#q-ouest"}, {"n": "15. Heide & Montsalvat", "lat": -37.7417, "lon": 145.1114, "url": "../melbourne/#q-nord-est"}, {"n": "16. Les grandes escapades", "lat": -38.0172, "lon": 144.9049, "url": "../melbourne/#q-escapades"}]'></div><figcaption>🗺️ la carte interactive des 16 quartiers <span class="btns"><a class="btn primary" href="../melbourne/">Ouvrir le dossier des 16 quartiers</a></span></figcaption></figure><p>Partie déjà rédigée sur le site, de <strong>Flinders &amp; Collins</strong> aux <strong>grandes escapades</strong>, de Phillip Island à la Great Ocean Road. Elle viendra en fin de dossier.</p><div class="links"><span class="links-t">Pour aller plus loin</span><a class="btn" href="https://olllvier.github.io/guide-istanbul/melbourne/" target="_blank" rel="noreferrer">Le dossier en ligne ↗</a></div></div>
+</section>
+      <footer><h4>Sources principales</h4><ul>
+<li>Australian Bureau of Statistics :</li>
+<li>population au 30 juin 2025 et au 31 mars 2026 ;</li>
+<li>immigration 2025 ;</li>
+<li>naissances 2024 ;</li>
+<li>mariages et divorces 2024 ;</li>
+<li>recensement 2021 (Victoria, religion, populations autochtones) ;</li>
+<li>salaires (mai 2026) et chômage (septembre 2026).</li>
+<li>Bureau of Meteorology et CSIRO : <em>State of the Climate 2024</em>.</li>
+<li>Climat des villes : moyennes Weather2Travel.</li>
+<li>Records de température : Weatherzone.</li>
+<li>FMI, Perspectives économiques d’avril 2026, via Fermor.</li>
+<li>Ministère australien des Affaires étrangères (DFAT) : commerce 2024-2025.</li>
+<li>Fair Work et ATO : salaire minimum 2026, fiscalité du visa vacances-travail.</li>
+<li>Logement : Cotality (août 2026) et Domain (septembre 2026).</li>
+<li>Public Transport Victoria : tarifs 2026.</li>
+<li>Business Victoria : jours fériés.</li>
+<li>Royal Life Saving : noyades 2024-2025.</li>
+<li>Taronga : requins 2024.</li>
+<li>Classements : EIU 2025 et QS 2026.</li>
+<li>Sport : MCG, VRC (Melbourne Cup), Cricket Australia, Midsumma, GPFans (F1 2027).</li>
+<li>Animal Medicines Australia : animaux de compagnie.</li>
+<li>Grattan Institute : jeu.</li>
+<li>Université de Melbourne et HILDA : couples mixtes.</li>
+</ul></footer>
+    </div>
+  </main>
+  <script src="../leaflet.js"></script>
+  <script>
+  const ORDER=[{"id": "a1", "t": "Le pays en un regard", "p": "Comprendre l’Australie", "n": 1}, {"id": "a2", "t": "Un continent habité depuis au moins 65 000 ans", "p": "Comprendre l’Australie", "n": 2}, {"id": "a3", "t": "Comment l’Australie est devenue un pays", "p": "Comprendre l’Australie", "n": 3}, {"id": "a4", "t": "Une géographie hors norme", "p": "Comprendre l’Australie", "n": 4}, {"id": "a5", "t": "Climats et saisons", "p": "Comprendre l’Australie", "n": 5}, {"id": "a6", "t": "Les États et territoires", "p": "Comprendre l’Australie", "n": 6}, {"id": "a7", "t": "Qui sont les Australiens ?", "p": "Comprendre l’Australie", "n": 7}, {"id": "a8", "t": "Une grande société d’immigration", "p": "Comprendre l’Australie", "n": 8}, {"id": "a9", "t": "Comment fonctionne le pays", "p": "Comprendre l’Australie", "n": 9}, {"id": "a10", "t": "L’économie australienne", "p": "Comprendre l’Australie", "n": 10}, {"id": "a11", "t": "Travailler et étudier en Australie", "p": "Comprendre l’Australie", "n": 11}, {"id": "a12", "t": "La vie quotidienne", "p": "Comprendre l’Australie", "n": 12}, {"id": "a13", "t": "Santé, urgences et sécurité", "p": "Comprendre l’Australie", "n": 13}, {"id": "a14", "t": "Faune et flore", "p": "Comprendre l’Australie", "n": 14}, {"id": "a15", "t": "Les animaux dangereux : réalité et légendes", "p": "Comprendre l’Australie", "n": 15}, {"id": "a16", "t": "Culture australienne", "p": "Comprendre l’Australie", "n": 16}, {"id": "a17", "t": "Sport et identité nationale", "p": "Comprendre l’Australie", "n": 17}, {"id": "a18", "t": "Australiens célèbres", "p": "Comprendre l’Australie", "n": 18}, {"id": "a19", "t": "Où aller selon ce que l’on recherche ?", "p": "Comprendre l’Australie", "n": 19}, {"id": "b1", "t": "Melbourne en un regard", "p": "Comprendre Melbourne", "n": 1}, {"id": "b2", "t": "Les Premiers Peuples et la rivière", "p": "Comprendre Melbourne", "n": 2}, {"id": "b3", "t": "La création de la ville", "p": "Comprendre Melbourne", "n": 3}, {"id": "b4", "t": "L’or et l’enrichissement spectaculaire", "p": "Comprendre Melbourne", "n": 4}, {"id": "b5", "t": "L’architecture victorienne", "p": "Comprendre Melbourne", "n": 5}, {"id": "b6", "t": "Les vagues migratoires", "p": "Comprendre Melbourne", "n": 6}, {"id": "b7", "t": "La sociologie actuelle", "p": "Comprendre Melbourne", "n": 7}, {"id": "b8", "t": "Les communautés et les quartiers", "p": "Comprendre Melbourne", "n": 8}, {"id": "b9", "t": "L’économie de Melbourne", "p": "Comprendre Melbourne", "n": 9}, {"id": "b10", "t": "Étudier et travailler à Melbourne", "p": "Comprendre Melbourne", "n": 10}, {"id": "b11", "t": "Se loger et se déplacer", "p": "Comprendre Melbourne", "n": 11}, {"id": "b12", "t": "Comprendre la météo melburnienne", "p": "Comprendre Melbourne", "n": 12}, {"id": "b13", "t": "Manger et boire", "p": "Comprendre Melbourne", "n": 13}, {"id": "b14", "t": "Sport et vie collective", "p": "Comprendre Melbourne", "n": 14}, {"id": "b15", "t": "Concerts, arts et événements", "p": "Comprendre Melbourne", "n": 15}, {"id": "b16", "t": "Ce qui distingue Melbourne de Sydney", "p": "Comprendre Melbourne", "n": 16}, {"id": "b17", "t": "Les 16 quartiers et les 90 lieux", "p": "Comprendre Melbourne", "n": 17}];
+  (function(){
+    const idx = id => ORDER.findIndex(o => o.id === id);
+    const go = i => { if (i < 0 || i >= ORDER.length) return; document.getElementById(ORDER[i].id).scrollIntoView({ behavior:"smooth" }); };
+    // Boutons précédent / suivant en bas de chaque chapitre
+    ORDER.forEach((o, i) => {
+      const sec = document.getElementById(o.id); const box = document.createElement("div"); box.className = "next";
+      box.innerHTML = (i > 0 ? `<button type="button" data-i="${i-1}"><small>← Précédent</small>${ORDER[i-1].t}</button>` : "") +
+                      (i < ORDER.length - 1 ? `<button type="button" class="n" data-i="${i+1}"><small>${ORDER[i+1].p === o.p ? "Chapitre suivant" : "Partie suivante"} →</small>${ORDER[i+1].t}</button>` : "");
+      sec.querySelector(".chap-body").appendChild(box);
+    });
+    document.addEventListener("click", e => { const b = e.target.closest(".next button"); if (b) go(+b.dataset.i); });
+    // Chapitre courant : surlignage du plan et barre du téléphone
+    let current = null;
+    const side = document.getElementById("side"), scrim = document.getElementById("scrim");
+    const setCur = id => {
+      if (current === id) return; current = id; const o = ORDER[idx(id)];
+      side.querySelectorAll("a[data-id]").forEach(a => a.classList.toggle("on", a.dataset.id === id));
+      document.getElementById("mPart").textContent = `${o.p} · ${o.n}/${ORDER.filter(x => x.p === o.p).length}`;
+      document.getElementById("mTitle").textContent = o.t + " ▾";
+      const a = side.querySelector(`a[data-id="${id}"]`); if (a && window.innerWidth > 980) a.scrollIntoView({ block:"nearest" });
+    };
+    const obs = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) setCur(e.target.id); }); }, { rootMargin:"-40% 0px -55% 0px" });
+    document.querySelectorAll(".chap").forEach(s => obs.observe(s));
+    const toggle = on => { side.classList.toggle("open", on); scrim.classList.toggle("on", on); };
+    document.getElementById("mMenu").onclick = () => toggle(!side.classList.contains("open"));
+    scrim.onclick = () => toggle(false);
+    side.addEventListener("click", e => { if (e.target.closest("a")) toggle(false); });
+    document.getElementById("mPrev").onclick = () => go(current ? idx(current) - 1 : 0);
+    document.getElementById("mNext").onclick = () => go(current ? idx(current) + 1 : 0);
+    document.querySelectorAll(".chap-body a, .links a").forEach(a => { if (!a.target) { a.target = "_blank"; a.rel = "noreferrer"; } });
+
+    // Cartes : créées quand elles arrivent à l'écran
+    const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+    const mapObs = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting || e.target._done) return; e.target._done = true;
+      const el = e.target, kind = el.dataset.kind, pts = JSON.parse(el.dataset.markers || "[]");
+      const map = L.map(el, { scrollWheelZoom:false, attributionControl:true });
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:18, attribution:"© OpenStreetMap" }).addTo(map);
+      const color = el.closest(".chap").dataset.part === "a" ? "#c4532e" : "#24506b";
+      pts.forEach(p => {
+        const icon = L.divIcon({ className:"", html:`<div class="mk lbl" style="background:${color}">${esc(p.n)}</div>`, iconSize:null, iconAnchor:[10,10] });
+        const pop = `<b>${esc(p.n)}</b>${p.extra ? "<br>" + esc(p.extra) : ""}${p.url ? `<br><a href="${p.url}" target="${p.url.startsWith("..") ? "_self" : "_blank"}" rel="noreferrer">${p.url.startsWith("..") ? "Ouvrir la fiche" : "Google Maps"}</a>` : ""}`;
+        L.marker([p.lat, p.lon], { icon }).addTo(map).bindPopup(pop);
+      });
+      if (pts.length > 1) map.fitBounds(L.latLngBounds(pts.map(p => [p.lat, p.lon])), { padding:[30,30] });
+      else if (pts.length === 1) map.setView([pts[0].lat, pts[0].lon], 10);
+      else map.setView([-27, 134], 3);
+    }), { rootMargin:"300px" });
+    document.querySelectorAll(".map").forEach(m => mapObs.observe(m));
+
+    // Photo d'ouverture de chaque chapitre (Wikipédia), sans doublon
+    const boxes = [...document.querySelectorAll(".chap-photo[data-wiki]")].filter(b => b.dataset.wiki);
+    const titles = [...new Set(boxes.map(b => b.dataset.wiki))];
+    const batches = []; for (let i = 0; i < titles.length; i += 45) batches.push(titles.slice(i, i + 45));
+    Promise.all(batches.map(b => fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail%7Cname&pithumbsize=1400&titles=" + encodeURIComponent(b.join("|"))).then(r => r.json()).catch(() => null)))
+    .then(rs => {
+      const img = {};
+      rs.forEach(r => { if (!r || !r.query) return; const back = {}; (r.query.normalized || []).concat(r.query.redirects || []).forEach(x => back[x.to] = back[x.from] || x.from);
+        Object.values(r.query.pages || {}).forEach(p => { if (p.thumbnail) img[back[p.title] || p.title] = { src:p.thumbnail.source, file:p.pageimage, page:"https://en.wikipedia.org/wiki/" + encodeURIComponent(p.title.replace(/ /g,"_")) }; }); });
+      const used = new Set();
+      boxes.forEach(b => { const w = img[b.dataset.wiki]; if (!w || used.has(w.file)) return; used.add(w.file);
+        const pre = new Image(); pre.onload = () => { b.style.backgroundImage = `url("${w.src}")`; b.classList.add("has-img"); b.insertAdjacentHTML("beforeend", `<a class="credit" href="${w.page}" target="_blank" rel="noreferrer">Photo Wikipédia</a>`); }; pre.src = w.src; });
+    });
+  })();
+  </script>
+</body>
+</html>
