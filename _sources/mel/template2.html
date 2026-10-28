@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Melbourne · le dossier</title>
+  <meta name="description" content="Melbourne en 16 quartiers et 100 lieux : histoire, identité, lieux classés, transports, cuisine, sport et société, sur une carte interactive.">
+  <meta property="og:title" content="Melbourne · le dossier">
+  <meta property="og:description" content="16 quartiers, 100 lieux, cuisine, sport et société : tout savoir sur Melbourne.">
+  <link rel="stylesheet" href="../leaflet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@400;600;700;800&display=swap">
+  <style>
+    :root { --ink: #16202a; --paper: #f8f5ef; --sand: #efe8dc; --line: rgba(22,32,42,.12); --muted: #5a6470; --gold: #e0a43a; --deep: #24506b;
+      --r3: #c4532e; --r2: #2f7a52; --r1: #8a8f8c;
+      --display: "DM Serif Display", Georgia, serif; --body: "Source Sans 3", -apple-system, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 62px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.6 var(--body); }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-left)); }
+    .nav { position: sticky; top: 0; z-index: 1000; background: rgba(36,80,107,.97); color: #fff; }
+    .nav .wrap { display: flex; align-items: center; gap: 18px; height: 54px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+    .nav .wrap::-webkit-scrollbar { display: none; }
+    .nav b { font-family: var(--display); font-weight: 400; font-size: 19px; margin-right: auto; }
+    .nav a { text-decoration: none; font-weight: 700; font-size: 13px; opacity: .9; }
+    .nav a.gold { background: var(--gold); color: var(--ink); padding: 6px 12px; border-radius: 999px; opacity: 1; }
+    .hero { position: relative; color: #fff; background: linear-gradient(135deg, #24506b, #16202a 70%); overflow: hidden; }
+    .hero .bg { position: absolute; inset: 0; background: center / cover no-repeat; opacity: .6; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,16,22,.1) 20%, rgba(10,16,22,.88)); }
+    .hero .wrap { position: relative; z-index: 1; padding-top: 140px; padding-bottom: 48px; }
+    .kicker { text-transform: uppercase; letter-spacing: .16em; font-size: 13px; font-weight: 800; color: var(--gold); }
+    .hero h1 { font: 400 clamp(52px, 10vw, 110px)/1 var(--display); margin: 10px 0 12px; }
+    .hero p { max-width: 680px; font-size: 19px; margin: 0; opacity: .93; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 28px; }
+    .stat { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); border-radius: 16px; padding: 12px 14px; }
+    .stat .v { font: 400 28px/1.1 var(--display); color: var(--gold); }
+    .stat .l { font-size: 13px; opacity: .9; }
+    section.block { padding: 56px 0 24px; }
+    section.alt { background: #fff; }
+    h2.title { font: 400 clamp(32px, 4.6vw, 52px)/1.05 var(--display); margin: 6px 0 12px; }
+    h3.sub2 { font: 400 26px var(--display); margin: 30px 0 12px; }
+    .lead { color: var(--muted); max-width: 780px; margin: 0 0 22px; font-size: 18px; }
+    .mapbox { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 16px; }
+    #map { height: 580px; border-radius: 20px; border: 1px solid var(--line); z-index: 1; }
+    .index { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 10px; max-height: 580px; overflow-y: auto; }
+    .index h4 { margin: 12px 6px 4px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
+    .index a { display: flex; gap: 10px; align-items: center; padding: 7px 6px; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 15px; }
+    .index a small { display: block; font-weight: 600; color: var(--muted); font-size: 12px; }
+    .index a:hover { background: var(--sand); }
+    .num { flex: none; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--c); color: #fff; font: 800 13px var(--body); }
+    @media (max-width: 860px) { .mapbox { grid-template-columns: 1fr; } #map { height: 60vh; } .index { max-height: 320px; } }
+    .pin { width: 34px; height: 34px; border-radius: 50% 50% 50% 8%; transform: rotate(-45deg); display: grid; place-items: center; background: var(--c); border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,.3); }
+    .pin span { transform: rotate(45deg); color: #fff; font: 800 13px var(--body); }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--c); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 12px 0 0; font-size: 14px; font-weight: 700; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); }
+    .zone-head { margin: 46px 0 14px; border-left: 6px solid var(--c); padding-left: 14px; }
+    .zone-head h2 { font: 400 clamp(30px, 4vw, 44px)/1.05 var(--display); margin: 0; }
+    .zone-head p { margin: 4px 0 0; color: var(--muted); }
+    .q { background: #fff; border-radius: 24px; border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(20,30,40,.06); overflow: hidden; margin-bottom: 22px; }
+    .q > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+    .q > summary::-webkit-details-marker { display: none; }
+    @media (max-width: 860px) { .q > summary { grid-template-columns: 1fr; } }
+    .qphoto { position: relative; min-height: 300px; background: linear-gradient(135deg, var(--c), #16202a); }
+    .qphoto .num { position: absolute; left: 16px; top: 16px; width: 50px; height: 50px; font-size: 20px; border: 3px solid #fff; z-index: 3; }
+    .qhead { padding: 24px 26px; display: flex; flex-direction: column; gap: 8px; }
+    .qhead h3 { font: 400 clamp(30px, 3.4vw, 40px)/1.05 var(--display); margin: 0; }
+    .qhead .sub { color: var(--c); font-weight: 800; }
+    .qhead .why { margin: 0; color: #3d4652; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .meta span { background: var(--sand); border-radius: 999px; padding: 4px 11px; font-size: 13px; font-weight: 700; }
+    .open-btn { margin-top: auto; align-self: flex-start; background: var(--c); color: #fff; border-radius: 999px; padding: 10px 18px; font-weight: 800; font-size: 14px; }
+    .q[open] .open-btn::after { content: " ▴"; } .q:not([open]) .open-btn::after { content: " ▾"; }
+    .qbody { padding: 6px 26px 26px; border-top: 1px solid var(--line); }
+    .understand { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 18px 0; }
+    .understand div { background: var(--paper); border-radius: 16px; padding: 14px 16px; border-top: 4px solid var(--c); }
+    .understand h4, .plan h4 { margin: 0 0 6px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
+    .understand p { margin: 0; font-size: 15.5px; color: #3d4652; }
+    .plan { background: var(--ink); color: #fff; border-radius: 16px; padding: 14px 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px 20px; margin-bottom: 18px; }
+    .plan h4 { color: var(--gold); }
+    .plan p { margin: 0; font-size: 15px; }
+    .places { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .place { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; background: var(--paper); border-radius: 18px; padding: 12px; }
+    @media (max-width: 600px) { .place { grid-template-columns: 84px minmax(0, 1fr); } }
+    .thumb { position: relative; width: 100%; aspect-ratio: 1; border-radius: 12px; overflow: hidden; background: linear-gradient(135deg, var(--c), #16202a); display: grid; place-items: center; color: #fff; font: 800 18px var(--body); }
+    .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .place h5 { margin: 0; font: 400 22px/1.15 var(--display); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .rank { font: 800 12px var(--body); color: #fff; border-radius: 6px; padding: 2px 7px; }
+    .rank.r3 { background: var(--r3); } .rank.r2 { background: var(--r2); } .rank.r1 { background: var(--r1); }
+    .place p { margin: 4px 0; font-size: 15.5px; color: #3d4652; }
+    .facts { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13.5px; font-weight: 700; color: var(--muted); }
+    .facts .free { color: var(--r2); }
+    .next { font-size: 13.5px; color: var(--c); font-weight: 700; margin-top: 4px; }
+    .plinks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .pl { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(22,32,42,.18); background: #fff; color: var(--ink); font: 700 13px/1 var(--body); text-decoration: none; cursor: pointer; }
+    .pl.copy { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .ins { margin-top: 16px; background: linear-gradient(135deg, #2b1d3a, #4a2a4f); color: #f3e9f5; border-radius: 18px; padding: 14px 18px; }
+    .ins h4 { margin: 0 0 6px; color: var(--gold); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+    .ins p { margin: 6px 0; }
+    .ins .pl { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+    .rankkey { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 14px; margin: 0 0 12px; color: var(--muted); }
+    .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+    .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .info { background: var(--paper); border-radius: 18px; padding: 16px 18px; border-top: 4px solid var(--deep); }
+    section.alt .info { background: var(--paper); } section:not(.alt) .info { background: #fff; }
+    .info h3 { margin: 0 0 6px; font: 400 22px var(--display); }
+    .info p { margin: 0; color: #3d4652; font-size: 15.5px; }
+    .info.food { border-top-color: var(--r3); }
+    .timeline { display: grid; gap: 0; border-left: 3px solid var(--gold); margin: 10px 0 10px 8px; }
+    .timeline div { padding: 8px 0 12px 18px; position: relative; }
+    .timeline div::before { content: ""; position: absolute; left: -9px; top: 14px; width: 15px; height: 15px; border-radius: 50%; background: var(--gold); border: 3px solid #fff; }
+    .timeline b { display: block; font-family: var(--display); font-weight: 400; font-size: 21px; }
+    .links-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .end { background: var(--deep); color: #fff; padding: 60px 0; }
+    .end p { max-width: 760px; font-size: 19px; }
+    footer { padding: 24px 0 60px; color: var(--muted); font-size: 13px; }
+    .tchips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
+    .tchips button { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 8px 13px; font: 700 14px var(--body); cursor: pointer; color: var(--ink); }
+    .tchips button small { color: var(--muted); font-weight: 700; margin-left: 4px; }
+    .tchips button.on { background: var(--deep); border-color: var(--deep); color: #fff; }
+    .tchips button.on small { color: #cfe0ea; }
+    @media (max-width: 700px) { .tchips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; position: sticky; top: 54px; z-index: 5; background: #fff; margin: 0 -16px; padding: 8px 16px; box-shadow: 0 6px 12px rgba(0,0,0,.05); } .tchips::-webkit-scrollbar { display: none; } .tchips button { flex: none; } }
+    .tcount { color: var(--muted); font-weight: 700; margin: 4px 0 12px; }
+    .tgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .tcard { background: var(--paper); border-radius: 16px; padding: 14px; border-left: 5px solid var(--c); display: flex; flex-direction: column; gap: 6px; }
+    .tcard h5 { margin: 0; font: 400 21px/1.15 var(--display); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .tcard p { margin: 0; font-size: 14.5px; color: #3d4652; }
+    .tq { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; color: var(--c); text-decoration: none; }
+    .tq .num { width: 24px; height: 24px; font-size: 11px; }
+    .ttags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .ttags span { font-size: 11.5px; background: #fff; border-radius: 999px; padding: 1px 8px; font-weight: 700; color: var(--muted); }
+    .car { position: absolute; inset: 0; overflow: hidden; }
+    .car-track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .car-track::-webkit-scrollbar { display: none; }
+    .car-slide { flex: 0 0 100%; height: 100%; margin: 0; position: relative; scroll-snap-align: start; }
+    .car-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .car-slide figcaption { position: absolute; left: 12px; bottom: 12px; max-width: 75%; color: #fff; font: 700 14px/1.25 var(--body); background: rgba(0,0,0,.5); padding: 6px 10px; border-radius: 10px; }
+    .car-slide figcaption a { color: #fff; opacity: .8; font-weight: 600; font-size: 11px; display: block; text-decoration: none; }
+    .car-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.88); font-size: 22px; font-weight: 800; cursor: pointer; z-index: 2; color: var(--ink); }
+    .car-prev { left: 10px; } .car-next { right: 10px; }
+    .car-dots { position: absolute; right: 12px; bottom: 14px; display: flex; gap: 5px; z-index: 2; }
+    .car-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.55); }
+    .car-dots i.on { background: #fff; width: 18px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="wrap"><b>Melbourne</b><a class="gold" href="#carte">La carte</a><a href="#quartiers">Les 16 quartiers</a><a href="#themes">Par thème</a><a href="#comprendre">Comprendre</a><a href="#manger">Manger</a><a href="#sport">Sport</a><a href="#pratique">Pratique</a><a href="../australie/">L’exposé</a></div></nav>
+  <header class="hero"><div class="bg" id="herobg"></div><div class="wrap">
+    <div class="kicker">Le dossier · 16 quartiers · 100 lieux</div>
+    <h1>Melbourne</h1>
+    <p>L’histoire de la ville, ses quartiers, ses habitants, sa cuisine et ses sports. Pour chaque quartier : ce qu’il raconte, pourquoi y aller, comment s’organiser et les lieux classés par ordre d’importance.</p>
+    <div class="stats"><!--STATS--></div>
+  </div></header>
+  <main>
+    <section class="block" id="carte"><div class="wrap">
+      <div class="kicker">La carte</div>
+      <h2 class="title">Les 16 quartiers et leurs 100 lieux</h2>
+      <p class="lead">Les grands numéros sont les quartiers, les petits points les lieux. Touchez un quartier pour ouvrir sa fiche.</p>
+      <div class="mapbox"><div id="map" aria-label="Carte des quartiers de Melbourne"></div><div class="index" id="index"></div></div>
+      <div class="legend" id="legend"></div>
+    </div></section>
+    <section class="block" id="quartiers"><div class="wrap">
+      <div class="kicker">Les quartiers</div>
+      <h2 class="title">16 quartiers pour raconter la ville</h2>
+      <p class="lead">Touchez une fiche pour l’ouvrir : l’histoire du quartier, son identité, son rôle économique, ses transformations, puis les lieux classés.</p>
+      <div class="rankkey"><span><span class="rank r3">+++</span> à ne pas manquer</span><span><span class="rank r2">++</span> vaut le détour</span><span><span class="rank r1">+</span> si vous avez le temps</span></div>
+      <div id="zones"></div>
+    </div></section>
+    <section class="block alt" id="themes"><div class="wrap">
+      <div class="kicker">Par thème</div>
+      <h2 class="title">Les 100 lieux, par envie</h2>
+      <p class="lead">La même ville vue autrement : tous les parcs, tous les musées, tout ce qui est gratuit… quel que soit le quartier. Touchez un thème, puis le numéro du quartier pour ouvrir sa fiche.</p>
+      <div class="tchips" id="tchips"></div>
+      <p class="tcount" id="tcount"></p>
+      <div class="tgrid" id="tgrid"></div>
+    </div></section>
+    <!--CHAPTERS-->
+  </main>
+  <script src="../leaflet.js"></script>
+  <script>
+  /*DATA*/
+  (function () {
+    const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    const rk = r => r === "+++" ? "r3" : r === "++" ? "r2" : "r1";
+    const Q = n => n + ", Melbourne, Victoria, Australia";
+    function links(name) {
+      const e = encodeURIComponent(Q(name));
+      return `<div class="plinks"><button type="button" class="pl copy" data-copy="${esc(Q(name))}">Copier</button><a class="pl" href="https://www.google.com/maps/search/?api=1&query=${e}" target="_blank" rel="noreferrer">Maps</a><a class="pl" href="https://waze.com/ul?q=${e}&navigate=yes" target="_blank" rel="noreferrer">Waze</a><a class="pl" href="https://www.google.com/search?tbm=isch&q=${e}" target="_blank" rel="noreferrer">Photos</a></div>`;
+    }
+    const zoneOf = id => ZONES.find(z => z.id === id);
+
+    // Index et légende
+    document.getElementById("legend").innerHTML = ZONES.map(z => `<span style="--c:${z.color}"><i></i>${esc(z.name)}</span>`).join("");
+    document.getElementById("index").innerHTML = ZONES.map(z => `<h4 style="--c:${z.color}">${esc(z.name)}</h4>` +
+      QUARTIERS.filter(q => q.zone === z.id).map(q => `<a href="#q-${q.id}" data-q="${q.id}"><span class="num" style="--c:${q.color}">${q.num}</span><span>${esc(q.name)}<small>${q.places.length + q.insolite.length} lieux</small></span></a>`).join("")).join("");
+
+    // Fiches des quartiers
+    document.getElementById("zones").innerHTML = ZONES.map(z => `<div class="zone-head" style="--c:${z.color}"><div class="kicker" style="color:${z.color}">Zone</div><h2>${esc(z.name)}</h2><p>${esc(z.intro)}</p></div>` +
+      QUARTIERS.filter(q => q.zone === z.id).map(q => `<details class="q" id="q-${q.id}" style="--c:${q.color}">
+        <summary><div class="qphoto" data-q="${q.id}"><span class="num">${q.num}</span></div>
+          <div class="qhead"><div class="sub">${esc(q.sub)}</div><h3>${esc(q.name)}</h3><p class="why">${esc(q.why)}</p>
+          <div class="meta"><span>${q.places.length + q.insolite.length} lieux</span><span>${esc(q.time)}</span><span>${esc(q.budget)}</span></div>
+          <span class="open-btn">Ouvrir la fiche</span></div></summary>
+        <div class="qbody">
+          <div class="understand">
+            <div><h4>Histoire</h4><p>${esc(q.history)}</p></div>
+            <div><h4>Identité</h4><p>${esc(q.identity)}</p></div>
+            <div><h4>Rôle économique</h4><p>${esc(q.economy)}</p></div>
+            <div><h4>Transformations</h4><p>${esc(q.change)}</p></div>
+          </div>
+          <div class="plan"><div><h4>Y aller</h4><p>${esc(q.go)}</p></div><div><h4>Durée</h4><p>${esc(q.time)}</p></div><div><h4>Budget</h4><p>${esc(q.budget)}</p></div></div>
+          <ul class="places">${q.places.map(p => `<li class="place"><div class="thumb" data-wiki="${esc(p.wiki)}">${p.n}</div><div>
+            <h5><span class="rank ${rk(p.rank)}">${p.rank}</span>${esc(p.name)}</h5><p>${esc(p.desc)}</p>
+            <div class="facts"><span>⏱ ${esc(p.dur)}</span><span class="${/^gratuit/.test(p.acc) ? "free" : ""}">${/^gratuit/.test(p.acc) ? "✓ " : "€ "}${esc(p.acc)}</span></div>
+            ${p.next ? `<div class="next">→ ${esc(p.next)}</div>` : ""}${links(p.name)}</div></li>`).join("")}</ul>
+          ${q.insolite.length ? `<div class="ins"><h4>Insolite</h4>${q.insolite.map(s => `<p><b>${esc(s.name)}</b> : ${esc(s.desc)}</p>${links(s.name)}`).join("")}</div>` : ""}
+        </div></details>`).join("")).join("");
+
+    // Carte
+    const map = L.map("map", { scrollWheelZoom: false }).setView([-37.83, 144.98], 11);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap contributors" }).addTo(map);
+    const openQ = id => { const d = document.getElementById("q-" + id); d.open = true; d.scrollIntoView({ behavior: "smooth", block: "start" }); };
+    QUARTIERS.forEach(q => {
+      q.places.concat(q.insolite).forEach(p => L.marker([p.lat, p.lon], { icon: L.divIcon({ className: "", html: `<div class="dot" style="--c:${q.color}"></div>`, iconSize: [12, 12], iconAnchor: [6, 6] }) })
+        .addTo(map).bindTooltip(`${esc(p.name)} · quartier ${q.num}`));
+      L.marker([q.lat, q.lon], { zIndexOffset: 500, icon: L.divIcon({ className: "", html: `<div class="pin" style="--c:${q.color}"><span>${q.num}</span></div>`, iconSize: [34, 34], iconAnchor: [17, 33] }) })
+        .addTo(map).bindTooltip(`${q.num}. ${esc(q.name)}`).on("click", () => openQ(q.id));
+    });
+    map.fitBounds(L.latLngBounds(QUARTIERS.filter(q => q.id !== "escapades").map(q => [q.lat, q.lon])), { padding: [30, 30] });
+    document.getElementById("index").addEventListener("click", e => { const a = e.target.closest("[data-q]"); if (!a) return; e.preventDefault(); openQ(a.dataset.q); });
+    if (location.hash.startsWith("#q-")) { const d = document.getElementById(location.hash.slice(1)); if (d) d.open = true; }
+
+    // Vue transversale par thème
+    const allPlaces = QUARTIERS.flatMap(q => q.places.map(p => Object.assign({ q }, p)).concat(q.insolite.map(s => Object.assign({ q, rank: "", dur: "", acc: "" }, s))));
+    const ico = id => (THEMES.find(t => t.id === id) || {}).ico || "";
+    let theme = "gratuit";
+    function renderThemes() {
+      document.getElementById("tchips").innerHTML = THEMES.map(t => `<button type="button" data-theme="${t.id}" class="${t.id === theme ? "on" : ""}">${t.ico} ${esc(t.name)}<small>${allPlaces.filter(p => p.tags.includes(t.id)).length}</small></button>`).join("");
+      const list = allPlaces.filter(p => p.tags.includes(theme)).sort((a, b) => (b.rank || "").length - (a.rank || "").length || a.q.num - b.q.num);
+      document.getElementById("tcount").textContent = `${list.length} lieux · classés par importance, puis par quartier`;
+      document.getElementById("tgrid").innerHTML = list.map(p => `<article class="tcard" style="--c:${p.q.color}">
+        <a class="tq" href="#q-${p.q.id}" data-openq="${p.q.id}"><span class="num" style="--c:${p.q.color}">${p.q.num}</span>${esc(p.q.name)}</a>
+        <h5>${p.rank ? `<span class="rank ${rk(p.rank)}">${p.rank}</span>` : `<span class="rank r1">insolite</span>`}${esc(p.name)}</h5>
+        <p>${esc(p.desc)}</p>
+        ${p.dur ? `<div class="facts"><span>⏱ ${esc(p.dur)}</span><span class="${/^gratuit/.test(p.acc) ? "free" : ""}">${/^gratuit/.test(p.acc) ? "✓ " : "€ "}${esc(p.acc)}</span></div>` : ""}
+        <div class="ttags">${p.tags.filter(t => t !== theme).map(t => `<span>${ico(t)} ${esc((THEMES.find(x => x.id === t) || {}).name || t)}</span>`).join("")}</div>
+        ${links(p.name)}</article>`).join("");
+    }
+    renderThemes();
+    document.getElementById("tchips").addEventListener("click", e => { const b = e.target.closest("[data-theme]"); if (!b) return; theme = b.dataset.theme; renderThemes(); });
+    document.getElementById("tgrid").addEventListener("click", e => { const a = e.target.closest("[data-openq]"); if (!a) return; e.preventDefault(); openQ(a.dataset.openq); });
+
+    // Copier
+    document.addEventListener("click", async e => {
+      const b = e.target.closest("[data-copy]"); if (!b) return; e.preventDefault();
+      try { await navigator.clipboard.writeText(b.dataset.copy); } catch (err) { prompt("Copiez :", b.dataset.copy); return; }
+      const t = b.textContent; b.textContent = "Copié !"; setTimeout(() => b.textContent = t, 1500);
+    });
+
+    // Photos Wikipédia : vignettes des lieux et diaporama de chaque quartier, sans doublon.
+    const titles = [...new Set(QUARTIERS.flatMap(q => q.places.map(p => p.wiki)).filter(Boolean))];
+    const batches = []; for (let i = 0; i < titles.length; i += 45) batches.push(titles.slice(i, i + 45));
+    Promise.all(batches.map(b => fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail%7Cname&pithumbsize=1000&titles=" + encodeURIComponent(b.join("|"))).then(r => r.json()).catch(() => null)))
+    .then(rs => {
+      const img = {};
+      rs.forEach(r => {
+        if (!r || !r.query) return;
+        const back = {}; (r.query.normalized || []).concat(r.query.redirects || []).forEach(x => { back[x.to] = back[x.from] || x.from; });
+        Object.values(r.query.pages || {}).forEach(p => { if (p.thumbnail) img[back[p.title] || p.title] = { src: p.thumbnail.source, file: p.pageimage || p.thumbnail.source, page: "https://en.wikipedia.org/wiki/" + encodeURIComponent(p.title.replace(/ /g, "_")) }; });
+      });
+      const used = new Set();
+      QUARTIERS.forEach(q => {
+        const slides = [];
+        q.places.forEach(p => {
+          const w = img[p.wiki]; if (!w || used.has(w.file)) return; used.add(w.file);
+          slides.push({ src: w.src, caption: p.name, page: w.page });
+          const t = document.querySelector(`#q-${q.id} .thumb[data-wiki="${CSS.escape(p.wiki)}"]`);
+          if (t) t.insertAdjacentHTML("beforeend", `<img src="${w.src}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">`);
+        });
+        const host = document.querySelector(`.qphoto[data-q="${q.id}"]`);
+        if (!host || !slides.length) return;
+        host.insertAdjacentHTML("beforeend", `<div class="car"><div class="car-track">${slides.map((s, i) => `<figure class="car-slide"><img src="${s.src}" alt="${esc(s.caption)}" ${i ? 'loading="lazy"' : ""} onerror="this.closest('figure').remove()"><figcaption>${esc(s.caption)}<a href="${s.page}" target="_blank" rel="noreferrer">Photo Wikipédia</a></figcaption></figure>`).join("")}</div>${slides.length > 1 ? `<button type="button" class="car-btn car-prev" aria-label="Photo précédente">‹</button><button type="button" class="car-btn car-next" aria-label="Photo suivante">›</button><div class="car-dots">${slides.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>` : ""}</div>`);
+        const car = host.querySelector(".car"), track = car.querySelector(".car-track");
+        const cur = () => Math.round(track.scrollLeft / track.clientWidth), n = () => track.children.length;
+        const go = i => track.scrollTo({ left: ((i + n()) % n()) * track.clientWidth, behavior: "smooth" });
+        car.addEventListener("click", e => {
+          if (e.target.closest(".car-prev")) { e.preventDefault(); e.stopPropagation(); go(cur() - 1); }
+          else if (e.target.closest(".car-next")) { e.preventDefault(); e.stopPropagation(); go(cur() + 1); }
+          else if (e.target.closest("figcaption a")) { e.stopPropagation(); }
+        });
+        track.addEventListener("scroll", () => { const i = cur(); car.querySelectorAll(".car-dots i").forEach((d, k) => d.classList.toggle("on", k === i)); }, { passive: true });
+      });
+      const hero = img["Flinders Street railway station"]; if (hero) document.getElementById("herobg").style.backgroundImage = `url("${hero.src.replace(/\/\d+px-/, "/1600px-")}")`;
+    });
+  })();
+  </script>
+</body>
+</html>

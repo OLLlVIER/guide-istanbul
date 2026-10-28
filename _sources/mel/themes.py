@@ -1,0 +1,31 @@
+THEMES = [
+ ("gratuit","Gratuit","🆓"),("musees","Musées, galeries & spectacles","🖼️"),("parcs","Parcs & jardins","🌳"),("marches","Marchés","🧺"),
+ ("manger","Manger","🍜"),("ruelles","Ruelles & street art","🎨"),("archi","Monuments & architecture","🏛️"),("culte","Lieux de culte","⛪"),
+ ("vues","Vues & panoramas","🔭"),("mer","Plages & bord de mer","🌊"),("bars","Bars & sorties","🍸"),("shopping","Shopping & créateurs","🛍️"),
+ ("sport","Sport","🏟️"),("famille","En famille & animaux","🐨"),("nature","Nature & escapades","🥾"),("insolite","Insolite","✨"),
+]
+TAGS = {
+ "ACMI":"musees","Immigration Museum":"musees archi","Hardware Lane":"ruelles manger","Sidney Myer Music Bowl":"musees parcs","Ian Potter Museum of Art":"musees","Station Pier & Port Melbourne Beach":"mer","St Kilda Botanical Gardens":"parcs","Como House & Garden":"archi parcs","Healesville Sanctuary":"famille nature","Warrandyte":"nature",
+ "Flinders Street Station":"archi","Federation Square":"musees archi","Hosier Lane":"ruelles","St Paul’s Cathedral":"culte archi",
+ "Degraves Street":"ruelles manger","Centre Place":"ruelles manger","Block Arcade":"archi shopping manger","Royal Arcade":"archi shopping",
+ "Cathedral Arcade":"archi shopping","Presgrave Place":"ruelles","AC/DC Lane":"ruelles bars","Beneath Driver Lane":"bars","Bar Americano":"bars",
+ "State Library Victoria":"archi musees","Queen Victoria Market":"marches manger","Coop’s Shot Tower":"archi shopping","Chinatown & Heffernan Lane":"manger ruelles",
+ "Old Melbourne Gaol":"musees archi","Quartier grec de Lonsdale Street":"manger","Guildford Lane":"ruelles","Niagara Lane":"ruelles",
+ "Drewery, Warburton & Sutherland":"ruelles","Equitable Place & Scott Alley":"ruelles manger","Berlin Bar":"bars","Loop Roof":"bars vues",
+ "Parliament House":"archi","St Patrick’s Cathedral":"culte archi","Fitzroy Gardens Conservatory":"parcs","Cooks’ Cottage":"musees archi",
+ "Old Treasury Building":"musees archi","Les maisons victoriennes d’East Melbourne":"archi","NGV International":"musees","Arts Centre Melbourne":"musees archi",
+ "Southbank Promenade":"vues manger","Polly Woodside":"musees famille","Eureka Skydeck":"vues","Ponyfish Island":"bars",
+ "Royal Botanic Gardens":"parcs","Shrine of Remembrance":"archi vues","The Grotto, Kings Domain":"parcs","Pioneer Women’s Memorial Garden":"parcs","The Tan":"sport parcs",
+ "Melbourne Cricket Ground (MCG)":"sport musees","Melbourne Park":"sport","Victoria Street, « Little Saigon »":"manger","Burnley Gardens":"parcs","Le panneau Skipping Girl":"archi",
+ "Brunswick Street":"shopping bars ruelles","Gertrude Street":"shopping manger","Smith Street":"shopping bars","Rose Street Artists’ Market":"marches shopping",
+ "Easey’s":"manger","The Everleigh":"bars","Royal Exhibition Building & Carlton Gardens":"archi parcs","Melbourne Museum":"musees famille","Lygon Street":"manger",
+ "System Garden, University of Melbourne":"parcs","Melbourne Zoo":"famille","Le café Pellegrini’s":"manger","Abbotsford Convent":"musees parcs",
+ "Collingwood Children’s Farm":"famille","Yarra Bend Park":"nature parcs famille","Dights Falls":"nature","South Melbourne Market":"marches manger",
+ "Albert Park Lake":"parcs sport","St Kilda Pier":"mer famille","Luna Park":"famille","Acland Street":"manger","St Kilda Esplanade Market":"marches mer",
+ "Prahran Market":"marches manger","Chapel Street":"shopping bars","The Astor Theatre":"musees","Rippon Lea Estate":"archi parcs",
+ "Brighton Bathing Boxes":"mer","Half Moon Bay, Black Rock":"mer","Ricketts Point Marine Sanctuary":"mer nature","Gem Pier, Williamstown":"mer vues",
+ "Footscray Market":"marches manger","Scienceworks":"musees famille","Jawbone Marine Sanctuary":"nature mer","Westgate Park":"nature",
+ "Heide Museum of Modern Art":"musees parcs","Montsalvat, Eltham":"musees archi","Phillip Island Penguin Parade":"nature famille","Great Ocean Road":"nature mer",
+ "Puffing Billy & Dandenong Ranges":"famille nature","Yarra Valley":"nature manger","Peninsula Hot Springs":"nature","Organ Pipes National Park":"nature","Werribee Gorge State Park":"nature",
+}
+FREE_INSOLITE = {"Les maisons victoriennes d’East Melbourne","The Tan","Le panneau Skipping Girl","Westgate Park"}

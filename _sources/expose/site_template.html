@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Melbourne · L’Australie</title>
+  <meta name="description" content="Exposé : comprendre l’Australie puis Melbourne. Territoire, histoire, habitants, économie, vie quotidienne, nature, culture, sport et personnalités.">
+  <meta property="og:title" content="Melbourne · L’Australie">
+  <meta property="og:description" content="Comprendre l’Australie puis Melbourne : 38 chapitres, cartes, chiffres et liens.">
+  <link rel="stylesheet" href="../leaflet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700;800&display=swap">
+  <style>
+    :root { --ink:#16202a; --paper:#f8f5ef; --sand:#efe8dc; --line:rgba(22,32,42,.12); --muted:#5a6470; --gold:#e0a43a; --deep:#24506b; --red:#c4532e; --green:#2f7a52;
+      --display:"DM Serif Display",Georgia,serif; --body:"Source Sans 3",-apple-system,"Segoe UI",sans-serif; --side:300px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:16px; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.65 var(--body); }
+    a { color:var(--deep); }
+    img { max-width:100%; display:block; }
+    /* Plan à gauche (ordinateur) */
+    .side { position:fixed; inset:0 auto 0 0; width:var(--side); background:#fff; border-right:1px solid var(--line); overflow-y:auto; padding:22px 16px 40px; z-index:20; }
+    .side .brand { font:400 24px/1.1 var(--display); margin:0 6px 4px; }
+    .side .brand small { display:block; font:600 12px var(--body); color:var(--muted); margin-top:4px; }
+    .toc-part { margin:22px 6px 8px; font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red); }
+    .toc-part:nth-of-type(n+2) { color:var(--deep); }
+    .side ol { list-style:none; margin:0; padding:0; }
+    .side li a { display:flex; gap:10px; align-items:baseline; padding:6px 8px; border-radius:10px; text-decoration:none; color:var(--ink); font-size:14.5px; line-height:1.3; }
+    .side li a span { flex:none; width:22px; font-weight:800; color:var(--muted); font-size:13px; text-align:right; }
+    .side li a:hover { background:var(--sand); }
+    .side li a.on { background:var(--ink); color:#fff; }
+    .side li a.on span { color:var(--gold); }
+    main { margin-left:var(--side); }
+    .wrap { max-width:860px; margin:0 auto; padding:0 28px; }
+    /* Barre du haut (téléphone) */
+    .mbar { display:none; }
+    @media (max-width: 980px) {
+      .side { transform:translateX(-102%); transition:transform .25s; width:min(88vw,360px); box-shadow:0 0 40px rgba(0,0,0,.25); padding-top:70px; }
+      .side.open { transform:none; }
+      main { margin-left:0; }
+      .wrap { padding:0 16px; }
+      .mbar { display:flex; position:sticky; top:0; z-index:30; align-items:center; gap:8px; background:var(--ink); color:#fff; padding:8px 8px; }
+      .mbar button { border:0; color:#fff; background:#ffffff1f; border-radius:12px; font:inherit; cursor:pointer; }
+      .mbar .arrow { width:44px; height:44px; font-size:22px; font-weight:800; flex:none; }
+      .mbar .mid { flex:1; min-width:0; height:44px; padding:0 10px; text-align:left; line-height:1.15; }
+      .mbar .mid small { display:block; font-size:11px; opacity:.75; letter-spacing:.06em; text-transform:uppercase; }
+      .mbar .mid b { display:block; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .scrim { position:fixed; inset:0; background:#0006; z-index:15; display:none; }
+      .scrim.on { display:block; }
+      html { scroll-padding-top:70px; }
+    }
+    /* Couverture */
+    .cover { background:linear-gradient(135deg,#24506b,#16202a 70%); color:#fff; padding:90px 0 50px; }
+    .cover .kicker { color:var(--gold); }
+    .cover h1 { font:400 clamp(44px,8vw,84px)/1 var(--display); margin:10px 0 14px; }
+    .cover p { font-size:19px; max-width:640px; opacity:.92; margin:0; }
+    .cover .go { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+    .cover .go a { text-decoration:none; color:var(--ink); background:var(--gold); padding:12px 18px; border-radius:999px; font-weight:800; }
+    .cover .go a.alt { background:#fff; }
+    .kicker { text-transform:uppercase; letter-spacing:.14em; font-size:12.5px; font-weight:800; color:var(--red); }
+    /* Ouverture de partie */
+    .part-open { margin:56px 0 10px; padding:26px; border-radius:24px; background:var(--ink); color:#fff; }
+    .part-open h2 { font:400 clamp(32px,5vw,48px)/1.05 var(--display); margin:6px 0 16px; }
+    .part-open .kicker { color:var(--gold); }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+    .stats div { background:#ffffff14; border-radius:14px; padding:10px 12px; }
+    .stats b { display:block; font:400 26px/1.1 var(--display); color:var(--gold); }
+    .stats span { font-size:13px; opacity:.85; }
+    /* Chapitres */
+    .chap { margin:34px 0 0; background:#fff; border-radius:24px; border:1px solid var(--line); overflow:hidden; box-shadow:0 10px 30px rgba(20,30,40,.05); }
+    .chap-photo { position:relative; min-height:220px; background:linear-gradient(135deg,#24506b,#16202a) center/cover no-repeat; display:flex; align-items:flex-end; }
+    .chap[data-part="a"] .chap-photo { background-color:#8a3a20; background-image:linear-gradient(135deg,#c4532e,#5a2414); }
+    .chap-photo::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.72)); }
+    .chap-photo.has-img { background-size:cover; background-position:center; }
+    .chap-head { position:relative; z-index:1; padding:18px 24px; color:#fff; }
+    .chap-head .kicker { color:var(--gold); }
+    .chap-head h3 { font:400 clamp(28px,4.4vw,42px)/1.08 var(--display); margin:4px 0 0; }
+    .chap-photo .credit { position:absolute; right:10px; top:10px; z-index:2; font-size:10px; color:#fff; background:rgba(0,0,0,.45); padding:2px 8px; border-radius:999px; text-decoration:none; }
+    .chap-body { padding:20px 24px 24px; }
+    @media (max-width: 600px) { .chap-body { padding:16px 16px 20px; } .chap-head { padding:14px 16px; } .chap { border-radius:18px; } }
+    .chap-body p { margin:10px 0; }
+    .chap-body ul, .chap-body ol { padding-left:20px; margin:10px 0; }
+    .chap-body li { margin:6px 0; }
+    .chap-body h3, .chap-body p > strong:only-child { font-family:var(--display); font-weight:400; }
+    .chap-body > p > strong:only-child { display:block; font-size:22px; margin-top:18px; }
+    /* Tableaux → fiches sur téléphone */
+    .tbl-wrap { margin:14px 0; overflow-x:auto; }
+    table.tbl { width:100%; border-collapse:collapse; font-size:15px; background:#fff; }
+    table.tbl th { text-align:left; background:var(--ink); color:#fff; padding:9px 10px; font-size:13px; letter-spacing:.02em; }
+    table.tbl td { padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+    table.tbl tr:nth-child(even) td { background:#faf8f3; }
+    table.kv thead { display:none; }
+    table.kv td:first-child { font-weight:800; width:28%; color:var(--deep); }
+    @media (max-width: 700px) {
+      table.tbl thead { display:none; }
+      table.tbl, table.tbl tbody, table.tbl tr, table.tbl td { display:block; width:100%; }
+      table.tbl tr { background:var(--paper); border-radius:14px; padding:8px 12px; margin:0 0 10px; border:1px solid var(--line); }
+      table.tbl tr:nth-child(even) td { background:transparent; }
+      table.tbl td { border:0; padding:3px 0; }
+      table.tbl td[data-label]::before { content:attr(data-label); display:block; font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+      table.tbl td:first-child { font-weight:800; font-size:16px; }
+      table.tbl.two thead { display:table-header-group; }
+      table.tbl.two { display:table; } table.tbl.two tbody { display:table-row-group; }
+      table.tbl.two tr { display:table-row; background:none; border:0; border-radius:0; padding:0; margin:0; }
+      table.tbl.two td { display:table-cell; width:auto; padding:8px 8px; border-bottom:1px solid var(--line); font-size:14.5px; }
+      table.tbl.two td:first-child { font-weight:700; font-size:14.5px; width:55%; }
+      table.tbl.two td[data-label]::before { content:none; }
+      table.tbl.two tr:nth-child(even) td { background:#faf8f3; }
+      table.kv td:first-child { width:auto; }
+    }
+    /* Encadrés */
+    .callout { margin:16px 0; padding:14px 16px; border-radius:16px; border-left:6px solid; }
+    .callout p { margin:0; }
+    .callout.retenir { background:#fdf3e1; border-color:var(--gold); }
+    .callout.recue { background:#eef3fb; border-color:#3a7bd5; }
+    .callout.attention { background:#fdecea; border-color:var(--red); }
+    /* Liens */
+    .links { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 0; padding-top:14px; border-top:1px dashed var(--line); }
+    .links-t { width:100%; font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+    .btn { display:inline-flex; align-items:center; min-height:34px; padding:0 12px; border-radius:999px; border:1px solid rgba(22,32,42,.18); background:#fff; color:var(--ink); text-decoration:none; font-weight:700; font-size:13.5px; }
+    .btn.primary { background:var(--deep); color:#fff; border-color:var(--deep); }
+    /* Cartes */
+    .map-fig { margin:18px 0; }
+    .map { height:340px; border-radius:16px; border:1px solid var(--line); background:#dfe8e2; z-index:1; }
+    @media (max-width:600px) { .map { height:280px; } }
+    .map-fig figcaption { font-size:14px; color:var(--muted); margin-top:8px; font-weight:600; }
+    .map-fig .btns { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+    .mk { width:14px; height:14px; border-radius:50%; background:var(--red); border:2px solid #fff; box-shadow:0 1px 5px rgba(0,0,0,.4); }
+    .mk.lbl { width:auto; height:auto; border-radius:999px; padding:2px 8px; color:#fff; font:800 11px var(--body); white-space:nowrap; }
+    /* Graphiques */
+    .chart { margin:18px 0; padding:14px 16px; background:var(--paper); border-radius:16px; }
+    .chart figcaption { font-weight:800; font-size:14px; margin-bottom:10px; }
+    .bar { display:grid; grid-template-columns:130px 1fr 64px; gap:10px; align-items:center; margin:6px 0; font-size:14px; }
+    @media (max-width:500px) { .bar { grid-template-columns:100px 1fr 56px; } }
+    .bt { height:14px; background:#fff; border-radius:999px; overflow:hidden; }
+    .bt i { display:block; height:100%; border-radius:999px; }
+    .bv { font-weight:800; text-align:right; }
+    .chart svg { width:100%; height:auto; }
+    .frise svg { min-width:620px; }
+    .frise { overflow-x:auto; }
+    .frise .fl { font:800 12px var(--body); fill:var(--ink); }
+    .frise .fl2 { font:600 10.5px var(--body); fill:var(--muted); }
+    .frise .fs { font:700 11px var(--body); text-anchor:middle; fill:#5a4a3a; }
+    .frise .gl { stroke:#0000000f; }
+    .frise .ax { font:600 10px var(--body); text-anchor:end; fill:var(--muted); }
+    .frise .rv { font:700 11px var(--body); text-anchor:middle; fill:#2a64a0; }
+    .frise .sv { font:700 11px var(--body); text-anchor:middle; fill:#9a7000; }
+    .frise .cv { font:800 11px var(--body); text-anchor:middle; fill:#1d2a33; }
+    .frise .cv.w { fill:#fff; }
+    .fr-tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:6px; }
+    .fr-tab { flex:none; border:1px solid #0002; background:#fff; border-radius:999px; padding:7px 13px; font:700 13px var(--body); cursor:pointer; }
+    .fr-tab.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .fr-hint { display:none; font-size:12.5px; color:var(--muted); margin:-4px 0 8px; }
+    @media (max-width:700px){ .fr-hint { display:block; } }
+    .heat table { width:100%; border-collapse:separate; border-spacing:2px; table-layout:fixed; font-size:12px; }
+    .heat th { font-weight:700; color:var(--muted); text-align:center; padding:2px 0; }
+    .heat tr th:first-child { text-align:left; width:92px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .heat th.me { font-weight:900; }
+    .heat td { text-align:center; padding:6px 0; border-radius:5px; font-weight:800; }
+    .heat .hs th { font-size:10px; font-weight:700; padding:3px 0; border-radius:5px; color:#5a4a3a; }
+    .heat .s-ete { background:#fde3c8; } .heat .s-aut { background:#f6e7c1; } .heat .s-hiv { background:#d9e6f5; } .heat .s-pri { background:#dcefd9; }
+    .heat td.sky { padding:3px 0; line-height:1.1; }
+    .heat td.sky span { display:block; font-size:16px; }
+    .heat td.sky small { display:block; font-size:10px; font-weight:800; }
+    .heat td.sky.big { font-size:20px; background:transparent; }
+    .sky-leg { font-size:12.5px; color:var(--ink); margin:8px 0 0; line-height:1.6; }
+    .heat .h2 { font-weight:800; font-size:13px; margin:12px 0 4px; }
+    @media (max-width:520px){ .heat table { font-size:10px; border-spacing:1px; } .heat tr th:first-child { width:62px; font-size:10px; } .heat td { padding:5px 0; font-size:9.5px; letter-spacing:-.02em; } .heat .hs th { font-size:8px; } .heat td.sky span { font-size:12px; } .heat td.sky small { font-size:8px; } .heat td.sky.big { font-size:14px; } }
+    .symgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+    .sym { display:flex; flex-direction:column; gap:6px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:10px; text-decoration:none; color:var(--ink); font-weight:700; font-size:13px; }
+    .sym img { width:100%; aspect-ratio:3/2; object-fit:contain; background:#f3f0ea; border-radius:6px; }
+    .sym.emo b { font-size:34px; aspect-ratio:3/2; display:flex; align-items:center; justify-content:center; background:#f3f0ea; border-radius:6px; }
+    @media (max-width:520px){ .symgrid { grid-template-columns:1fr 1fr; } }
+    .fr-note { font-size:12.5px; color:var(--muted); margin:8px 0 0; }
+    .chart .tv { font:800 12px var(--body); text-anchor:middle; fill:var(--ink); }
+    .chart .tv.lo { fill:#2a5aa8; }
+    .chart .tm { font:700 12px var(--body); text-anchor:middle; fill:var(--muted); }
+    /* Personnalités */
+    .chap.people .chap-body ul { list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:10px; }
+    .chap.people .chap-body li { margin:0; background:var(--paper); border-radius:14px; padding:10px 12px; font-size:15px; }
+    .intro2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:860px; }
+    .intro2 > div { background:#ffffff14; border-radius:16px; padding:14px 16px; }
+    .intro2 h4 { margin:0 0 6px; font-size:19px; display:flex; align-items:center; gap:10px; }
+    .intro2 p { font-size:16px !important; margin:0; }
+    img.flag { display:inline-block; height:26px; width:auto !important; max-width:none; flex:none; border-radius:3px; box-shadow:0 1px 4px #0006; background:#fff; }
+    .part-open h2 img.flag { height:34px; margin-right:12px; vertical-align:-4px; }
+    .fnav { position:fixed; right:22px; bottom:22px; z-index:40; display:flex; gap:8px; }
+    .fnav button { width:52px; height:52px; border-radius:50%; border:0; background:var(--deep); color:#fff; font-size:26px; font-weight:800; cursor:pointer; box-shadow:0 4px 14px #0004; }
+    .fnav button:hover { background:var(--ink); }
+    @media (max-width:980px){ .fnav { display:none; } }
+    @media (max-width:640px){ .intro2 { grid-template-columns:1fr; } }
+    .subnav { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+    .subnav a { background:var(--sand); color:var(--ink); text-decoration:none; font-weight:700; font-size:14px; padding:7px 12px; border-radius:999px; }
+    .chap-body > h3 { font:400 26px/1.2 var(--display); margin:34px 0 10px; padding-top:18px; border-top:1px solid var(--line); scroll-margin-top:70px; }
+    .chap-body > h3:first-of-type { border-top:0; padding-top:0; margin-top:6px; }
+    /* Navigation entre chapitres */
+    .next { display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 0; }
+    .next button { flex:1 1 220px; border:0; border-radius:16px; padding:14px 16px; font:inherit; font-weight:800; cursor:pointer; text-align:left; background:var(--sand); color:var(--ink); }
+    .next button.n { background:var(--deep); color:#fff; text-align:right; }
+    .next button small { display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; opacity:.75; }
+    footer { margin:40px 0 80px; font-size:13px; color:var(--muted); }
+    footer ul { padding-left:18px; }
+  </style>
+  <script>
+  function symFallback(img) {
+    if (img.dataset.tried) { img.style.display = 'none'; return; } img.dataset.tried = 1;
+    fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=400&titles=" + encodeURIComponent(img.dataset.wiki))
+      .then(r => r.json()).then(r => { const pg = Object.values((r.query || {}).pages || {})[0]; if (pg && pg.thumbnail) img.src = pg.thumbnail.source; else img.style.display = 'none'; }).catch(() => { img.style.display = 'none'; });
+  }
+  </script>
+</head>
+<body>
+  <div class="fnav"><button type="button" id="fPrev" aria-label="Chapitre précédent" title="Chapitre précédent">‹</button><button type="button" id="fNext" aria-label="Chapitre suivant" title="Chapitre suivant">›</button></div>
+  <div class="mbar"><button type="button" class="arrow" id="mPrev" aria-label="Chapitre précédent">‹</button><button type="button" class="mid" id="mMenu"><small id="mPart">Le plan</small><b id="mTitle">Tous les chapitres ▾</b></button><button type="button" class="arrow" id="mNext" aria-label="Chapitre suivant">›</button></div>
+  <div class="scrim" id="scrim"></div>
+  <nav class="side" id="side" aria-label="Plan de l’exposé">
+    <div class="brand">Melbourne · L’Australie<small>Exposé · octobre 2026</small></div>
+    <!--TOC-->
+    <div class="toc-part" style="color:var(--green)">À voir aussi</div>
+    <ol><li><a href="../melbourne/"><span>→</span>Le dossier : 16 quartiers et 100 lieux</a></li></ol>
+  </nav>
+  <main>
+    <header class="cover"><div class="wrap">
+      <div class="kicker">Exposé · chiffres vérifiés en octobre 2026 · 1 AUD ≈ 0,61 € (cours moyen 2026)</div>
+      <h1>Melbourne · L’Australie</h1>
+      <div class="intro2"><div><h4><img class="flag" src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Melbourne.svg?width=240" data-wiki="Flag of Melbourne" alt="" onerror="symFallback(this)">Melbourne</h4><p>Les 16 quartiers et 100 lieux à visiter. Puis la ville : histoire, habitants, économie, travail, logement, météo, cuisine, sport, sorties et prix.</p></div><div><h4><img class="flag" src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Australia_(converted).svg?width=240" data-wiki="Flag of Australia" alt="" onerror="symFallback(this)">L’Australie</h4><p>Le pays, son histoire et ses habitants, l’économie, le travail État par État, le mode de vie, la nature, la culture et le sport.</p></div></div>
+      <div class="go"><a href="#b1">Les lieux à visiter</a><a class="alt" href="#b2">Melbourne</a><a class="alt" href="#a1">L’Australie</a></div>
+    </div></header>
+    <div class="wrap">
+      <!--SECTIONS-->
+      <footer><h4>Sources principales</h4><!--SOURCES--></footer>
+    </div>
+  </main>
+  <script src="../leaflet.js"></script>
+  <script>
+  /*ORDER*/
+  (function(){
+    const idx = id => ORDER.findIndex(o => o.id === id);
+    const go = i => { if (i < 0 || i >= ORDER.length) return; document.getElementById(ORDER[i].id).scrollIntoView({ behavior:"smooth" }); };
+    // Boutons précédent / suivant en bas de chaque chapitre
+    ORDER.forEach((o, i) => {
+      const sec = document.getElementById(o.id); const box = document.createElement("div"); box.className = "next";
+      box.innerHTML = (i > 0 ? `<button type="button" data-i="${i-1}"><small>← Précédent</small>${ORDER[i-1].t}</button>` : "") +
+                      (i < ORDER.length - 1 ? `<button type="button" class="n" data-i="${i+1}"><small>${ORDER[i+1].p === o.p ? "Chapitre suivant" : "Partie suivante : " + ORDER[i+1].p} →</small>${ORDER[i+1].t}</button>` : "");
+      sec.querySelector(".chap-body").appendChild(box);
+    });
+    document.addEventListener("click", e => { const b = e.target.closest(".next button"); if (b) go(+b.dataset.i); });
+    // Chapitre courant : surlignage du plan et barre du téléphone
+    let current = null;
+    const side = document.getElementById("side"), scrim = document.getElementById("scrim");
+    const setCur = id => {
+      if (current === id) return; current = id; const o = ORDER[idx(id)];
+      side.querySelectorAll("a[data-id]").forEach(a => a.classList.toggle("on", a.dataset.id === id));
+      document.getElementById("mPart").textContent = `${o.p} · ${o.n}/${ORDER.filter(x => x.p === o.p).length}`;
+      document.getElementById("mTitle").textContent = o.t + " ▾";
+      const a = side.querySelector(`a[data-id="${id}"]`); if (a && window.innerWidth > 980) a.scrollIntoView({ block:"nearest" });
+    };
+    const obs = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) setCur(e.target.id); }); }, { rootMargin:"-40% 0px -55% 0px" });
+    document.querySelectorAll(".chap").forEach(s => obs.observe(s));
+    const toggle = on => { side.classList.toggle("open", on); scrim.classList.toggle("on", on); };
+    document.getElementById("mMenu").onclick = () => toggle(!side.classList.contains("open"));
+    scrim.onclick = () => toggle(false);
+    side.addEventListener("click", e => { if (e.target.closest("a")) toggle(false); });
+    document.getElementById("mPrev").onclick = () => go(current ? idx(current) - 1 : 0);
+    document.getElementById("mNext").onclick = () => go(current ? idx(current) + 1 : 0);
+    document.getElementById("fPrev").onclick = () => go(current ? idx(current) - 1 : 0);
+    document.getElementById("fNext").onclick = () => go(current ? idx(current) + 1 : 0);
+    document.querySelectorAll(".chap-body a, .links a").forEach(a => { if (!a.target) { a.target = "_blank"; a.rel = "noreferrer"; } });
+
+    // Cartes : créées quand elles arrivent à l'écran
+    const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+    const mapObs = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting || e.target._done) return; e.target._done = true;
+      const el = e.target, kind = el.dataset.kind, pts = JSON.parse(el.dataset.markers || "[]");
+      const map = L.map(el, { scrollWheelZoom:false, attributionControl:true });
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:18, attribution:"© OpenStreetMap" }).addTo(map);
+      const color = el.closest(".chap").dataset.part === "a" ? "#c4532e" : "#24506b";
+      pts.forEach(p => {
+        const icon = L.divIcon({ className:"", html:`<div class="mk lbl" style="background:${color}">${esc(p.n)}</div>`, iconSize:null, iconAnchor:[10,10] });
+        const pop = `<b>${esc(p.n)}</b>${p.extra ? "<br>" + esc(p.extra) : ""}${p.url ? `<br><a href="${p.url}" target="${p.url.startsWith("..") ? "_self" : "_blank"}" rel="noreferrer">${p.url.startsWith("..") ? "Ouvrir la fiche" : "Google Maps"}</a>` : ""}`;
+        L.marker([p.lat, p.lon], { icon }).addTo(map).bindPopup(pop);
+      });
+      if (pts.length > 1) map.fitBounds(L.latLngBounds(pts.map(p => [p.lat, p.lon])), { padding:[30,30] });
+      else if (pts.length === 1) map.setView([pts[0].lat, pts[0].lon], 10);
+      else map.setView([-27, 134], 3);
+    }), { rootMargin:"300px" });
+    document.querySelectorAll(".map").forEach(m => mapObs.observe(m));
+
+    // Photo d'ouverture de chaque chapitre (Wikipédia), sans doublon
+    const boxes = [...document.querySelectorAll(".chap-photo[data-wiki]")].filter(b => b.dataset.wiki);
+    const titles = [...new Set(boxes.map(b => b.dataset.wiki))];
+    const batches = []; for (let i = 0; i < titles.length; i += 45) batches.push(titles.slice(i, i + 45));
+    Promise.all(batches.map(b => fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail%7Cname&pithumbsize=1400&titles=" + encodeURIComponent(b.join("|"))).then(r => r.json()).catch(() => null)))
+    .then(rs => {
+      const img = {};
+      rs.forEach(r => { if (!r || !r.query) return; const back = {}; (r.query.normalized || []).concat(r.query.redirects || []).forEach(x => back[x.to] = back[x.from] || x.from);
+        Object.values(r.query.pages || {}).forEach(p => { if (p.thumbnail) img[back[p.title] || p.title] = { src:p.thumbnail.source, file:p.pageimage, page:"https://en.wikipedia.org/wiki/" + encodeURIComponent(p.title.replace(/ /g,"_")) }; }); });
+      const used = new Set();
+      boxes.forEach(b => { const w = img[b.dataset.wiki]; if (!w || used.has(w.file)) return; used.add(w.file);
+        const pre = new Image(); pre.onload = () => { b.style.backgroundImage = `url("${w.src}")`; b.classList.add("has-img"); b.insertAdjacentHTML("beforeend", `<a class="credit" href="${w.page}" target="_blank" rel="noreferrer">Photo Wikipédia</a>`); }; pre.src = w.src; });
+    });
+  })();
+  document.querySelectorAll('.frise').forEach(f => f.querySelectorAll('.fr-tab').forEach(b => b.onclick = () => {
+    f.querySelectorAll('.fr-tab').forEach(x => x.classList.toggle('on', x === b));
+    f.querySelectorAll('.fr-pane').forEach(p => p.hidden = p.dataset.c !== b.dataset.c);
+  }));
+  </script>
+</body>
+</html>
