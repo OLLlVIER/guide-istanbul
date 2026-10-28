@@ -177,8 +177,22 @@ def symbols():
     emo = "".join(f'<div class="sym emo"><b>{e}</b><span>{t}</span></div>' for e, t in [("🟢🟡","Vert et or, les couleurs"),("🌼","Le mimosa doré"),("🦘","Kangourou et émeu"),("🎵","« Advance Australia Fair »")])
     return f'<figure class="chart symbols"><figcaption>Les symboles de l’Australie</figcaption><div class="symgrid">{cards}{emo}</div></figure>'
 
+def state_flags():
+    F = lambda f: "https://commons.wikimedia.org/wiki/Special:FilePath/" + f + "?width=360"
+    items = [("Flag_of_New_South_Wales.svg","Flag of New South Wales","Nouvelle-Galles du Sud"),
+             ("Flag_of_Victoria_(Australia).svg","Flag of Victoria (Australia)","Victoria"),
+             ("Flag_of_Queensland.svg","Flag of Queensland","Queensland"),
+             ("Flag_of_Western_Australia.svg","Flag of Western Australia","Australie-Occidentale"),
+             ("Flag_of_South_Australia.svg","Flag of South Australia","Australie-Méridionale"),
+             ("Flag_of_Tasmania.svg","Flag of Tasmania","Tasmanie"),
+             ("Flag_of_the_Northern_Territory.svg","Flag of the Northern Territory","Territoire du Nord"),
+             ("Flag_of_the_Australian_Capital_Territory.svg","Flag of the Australian Capital Territory","Territoire de la capitale")]
+    cards = "".join(f'<a class="sym" href="https://en.wikipedia.org/wiki/{w.replace(" ", "_")}" target="_blank" rel="noreferrer"><img src="{F(f)}" data-wiki="{w}" alt="Drapeau : {t}" loading="lazy" onerror="symFallback(this)"><span>{t}</span></a>' for f, w, t in items)
+    return f'<figure class="chart symbols"><figcaption>Les drapeaux des huit États et territoires</figcaption><div class="symgrid">{cards}</div></figure>'
+
 exec(open('frise.py').read())
 EXTRA_AFTER = {
+ ("États et territoires", "État ou territoire"): state_flags(),
  ("Le pays en un regard", "Les symboles du pays"): symbols(),
  ("Climats", "Doux toute l"): heat_villes(),
  ("Qui sont", "Religion (2021)"): bars("Religion en Australie (recensement 2021, en %)", [("Christianisme",43.9),("Sans religion",38.9),("Islam",3.2),("Hindouisme",2.7),("Bouddhisme",2.4),("Sikhisme",0.8)], " %", "#7a4fa0"),
