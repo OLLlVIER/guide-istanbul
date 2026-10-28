@@ -976,7 +976,8 @@ Ce que l’on veut savoir avant de vivre ou de travailler dans le pays.
 
 | À partir de | Ce qui est permis |
 |---|---|
-| 12 ans | Responsabilité pénale (âge relevé de 10 à 12 ans en 2024) |
+| 12 ans | Responsabilité pénale au Victoria : relevée de 10 à 12 ans par une loi votée en août 2024 ; le projet d’aller jusqu’à 14 ans a été abandonné. C’est 10 ans dans la plupart des autres États, 12 dans le Territoire du Nord et à Canberra |
+| 14 ans | Au Victoria, la loi « Adult Time for Violent Crime », annoncée en novembre 2025 et prévue pour 2026, fait juger par les tribunaux pour adultes les jeunes de 14 ans et plus accusés de violences graves (cambriolage avec violence, vol de voiture avec violence, agression à la machette), avec des peines pouvant aller jusqu’à la perpétuité |
 | 16 ans | Majorité sexuelle (17 ans en Australie-Méridionale et en Tasmanie) ; permis d’apprenti conducteur, accompagné ; inscription anticipée sur les listes électorales ; réseaux sociaux autorisés |
 | 16-17 ans | Mariage seulement avec l’accord d’un juge et des parents, et avec une personne majeure |
 | 17 ans | Fin de la scolarité obligatoire |
@@ -1055,9 +1056,10 @@ Ce que l’on veut savoir avant de vivre ou de travailler dans le pays.
 - **Soleil** : crème, chapeau et lunettes même par temps couvert. La campagne nationale « Slip, Slop, Slap » existe depuis 1981.
 - **Feux** : consulter l’application VicEmergency en été ; certains jours de « Total Fire Ban », tout feu est interdit.
 - **Armes** : après la tuerie de **Port Arthur** en Tasmanie (35 morts, avril 1996), le pays a adopté l’une des lois les plus strictes au monde et racheté puis détruit environ 650 000 armes. Porter une arme pour se défendre n’est pas un motif admis.
+- **Les prisons** : **46 998 détenus** au 30 juin 2025, soit 216 pour 100 000 adultes. **92 %** sont des hommes, **42 %** attendent leur procès (détention provisoire), et **37 %** sont aborigènes ou insulaires, alors qu’ils ne représentent que 3,8 % de la population : c’est l’une des plus fortes surreprésentations au monde. Le Victoria emprisonne beaucoup moins : 6 593 détenus, 118 pour 100 000 adultes. La première cause d’incarcération est la violence contre les personnes (29 %).
 - **Randonnée** : prévenir de son itinéraire, emporter beaucoup d’eau ; le réseau téléphonique disparaît vite hors des villes.
 
-🔗 **Liens** : [Beachsafe, sécurité des plages](https://beachsafe.org.au/) · [VicEmergency](https://emergency.vic.gov.au/) · [Medicare et accords de réciprocité](https://www.servicesaustralia.gov.au/medicare) · [Noyades 2025 (Royal Life Saving)](https://www.royallifesaving.com.au/library/national-drowning-report/national-drowning-report-2025) · [Smartraveller (conseils officiels)](https://www.smartraveller.gov.au/)
+🔗 **Liens** : [Prisonniers en Australie 2025 (ABS)](https://abs.gov.au/statistics/people/crime-and-justice/prisoners-australia/2025) · [Responsabilité pénale au Victoria (The Daily Aus)](https://www.thedailyaus.com.au/crime/victoria-age-of-criminal-responsibility) · [Adult Time for Violent Crime (gouvernement du Victoria)](https://www.premier.vic.gov.au/sites/default/files/2025-11/251112-Adult-Time-For-Violent-Crime-.pdf) · [Beachsafe, sécurité des plages](https://beachsafe.org.au/) · [VicEmergency](https://emergency.vic.gov.au/) · [Medicare et accords de réciprocité](https://www.servicesaustralia.gov.au/medicare) · [Noyades 2025 (Royal Life Saving)](https://www.royallifesaving.com.au/library/national-drowning-report/national-drowning-report-2025) · [Smartraveller (conseils officiels)](https://www.smartraveller.gov.au/)
 
 ## 20. Faune et flore
 
