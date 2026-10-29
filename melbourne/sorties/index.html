@@ -9,7 +9,7 @@
 :root{
   --bg:#f8f5ef; --surface:#fffdf9; --ink:#16202a; --muted:#5a6470; --line:#e3dccf;
   --tram:#24506b; --band:#24506b;
-  --c-cafe:#8a5a3b; --c-bar:#24506b; --c-roof:#a8741a; --c-club:#6b3fa0; --c-hallo:#c4532e; --c-meet:#2f7a52; --c-after:#3b3f8f;
+  --c-cafe:#8a5a3b; --c-bar:#24506b; --c-roof:#a8741a; --c-club:#6b3fa0; --c-hallo:#c4532e; --c-meet:#2f7a52; --c-after:#3b3f8f; --c-girls:#a8336b;
   --ok:#2f7a52; --mid:#b07a1a; --hard:#b3261e; --sign:#e0a43a; --hallo:#c4532e; --alert:#b3261e;
   --f-display:"DM Serif Display",Georgia,serif;
   --f-body:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;
@@ -18,7 +18,7 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
   --tram:#7fb2d4; --band:#1d4259;
-  --c-cafe:#d29a72; --c-bar:#7fb2d4; --c-roof:#e0a43a; --c-club:#b48ae6; --c-hallo:#e8774f; --c-meet:#5fc08a; --c-after:#9aa0f0;
+  --c-cafe:#d29a72; --c-bar:#7fb2d4; --c-roof:#e0a43a; --c-club:#b48ae6; --c-hallo:#e8774f; --c-meet:#5fc08a; --c-after:#9aa0f0; --c-girls:#e889b5;
   --ok:#5fc08a; --mid:#e0a43a; --hard:#ff6b61; --sign:#e0a43a; --hallo:#e8774f; --alert:#ff6b61; color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
   --tram:#7fb2d4; --band:#1d4259;
@@ -94,6 +94,11 @@ nav.jump a{display:inline-flex;align-items:center;gap:6px}
 nav.jump a[href="#rencontres"]{border-color:var(--c-meet);color:var(--c-meet)}
 .music{display:flex;gap:6px;align-items:baseline;font-size:14px;color:var(--ink)}
 .music .ic{color:var(--sec,var(--muted))}
+
+.girls{margin-top:18px;border:2px solid var(--c-girls);border-radius:12px;padding:18px;background:color-mix(in srgb,var(--c-girls) 7%,var(--bg))}
+.girls>h3{font-family:var(--f-display);font-weight:400;font-size:28px;margin:0 0 12px;color:var(--c-girls)}
+.girls h4{margin:0 0 8px;font-size:17px}
+.girls .sos h4{color:var(--alert)}
 footer{padding-block:34px 40px;color:var(--muted);font-size:14px}
 footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;margin:10px 0 18px}
 @media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
@@ -113,7 +118,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
   <div class="wrap">
     <a class="h" href="#halloween"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-4.4 0-8 3-8 7.2S7.6 20 12 20s8-2.6 8-6.8S16.4 6 12 6Z"/><path d="M12 6V3.5c1 0 2 .4 2.5 1.2"/><path d="M8.5 11.5l1.5 1 1.5-1M12.5 11.5l1.5 1 1.5-1M9 16c2 1 4 1 6 0"/></svg>Halloween</a>
     <a href="#rencontres"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5M13.5 18.5c.5-2.1 1.7-3.3 3-3.3 1.6 0 3 1.2 3.5 3.3"/></svg>Rencontres</a>
-    <a href="#securite"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-3 7.8-7 9.5-4-1.7-7-5.2-7-9.5V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>Sécurité</a>
+    <a href="#securite" style="border-color:var(--c-girls);color:var(--c-girls)"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-3 7.8-7 9.5-4-1.7-7-5.2-7-9.5V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>Sécurité</a>
     <a href="#budget"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/></svg>Prix &amp; transport</a>
     <a href="#bars"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14l-7 8-7-8Z"/><path d="M12 12v7M8 20h8"/><path d="M15.5 4l2-2"/></svg>Bars</a>
     <a href="#rooftops"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18"/><path d="M6 20V11h5v9M13 20V7h5v13"/><circle cx="9" cy="5" r="2"/></svg>Rooftops</a>
@@ -183,6 +188,52 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
           <li>Uber / DiDi : vérifier plaque et chauffeur, partager le trajet avec une amie.</li>
           <li>Sortir et rentrer à deux, se fixer un point de rendez-vous si on se perd.</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="girls">
+      <h3>Entre filles : les règles de la soirée</h3>
+      <div class="cols">
+        <div class="box">
+          <h4>Avant de partir</h4>
+          <ul>
+            <li>Le plan de retour se décide <strong>avant</strong> de sortir : Night Network, Uber, qui rentre avec qui.</li>
+            <li>Partage de position activé entre copines pour toute la nuit (Localiser sur iPhone, Google Maps sur Android).</li>
+            <li>Téléphone chargé, batterie externe, et l'app officielle <strong>Emergency+</strong> : elle affiche ta position GPS exacte à lire aux secours.</li>
+            <li>Le passeport perdu, c'est la galère en PVT : préfère la carte Proof of Age de Victoria, sinon passeport dans une poche zippée.</li>
+            <li>Sac fermé porté devant, carte bancaire séparée du cash, et un budget « retour » auquel on ne touche pas.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h4>Pendant la soirée</h4>
+          <ul>
+            <li><strong>On arrive ensemble, on repart ensemble.</strong> Personne ne part avec quelqu'un sans le dire au groupe.</li>
+            <li>Un mot de code entre vous pour dire « sors-moi de là » sans avoir à s'expliquer.</li>
+            <li>Un verre offert : seulement s'il est servi devant toi, au bar. Un verre quitté des yeux, on en recommande un.</li>
+            <li>Une copine soudain beaucoup plus ivre que ce qu'elle a bu : on ne la laisse jamais seule, on ne la confie pas à quelqu'un qui « la raccompagne », on prévient la sécurité et on appelle le 000.</li>
+            <li>Lourdeur, attouchement : on le signale au staff ou aux videurs, qui ont l'obligation d'agir. Et on change de lieu sans hésiter.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h4>Le retour</h4>
+          <ul>
+            <li>Uber, DiDi : vérifier plaque, modèle et prénom du chauffeur, s'asseoir à l'arrière, partager le trajet en direct.</li>
+            <li>N'accepte jamais de « lift » d'un inconnu, même sympa, même d'une soirée.</li>
+            <li>Train de nuit : attendre sur la partie éclairée du quai, près des caméras et des agents ; monter dans la première voiture, près du conducteur.</li>
+            <li>La nuit, ne pas couper par les parcs ni longer la plage de St Kilda : rester sur les grandes rues éclairées.</li>
+            <li>Message « bien rentrée » dans le groupe : personne ne dort tant que tout le monde n'a pas écrit.</li>
+          </ul>
+        </div>
+        <div class="box sos">
+          <h4>Si quelque chose arrive</h4>
+          <ul>
+            <li>Danger immédiat : <span class="num">000</span> (ou <span class="num">112</span> depuis un mobile).</li>
+            <li>Agression sexuelle, 24/7, gratuit et confidentiel : <span class="num">1800 806 292</span>.</li>
+            <li>Violences sexuelles ou conjugales, écoute nationale 24/7 : <span class="num">1800 737 732</span> (1800RESPECT).</li>
+            <li>Après un possible verre drogué, aller aux urgences rapidement : certaines substances ne sont détectables que quelques heures.</li>
+            <li>Ce n'est jamais ta faute : tu peux demander de l'aide même si tu as bu.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
