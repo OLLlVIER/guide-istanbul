@@ -58,6 +58,9 @@ h2{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5vw,46px);l
 .halloween .links a.ph{background:var(--hallo);border-color:var(--hallo)}
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}
 .filters button{font:inherit;font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+#quartiers{padding-block:22px 0}
+#quartiers h2{font-size:clamp(26px,4vw,34px)}
+.empty{color:var(--muted);font-style:italic;margin:0}
 .filters button[aria-pressed="true"]{background:var(--sign);color:#16202a;border-color:var(--sign)}
 .sub{font-family:var(--f-display);font-weight:400;font-size:26px;margin:24px 0 10px}
 .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
@@ -119,6 +122,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
 
 <nav class="jump" aria-label="Sections">
   <div class="wrap">
+    <a href="#quartiers"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg>Quartiers</a>
     <a href="#tendance"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.6L20 9.3l-4.4 3.9 1.3 5.8L12 16l-4.9 3 1.3-5.8L4 9.3l5.8-.7L12 3Z"/></svg>À la mode</a>
     <a class="h" href="#halloween"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-4.4 0-8 3-8 7.2S7.6 20 12 20s8-2.6 8-6.8S16.4 6 12 6Z"/><path d="M12 6V3.5c1 0 2 .4 2.5 1.2"/><path d="M8.5 11.5l1.5 1 1.5-1M12.5 11.5l1.5 1 1.5-1M9 16c2 1 4 1 6 0"/></svg>Halloween</a>
     <a href="#rencontres"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5M13.5 18.5c.5-2.1 1.7-3.3 3-3.3 1.6 0 3 1.2 3.5 3.3"/></svg>Rencontres</a>
@@ -133,6 +137,14 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
 </nav>
 
 <main>
+<section id="quartiers">
+  <div class="wrap">
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg>Par quartier</h2>
+    <div class="filters" id="qf" role="group" aria-label="Choisir un quartier"></div>
+    <p class="lede" id="qdesc"></p>
+  </div>
+</section>
+
 <section id="tendance">
   <div class="wrap">
     <span class="eyebrow">Les adresses dont on parle en 2026</span>
@@ -299,7 +311,6 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
     <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14l-7 8-7-8Z"/><path d="M12 12v7M8 20h8"/><path d="M15.5 4l2-2"/></svg>Bars</h2>
     <p class="lede">Les adresses petits budgets et les bars cachés des laneways. St Kilda est le quartier backpackers ; Fitzroy le plus vivant côté nord.</p>
     <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
-    <div class="filters" data-for="g-bars"></div>
     <div class="grid" id="g-bars"></div>
     <div class="sub">Speakeasies (entrées cachées)</div>
     <div class="grid" id="g-speak"></div>
@@ -311,7 +322,6 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
     <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18"/><path d="M6 20V11h5v9M13 20V7h5v13"/><circle cx="9" cy="5" r="2"/></svg>Rooftops</h2>
     <p class="lede">Ouverts toute l'année avec chauffages. Arrive avant 18 h le week-end pour éviter la file, prends une veste : la température chute vite après le coucher du soleil.</p>
     <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
-    <div class="filters" data-for="g-roof"></div>
     <div class="grid" id="g-roof"></div>
   </div>
 </section>
@@ -321,7 +331,6 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
     <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><path d="M4.5 12h15M12 4.5v15M6.6 6.8c3.6 2 7.2 2 10.8 0M6.6 17.2c3.6-2 7.2-2 10.8 0"/></svg>Clubs</h2>
     <p class="lede">Melbourne ferme tard : licences jusqu'à 5 h, 7 h ou 24 h. Les clubs se remplissent rarement avant minuit ; certains font entrer gratuitement ou moins cher avant 22 h.</p>
     <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
-    <div class="filters" data-for="g-clubs"></div>
     <div class="grid" id="g-clubs"></div>
   </div>
 </section>
@@ -359,7 +368,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
 </footer>
 
 <script>
-const AREAS=["Tout","CBD","Fitzroy / Collingwood","St Kilda","South Yarra / Prahran","Carlton / Richmond"];
+const AREAS=["Tout","CBD","Fitzroy / Collingwood","St Kilda","Chapel Street","Carlton"];
 const D={
 "g-halloween":[
  {n:"International Halloween Party",a:"The Carlton Club, 193 Bourke St",z:"CBD",when:"Sam 31 · 17h – 23h30",p:"Billet Eventbrite",d:"Grande soirée multiculturelle (échange linguistique Linguas) : DJ, jeux, concours de costumes. La meilleure pour rencontrer du monde en arrivant.",t:"https://www.eventbrite.com.au/e/international-halloween-party-2026-tickets-1994779454045"},
@@ -369,7 +378,7 @@ const D={
  {n:"The Fright Crawl",a:"14 Corrs Lane",z:"CBD",when:"Sam 31 · 17h – 22h30",p:"Billet en ligne",d:"Bar crawl de fin d'après-midi dans les laneways, idéal avant d'enchaîner en club.",t:"https://keen.social/whats-on/melbourne/halloween"},
  {n:"Luna Dark",a:"Luna Park, 18 Lower Esplanade",z:"St Kilda",when:"Jeu 29, ven 30, sam 31 · 18h – minuit",p:"Billet manèges",d:"Le vieux parc d'attractions version Halloween, en nocturne au bord de la plage.",t:"https://lunapark.com.au"},
  {n:"Halloween à Old Melbourne Gaol",a:"377 Russell St",z:"CBD",when:"Sam 31 · 18h – 22h",p:"Réservation",d:"L'ancienne prison où fut pendu Ned Kelly, de nuit. Visites hantées.",t:"https://www.oldmelbournegaol.com.au/event/halloween-at-old-melbourne-gaol/"},
- {n:"Poof Doof Halloqween",a:"Chasers, 386 Chapel St",z:"South Yarra / Prahran",when:"Sam 31 · 21h – 4h30",p:"Prévente Eventbrite",d:"Soirée LGBTQ+ et alliés, drag queens, pop. Ambiance très festive.",t:"https://keen.social/whats-on/melbourne/halloween"},
+ {n:"Poof Doof Halloqween",a:"Chasers, 386 Chapel St",z:"Chapel Street",when:"Sam 31 · 21h – 4h30",p:"Prévente Eventbrite",d:"Soirée LGBTQ+ et alliés, drag queens, pop. Ambiance très festive.",t:"https://keen.social/whats-on/melbourne/halloween"},
  {n:"Emo Never Sleeps : Halloween",a:"Royal Melbourne Hotel, 629 Bourke St",z:"CBD",when:"Sam 31 · dès 21h",p:"Billet en ligne",d:"Emo, pop-punk, années 2000. Public déguisé en masse.",t:"https://keen.social/whats-on/melbourne/halloween"}
 ],
 "g-meet":[
@@ -382,7 +391,7 @@ const D={
 ],
 "g-trend":[
  {n:"Caretaker's Cottage",a:"139-141 Little Lonsdale St",z:"CBD",when:"Lun – sam · 16h – 1h",p:"cocktails ≈ 26 $",d:"45<sup>e</sup> des World's 50 Best Bars 2026, le seul bar australien du classement. Minuscule (25 places) dans une ancienne maison de gardien en pierre bleue. Martini glacé, carte qui change chaque mois.",m:"Vinyles au bar",t:"https://caretakerscottage.bar",e:[2,"25 places : arriver tôt, ça déborde sur le trottoir"]},
- {n:"Coil",a:"116 Chapel St, Windsor",z:"South Yarra / Prahran",when:"Mer – dim dès 17h · jusqu'à 3h ven – sam",p:"gratuit avant 21h · 15 – 20 $ après",d:"Le nouveau club de l'équipe Rumbler, ouvert en 2026 : bar pour discuter jusqu'à 21h, puis piste de danse avec un son haut de gamme. Téléphones interdits sur la piste.",m:"House, techno, électro pointue",e:[1,"Gratuit avant 21h ; caméra du téléphone masquée sur la piste"]},
+ {n:"Coil",a:"116 Chapel St, Windsor",z:"Chapel Street",when:"Mer – dim dès 17h · jusqu'à 3h ven – sam",p:"gratuit avant 21h · 15 – 20 $ après",d:"Le nouveau club de l'équipe Rumbler, ouvert en 2026 : bar pour discuter jusqu'à 21h, puis piste de danse avec un son haut de gamme. Téléphones interdits sur la piste.",m:"House, techno, électro pointue",e:[1,"Gratuit avant 21h ; caméra du téléphone masquée sur la piste"]},
  {n:"Solace",a:"21-25 Croft Alley, Chinatown",z:"CBD",when:"Mar – jeu 17h – 1h · ven – sam 17h – 3h",d:"Bar-club de Chinatown cité par Time Out parmi les meilleures pistes de danse de la ville. Soirées tenues par des labels et collectifs locaux.",m:"Musique électronique",t:"https://ra.co/events/au/melbourne",e:[2,"Sans réservation ; prix selon la soirée (Resident Advisor)"]},
  {n:"Bar Ferdinand",a:"Level 1, 7 Alfred Pl",z:"CBD",when:"Tous les jours dès 17h · jusqu'à 1h ven – dim",d:"L'ouverture la plus spectaculaire de 2026 : grand escalier, ancien bureau de botaniste, cocktails inspirés des plantes des Jardins botaniques royaux.",e:[2,"Réservation en ligne (SevenRooms) conseillée"]},
  {n:"Bar Kaeru",a:"62-64 Little La Trobe St",z:"CBD",when:"Mar – sam dès 17h30",d:"Bar à saké caché au design futuriste, plus de 100 références et cuisine asiatique pour accompagner. Parfait pour découvrir le saké.",e:[2,"Réservation en ligne (SevenRooms) conseillée"]},
@@ -410,10 +419,10 @@ const D={
  {n:"Goldilocks",a:"Level 4, 264 Swanston St",z:"CBD",d:"Petit rooftop caché sur Swanston, ouvert dès midi tous les jours, souvent plus calme."},
  {n:"Inuman",a:"Rooftop, 167 Exhibition St",z:"CBD",d:"Rooftop à ciel ouvert au-dessus du restaurant philippin Askal. Mar – sam dès 16h, jusqu'à minuit ven – sam ; fermé dim et lun."},
  {n:"Naked for Satan",a:"Rooftop, 285 Brunswick St",z:"Fitzroy / Collingwood",d:"Naked in the Sky, le rooftop de Fitzroy : vue sur la skyline, jusqu'à 1h ven – sam."},
- {n:"Johnny's Green Room",a:"Level 2, 293-297 Lygon St, Carlton",z:"Carlton / Richmond",d:"Une des plus belles vues sur la skyline, côté Carlton. Jusqu'à minuit ven – sam.",q:"Johnny's Green Room 293 Lygon St Carlton"}
+ {n:"Johnny's Green Room",a:"Level 2, 293-297 Lygon St, Carlton",z:"Carlton",d:"Une des plus belles vues sur la skyline, côté Carlton. Jusqu'à minuit ven – sam.",q:"Johnny's Green Room 293 Lygon St Carlton"}
 ],
 "g-after":[
- {n:"Revolver Upstairs : The Late Show",a:"L1/229 Chapel St, Prahran",z:"South Yarra / Prahran",when:"Sam nuit → lundi matin · day parties le dimanche dès 7h",d:"L'after le plus célèbre d'Australie, chaque week-end depuis 1999. Licence jusqu'au matin : on y arrive après les autres clubs.",m:"Techno, house, deep house",t:"https://revolverupstairs.com.au",q:"Revolver Upstairs Prahran",e:[3,"Membres seulement quand c'est plein, dress code strict, file au petit matin"]},
+ {n:"Revolver Upstairs : The Late Show",a:"L1/229 Chapel St, Prahran",z:"Chapel Street",when:"Sam nuit → lundi matin · day parties le dimanche dès 7h",d:"L'after le plus célèbre d'Australie, chaque week-end depuis 1999. Licence jusqu'au matin : on y arrive après les autres clubs.",m:"Techno, house, deep house",t:"https://revolverupstairs.com.au",q:"Revolver Upstairs Prahran",e:[3,"Membres seulement quand c'est plein, dress code strict, file au petit matin"]},
  {n:"Sub Club (fin de nuit)",a:"Flinders Court (sous-sol)",z:"CBD",when:"Ven et sam · jusqu'à 7h",d:"La meilleure option dans le CBD pour finir au lever du jour, à deux pas de la gare de Flinders Street.",m:"Techno, bass, électro",q:"Sub Club Flinders Court Melbourne",e:[2,"Billet conseillé ; politique stricte de bon comportement"]},
  {n:"Brown Alley (fin de nuit)",a:"585 Lonsdale St",z:"CBD",when:"Licence 24 h · horaires selon la soirée",d:"Quatre salles, terrasse en plein air : certaines soirées de promoteurs continuent tard dans la matinée. Vérifie l'heure de fin sur le billet.",m:"Hard techno, house",q:"Brown Alley 585 Lonsdale St Melbourne",e:[2,"Billet conseillé, ID ; refus si trop éméché"]},
  {n:"Glamorama (fin de nuit)",a:"393 Brunswick St, Fitzroy",z:"Fitzroy / Collingwood",when:"Ven et sam · jusqu'à 5h",d:"Pour finir à Fitzroy sans repasser par le centre.",m:"House, techno, tech house",q:"Glamorama Fitzroy",p:"15 – 30 $",e:[2,"Billet conseillé sur Resident Advisor"]}
@@ -422,8 +431,8 @@ const D={
  {n:"Brown Alley",a:"585 Lonsdale St",z:"CBD",d:"Club sur plusieurs niveaux, 4 salles, terrasse fumeurs. Vendredi NERVE (hard techno), samedi LEVELS. Licence 24 h.",p:"≈ 20 – 30 $"},
  {n:"Sub Club",a:"Flinders Court (sous-sol)",z:"CBD",d:"Techno pointue, deux étages sous terre. Ven – sam 23h – 7h. Pas de tables, pas de listes d'anniversaire.",q:"Sub Club Flinders Court Melbourne"},
  {n:"Angel Music Bar",a:"12 Bourke St (sous-sol)",z:"CBD",d:"Club en sous-sol, soirées électroniques le week-end, environ 22h – 5h."},
- {n:"Revolver Upstairs (Revs)",a:"L1/229 Chapel St, Prahran",z:"South Yarra / Prahran",d:"Le club le plus célèbre de Melbourne : The Late Show chaque samedi depuis 1999, jusqu'au matin. Pas de tongs, débardeur ni survêtement ; quand c'est plein, membres seulement."},
- {n:"Chasers",a:"386 Chapel St, South Yarra",z:"South Yarra / Prahran",d:"Institution depuis 1978. Samedi Poof Doof (21h – 4h30). Ven 13 nov : 48 ans du club, entrée et une boisson offertes avant 22h avec inscription Eventbrite."},
+ {n:"Revolver Upstairs (Revs)",a:"L1/229 Chapel St, Prahran",z:"Chapel Street",d:"Le club le plus célèbre de Melbourne : The Late Show chaque samedi depuis 1999, jusqu'au matin. Pas de tongs, débardeur ni survêtement ; quand c'est plein, membres seulement."},
+ {n:"Chasers",a:"386 Chapel St, South Yarra",z:"Chapel Street",d:"Institution depuis 1978. Samedi Poof Doof (21h – 4h30). Ven 13 nov : 48 ans du club, entrée et une boisson offertes avant 22h avec inscription Eventbrite."},
  {n:"Glamorama",a:"393 Brunswick St",z:"Fitzroy / Collingwood",d:"Club électro de Fitzroy : vendredi 22h – 5h, samedi 21h – 5h.",p:"15 – 30 $"}
 ]};
 const MUSIC={
@@ -501,16 +510,30 @@ function card(v,isH,gid){
   return el;
 }
 for(const id in D){const g=document.getElementById(id);D[id].forEach(v=>g.appendChild(card(v,id==="g-halloween",id)));}
-document.querySelectorAll(".filters").forEach(f=>{
-  const g=document.getElementById(f.dataset.for);
-  const present=new Set([...g.children].map(c=>c.dataset.z));
-  AREAS.filter(a=>a==="Tout"||present.has(a)).forEach((a,i)=>{
-    const b=document.createElement("button");b.type="button";b.id=f.dataset.for+"-f"+i;b.textContent=a;b.setAttribute("aria-pressed",a==="Tout");
-    b.onclick=()=>{f.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));
-      [...g.children].forEach(c=>c.hidden=!(a==="Tout"||c.dataset.z===a));
-      if(f.dataset.for==="g-bars"){[...document.getElementById("g-speak").children].forEach(c=>c.hidden=!(a==="Tout"||c.dataset.z===a));}};
-    f.appendChild(b);});
-});
+const QDESC={
+"Tout":"Tous les lieux du guide. Choisis un quartier : toutes les rubriques ci-dessous n'afficheront que les adresses de ce quartier.",
+"CBD":"Le centre-ville : laneways, bars cachés, rooftops et clubs, tout se fait à pied. Tram gratuit dans la Free Tram Zone, trains de nuit depuis Flinders Street.",
+"Fitzroy / Collingwood":"Le quartier alternatif au nord du centre : Brunswick Street et Smith Street, pubs, bars à cocktails et clubs électro. Tram 11 sur Brunswick Street.",
+"St Kilda":"Le bord de mer, quartier historique des backpackers : pubs face à la plage, auberges, Luna Park. Tram 96 depuis le centre.",
+"Chapel Street":"South Yarra, Prahran et Windsor : la rue des clubs, plus chic, et le cœur de la scène LGBTQ+. Gares de South Yarra, Prahran et Windsor.",
+"Carlton":"Le quartier italien et étudiant autour de Lygon Street, à deux pas de l'université de Melbourne."
+};
+(function(){
+  const qf=document.getElementById("qf"),qd=document.getElementById("qdesc");
+  const grids=[...document.querySelectorAll(".grid")];
+  grids.forEach(g=>{const e=document.createElement("p");e.className="empty";e.hidden=true;e.textContent="Rien dans ce quartier pour cette rubrique.";g.after(e);});
+  function apply(a){
+    qd.textContent=QDESC[a]||"";
+    grids.forEach(g=>{let k=0;[...g.children].forEach(c=>{const on=a==="Tout"||c.dataset.z===a;c.hidden=!on;if(on)k++;});g.nextElementSibling.hidden=k>0;});
+    qf.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.a===a));
+    try{localStorage.setItem("mbn-q",a)}catch(e){}
+  }
+  AREAS.forEach((a,i)=>{const b=document.createElement("button");b.type="button";b.id="q-"+i;b.dataset.a=a;
+    const c=a==="Tout"?grids.reduce((s,g)=>s+g.children.length,0):grids.reduce((s,g)=>s+[...g.children].filter(x=>x.dataset.z===a).length,0);
+    b.textContent=a+" ("+c+")";b.onclick=()=>apply(a);qf.appendChild(b);});
+  let start="Tout";try{start=localStorage.getItem("mbn-q")||"Tout"}catch(e){}
+  apply(AREAS.includes(start)?start:"Tout");
+})();
 </script>
 
 </body></html>
