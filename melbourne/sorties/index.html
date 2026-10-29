@@ -100,6 +100,8 @@ nav.jump a[href="#rencontres"]{border-color:var(--c-meet);color:var(--c-meet)}
 .girls>h3{font-family:var(--f-display);font-weight:400;font-size:28px;margin:0 0 12px;color:var(--c-girls)}
 .girls h4{margin:0 0 8px;font-size:17px}
 .girls .sos h4{color:var(--alert)}
+
+.kind{align-self:flex-start;font-family:var(--f-data);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:500;color:var(--sec,var(--muted))}
 footer{padding-block:34px 40px;color:var(--muted);font-size:14px}
 footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;margin:10px 0 18px}
 @media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
@@ -117,9 +119,9 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
 
 <nav class="jump" aria-label="Sections">
   <div class="wrap">
+    <a href="#tendance"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.6L20 9.3l-4.4 3.9 1.3 5.8L12 16l-4.9 3 1.3-5.8L4 9.3l5.8-.7L12 3Z"/></svg>À la mode</a>
     <a class="h" href="#halloween"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-4.4 0-8 3-8 7.2S7.6 20 12 20s8-2.6 8-6.8S16.4 6 12 6Z"/><path d="M12 6V3.5c1 0 2 .4 2.5 1.2"/><path d="M8.5 11.5l1.5 1 1.5-1M12.5 11.5l1.5 1 1.5-1M9 16c2 1 4 1 6 0"/></svg>Halloween</a>
     <a href="#rencontres"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5M13.5 18.5c.5-2.1 1.7-3.3 3-3.3 1.6 0 3 1.2 3.5 3.3"/></svg>Rencontres</a>
-    <a href="#tendance"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.6L20 9.3l-4.4 3.9 1.3 5.8L12 16l-4.9 3 1.3-5.8L4 9.3l5.8-.7L12 3Z"/></svg>À la mode</a>
     <a href="#securite" style="border-color:var(--c-girls);color:var(--c-girls)"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-3 7.8-7 9.5-4-1.7-7-5.2-7-9.5V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>Sécurité</a>
     <a href="#budget"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/></svg>Prix &amp; transport</a>
     <a href="#bars"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14l-7 8-7-8Z"/><path d="M12 12v7M8 20h8"/><path d="M15.5 4l2-2"/></svg>Bars</a>
@@ -131,6 +133,16 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
 </nav>
 
 <main>
+<section id="tendance">
+  <div class="wrap">
+    <span class="eyebrow">Les adresses dont on parle en 2026</span>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.6L20 9.3l-4.4 3.9 1.3 5.8L12 16l-4.9 3 1.3-5.8L4 9.3l5.8-.7L12 3Z"/></svg>À la mode</h2>
+    <p class="lede">Melbourne est classée 4<sup>e</sup> ville au monde pour la vie nocturne en 2026 (Time Out). Voici les lieux qui font parler cette année : le seul bar australien du classement mondial, les nouveaux clubs et les ouvertures les plus remarquées.</p>
+    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
+    <div class="grid" id="g-trend"></div>
+  </div>
+</section>
+
 <section id="halloween" class="halloween">
   <div class="wrap">
     <span class="eyebrow">Vendredi 30 &amp; samedi 31 octobre 2026</span>
@@ -148,16 +160,6 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
     <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5M13.5 18.5c.5-2.1 1.7-3.3 3-3.3 1.6 0 3 1.2 3.5 3.3"/></svg>Rencontrer du monde</h2>
     <p class="lede">Les soirées « étudiantes » et d'échange linguistique sont le moyen le plus simple de se faire un groupe en arrivant. Un PVTiste y est bienvenu : on te demandera une pièce d'identité (18+), presque jamais une carte d'étudiant.</p>
     <div class="grid" id="g-meet"></div>
-  </div>
-</section>
-
-<section id="tendance">
-  <div class="wrap">
-    <span class="eyebrow">Les adresses dont on parle en 2026</span>
-    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.6L20 9.3l-4.4 3.9 1.3 5.8L12 16l-4.9 3 1.3-5.8L4 9.3l5.8-.7L12 3Z"/></svg>À la mode</h2>
-    <p class="lede">Melbourne est classée 4<sup>e</sup> ville au monde pour la vie nocturne en 2026 (Time Out). Voici les lieux qui font parler cette année : le seul bar australien du classement mondial, les nouveaux clubs et les ouvertures les plus remarquées.</p>
-    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
-    <div class="grid" id="g-trend"></div>
   </div>
 </section>
 
@@ -481,16 +483,24 @@ const DOOR={
 "Melbourne Global Circle (Meetup)":[1,"Inscription gratuite sur Meetup"]
 };
 const LVL=["","Facile","Moyen","Sélectif"];
+const KIND_DEF={"g-trend":"Bar","g-halloween":"Soirée","g-meet":"Rencontre","g-bars":"Bar","g-speak":"Bar caché (speakeasy)","g-roof":"Rooftop","g-after":"Club · after","g-clubs":"Club"};
+const KIND={
+"Caretaker's Cottage":"Bar à cocktails","Coil":"Bar + club","Solace":"Bar + club","Bar Ferdinand":"Bar à cocktails","Bar Kaeru":"Bar à saké","Triple U":"Bar à cocktails",
+"Haunted Hop (bar crawl)":"Tournée des bars","The Fright Crawl":"Tournée des bars","Luna Dark":"Fête foraine","Halloween à Old Melbourne Gaol":"Visite hantée","Poof Doof Halloqween":"Club LGBTQ+","Emo Never Sleeps : Halloween":"Soirée dans un pub","Halloween by The Student Life":"Soirée en club","Halloweenfest Melbourne":"Soirée en club",
+"Linguas : échange linguistique du jeudi":"Échange linguistique","International Halloween Party (Linguas)":"Soirée","The Student Life":"Soirées étudiantes","Melbourne Bar Crawl":"Tournée des bars","Bars d'auberges (Nomads St Kilda)":"Bar d'auberge","Melbourne Global Circle (Meetup)":"Groupe Meetup",
+"Asian Beer Café":"Bar","Strike Melbourne Central":"Bowling + bar","Red Eye Bar (Nomads St Kilda)":"Bar d'auberge","St Kilda RSL":"Pub + salle de concert","The Esplanade Hotel (The Espy)":"Pub + concerts","Captain Baxter":"Bar rooftop","The Provincial Hotel":"Pub + rooftop",
+"Siglo":"Bar en terrasse","Bomba":"Bar à tapas + rooftop","Angel Music Bar":"Club","Revolver Upstairs (Revs)":"Club","Chasers":"Club","Brown Alley":"Club","Sub Club":"Club","Glamorama":"Club"
+};
 const enc=s=>encodeURIComponent(s);
-function card(v,isH){
+function card(v,isH,gid){
   const q=v.q||(v.n.replace(/\s*\(.*?\)/g,"")+" "+v.a+" Melbourne");
   const maps="https://www.google.com/maps/search/?api=1&query="+enc(q);
   const pics="https://www.google.com/search?tbm=isch&q="+enc((v.q||v.n.replace(/\s*\(.*?\)/g,"")+" Melbourne"));
   const el=document.createElement("article");el.className="card";el.dataset.z=v.z;
-  el.innerHTML=`<h3>${v.n}</h3><div class="meta"><span>${v.a}</span><span>${v.z}</span>${v.when?`<span>${v.when}</span>`:""}</div>${(v.e||DOOR[v.n])?`<div class="door d${(v.e||DOOR[v.n])[0]}"><b>${LVL[(v.e||DOOR[v.n])[0]]}</b><span>${(v.e||DOOR[v.n])[1]}</span></div>`:""}${v.p?`<span class="price">${v.p}</span>`:""}${(v.m||MUSIC[v.n])?`<div class="music"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><span>${v.m||MUSIC[v.n]}</span></div>`:""}<p>${v.d}</p><div class="links"><a class="ph" href="${pics}" target="_blank" rel="noopener">Photos</a><a href="${maps}" target="_blank" rel="noopener">Carte</a>${v.t?`<a href="${v.t}" target="_blank" rel="noopener">${isH?"Billets":"Site"}</a>`:""}</div>`;
+  el.innerHTML=`<span class="kind">${KIND[v.n]||KIND_DEF[gid]||""}</span><h3>${v.n}</h3><div class="meta"><span>${v.a}</span><span>${v.z}</span>${v.when?`<span>${v.when}</span>`:""}</div>${(v.e||DOOR[v.n])?`<div class="door d${(v.e||DOOR[v.n])[0]}"><b>${LVL[(v.e||DOOR[v.n])[0]]}</b><span>${(v.e||DOOR[v.n])[1]}</span></div>`:""}${v.p?`<span class="price">${v.p}</span>`:""}${(v.m||MUSIC[v.n])?`<div class="music"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><span>${v.m||MUSIC[v.n]}</span></div>`:""}<p>${v.d}</p><div class="links"><a class="ph" href="${pics}" target="_blank" rel="noopener">Photos</a><a href="${maps}" target="_blank" rel="noopener">Carte</a>${v.t?`<a href="${v.t}" target="_blank" rel="noopener">${isH?"Billets":"Site"}</a>`:""}</div>`;
   return el;
 }
-for(const id in D){const g=document.getElementById(id);D[id].forEach(v=>g.appendChild(card(v,id==="g-halloween")));}
+for(const id in D){const g=document.getElementById(id);D[id].forEach(v=>g.appendChild(card(v,id==="g-halloween",id)));}
 document.querySelectorAll(".filters").forEach(f=>{
   const g=document.getElementById(f.dataset.for);
   const present=new Set([...g.children].map(c=>c.dataset.z));
