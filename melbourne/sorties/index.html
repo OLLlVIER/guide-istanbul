@@ -3,31 +3,31 @@
 <style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
 <title>Melbourne by Night</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Layout : panneau de quai de tram — bandeau vert, sections empilées, cartes lieu en grille, filtre par quartier */
 :root{
-  --bg:#f2f5f0; --surface:#ffffff; --ink:#13211a; --muted:#56685e; --line:#d4ddd6;
-  --tram:#0f6b45; --sign:#f2c230; --hallo:#d9581a; --alert:#b3261e;
-  --f-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
-  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bg:#f8f5ef; --surface:#fffdf9; --ink:#16202a; --muted:#5a6470; --line:#e3dccf;
+  --tram:#24506b; --band:#24506b; --sign:#e0a43a; --hallo:#c4532e; --alert:#b3261e;
+  --f-display:"DM Serif Display",Georgia,serif;
+  --f-body:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;
   --f-data:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0d1511; --surface:#15201a; --ink:#e6eee8; --muted:#9cafa4; --line:#27362e;
-  --tram:#3dbb83; --sign:#f2c230; --hallo:#ff8a4c; --alert:#ff6b61; color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0d1511; --surface:#15201a; --ink:#e6eee8; --muted:#9cafa4; --line:#27362e;
-  --tram:#3dbb83; --sign:#f2c230; --hallo:#ff8a4c; --alert:#ff6b61; color-scheme:dark}
+  --bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
+  --tram:#7fb2d4; --band:#1d4259; --sign:#e0a43a; --hallo:#e8774f; --alert:#ff6b61; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
+  --tram:#7fb2d4; --band:#1d4259; --sign:#e0a43a; --hallo:#e8774f; --alert:#ff6b61; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
 *{box-sizing:border-box}
 a{color:var(--tram)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--sign);outline-offset:2px}
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-header.band{background:var(--tram);color:#fff}
+header.band{background:linear-gradient(135deg,var(--band),#16202a 75%);color:#fff}
 header .wrap{padding-block:28px 22px;display:grid;gap:10px}
 .route{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-data);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
-.route b{background:var(--sign);color:#13211a;padding:2px 8px;border-radius:3px}
-h1{font-family:var(--f-display);font-weight:800;font-size:clamp(44px,9vw,84px);line-height:.92;margin:0;letter-spacing:.01em;text-wrap:balance}
+.route b{background:var(--sign);color:#16202a;padding:2px 8px;border-radius:3px}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,9vw,84px);line-height:.92;margin:0;letter-spacing:.01em;text-wrap:balance}
 header p{margin:0;max-width:62ch;opacity:.92}
 nav.jump{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
@@ -35,7 +35,7 @@ nav.jump .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar
 nav.jump a{flex:none;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
 nav.jump a.h{border-color:var(--hallo);color:var(--hallo)}
 section{padding-block:34px 8px}
-h2{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,44px);line-height:1;margin:0 0 6px;text-transform:uppercase;letter-spacing:.02em}
+h2{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5vw,46px);line-height:1.05;margin:0 0 6px}
 .lede{color:var(--muted);margin:0 0 18px;max-width:65ch}
 .eyebrow{font-family:var(--f-data);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .halloween h2{color:var(--hallo)}
@@ -48,12 +48,12 @@ h2{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,44px);l
 .price{font-family:var(--f-data);font-size:13px;font-variant-numeric:tabular-nums;color:var(--ink);background:color-mix(in srgb,var(--sign) 28%,transparent);padding:1px 6px;border-radius:3px;align-self:flex-start}
 .links{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px;padding-top:6px}
 .links a{font-size:13.5px;font-weight:700;text-decoration:none;padding:6px 10px;border-radius:6px;border:1px solid var(--line);color:var(--ink)}
-.links a.ph{background:var(--tram);border-color:var(--tram);color:#fff}
+.links a.ph{background:var(--band);border-color:var(--band);color:#fff}
 .halloween .links a.ph{background:var(--hallo);border-color:var(--hallo)}
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}
 .filters button{font:inherit;font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
-.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.sub{font-family:var(--f-display);font-weight:700;font-size:24px;text-transform:uppercase;margin:24px 0 10px;letter-spacing:.03em}
+.filters button[aria-pressed="true"]{background:var(--sign);color:#16202a;border-color:var(--sign)}
+.sub{font-family:var(--f-display);font-weight:400;font-size:26px;margin:24px 0 10px}
 .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;min-width:460px;font-size:15px}
 th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
