@@ -9,7 +9,7 @@
 :root{
   --bg:#f8f5ef; --surface:#fffdf9; --ink:#16202a; --muted:#5a6470; --line:#e3dccf;
   --tram:#24506b; --band:#24506b;
-  --c-cafe:#8a5a3b; --c-bar:#24506b; --c-roof:#a8741a; --c-club:#6b3fa0; --c-hallo:#c4532e; --c-meet:#2f7a52; --c-after:#3b3f8f; --c-girls:#a8336b;
+  --c-cafe:#8a5a3b; --c-bar:#24506b; --c-roof:#a8741a; --c-club:#6b3fa0; --c-hallo:#c4532e; --c-meet:#2f7a52; --c-after:#3b3f8f; --c-girls:#a8336b; --c-trend:#0e7c86;
   --ok:#2f7a52; --mid:#b07a1a; --hard:#b3261e; --sign:#e0a43a; --hallo:#c4532e; --alert:#b3261e;
   --f-display:"DM Serif Display",Georgia,serif;
   --f-body:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;
@@ -18,7 +18,7 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
   --tram:#7fb2d4; --band:#1d4259;
-  --c-cafe:#d29a72; --c-bar:#7fb2d4; --c-roof:#e0a43a; --c-club:#b48ae6; --c-hallo:#e8774f; --c-meet:#5fc08a; --c-after:#9aa0f0; --c-girls:#e889b5;
+  --c-cafe:#d29a72; --c-bar:#7fb2d4; --c-roof:#e0a43a; --c-club:#b48ae6; --c-hallo:#e8774f; --c-meet:#5fc08a; --c-after:#9aa0f0; --c-girls:#e889b5; --c-trend:#4fd1d9;
   --ok:#5fc08a; --mid:#e0a43a; --hard:#ff6b61; --sign:#e0a43a; --hallo:#e8774f; --alert:#ff6b61; color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
   --tram:#7fb2d4; --band:#1d4259;
@@ -89,6 +89,7 @@ nav.jump a[href="#rooftops"]{border-color:var(--c-roof);color:var(--c-roof)} nav
 h2 .ic{width:.85em;height:.85em;margin-right:.3em;vertical-align:-.06em}
 nav.jump a{display:inline-flex;align-items:center;gap:6px}
 #after{--sec:var(--c-after)} #after h2{color:var(--sec)} #after .card{border-top:4px solid var(--sec)} #after .links a.ph{background:var(--sec);border-color:var(--sec);color:var(--bg)} nav.jump a[href="#after"]{border-color:var(--c-after);color:var(--c-after)}
+#tendance{--sec:var(--c-trend)} #tendance h2{color:var(--sec)} #tendance .card{border-top:4px solid var(--sec)} #tendance .links a.ph{background:var(--sec);border-color:var(--sec);color:var(--bg)} nav.jump a[href="#tendance"]{border-color:var(--c-trend);color:var(--c-trend)}
 #rencontres{--sec:var(--c-meet)} #rencontres h2{color:var(--sec)} #rencontres .card{border-top:4px solid var(--sec)}
 #rencontres .links a.ph{background:var(--sec);border-color:var(--sec);color:var(--bg)}
 nav.jump a[href="#rencontres"]{border-color:var(--c-meet);color:var(--c-meet)}
@@ -118,6 +119,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
   <div class="wrap">
     <a class="h" href="#halloween"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-4.4 0-8 3-8 7.2S7.6 20 12 20s8-2.6 8-6.8S16.4 6 12 6Z"/><path d="M12 6V3.5c1 0 2 .4 2.5 1.2"/><path d="M8.5 11.5l1.5 1 1.5-1M12.5 11.5l1.5 1 1.5-1M9 16c2 1 4 1 6 0"/></svg>Halloween</a>
     <a href="#rencontres"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5M13.5 18.5c.5-2.1 1.7-3.3 3-3.3 1.6 0 3 1.2 3.5 3.3"/></svg>Rencontres</a>
+    <a href="#tendance"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.6L20 9.3l-4.4 3.9 1.3 5.8L12 16l-4.9 3 1.3-5.8L4 9.3l5.8-.7L12 3Z"/></svg>À la mode</a>
     <a href="#securite" style="border-color:var(--c-girls);color:var(--c-girls)"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-3 7.8-7 9.5-4-1.7-7-5.2-7-9.5V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>Sécurité</a>
     <a href="#budget"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/></svg>Prix &amp; transport</a>
     <a href="#bars"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14l-7 8-7-8Z"/><path d="M12 12v7M8 20h8"/><path d="M15.5 4l2-2"/></svg>Bars</a>
@@ -149,6 +151,16 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
   </div>
 </section>
 
+<section id="tendance">
+  <div class="wrap">
+    <span class="eyebrow">Les adresses dont on parle en 2026</span>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.6L20 9.3l-4.4 3.9 1.3 5.8L12 16l-4.9 3 1.3-5.8L4 9.3l5.8-.7L12 3Z"/></svg>À la mode</h2>
+    <p class="lede">Melbourne est classée 4<sup>e</sup> ville au monde pour la vie nocturne en 2026 (Time Out). Voici les lieux qui font parler cette année : le seul bar australien du classement mondial, les nouveaux clubs et les ouvertures les plus remarquées.</p>
+    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
+    <div class="grid" id="g-trend"></div>
+  </div>
+</section>
+
 <section id="securite">
   <div class="wrap">
     <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-3 7.8-7 9.5-4-1.7-7-5.2-7-9.5V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>Sortir en sécurité</h2>
@@ -175,7 +187,8 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
       <div class="box">
         <h3>Entrée &amp; dress code</h3>
         <ul>
-          <li>18+ strict, contrôle à chaque porte. Papier d'identité <strong>physique</strong> : passeport ou carte « Proof of Age » de l'État de Victoria. Les identités numériques étrangères sont refusées (seule l'app Service Victoria compte).</li>
+          <li>18+ strict, contrôle à chaque porte. Pièces acceptées par la loi de Victoria : <strong>passeport</strong> (étranger inclus), ou <strong>permis de conduire étranger rédigé en anglais</strong>. Un permis français doit être accompagné du <strong>permis international</strong> ou d'une traduction officielle.</li>
+          <li>Prends l'original : copies et photos ne font pas partie de la liste officielle. Côté numérique, seuls quelques permis australiens et la Keypass sont acceptés, pas les applis d'identité étrangères.</li>
           <li>Refus fréquents : tongs, chaussures de chantier, débardeur pour les hommes, survêtement. Rooftops : smart casual.</li>
           <li>Videurs souverains : inutile de discuter, on change de lieu.</li>
         </ul>
@@ -200,7 +213,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
             <li>Le plan de retour se décide <strong>avant</strong> de sortir : Night Network, Uber, qui rentre avec qui.</li>
             <li>Partage de position activé entre copines pour toute la nuit (Localiser sur iPhone, Google Maps sur Android).</li>
             <li>Téléphone chargé, batterie externe, et l'app officielle <strong>Emergency+</strong> : elle affiche ta position GPS exacte à lire aux secours.</li>
-            <li>Le passeport perdu, c'est la galère en PVT : préfère la carte Proof of Age de Victoria, sinon passeport dans une poche zippée.</li>
+            <li>Perdre son passeport en PVT, c'est la galère : le permis français + permis international est aussi accepté à l'entrée. Sinon, passeport dans une poche zippée.</li>
             <li>Sac fermé porté devant, carte bancaire séparée du cash, et un budget « retour » auquel on ne touche pas.</li>
           </ul>
         </div>
@@ -362,53 +375,61 @@ const D={
  {n:"International Halloween Party (Linguas)",a:"The Carlton Club, 193 Bourke St",z:"CBD",when:"Sam 31 oct · 17h – 23h30",p:"Billet Eventbrite",d:"La version Halloween des soirées Linguas, avec les communautés japonaise et internationale. Parfait si tu arrives seul·e.",t:"https://www.eventbrite.com.au/e/international-halloween-party-2026-tickets-1994779454045",m:"DJ, jeux, concours de costumes"},
  {n:"The Student Life",a:"Brown Alley et autres clubs",z:"CBD",when:"Soirées par semestre · Halloween sam 31",p:"dès 20,50 $",d:"Organisateur de soirées pour étudiants internationaux (UniMelb, RMIT, Monash…). La page ne demande pas de carte étudiante : passeport à l'entrée. Groupe WhatsApp après achat du billet.",t:"https://jointhestudentlife.com/melbourne-hw26",m:"Hits, soirées à thème"},
  {n:"Melbourne Bar Crawl",a:"Départs dans le CBD (King St, laneways)",z:"CBD",when:"Surtout vendredi et samedi",p:"≈ 17 – 58 $ selon la soirée",d:"Tournées des bars encadrées, très prisées des backpackers : on arrive seul·e, on repart avec un groupe. Organise aussi Halloweenfest.",t:"https://www.eventbrite.com.au/e/halloweenfest-melbourne-2026-night-2-saturday-oct-31-tickets-1999932195032",m:"Bars variés, puis club"},
- {n:"Bars d'auberges (Base St Kilda)",a:"17 Carlisle St",z:"St Kilda",d:"Jeux, soirées à thème et verres très bon marché : la scène backpackers de St Kilda. On y rencontre des PVTistes de tous les pays.",m:"Hits, soirées jeux"},
- {n:"Melbourne Global Circle (Meetup)",a:"Lieux variés",z:"CBD",when:"Plusieurs sorties par mois",p:"souvent gratuit",d:"Groupe Meetup de sorties pour nouveaux arrivants et internationaux : afterworks, balades, soirées. Inscription gratuite sur l'app Meetup.",t:"https://www.meetup.com/melbourne-global-circle/"}
+ {n:"Bars d'auberges (Nomads St Kilda)",a:"17 Carlisle St",z:"St Kilda",d:"Bingo, fléchettes, beer pong et verres bon marché dans l'auberge Nomads (ex-Base) : on y croise des PVTistes de tous les pays.",m:"Soirées jeux"},
+ {n:"Melbourne Global Circle (Meetup)",a:"Lieux variés",z:"CBD",when:"Balade le jeudi soir · café le samedi après-midi",d:"Groupe Meetup international (étudiants, voyageurs, expats) : balades, cafés, échanges linguistiques, sorties plage ou rando. Inscription gratuite sur l'app Meetup.",t:"https://www.meetup.com/melbourne-global-circle/"}
+],
+"g-trend":[
+ {n:"Caretaker's Cottage",a:"139-141 Little Lonsdale St",z:"CBD",when:"Lun – sam · 16h – 1h",p:"cocktails ≈ 26 $",d:"45<sup>e</sup> des World's 50 Best Bars 2026, le seul bar australien du classement. Minuscule (25 places) dans une ancienne maison de gardien en pierre bleue. Martini glacé, carte qui change chaque mois.",m:"Vinyles au bar",t:"https://caretakerscottage.bar",e:[2,"25 places : arriver tôt, ça déborde sur le trottoir"]},
+ {n:"Coil",a:"116 Chapel St, Windsor",z:"South Yarra / Prahran",when:"Mer – dim dès 17h · jusqu'à 3h ven – sam",p:"gratuit avant 21h · 15 – 20 $ après",d:"Le nouveau club de l'équipe Rumbler, ouvert en 2026 : bar pour discuter jusqu'à 21h, puis piste de danse avec un son haut de gamme. Téléphones interdits sur la piste.",m:"House, techno, électro pointue",e:[1,"Gratuit avant 21h ; caméra du téléphone masquée sur la piste"]},
+ {n:"Solace",a:"21-25 Croft Alley, Chinatown",z:"CBD",when:"Mar – jeu 17h – 1h · ven – sam 17h – 3h",d:"Bar-club de Chinatown cité par Time Out parmi les meilleures pistes de danse de la ville. Soirées tenues par des labels et collectifs locaux.",m:"Musique électronique",t:"https://ra.co/events/au/melbourne",e:[2,"Sans réservation ; prix selon la soirée (Resident Advisor)"]},
+ {n:"Bar Ferdinand",a:"Level 1, 7 Alfred Pl",z:"CBD",when:"Tous les jours dès 17h · jusqu'à 1h ven – dim",d:"L'ouverture la plus spectaculaire de 2026 : grand escalier, ancien bureau de botaniste, cocktails inspirés des plantes des Jardins botaniques royaux.",e:[2,"Réservation en ligne (SevenRooms) conseillée"]},
+ {n:"Bar Kaeru",a:"62-64 Little La Trobe St",z:"CBD",when:"Mar – sam dès 17h30",d:"Bar à saké caché au design futuriste, plus de 100 références et cuisine asiatique pour accompagner. Parfait pour découvrir le saké.",e:[2,"Réservation en ligne (SevenRooms) conseillée"]},
+ {n:"Triple U",a:"360 Brunswick St",z:"Fitzroy / Collingwood",d:"Cocktails inspirés de la culture chinoise (melon amer, sésame noir, pandan), très prisé des étudiants. Plus calme que les pubs de Fitzroy.",m:"Hip-hop chinois",e:[1,"Entrée libre"]}
 ],
 "g-bars":[
- {n:"Asian Beer Café",a:"Melbourne Central",z:"CBD",d:"Happy hour quotidien de fin d'après-midi : pichets, cocktails et alcools à petit prix. QG étudiant.",p:"pichets pas chers (à vérifier sur place)"},
- {n:"Strike Melbourne Central",a:"Level 3, Melbourne Central",z:"CBD",d:"Bowling, karaoké et bar. Offres en semaine, bon plan pour une soirée en groupe."},
- {n:"Red Eye Bar (Base Backpackers)",a:"17 Carlisle St",z:"St Kilda",d:"Bar de l'auberge, parmi les verres les moins chers de la ville. Pour rencontrer d'autres PVTistes."},
- {n:"St Kilda RSL",a:"88 Acland St",z:"St Kilda",d:"Club d'anciens combattants ouvert à tous : boissons pas chères, vue plage, karaoké, billard."},
- {n:"The Esplanade Hotel (The Espy)",a:"11 The Esplanade",z:"St Kilda",d:"Pub mythique face à la mer, sur plusieurs niveaux, concerts presque tous les soirs."},
- {n:"Captain Baxter",a:"St Kilda Sea Baths, 10/18 Jacka Blvd",z:"St Kilda",d:"Cocktails et bières au coucher du soleil sur la baie. Gamme de prix modeste."},
- {n:"The Provincial Hotel",a:"299 Brunswick St",z:"Fitzroy / Collingwood",d:"Pub de Brunswick Street avec rooftop : point de départ classique d'une soirée à Fitzroy."}
+ {n:"Asian Beer Café",a:"Level 3, Melbourne Central (211 La Trobe St)",z:"CBD",d:"Happy hour tous les jours, formule repas + boisson à 25 $ de midi à 21h. Ouvert jusqu'à 1h ven – sam. QG étudiant, et lieu de l'échange linguistique Linguas du jeudi.",p:"repas + verre 25 $"},
+ {n:"Strike Melbourne Central",a:"Level 3, Melbourne Central",z:"CBD",d:"Bowling, laser game, escape rooms et fléchettes, avec bar à cocktails. Pratique pour une première soirée en groupe.",p:"bowling 23 – 26 $ la partie"},
+ {n:"Red Eye Bar (Nomads St Kilda)",a:"17 Carlisle St (auberge ex-Base)",z:"St Kilda",d:"Le bar de l'auberge Nomads, l'ancienne Base : bingo le lundi, fléchettes, beer pong le dimanche. Le repaire des backpackers de St Kilda."},
+ {n:"St Kilda RSL",a:"88 Acland St",z:"St Kilda",d:"Club des anciens combattants avec bar public sur Acland St et salle de concerts MEMO Music Hall à l'arrière. Ambiance locale, prix raisonnables."},
+ {n:"The Esplanade Hotel (The Espy)",a:"11 The Esplanade",z:"St Kilda",d:"Pub mythique face à la mer, sur plusieurs niveaux, avec concerts. Ouvert 11h – minuit (dès 10h le week-end)."},
+ {n:"Captain Baxter",a:"10/10-18 Jacka Blvd (St Kilda Sea Baths)",z:"St Kilda",d:"Rooftop ouvert toute l'année face à la baie, cocktails au coucher du soleil. DJ le samedi de 19h à 23h."},
+ {n:"The Provincial Hotel",a:"299 Brunswick St",z:"Fitzroy / Collingwood",d:"Pub de Brunswick Street avec rooftop couvert et chauffé. Jusqu'à 3h ven – sam : point de départ classique d'une soirée à Fitzroy."}
 ],
 "g-speak":[
- {n:"Berlin Bar",a:"2/16 Corrs Ln",z:"CBD",d:"Un mur de brique et une sonnette : sonne pour entrer. Deux salles au décor opposé."},
- {n:"State of Grace",a:"27 King St",z:"CBD",d:"La bibliothèque s'ouvre en tirant le bon livre. Cocktails soignés."},
- {n:"Eau de Vie",a:"1 Malthouse Ln",z:"CBD",d:"Bar à whisky et cocktails caché. Mar – sam, 17h – 1h.",p:"cocktails ≈ 25 $"}
+ {n:"Berlin Bar",a:"16 Corrs Ln",z:"CBD",d:"Porte discrète dans une laneway, deux salles au décor opposé. Mar – dim, jusqu'à 2h ven – sam, fermé le lundi."},
+ {n:"State of Grace",a:"27 King St",z:"CBD",d:"Bar-restaurant au rez-de-chaussée et Fall From Grace, un bar caché au sous-sol. Jusqu'à 1h ven – sam, fermé le dimanche."},
+ {n:"Eau de Vie",a:"1 Malthouse Ln",z:"CBD",d:"Bar à whisky et cocktails caché près de Flinders Lane. Mar – sam, 17h – 1h. Réservation en direct auprès du bar."}
 ],
 "g-roof":[
- {n:"Rooftop Bar (Curtin House)",a:"252 Swanston St",z:"CBD",d:"Rooftop historique, avec cinéma en plein air l'été. 7 étages à pied ou en ascenseur."},
- {n:"Good Heavens",a:"L2/79 Bourke St",z:"CBD",d:"Rooftop festif avec barbecue américain (Fancy Hanks). Départ du bar crawl d'Halloween."},
- {n:"Bomba",a:"103 Lonsdale St",z:"CBD",d:"Terrasse végétale, vermouth et tacos. Jusqu'à 1h du jeudi au samedi.",p:"≈ 100 $ pour deux, boissons comprises"},
- {n:"Siglo",a:"2/161 Spring St",z:"CBD",d:"Terrasse chic face au Parlement, ouvert tard (17h – 3h). Tenue soignée.",p:"≈ 80 $ pour deux"},
- {n:"Goldilocks",a:"Level 4, 264 Swanston St",z:"CBD",d:"Petit rooftop caché sur Swanston, ambiance détendue."},
- {n:"Inuman",a:"167 Exhibition St",z:"CBD",d:"Rooftop à ciel ouvert au-dessus du restaurant philippin Askal, belle vue sur la ville."},
- {n:"Naked for Satan",a:"285 Brunswick St",z:"Fitzroy / Collingwood",d:"Le rooftop de Fitzroy : vue sur la skyline, pintxos au bar du rez-de-chaussée."},
- {n:"Johnny's Green Room",a:"Faraday St",z:"Carlton / Richmond",d:"Une des plus belles vues sur la skyline, côté Carlton.",q:"Johnny's Green Room Carlton Melbourne"}
+ {n:"Rooftop Bar (Curtin House)",a:"Level 7, Curtin House, 252 Swanston St",z:"CBD",d:"Le rooftop historique du CBD, sans réservation. Jusqu'à 3h du jeudi au samedi, 1h les autres soirs."},
+ {n:"Good Heavens",a:"L2/79 Bourke St",z:"CBD",d:"Rooftop festif avec barbecue américain. Jusqu'à 1h ven – sam, 23h en semaine. Départ du bar crawl d'Halloween."},
+ {n:"Bomba",a:"103 Lonsdale St",z:"CBD",d:"Tapas et vermouth en bas, terrasse végétale sur le toit dès 15h. Jusqu'à 23h du jeudi au samedi, 22h les autres jours."},
+ {n:"Siglo",a:"161 Spring St (au-dessus du Melbourne Supper Club)",z:"CBD",d:"Terrasse face au Parlement, service à table, ouverte tard (jusqu'à 3h le jeudi)."},
+ {n:"Goldilocks",a:"Level 4, 264 Swanston St",z:"CBD",d:"Petit rooftop caché sur Swanston, ouvert dès midi tous les jours, souvent plus calme."},
+ {n:"Inuman",a:"Rooftop, 167 Exhibition St",z:"CBD",d:"Rooftop à ciel ouvert au-dessus du restaurant philippin Askal. Mar – sam dès 16h, jusqu'à minuit ven – sam ; fermé dim et lun."},
+ {n:"Naked for Satan",a:"Rooftop, 285 Brunswick St",z:"Fitzroy / Collingwood",d:"Naked in the Sky, le rooftop de Fitzroy : vue sur la skyline, jusqu'à 1h ven – sam."},
+ {n:"Johnny's Green Room",a:"Level 2, 293-297 Lygon St, Carlton",z:"Carlton / Richmond",d:"Une des plus belles vues sur la skyline, côté Carlton. Jusqu'à minuit ven – sam.",q:"Johnny's Green Room 293 Lygon St Carlton"}
 ],
 "g-after":[
  {n:"Revolver Upstairs : The Late Show",a:"L1/229 Chapel St, Prahran",z:"South Yarra / Prahran",when:"Sam nuit → lundi matin · day parties le dimanche dès 7h",d:"L'after le plus célèbre d'Australie, chaque week-end depuis 1999. Licence jusqu'au matin : on y arrive après les autres clubs.",m:"Techno, house, deep house",t:"https://revolverupstairs.com.au",q:"Revolver Upstairs Prahran",e:[3,"Membres seulement quand c'est plein, dress code strict, file au petit matin"]},
  {n:"Sub Club (fin de nuit)",a:"Flinders Court (sous-sol)",z:"CBD",when:"Ven et sam · jusqu'à 7h",d:"La meilleure option dans le CBD pour finir au lever du jour, à deux pas de la gare de Flinders Street.",m:"Techno, bass, électro",q:"Sub Club Flinders Court Melbourne",e:[2,"Billet conseillé ; politique stricte de bon comportement"]},
  {n:"Brown Alley (fin de nuit)",a:"585 Lonsdale St",z:"CBD",when:"Licence 24 h · horaires selon la soirée",d:"Quatre salles, terrasse en plein air : certaines soirées de promoteurs continuent tard dans la matinée. Vérifie l'heure de fin sur le billet.",m:"Hard techno, house",q:"Brown Alley 585 Lonsdale St Melbourne",e:[2,"Billet conseillé, ID ; refus si trop éméché"]},
- {n:"Glamorama (fin de nuit)",a:"393 Brunswick St, Fitzroy",z:"Fitzroy / Collingwood",when:"Jusqu'à 5h",d:"Pour finir à Fitzroy sans repasser par le centre.",m:"Pop, dance, rétro",q:"Glamorama Fitzroy",p:"10 – 15 $",e:[1,"Entrée payante à la porte"]}
+ {n:"Glamorama (fin de nuit)",a:"393 Brunswick St, Fitzroy",z:"Fitzroy / Collingwood",when:"Ven et sam · jusqu'à 5h",d:"Pour finir à Fitzroy sans repasser par le centre.",m:"House, techno, tech house",q:"Glamorama Fitzroy",p:"15 – 30 $",e:[2,"Billet conseillé sur Resident Advisor"]}
 ],
 "g-clubs":[
  {n:"Brown Alley",a:"585 Lonsdale St",z:"CBD",d:"Club sur plusieurs niveaux, 4 salles, terrasse fumeurs. Vendredi NERVE (hard techno), samedi LEVELS. Licence 24 h.",p:"≈ 20 – 30 $"},
  {n:"Sub Club",a:"Flinders Court (sous-sol)",z:"CBD",d:"Techno pointue, deux étages sous terre. Ven – sam 23h – 7h. Pas de tables, pas de listes d'anniversaire.",q:"Sub Club Flinders Court Melbourne"},
- {n:"Angel Music Bar",a:"12 Bourke St",z:"CBD",d:"Bar dansant en sous-sol, souvent sans entrée payante. 20h – 3h.",p:"souvent gratuit"},
+ {n:"Angel Music Bar",a:"12 Bourke St (sous-sol)",z:"CBD",d:"Club en sous-sol, soirées électroniques le week-end, environ 22h – 5h."},
  {n:"Revolver Upstairs (Revs)",a:"L1/229 Chapel St, Prahran",z:"South Yarra / Prahran",d:"Le club le plus célèbre de Melbourne : The Late Show chaque samedi depuis 1999, jusqu'au matin. Pas de tongs, débardeur ni survêtement ; quand c'est plein, membres seulement."},
  {n:"Chasers",a:"386 Chapel St, South Yarra",z:"South Yarra / Prahran",d:"Institution depuis 1978. Samedi Poof Doof (21h – 4h30). Ven 13 nov : 48 ans du club, entrée et une boisson offertes avant 22h avec inscription Eventbrite."},
- {n:"Glamorama",a:"393 Brunswick St",z:"Fitzroy / Collingwood",d:"Bar dansant rétro de Fitzroy, ambiance sans prise de tête. 21h – 5h.",p:"10 – 15 $"}
+ {n:"Glamorama",a:"393 Brunswick St",z:"Fitzroy / Collingwood",d:"Club électro de Fitzroy : vendredi 22h – 5h, samedi 21h – 5h.",p:"15 – 30 $"}
 ]};
 const MUSIC={
 "International Halloween Party":"DJ, hits, jeux","Halloween by The Student Life":"Hits, soirée à thème","Halloweenfest Melbourne":"DJ, hits","Haunted Hop (bar crawl)":"Bars variés","The Fright Crawl":"Bars variés",
 "Poof Doof Halloqween":"Pop, drag, tubes","Emo Never Sleeps : Halloween":"Emo, pop-punk, années 2000",
-"Red Eye Bar (Base Backpackers)":"Hits, soirées jeux","St Kilda RSL":"Groupes live, karaoké","The Esplanade Hotel (The Espy)":"Concerts rock, indie","Strike Melbourne Central":"Karaoké, playlists",
-"Brown Alley":"Hard techno (ven. NERVE), house et techno (sam. LEVELS)","Sub Club":"Techno, underground","Angel Music Bar":"Indie, rock, alternatif",
-"Revolver Upstairs (Revs)":"Techno, house, soul : un genre par soir","Chasers":"Pop, tubes 70s à 00s, drag (samedi Poof Doof)","Glamorama":"Pop, dance, rétro"
+"Red Eye Bar (Nomads St Kilda)":"Soirées jeux, playlists","St Kilda RSL":"Concerts (MEMO Music Hall)","The Esplanade Hotel (The Espy)":"Concerts rock, indie",
+"Brown Alley":"Hard techno (ven. NERVE), house et techno (sam. LEVELS)","Sub Club":"Techno, underground","Angel Music Bar":"Électro, techno, house",
+"Revolver Upstairs (Revs)":"Techno, house, soul : un genre par soir","Chasers":"Pop, tubes 70s à 00s, drag (samedi Poof Doof)","Glamorama":"House, techno, tech house"
 };
 const DOOR={
 "International Halloween Party":[2,"Billet obligatoire, en vente jusqu'au jour même s'il en reste"],
@@ -428,35 +449,35 @@ const DOOR={
 "Pellegrini's":[1,"Entrée libre, au comptoir"],
 "Proud Mary":[2,"File le week-end, venir avant 9 h"],
 "Top Paddock":[2,"File le week-end"],
-"Asian Beer Café":[1,"Entrée libre, ID contrôlée"],
-"Strike Melbourne Central":[2,"Réservation conseillée pour un groupe"],
-"Red Eye Bar (Base Backpackers)":[1,"Bar d'auberge, ambiance backpackers, ID contrôlée"],
-"St Kilda RSL":[1,"Club : les non-membres s'enregistrent à l'entrée avec une pièce d'identité"],
+"Asian Beer Café":[1,"Entrée libre, pièce d'identité contrôlée"],
+"Strike Melbourne Central":[2,"Réservation conseillée en groupe ; pièce d'identité obligatoire après 20h"],
+"Red Eye Bar (Nomads St Kilda)":[2,"Pensé pour les clients de l'auberge : demande à l'entrée si c'est ouvert aux non-résidents"],
+"St Kilda RSL":[1,"Bar public ouvert à tous, pièce d'identité"],
 "The Esplanade Hotel (The Espy)":[1,"Entrée libre ; concerts parfois payants"],
-"Captain Baxter":[2,"Réservation conseillée les soirs d'été et le week-end"],
+"Captain Baxter":[2,"Arriver tôt les soirs de beau temps"],
 "The Provincial Hotel":[1,"Entrée libre, rooftop vite plein le week-end"],
-"Berlin Bar":[2,"Porte cachée : sonner ; réservation conseillée le week-end"],
-"State of Grace":[2,"Entrée secrète par la bibliothèque, file possible tard"],
-"Eau de Vie":[2,"Petit bar caché, réservation conseillée"],
-"Rooftop Bar (Curtin House)":[2,"File en fin de semaine par beau temps"],
+"Berlin Bar":[2,"Petit bar caché, arriver tôt le week-end"],
+"State of Grace":[2,"Bar du sous-sol caché, places limitées"],
+"Eau de Vie":[2,"Petit bar caché, réservation directe conseillée"],
+"Rooftop Bar (Curtin House)":[2,"Sans réservation : file en fin de semaine par beau temps"],
 "Good Heavens":[2,"File le week-end"],
-"Bomba":[2,"Réservation possible, conseillée en groupe"],
-"Siglo":[3,"Tenue soignée exigée, places limitées"],
-"Goldilocks":[1,"Entrée libre, souvent plus calme"],
+"Bomba":[2,"Réservation en ligne (SevenRooms) conseillée en groupe"],
+"Siglo":[2,"Service à table, places limitées"],
+"Goldilocks":[1,"Entrée libre"],
 "Inuman":[2,"File par beau temps"],
 "Naked for Satan":[2,"File sur le toit le week-end"],
-"Johnny's Green Room":[2,"File par beau temps, réservation conseillée"],
+"Johnny's Green Room":[2,"File par beau temps"],
 "Brown Alley":[2,"Billet conseillé, dress code, ID ; refus si trop éméché"],
 "Sub Club":[2,"Billet conseillé, pas de tables ni listes ; escaliers raides"],
-"Angel Music Bar":[1,"Souvent gratuit, ID contrôlée"],
+"Angel Music Bar":[2,"Billet selon la soirée (Resident Advisor)"],
 "Revolver Upstairs (Revs)":[3,"Quand c'est plein : membres seulement (adhésion sur parrainage). Dress code strict"],
 "Chasers":[2,"Billet ou RSVP Eventbrite, file tard"],
-"Glamorama":[1,"Entrée payante à la porte, ambiance détendue"],
+"Glamorama":[2,"Billet conseillé sur Resident Advisor"],
 "Linguas : échange linguistique du jeudi":[1,"Billet 5,60 $ sur Eventbrite, ouvert à tous"],
 "International Halloween Party (Linguas)":[2,"Billet obligatoire"],
 "The Student Life":[2,"Billet obligatoire, ID ; carte étudiante non demandée"],
 "Melbourne Bar Crawl":[1,"Billet en ligne, groupe encadré"],
-"Bars d'auberges (Base St Kilda)":[1,"ID contrôlée ; demande à l'entrée si les non-résidents sont acceptés ce soir-là"],
+"Bars d'auberges (Nomads St Kilda)":[2,"Demande à l'entrée si les non-résidents sont acceptés ce soir-là"],
 "Melbourne Global Circle (Meetup)":[1,"Inscription gratuite sur Meetup"]
 };
 const LVL=["","Facile","Moyen","Sélectif"];
