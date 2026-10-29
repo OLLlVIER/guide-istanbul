@@ -8,16 +8,22 @@
 /* Layout : panneau de quai de tram — bandeau vert, sections empilées, cartes lieu en grille, filtre par quartier */
 :root{
   --bg:#f8f5ef; --surface:#fffdf9; --ink:#16202a; --muted:#5a6470; --line:#e3dccf;
-  --tram:#24506b; --band:#24506b; --sign:#e0a43a; --hallo:#c4532e; --alert:#b3261e;
+  --tram:#24506b; --band:#24506b;
+  --c-cafe:#8a5a3b; --c-bar:#24506b; --c-roof:#a8741a; --c-club:#6b3fa0; --c-hallo:#c4532e;
+  --ok:#2f7a52; --mid:#b07a1a; --hard:#b3261e; --sign:#e0a43a; --hallo:#c4532e; --alert:#b3261e;
   --f-display:"DM Serif Display",Georgia,serif;
   --f-body:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;
   --f-data:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
-  --tram:#7fb2d4; --band:#1d4259; --sign:#e0a43a; --hallo:#e8774f; --alert:#ff6b61; color-scheme:dark}}
+  --tram:#7fb2d4; --band:#1d4259;
+  --c-cafe:#d29a72; --c-bar:#7fb2d4; --c-roof:#e0a43a; --c-club:#b48ae6; --c-hallo:#e8774f;
+  --ok:#5fc08a; --mid:#e0a43a; --hard:#ff6b61; --sign:#e0a43a; --hallo:#e8774f; --alert:#ff6b61; color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
-  --tram:#7fb2d4; --band:#1d4259; --sign:#e0a43a; --hallo:#e8774f; --alert:#ff6b61; color-scheme:dark}
+  --tram:#7fb2d4; --band:#1d4259;
+  --c-cafe:#d29a72; --c-bar:#7fb2d4; --c-roof:#e0a43a; --c-club:#b48ae6; --c-hallo:#e8774f;
+  --ok:#5fc08a; --mid:#e0a43a; --hard:#ff6b61; --sign:#e0a43a; --hallo:#e8774f; --alert:#ff6b61; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
 *{box-sizing:border-box}
 a{color:var(--tram)}
@@ -33,7 +39,7 @@ nav.jump{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:v
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 nav.jump .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
 nav.jump a{flex:none;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
-nav.jump a.h{border-color:var(--hallo);color:var(--hallo)}
+nav.jump a.h{border-color:var(--c-hallo);color:var(--c-hallo)}
 section{padding-block:34px 8px}
 h2{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5vw,46px);line-height:1.05;margin:0 0 6px}
 .lede{color:var(--muted);margin:0 0 18px;max-width:65ch}
@@ -67,6 +73,17 @@ td.n{font-family:var(--f-data);font-variant-numeric:tabular-nums;white-space:now
 .sos{border-color:var(--alert)}
 .sos h3{color:var(--alert)}
 .num{font-family:var(--f-data);font-weight:500;font-size:15px;user-select:all;white-space:nowrap}
+
+#halloween{--sec:var(--c-hallo)} #cafes{--sec:var(--c-cafe)} #bars{--sec:var(--c-bar)} #rooftops{--sec:var(--c-roof)} #clubs{--sec:var(--c-club)}
+#halloween h2,#cafes h2,#bars h2,#rooftops h2,#clubs h2{color:var(--sec)}
+#halloween .card,#cafes .card,#bars .card,#rooftops .card,#clubs .card{border-top:4px solid var(--sec)}
+#halloween .links a.ph,#cafes .links a.ph,#bars .links a.ph,#rooftops .links a.ph,#clubs .links a.ph{background:var(--sec);border-color:var(--sec);color:var(--bg)}
+nav.jump a[href="#cafes"]{border-color:var(--c-cafe);color:var(--c-cafe)} nav.jump a[href="#bars"]{border-color:var(--c-bar);color:var(--c-bar)}
+nav.jump a[href="#rooftops"]{border-color:var(--c-roof);color:var(--c-roof)} nav.jump a[href="#clubs"]{border-color:var(--c-club);color:var(--c-club)}
+.door{display:flex;gap:8px;align-items:baseline;font-size:14px;line-height:1.35}
+.door b{flex:none;font-family:var(--f-data);font-weight:500;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:999px;border:1.5px solid currentColor}
+.d1 b{color:var(--ok)} .d2 b{color:var(--mid)} .d3 b{color:var(--hard)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 18px;font-size:14px;color:var(--muted)}
 footer{padding-block:34px 40px;color:var(--muted);font-size:14px}
 footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;margin:10px 0 18px}
 @media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
@@ -102,6 +119,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
     <h2>Halloween ce week-end</h2>
     <p class="lede">Halloween tombe un samedi : deux grosses nuits d'affilée. Les soirées vendent par paliers, la prévente est moins chère et beaucoup affichent complet le jour même.</p>
     <div class="notice"><strong>À savoir :</strong> costume conseillé partout, obligatoire chez certains. Évite les fausses armes réalistes (refus à l'entrée fréquents). Le week-end suivant est long : mardi 3 novembre (Melbourne Cup) est férié, majoration de 15 à 20 % dans les bars et <strong>pas de Night Network la nuit du 3</strong>.</div>
+    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
     <div class="grid" id="g-halloween"></div>
   </div>
 </section>
@@ -195,6 +213,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
   <div class="wrap">
     <h2>Cafés</h2>
     <p class="lede">La capitale mondiale du flat white. Proud Mary est classé 27<sup>e</sup> et Vacation 100<sup>e</sup> des meilleurs coffee shops du monde en 2026.</p>
+    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
     <div class="filters" data-for="g-cafes"></div>
     <div class="grid" id="g-cafes"></div>
   </div>
@@ -204,6 +223,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
   <div class="wrap">
     <h2>Bars</h2>
     <p class="lede">Les adresses petits budgets et les bars cachés des laneways. St Kilda est le quartier backpackers ; Fitzroy le plus vivant côté nord.</p>
+    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
     <div class="filters" data-for="g-bars"></div>
     <div class="grid" id="g-bars"></div>
     <div class="sub">Speakeasies (entrées cachées)</div>
@@ -215,6 +235,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
   <div class="wrap">
     <h2>Rooftops</h2>
     <p class="lede">Ouverts toute l'année avec chauffages. Arrive avant 18 h le week-end pour éviter la file, prends une veste : la température chute vite après le coucher du soleil.</p>
+    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
     <div class="filters" data-for="g-roof"></div>
     <div class="grid" id="g-roof"></div>
   </div>
@@ -224,6 +245,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
   <div class="wrap">
     <h2>Clubs</h2>
     <p class="lede">Melbourne ferme tard : licences jusqu'à 5 h, 7 h ou 24 h. Les clubs se remplissent rarement avant minuit ; certains font entrer gratuitement ou moins cher avant 22 h.</p>
+    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
     <div class="filters" data-for="g-clubs"></div>
     <div class="grid" id="g-clubs"></div>
   </div>
@@ -304,13 +326,57 @@ const D={
  {n:"Chasers",a:"386 Chapel St, South Yarra",z:"South Yarra / Prahran",d:"Institution depuis 1978. Samedi Poof Doof (21h – 4h30). Ven 13 nov : 48 ans du club, entrée et une boisson offertes avant 22h avec inscription Eventbrite."},
  {n:"Glamorama",a:"393 Brunswick St",z:"Fitzroy / Collingwood",d:"Bar dansant rétro de Fitzroy, ambiance sans prise de tête. 21h – 5h.",p:"10 – 15 $"}
 ]};
+const DOOR={
+"International Halloween Party":[2,"Billet obligatoire, en vente jusqu'au jour même s'il en reste"],
+"Halloween by The Student Life":[2,"Billet obligatoire + costume ; deux vagues seulement, achète tôt"],
+"Halloweenfest Melbourne":[2,"Billet obligatoire, risque de complet le samedi"],
+"Haunted Hop (bar crawl)":[1,"Billet en ligne, groupe encadré"],
+"The Fright Crawl":[1,"Billet en ligne"],
+"Luna Dark":[2,"Billet ; file à l'entrée en début de soirée"],
+"Halloween à Old Melbourne Gaol":[2,"Réservation obligatoire, places limitées"],
+"Poof Doof Halloqween":[2,"Prévente conseillée, file tard dans la nuit"],
+"Emo Never Sleeps : Halloween":[2,"Billet conseillé"],
+"Higher Ground":[2,"Pas de réservation au brunch du week-end : file possible"],
+"Patricia Coffee Brewers":[1,"Entrée libre, debout uniquement, fermé le week-end"],
+"Vacation":[1,"Entrée libre, à emporter surtout"],
+"Market Lane Coffee":[1,"Entrée libre"],
+"Brick Lane":[1,"Entrée libre, file au brunch le week-end"],
+"Pellegrini's":[1,"Entrée libre, au comptoir"],
+"Proud Mary":[2,"File le week-end, venir avant 9 h"],
+"Top Paddock":[2,"File le week-end"],
+"Asian Beer Café":[1,"Entrée libre, ID contrôlée"],
+"Strike Melbourne Central":[2,"Réservation conseillée pour un groupe"],
+"Red Eye Bar (Base Backpackers)":[1,"Bar d'auberge, ambiance backpackers, ID contrôlée"],
+"St Kilda RSL":[1,"Club : les non-membres s'enregistrent à l'entrée avec une pièce d'identité"],
+"The Esplanade Hotel (The Espy)":[1,"Entrée libre ; concerts parfois payants"],
+"Captain Baxter":[2,"Réservation conseillée les soirs d'été et le week-end"],
+"The Provincial Hotel":[1,"Entrée libre, rooftop vite plein le week-end"],
+"Berlin Bar":[2,"Porte cachée : sonner ; réservation conseillée le week-end"],
+"State of Grace":[2,"Entrée secrète par la bibliothèque, file possible tard"],
+"Eau de Vie":[2,"Petit bar caché, réservation conseillée"],
+"Rooftop Bar (Curtin House)":[2,"File en fin de semaine par beau temps"],
+"Good Heavens":[2,"File le week-end"],
+"Bomba":[2,"Réservation possible, conseillée en groupe"],
+"Siglo":[3,"Tenue soignée exigée, places limitées"],
+"Goldilocks":[1,"Entrée libre, souvent plus calme"],
+"Inuman":[2,"File par beau temps"],
+"Naked for Satan":[2,"File sur le toit le week-end"],
+"Johnny's Green Room":[2,"File par beau temps, réservation conseillée"],
+"Brown Alley":[2,"Billet conseillé, dress code, ID ; refus si trop éméché"],
+"Sub Club":[2,"Billet conseillé, pas de tables ni listes ; escaliers raides"],
+"Angel Music Bar":[1,"Souvent gratuit, ID contrôlée"],
+"Revolver Upstairs (Revs)":[3,"Quand c'est plein : membres seulement (adhésion sur parrainage). Dress code strict"],
+"Chasers":[2,"Billet ou RSVP Eventbrite, file tard"],
+"Glamorama":[1,"Entrée payante à la porte, ambiance détendue"]
+};
+const LVL=["","Facile","Moyen","Sélectif"];
 const enc=s=>encodeURIComponent(s);
 function card(v,isH){
   const q=v.q||(v.n.replace(/\s*\(.*?\)/g,"")+" "+v.a+" Melbourne");
   const maps="https://www.google.com/maps/search/?api=1&query="+enc(q);
   const pics="https://www.google.com/search?tbm=isch&q="+enc((v.q||v.n.replace(/\s*\(.*?\)/g,"")+" Melbourne"));
   const el=document.createElement("article");el.className="card";el.dataset.z=v.z;
-  el.innerHTML=`<h3>${v.n}</h3><div class="meta"><span>${v.a}</span><span>${v.z}</span>${v.when?`<span>${v.when}</span>`:""}</div>${v.p?`<span class="price">${v.p}</span>`:""}<p>${v.d}</p><div class="links"><a class="ph" href="${pics}" target="_blank" rel="noopener">Photos</a><a href="${maps}" target="_blank" rel="noopener">Carte</a>${v.t?`<a href="${v.t}" target="_blank" rel="noopener">${isH?"Billets":"Site"}</a>`:""}</div>`;
+  el.innerHTML=`<h3>${v.n}</h3><div class="meta"><span>${v.a}</span><span>${v.z}</span>${v.when?`<span>${v.when}</span>`:""}</div>${DOOR[v.n]?`<div class="door d${DOOR[v.n][0]}"><b>${LVL[DOOR[v.n][0]]}</b><span>${DOOR[v.n][1]}</span></div>`:""}${v.p?`<span class="price">${v.p}</span>`:""}<p>${v.d}</p><div class="links"><a class="ph" href="${pics}" target="_blank" rel="noopener">Photos</a><a href="${maps}" target="_blank" rel="noopener">Carte</a>${v.t?`<a href="${v.t}" target="_blank" rel="noopener">${isH?"Billets":"Site"}</a>`:""}</div>`;
   return el;
 }
 for(const id in D){const g=document.getElementById(id);D[id].forEach(v=>g.appendChild(card(v,id==="g-halloween")));}
