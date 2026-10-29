@@ -9,7 +9,7 @@
 :root{
   --bg:#f8f5ef; --surface:#fffdf9; --ink:#16202a; --muted:#5a6470; --line:#e3dccf;
   --tram:#24506b; --band:#24506b;
-  --c-cafe:#8a5a3b; --c-bar:#24506b; --c-roof:#a8741a; --c-club:#6b3fa0; --c-hallo:#c4532e;
+  --c-cafe:#8a5a3b; --c-bar:#24506b; --c-roof:#a8741a; --c-club:#6b3fa0; --c-hallo:#c4532e; --c-meet:#2f7a52; --c-after:#3b3f8f;
   --ok:#2f7a52; --mid:#b07a1a; --hard:#b3261e; --sign:#e0a43a; --hallo:#c4532e; --alert:#b3261e;
   --f-display:"DM Serif Display",Georgia,serif;
   --f-body:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;
@@ -18,7 +18,7 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
   --tram:#7fb2d4; --band:#1d4259;
-  --c-cafe:#d29a72; --c-bar:#7fb2d4; --c-roof:#e0a43a; --c-club:#b48ae6; --c-hallo:#e8774f;
+  --c-cafe:#d29a72; --c-bar:#7fb2d4; --c-roof:#e0a43a; --c-club:#b48ae6; --c-hallo:#e8774f; --c-meet:#5fc08a; --c-after:#9aa0f0;
   --ok:#5fc08a; --mid:#e0a43a; --hard:#ff6b61; --sign:#e0a43a; --hallo:#e8774f; --alert:#ff6b61; color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#11181f; --surface:#1a242e; --ink:#ece6dc; --muted:#a3adb8; --line:#2c3a46;
   --tram:#7fb2d4; --band:#1d4259;
@@ -84,6 +84,16 @@ nav.jump a[href="#rooftops"]{border-color:var(--c-roof);color:var(--c-roof)} nav
 .door b{flex:none;font-family:var(--f-data);font-weight:500;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:999px;border:1.5px solid currentColor}
 .d1 b{color:var(--ok)} .d2 b{color:var(--mid)} .d3 b{color:var(--hard)}
 .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 18px;font-size:14px;color:var(--muted)}
+
+.ic{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.12em}
+h2 .ic{width:.85em;height:.85em;margin-right:.3em;vertical-align:-.06em}
+nav.jump a{display:inline-flex;align-items:center;gap:6px}
+#after{--sec:var(--c-after)} #after h2{color:var(--sec)} #after .card{border-top:4px solid var(--sec)} #after .links a.ph{background:var(--sec);border-color:var(--sec);color:var(--bg)} nav.jump a[href="#after"]{border-color:var(--c-after);color:var(--c-after)}
+#rencontres{--sec:var(--c-meet)} #rencontres h2{color:var(--sec)} #rencontres .card{border-top:4px solid var(--sec)}
+#rencontres .links a.ph{background:var(--sec);border-color:var(--sec);color:var(--bg)}
+nav.jump a[href="#rencontres"]{border-color:var(--c-meet);color:var(--c-meet)}
+.music{display:flex;gap:6px;align-items:baseline;font-size:14px;color:var(--ink)}
+.music .ic{color:var(--sec,var(--muted))}
 footer{padding-block:34px 40px;color:var(--muted);font-size:14px}
 footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;margin:10px 0 18px}
 @media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
@@ -95,20 +105,21 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
     <a href="../" style="color:#fff;font-weight:700;text-decoration:none;font-size:14px">← Le dossier Melbourne</a>
     <span class="route"><b>PVT</b> Guide sorties · mis à jour le 29 oct. 2026</span>
     <h1>Melbourne<br>by Night</h1>
-    <p>Bars, cafés, rooftops et clubs qui valent le détour, avec les prix réels, les réservations, la carte et les photos de chaque lieu. Et tout ce qu'il faut pour rentrer en sécurité.</p>
+    <p>Bars, rooftops, clubs et afters qui valent le détour, avec les prix réels, les réservations, la carte et les photos de chaque lieu. Et tout ce qu'il faut pour rentrer en sécurité.</p>
   </div>
 </header>
 
 <nav class="jump" aria-label="Sections">
   <div class="wrap">
-    <a class="h" href="#halloween">🎃 Halloween</a>
-    <a href="#securite">Sécurité</a>
-    <a href="#budget">Prix &amp; transport</a>
-    <a href="#cafes">Cafés</a>
-    <a href="#bars">Bars</a>
-    <a href="#rooftops">Rooftops</a>
-    <a href="#clubs">Clubs</a>
-    <a href="#liens">Liens</a>
+    <a class="h" href="#halloween"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-4.4 0-8 3-8 7.2S7.6 20 12 20s8-2.6 8-6.8S16.4 6 12 6Z"/><path d="M12 6V3.5c1 0 2 .4 2.5 1.2"/><path d="M8.5 11.5l1.5 1 1.5-1M12.5 11.5l1.5 1 1.5-1M9 16c2 1 4 1 6 0"/></svg>Halloween</a>
+    <a href="#rencontres"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5M13.5 18.5c.5-2.1 1.7-3.3 3-3.3 1.6 0 3 1.2 3.5 3.3"/></svg>Rencontres</a>
+    <a href="#securite"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-3 7.8-7 9.5-4-1.7-7-5.2-7-9.5V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>Sécurité</a>
+    <a href="#budget"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/></svg>Prix &amp; transport</a>
+    <a href="#bars"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14l-7 8-7-8Z"/><path d="M12 12v7M8 20h8"/><path d="M15.5 4l2-2"/></svg>Bars</a>
+    <a href="#rooftops"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18"/><path d="M6 20V11h5v9M13 20V7h5v13"/><circle cx="9" cy="5" r="2"/></svg>Rooftops</a>
+    <a href="#clubs"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><path d="M4.5 12h15M12 4.5v15M6.6 6.8c3.6 2 7.2 2 10.8 0M6.6 17.2c3.6-2 7.2-2 10.8 0"/></svg>Clubs</a>
+    <a href="#after"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>After</a>
+    <a href="#liens"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Liens</a>
   </div>
 </nav>
 
@@ -116,7 +127,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
 <section id="halloween" class="halloween">
   <div class="wrap">
     <span class="eyebrow">Vendredi 30 &amp; samedi 31 octobre 2026</span>
-    <h2>Halloween ce week-end</h2>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-4.4 0-8 3-8 7.2S7.6 20 12 20s8-2.6 8-6.8S16.4 6 12 6Z"/><path d="M12 6V3.5c1 0 2 .4 2.5 1.2"/><path d="M8.5 11.5l1.5 1 1.5-1M12.5 11.5l1.5 1 1.5-1M9 16c2 1 4 1 6 0"/></svg>Halloween ce week-end</h2>
     <p class="lede">Halloween tombe un samedi : deux grosses nuits d'affilée. Les soirées vendent par paliers, la prévente est moins chère et beaucoup affichent complet le jour même.</p>
     <div class="notice"><strong>À savoir :</strong> costume conseillé partout, obligatoire chez certains. Évite les fausses armes réalistes (refus à l'entrée fréquents). Le week-end suivant est long : mardi 3 novembre (Melbourne Cup) est férié, majoration de 15 à 20 % dans les bars et <strong>pas de Night Network la nuit du 3</strong>.</div>
     <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
@@ -124,9 +135,18 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
   </div>
 </section>
 
+<section id="rencontres">
+  <div class="wrap">
+    <span class="eyebrow">PVT, étudiants, nouveaux arrivants</span>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5M13.5 18.5c.5-2.1 1.7-3.3 3-3.3 1.6 0 3 1.2 3.5 3.3"/></svg>Rencontrer du monde</h2>
+    <p class="lede">Les soirées « étudiantes » et d'échange linguistique sont le moyen le plus simple de se faire un groupe en arrivant. Un PVTiste y est bienvenu : on te demandera une pièce d'identité (18+), presque jamais une carte d'étudiant.</p>
+    <div class="grid" id="g-meet"></div>
+  </div>
+</section>
+
 <section id="securite">
   <div class="wrap">
-    <h2>Sortir en sécurité</h2>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-3 7.8-7 9.5-4-1.7-7-5.2-7-9.5V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>Sortir en sécurité</h2>
     <p class="lede">Le CBD, Fitzroy et St Kilda sont globalement sûrs la nuit. Les vrais risques : verre drogué, retour seul tard, vol à l'arraché dans la foule.</p>
     <div class="cols">
       <div class="box sos">
@@ -170,7 +190,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
 
 <section id="budget">
   <div class="wrap">
-    <h2>Prix &amp; transport</h2>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/></svg>Prix &amp; transport</h2>
     <p class="lede">Melbourne est chère pour boire. Demande toujours la taille de bière : sans précision, on te sert un « pot » de 285 ml.</p>
     <div class="tablewrap">
       <table>
@@ -181,8 +201,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
           <tr><td>Pint (570 ml)</td><td class="n">14 – 18,50 $</td><td>Carlton Draught ≈ 13,90 $</td></tr>
           <tr><td>Cocktail</td><td class="n">18 – 28 $</td><td>≈ 24 $ en club</td></tr>
           <tr><td>Entrée club</td><td class="n">15 – 40 $</td><td>plus cher avec DJ international</td></tr>
-          <tr><td>Flat white</td><td class="n">5 – 6,50 $</td><td>lait végétal +0,50 à 1 $</td></tr>
-          <tr><td>Repas simple</td><td class="n">≈ 25 $</td><td>CBD, Carlton</td></tr>
+                    <tr><td>Repas simple</td><td class="n">≈ 25 $</td><td>CBD, Carlton</td></tr>
           <tr><td>Majoration dimanche</td><td class="n">+10 %</td><td>sur toute l'addition</td></tr>
           <tr><td>Majoration jour férié</td><td class="n">+15 – 20 %</td><td>dont mardi 3 nov.</td></tr>
         </tbody>
@@ -209,19 +228,9 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
   </div>
 </section>
 
-<section id="cafes">
-  <div class="wrap">
-    <h2>Cafés</h2>
-    <p class="lede">La capitale mondiale du flat white. Proud Mary est classé 27<sup>e</sup> et Vacation 100<sup>e</sup> des meilleurs coffee shops du monde en 2026.</p>
-    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
-    <div class="filters" data-for="g-cafes"></div>
-    <div class="grid" id="g-cafes"></div>
-  </div>
-</section>
-
 <section id="bars">
   <div class="wrap">
-    <h2>Bars</h2>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14l-7 8-7-8Z"/><path d="M12 12v7M8 20h8"/><path d="M15.5 4l2-2"/></svg>Bars</h2>
     <p class="lede">Les adresses petits budgets et les bars cachés des laneways. St Kilda est le quartier backpackers ; Fitzroy le plus vivant côté nord.</p>
     <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
     <div class="filters" data-for="g-bars"></div>
@@ -233,7 +242,7 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
 
 <section id="rooftops">
   <div class="wrap">
-    <h2>Rooftops</h2>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18"/><path d="M6 20V11h5v9M13 20V7h5v13"/><circle cx="9" cy="5" r="2"/></svg>Rooftops</h2>
     <p class="lede">Ouverts toute l'année avec chauffages. Arrive avant 18 h le week-end pour éviter la file, prends une veste : la température chute vite après le coucher du soleil.</p>
     <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
     <div class="filters" data-for="g-roof"></div>
@@ -243,18 +252,29 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
 
 <section id="clubs">
   <div class="wrap">
-    <h2>Clubs</h2>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><path d="M4.5 12h15M12 4.5v15M6.6 6.8c3.6 2 7.2 2 10.8 0M6.6 17.2c3.6-2 7.2-2 10.8 0"/></svg>Clubs</h2>
     <p class="lede">Melbourne ferme tard : licences jusqu'à 5 h, 7 h ou 24 h. Les clubs se remplissent rarement avant minuit ; certains font entrer gratuitement ou moins cher avant 22 h.</p>
     <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
     <div class="filters" data-for="g-clubs"></div>
     <div class="grid" id="g-clubs"></div>
   </div>
 </section>
+
+<section id="after">
+  <div class="wrap">
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>After &amp; kick-ons</h2>
+    <p class="lede">Melbourne est la ville d'Australie qui ferme le plus tard : plusieurs clubs ont des licences jusqu'au matin, voire 24 h. Les « kick-ons », c'est l'after, souvent chez quelqu'un.</p>
+    <div class="notice" style="border-left-color:var(--c-after)"><strong>Sécurité after :</strong> ne pars jamais seul·e dans un after privé chez des inconnus, partage ta position avec une amie, garde de quoi payer un Uber. Les trains de nuit passent toutes les heures jusqu'au matin le samedi et le dimanche.</div>
+    <div class="legend"><span class="door d1"><b>Facile</b> entrée libre</span><span class="door d2"><b>Moyen</b> file, réservation ou billet conseillé</span><span class="door d3"><b>Sélectif</b> dress code strict, refus fréquents, membres</span></div>
+    <div class="grid" id="g-after"></div>
+  </div>
+</section>
+
 </main>
 
 <footer id="liens">
   <div class="wrap">
-    <h2 style="color:var(--ink)">Liens utiles</h2>
+    <h2 style="color:var(--ink)"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Liens utiles</h2>
     <ul>
       <li><a href="https://keen.social/whats-on/melbourne/halloween" target="_blank" rel="noopener">Agenda Halloween complet</a></li>
       <li><a href="https://ptv.vic.gov.au/nightnetwork" target="_blank" rel="noopener">Night Network (PTV)</a></li>
@@ -262,6 +282,8 @@ footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none;mar
       <li><a href="https://www.police.vic.gov.au/drink-spiking" target="_blank" rel="noopener">Police Victoria : drink spiking</a></li>
       <li><a href="https://ra.co/events/au/melbourne" target="_blank" rel="noopener">Resident Advisor (techno, house)</a></li>
       <li><a href="https://www.moshtix.com.au" target="_blank" rel="noopener">Moshtix</a></li>
+      <li><a href="https://www.meetup.com/linguas-au/" target="_blank" rel="noopener">Linguas (Meetup)</a></li>
+      <li><a href="https://pvtistes.net" target="_blank" rel="noopener">pvtistes.net</a></li>
       <li><a href="https://www.oztix.com.au" target="_blank" rel="noopener">Oztix</a></li>
       <li><a href="https://www.timeout.com/melbourne/bars" target="_blank" rel="noopener">Time Out Melbourne</a></li>
       <li><a href="https://www.broadsheet.com.au/melbourne" target="_blank" rel="noopener">Broadsheet</a></li>
@@ -284,15 +306,13 @@ const D={
  {n:"Poof Doof Halloqween",a:"Chasers, 386 Chapel St",z:"South Yarra / Prahran",when:"Sam 31 · 21h – 4h30",p:"Prévente Eventbrite",d:"Soirée LGBTQ+ et alliés, drag queens, pop. Ambiance très festive.",t:"https://keen.social/whats-on/melbourne/halloween"},
  {n:"Emo Never Sleeps : Halloween",a:"Royal Melbourne Hotel, 629 Bourke St",z:"CBD",when:"Sam 31 · dès 21h",p:"Billet en ligne",d:"Emo, pop-punk, années 2000. Public déguisé en masse.",t:"https://keen.social/whats-on/melbourne/halloween"}
 ],
-"g-cafes":[
- {n:"Higher Ground",a:"650 Little Bourke St",z:"CBD",d:"Brunch dans un ancien bâtiment industriel classé, plafonds immenses. Souvent cité meilleur café de la ville.",p:"brunch ≈ 25 – 30 $"},
- {n:"Patricia Coffee Brewers",a:"Little Bourke St × Little William St",z:"CBD",d:"Minuscule bar à café debout, sans repas. Pour le café pur, en semaine."},
- {n:"Vacation",a:"Exhibition St",z:"CBD",d:"100<sup>e</sup> au classement mondial 2026. Gobelet rose, rapide, parfait avant le boulot.",q:"Vacation Coffee Exhibition Street Melbourne"},
- {n:"Market Lane Coffee",a:"8 Collins St (et autres)",z:"CBD",d:"Torréfacteur maison, filtres et espressos très réguliers."},
- {n:"Brick Lane",a:"33 Guildford Ln",z:"CBD",d:"Caché dans une laneway près de Melbourne Central, déco très photogénique."},
- {n:"Pellegrini's",a:"66 Bourke St",z:"CBD",d:"Institution italienne depuis les années 1950 : comptoir, granita, pâtes. Ouvert tard."},
- {n:"Proud Mary",a:"172 Oxford St, Collingwood",z:"Fitzroy / Collingwood",d:"27<sup>e</sup> meilleur coffee shop du monde en 2026. Cafés rares, brunch copieux, file le week-end."},
- {n:"Top Paddock",a:"658 Church St, Richmond",z:"Carlton / Richmond",d:"Brunch de référence (pancakes célèbres). Grand espace lumineux."}
+"g-meet":[
+ {n:"Linguas : échange linguistique du jeudi",a:"Asian Beer Café (Chairman's Lounge), 211 La Trobe St",z:"CBD",when:"Chaque jeudi · 18h – 22h30 · dont ce soir",p:"5,60 $",d:"Ouvert à toutes les nationalités et tous les niveaux. Tu parles français, on te cherchera : idéal pour se faire des amis australiens et internationaux dès la première semaine.",t:"https://whatson.melbourne.vic.gov.au/things-to-do/thursday-linguas-melbourne-language-exchange-and-social",m:"Ambiance bar, conversation"},
+ {n:"International Halloween Party (Linguas)",a:"The Carlton Club, 193 Bourke St",z:"CBD",when:"Sam 31 oct · 17h – 23h30",p:"Billet Eventbrite",d:"La version Halloween des soirées Linguas, avec les communautés japonaise et internationale. Parfait si tu arrives seul·e.",t:"https://www.eventbrite.com.au/e/international-halloween-party-2026-tickets-1994779454045",m:"DJ, jeux, concours de costumes"},
+ {n:"The Student Life",a:"Brown Alley et autres clubs",z:"CBD",when:"Soirées par semestre · Halloween sam 31",p:"dès 20,50 $",d:"Organisateur de soirées pour étudiants internationaux (UniMelb, RMIT, Monash…). La page ne demande pas de carte étudiante : passeport à l'entrée. Groupe WhatsApp après achat du billet.",t:"https://jointhestudentlife.com/melbourne-hw26",m:"Hits, soirées à thème"},
+ {n:"Melbourne Bar Crawl",a:"Départs dans le CBD (King St, laneways)",z:"CBD",when:"Surtout vendredi et samedi",p:"≈ 17 – 58 $ selon la soirée",d:"Tournées des bars encadrées, très prisées des backpackers : on arrive seul·e, on repart avec un groupe. Organise aussi Halloweenfest.",t:"https://www.eventbrite.com.au/e/halloweenfest-melbourne-2026-night-2-saturday-oct-31-tickets-1999932195032",m:"Bars variés, puis club"},
+ {n:"Bars d'auberges (Base St Kilda)",a:"17 Carlisle St",z:"St Kilda",d:"Jeux, soirées à thème et verres très bon marché : la scène backpackers de St Kilda. On y rencontre des PVTistes de tous les pays.",m:"Hits, soirées jeux"},
+ {n:"Melbourne Global Circle (Meetup)",a:"Lieux variés",z:"CBD",when:"Plusieurs sorties par mois",p:"souvent gratuit",d:"Groupe Meetup de sorties pour nouveaux arrivants et internationaux : afterworks, balades, soirées. Inscription gratuite sur l'app Meetup.",t:"https://www.meetup.com/melbourne-global-circle/"}
 ],
 "g-bars":[
  {n:"Asian Beer Café",a:"Melbourne Central",z:"CBD",d:"Happy hour quotidien de fin d'après-midi : pichets, cocktails et alcools à petit prix. QG étudiant.",p:"pichets pas chers (à vérifier sur place)"},
@@ -318,6 +338,12 @@ const D={
  {n:"Naked for Satan",a:"285 Brunswick St",z:"Fitzroy / Collingwood",d:"Le rooftop de Fitzroy : vue sur la skyline, pintxos au bar du rez-de-chaussée."},
  {n:"Johnny's Green Room",a:"Faraday St",z:"Carlton / Richmond",d:"Une des plus belles vues sur la skyline, côté Carlton.",q:"Johnny's Green Room Carlton Melbourne"}
 ],
+"g-after":[
+ {n:"Revolver Upstairs : The Late Show",a:"L1/229 Chapel St, Prahran",z:"South Yarra / Prahran",when:"Sam nuit → lundi matin · day parties le dimanche dès 7h",d:"L'after le plus célèbre d'Australie, chaque week-end depuis 1999. Licence jusqu'au matin : on y arrive après les autres clubs.",m:"Techno, house, deep house",t:"https://revolverupstairs.com.au",q:"Revolver Upstairs Prahran",e:[3,"Membres seulement quand c'est plein, dress code strict, file au petit matin"]},
+ {n:"Sub Club (fin de nuit)",a:"Flinders Court (sous-sol)",z:"CBD",when:"Ven et sam · jusqu'à 7h",d:"La meilleure option dans le CBD pour finir au lever du jour, à deux pas de la gare de Flinders Street.",m:"Techno, bass, électro",q:"Sub Club Flinders Court Melbourne",e:[2,"Billet conseillé ; politique stricte de bon comportement"]},
+ {n:"Brown Alley (fin de nuit)",a:"585 Lonsdale St",z:"CBD",when:"Licence 24 h · horaires selon la soirée",d:"Quatre salles, terrasse en plein air : certaines soirées de promoteurs continuent tard dans la matinée. Vérifie l'heure de fin sur le billet.",m:"Hard techno, house",q:"Brown Alley 585 Lonsdale St Melbourne",e:[2,"Billet conseillé, ID ; refus si trop éméché"]},
+ {n:"Glamorama (fin de nuit)",a:"393 Brunswick St, Fitzroy",z:"Fitzroy / Collingwood",when:"Jusqu'à 5h",d:"Pour finir à Fitzroy sans repasser par le centre.",m:"Pop, dance, rétro",q:"Glamorama Fitzroy",p:"10 – 15 $",e:[1,"Entrée payante à la porte"]}
+],
 "g-clubs":[
  {n:"Brown Alley",a:"585 Lonsdale St",z:"CBD",d:"Club sur plusieurs niveaux, 4 salles, terrasse fumeurs. Vendredi NERVE (hard techno), samedi LEVELS. Licence 24 h.",p:"≈ 20 – 30 $"},
  {n:"Sub Club",a:"Flinders Court (sous-sol)",z:"CBD",d:"Techno pointue, deux étages sous terre. Ven – sam 23h – 7h. Pas de tables, pas de listes d'anniversaire.",q:"Sub Club Flinders Court Melbourne"},
@@ -326,6 +352,13 @@ const D={
  {n:"Chasers",a:"386 Chapel St, South Yarra",z:"South Yarra / Prahran",d:"Institution depuis 1978. Samedi Poof Doof (21h – 4h30). Ven 13 nov : 48 ans du club, entrée et une boisson offertes avant 22h avec inscription Eventbrite."},
  {n:"Glamorama",a:"393 Brunswick St",z:"Fitzroy / Collingwood",d:"Bar dansant rétro de Fitzroy, ambiance sans prise de tête. 21h – 5h.",p:"10 – 15 $"}
 ]};
+const MUSIC={
+"International Halloween Party":"DJ, hits, jeux","Halloween by The Student Life":"Hits, soirée à thème","Halloweenfest Melbourne":"DJ, hits","Haunted Hop (bar crawl)":"Bars variés","The Fright Crawl":"Bars variés",
+"Poof Doof Halloqween":"Pop, drag, tubes","Emo Never Sleeps : Halloween":"Emo, pop-punk, années 2000",
+"Red Eye Bar (Base Backpackers)":"Hits, soirées jeux","St Kilda RSL":"Groupes live, karaoké","The Esplanade Hotel (The Espy)":"Concerts rock, indie","Strike Melbourne Central":"Karaoké, playlists",
+"Brown Alley":"Hard techno (ven. NERVE), house et techno (sam. LEVELS)","Sub Club":"Techno, underground","Angel Music Bar":"Indie, rock, alternatif",
+"Revolver Upstairs (Revs)":"Techno, house, soul : un genre par soir","Chasers":"Pop, tubes 70s à 00s, drag (samedi Poof Doof)","Glamorama":"Pop, dance, rétro"
+};
 const DOOR={
 "International Halloween Party":[2,"Billet obligatoire, en vente jusqu'au jour même s'il en reste"],
 "Halloween by The Student Life":[2,"Billet obligatoire + costume ; deux vagues seulement, achète tôt"],
@@ -367,7 +400,13 @@ const DOOR={
 "Angel Music Bar":[1,"Souvent gratuit, ID contrôlée"],
 "Revolver Upstairs (Revs)":[3,"Quand c'est plein : membres seulement (adhésion sur parrainage). Dress code strict"],
 "Chasers":[2,"Billet ou RSVP Eventbrite, file tard"],
-"Glamorama":[1,"Entrée payante à la porte, ambiance détendue"]
+"Glamorama":[1,"Entrée payante à la porte, ambiance détendue"],
+"Linguas : échange linguistique du jeudi":[1,"Billet 5,60 $ sur Eventbrite, ouvert à tous"],
+"International Halloween Party (Linguas)":[2,"Billet obligatoire"],
+"The Student Life":[2,"Billet obligatoire, ID ; carte étudiante non demandée"],
+"Melbourne Bar Crawl":[1,"Billet en ligne, groupe encadré"],
+"Bars d'auberges (Base St Kilda)":[1,"ID contrôlée ; demande à l'entrée si les non-résidents sont acceptés ce soir-là"],
+"Melbourne Global Circle (Meetup)":[1,"Inscription gratuite sur Meetup"]
 };
 const LVL=["","Facile","Moyen","Sélectif"];
 const enc=s=>encodeURIComponent(s);
@@ -376,7 +415,7 @@ function card(v,isH){
   const maps="https://www.google.com/maps/search/?api=1&query="+enc(q);
   const pics="https://www.google.com/search?tbm=isch&q="+enc((v.q||v.n.replace(/\s*\(.*?\)/g,"")+" Melbourne"));
   const el=document.createElement("article");el.className="card";el.dataset.z=v.z;
-  el.innerHTML=`<h3>${v.n}</h3><div class="meta"><span>${v.a}</span><span>${v.z}</span>${v.when?`<span>${v.when}</span>`:""}</div>${DOOR[v.n]?`<div class="door d${DOOR[v.n][0]}"><b>${LVL[DOOR[v.n][0]]}</b><span>${DOOR[v.n][1]}</span></div>`:""}${v.p?`<span class="price">${v.p}</span>`:""}<p>${v.d}</p><div class="links"><a class="ph" href="${pics}" target="_blank" rel="noopener">Photos</a><a href="${maps}" target="_blank" rel="noopener">Carte</a>${v.t?`<a href="${v.t}" target="_blank" rel="noopener">${isH?"Billets":"Site"}</a>`:""}</div>`;
+  el.innerHTML=`<h3>${v.n}</h3><div class="meta"><span>${v.a}</span><span>${v.z}</span>${v.when?`<span>${v.when}</span>`:""}</div>${(v.e||DOOR[v.n])?`<div class="door d${(v.e||DOOR[v.n])[0]}"><b>${LVL[(v.e||DOOR[v.n])[0]]}</b><span>${(v.e||DOOR[v.n])[1]}</span></div>`:""}${v.p?`<span class="price">${v.p}</span>`:""}${(v.m||MUSIC[v.n])?`<div class="music"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><span>${v.m||MUSIC[v.n]}</span></div>`:""}<p>${v.d}</p><div class="links"><a class="ph" href="${pics}" target="_blank" rel="noopener">Photos</a><a href="${maps}" target="_blank" rel="noopener">Carte</a>${v.t?`<a href="${v.t}" target="_blank" rel="noopener">${isH?"Billets":"Site"}</a>`:""}</div>`;
   return el;
 }
 for(const id in D){const g=document.getElementById(id);D[id].forEach(v=>g.appendChild(card(v,id==="g-halloween")));}
